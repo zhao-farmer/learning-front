@@ -1,0 +1,176 @@
+<!-- view 小程序提供的容器组件，直接当成 div 使用即可 -->
+
+<!-- 轮播图区域 -->
+<view class="swiper">
+
+  <!-- 
+      autoplay 自动播放 
+      cirular 从头开始  
+      interval 间隔事件
+      indicator-dots 是否显示面板指示点
+      indicator-color 指示点颜色
+      indicator-active-color 指示点选中颜色
+  -->
+  <swiper 
+    autoplay 
+    circular
+    interval="2000" 
+    indicator-dots 
+    indicator-color="#fff"
+    indicator-active-color="#f3514f"
+  >
+    <swiper-item>
+      <image src="../../assets/banner/banner-1.png" mode="" />
+
+    </swiper-item>
+    <swiper-item>
+      <image src="../../assets/banner/banner-2.png" mode="" />
+    </swiper-item>
+    <swiper-item>
+      <image src="../../assets/banner/banner-3.png" mode="" />
+    </swiper-item>
+  </swiper>
+</view>
+
+<!-- 公司信息 -->
+<view class="info">
+  <text><text class="iconfont icon-ps"></text>同城配送 </text>
+  <text><text class="iconfont icon-lx"></text>行业龙头</text>
+  <text><text class="iconfont icon-time"></text>半小时送达 </text>
+  <text><text class="iconfont icon-hp"></text>100% 好评</text>
+</view>
+
+<!-- 商品导航 -->
+<view class="good-nav">
+  <view>
+    <navigator url="/pages/list/list">
+      <image src="../../assets/category/cate-1.png" mode=""/>
+      <text>鲜花玫瑰</text>
+    </navigator>
+  </view>
+  <view>
+    <navigator url="/pages/list/list">
+      <image src="../../assets/category/cate-2.png" mode=""/>
+      <text>鲜花玫瑰</text>
+    </navigator>
+  </view>
+  <view>
+    <navigator url="/pages/list/list" >
+      <image src="../../assets/category/cate-3.png" mode=""/>
+      <text>鲜花玫瑰</text>
+    </navigator>
+  </view>
+  <view>
+    <navigator url="/pages/list/list" >
+      <image src="../../assets/category/cate-4.png" mode=""/>
+      <text>鲜花玫瑰</text>
+    </navigator>
+  </view>
+  <view>
+    <navigator url="/pages/list/list">
+      <image src="../../assets/category/cate-5.png" mode=""/>
+      <text>鲜花玫瑰</text>
+    </navigator>
+  </view>
+</view>
+
+<!-- 推荐商品 -->
+<view class="good-hot">
+  <scroll-view scroll-x class="scroll-x">
+    <view>
+      <view class="good-item">
+        <image src="../../assets/floor/1.png" mode=""/>
+        <text>鲜花玫瑰</text>
+        <text>79</text>
+      </view>
+    </view>
+
+    <view>
+      <view class="good-item">
+        <image src="../../assets/floor/2.png" mode=""/>
+        <text>鲜花玫瑰</text>
+        <text>66</text>
+      </view>
+    </view>
+
+    <view>
+      <view class="good-item">
+        <image src="../../assets/floor/3.png" mode=""/>
+        <text>鲜花玫瑰</text>
+        <text>77</text>
+      </view>
+    </view>
+
+    <view>
+      <view class="good-item">
+        <image src="../../assets/floor/4.png" mode=""/>
+        <text>鲜花玫瑰</text>
+        <text>88</text>
+      </view>
+    </view>
+
+    <view>
+      <view class="good-item">
+        <image src="../../assets/floor/5.png" mode=""/>
+        <text>鲜花玫瑰</text>
+        <text>99</text>
+      </view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- src: 图片的资源地址 -->
+<!-- mode：图片的裁剪和缩放模式 -->
+<!-- show-menu-by-longpress 长按显示菜单,
+    菜单中含有 转发给好友、收藏、下载 
+-->
+<!-- lazy-load: 图片懒加载功能，在滑动到一定距离（上下三屏显示图片） -->
+<!-- <image src="../../assets/floor/1.png" mode="aspectFill" show-menu-by-longpress/> -->
+
+<!-- user-select：长按以后选中文本 -->
+<!-- space 显示文本空格 -->
+<!-- <text user-select space="ensp">尚  硅谷</text> -->
+
+<!-- 在页面跳转时，需要在路径的前面添加 / 斜线 ，否则不成功 -->
+<!-- <navigator url="/pages/list/list" >到商品列表页面</navigator> -->
+
+<!-- navigator: 只能跳转到非 TabBar 页面，不能跳转到 TabBar页面, 保留上一级页面 -->
+<!-- <navigator url="/pages/list/list" open-type="navigate">到商品列表页面</navigator>
+<navigator url="/pages/cate/cate" open-type="navigate">到商品列表页面</navigator> -->
+
+
+<!-- redirect: 只能跳转到非 TabBar 页面，不能跳转到 TabBar页面, 关闭上一级页面 -->
+<!-- <navigator url="/pages/list/list" open-type="redirect">到商品列表页面</navigator>
+<navigator url="/pages/cate/cate" open-type="redirect">到商品列表页面</navigator>  -->
+
+<!-- switchTab: 只能跳转到 TabBar 页面，不能跳转到非 TabBar页面, 关闭其他所有非 TabBar 页面 -->
+<!-- <navigator url="/pages/list/list" open-type="switchTab">到商品列表页面</navigator>
+<navigator url="/pages/cate/cate" open-type="switchTab">到商品列表页面</navigator>  -->
+
+<!-- reLaunch: 关闭所有页面,打开小程序某一个页面 -->
+<!-- <navigator url="/pages/list/list" open-type="reLaunch">到商品列表页面</navigator>
+<navigator url="/pages/cate/cate" open-type="switchTab">到商品列表页面</navigator>  -->
+
+<!-- 跳转后 得到的返回 -->
+<!-- <navigator url="/pages/list/list" >到商品列表页面</navigator> -->
+
+<!-- 跳转带参数 -->
+<!-- <navigator url="/pages/list/list?id=10&num=hua" >到商品列表页面</navigator> -->
+
+<!-- 
+<scroll-view scroll-x class="scroll-x">
+  <view>1</view>
+  <view>2</view>
+  <view>3</view>
+  <view>4</view>
+</scroll-view>
+
+<scroll-view scroll-y class="scroll-y">
+  <view>1</view>
+  <view>2</view>
+  <view>3</view>
+  <view>4</view>
+</scroll-view> -->
+
+
+<view class="bg-image"></view>

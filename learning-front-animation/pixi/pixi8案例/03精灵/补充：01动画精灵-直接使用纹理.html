@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <title>动画精灵</title>
+  </head>
+
+  <body>
+    <div id="px-render"></div>
+
+    <script type="module">
+      import { Application, Assets, AnimatedSprite, Texture, Rectangle, Sprite } from "../js/pixi.mjs";
+
+      // 创建一个 Pixi应用
+      let app = new Application();
+      // 创建一个 Pixi应用 需要的一些参数
+      let option = {
+        width: 400,
+        height: 300,
+      };
+      // 初始化应用程序
+      await app.init(option);
+
+      let playground = document.getElementById("px-render");
+
+      // 把 Pixi 创建的 canvas 添加到页面上
+      playground.appendChild(app.canvas);
+
+      //需要加载的雪碧图
+      const texture = await Assets.load("../assets/images/dnf.png");
+
+      //第一个纹理
+      let texture0 = new Texture({ source: texture, frame: new Rectangle(0, 0, 80, 143) });
+      //第二个纹理
+      let texture1 = new Texture({ source: texture, frame: new Rectangle(80, 0, 80, 143) });
+      //第三个纹理
+      let texture2 = new Texture({ source: texture, frame: new Rectangle(160, 0, 80, 143) });
+      //第四个纹理
+      let texture3 = new Texture({ source: texture, frame: new Rectangle(240, 0, 80, 143) });
+
+      //创建纹理数组
+      let textures = [texture0, texture1, texture2, texture3];
+
+      //创建动画精灵
+      let anim = new AnimatedSprite(textures);
+      // 设置位置与锚点
+      anim.x = app.screen.width / 2;
+      anim.y = app.screen.height / 2;
+      anim.anchor.set(0.5);
+
+      //设置速度与播放
+      anim.animationSpeed = 0.1;
+      anim.play();
+
+      //将其添加到舞台上
+      app.stage.addChild(anim);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>02赋值运算符</title>
+    <script>
+        /* 
+            赋值运算符用来将一个值赋值给一个变量
+            =  
+                -将符号右侧的值赋值给左边的变量
+            ??=
+                - 只有当前变量的值为null活undefined 赋值成功过
+            +=
+                - a += n 等价于 a = a + n
+            -=
+                - a -= n 等价于 a = a - n
+            *=
+                - a *= n 等价于 a = a * n
+            /+
+                - a /= n 等价于 a = a / n
+            **=
+                - a **= n 等价于 a = a ** n
+            %=
+                - a %= n 等价于 a = a % n
+        
+
+               
+        */
+        let a = 10
+        a = 5 // 右边的值赋值给左边的变量
+
+        let b = a //一个变量只有在=左边时才是变量，在=右边时它是值
+
+        a = 66
+        a + 11 //大部分的运算符都不会改变变量的值,赋值运算符除外
+
+        console.log(a);
+
+        a = 5
+        a = a + 5 // 10
+        a += 5 //在a原来值的基础上增加5
+
+        a = undefined
+        a ??= 100
+        console.log(a);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

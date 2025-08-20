@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 1.变量多，单元值少 undefined
+            const [a1, b1, c1, d1] = [1, 2, 3];
+            console.log(a1); // 1
+            console.log(b1); // 2
+            console.log(c1); // 3
+            console.log(d1); // undefined
+
+            // 2.变量少，单元值多
+            const [a2, b2, c2] = [1, 2, 3, 4];
+            console.log(a2); // 1
+            console.log(b2); // 2
+            console.log(c2); // 3
+
+            // 3.剩余参数 变量少 单元值多
+            const [a3, b3, ...c3] = [1, 2, 3, 4];
+            console.log(a3); // 1
+            console.log(b3); // 2
+            console.log(c3); // [3,4]
+
+            // 4.防止undefined 传递 设置默认值
+            const [a4 = 0, b4 = 1, c4 = 2] = [1, 2];
+            console.log(a4); // 1
+            console.log(b4); // 2
+            console.log(c4); // 2
+
+            // 5.按需导入赋值
+            const [a5, b5, , c5] = [1, 2, 3, 4];
+            console.log(a5); // 1
+            console.log(b5); // 2
+            console.log(c5); // 4
+
+            // 6.支持多维数组解构
+            const [a6, b6, [c6, d6]] = [1, 2, [3, 4]];
+            console.log(a6); // 1
+            console.log(b6); // 2
+            console.log(c6); // 3
+            console.log(d6); // 4
+        </script>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+.mixin(@color,@rest...) { 
+    color:@color; 
+    padding: @rest 
+  }
+div {
+  .mixin(red; 10px; 20px; 5px; 5px);
+}

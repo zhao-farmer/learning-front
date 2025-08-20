@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+  <script type="module">
+    import { Application, Assets, Sprite, SCALE_MODES } from "../js/pixi.mjs";
+
+    (async () => {
+      // 创建应用程序
+      const app = new Application();
+
+      // 初始化应用程序
+      await app.init({ 
+          background: "#1099bb",   
+          width: 600,
+          height: 400,   
+      });
+
+      // 应用程序添加到页面上
+      document.body.appendChild(app.canvas);
+
+      // 加载兔子纹理
+      const texture = await Assets.load("../assets/images/bunny.png");
+
+      // 将纹理的缩放模式设置为最接近以保持像素化
+      texture.baseTexture.scaleMode = SCALE_MODES.NEAREST;
+
+      for (let i = 0; i < 10; i++) {
+        //设置随机的位置
+        createBunny(Math.floor(Math.random() * app.screen.width), Math.floor(Math.random() * app.screen.height));
+      }
+
+      function createBunny(x, y) {
+        // 创建我们的兔子朋友
+        const bunny = new Sprite(texture);
+
+        // 使兔子能够互动。。。这将允许它对鼠标和触摸事件做出响应
+        bunny.eventMode = "static";
+
+        // 此按钮模式意味着当您用鼠标滚动兔子时，手光标会出现
+        bunny.cursor = "pointer";
+
+        // 将兔子的锚点居中
+        bunny.anchor.set(0.5);
+
+        // 把它做大一点，这样更容易抓
+        bunny.scale.set(3);
+
+        //使用指针事件设置鼠标+触摸事件
+        bunny.on("pointerdown", onDragStart, bunny);
+
+        //将角色移动到指定位置
+        bunny.x = x;
+        bunny.y = y;
+
+        // 添加到舞台上
+        app.stage.addChild(bunny);
+      }
+
+      //设置拖动目标
+      let dragTarget = null;
+      //设置交互性
+      app.stage.eventMode = "static";
+      //点击范围
+      app.stage.hitArea = app.screen;
+      // 松开事件
+      app.stage.on("pointerup", onDragEnd);
+      app.stage.on("pointerupoutside", onDragEnd);
+
+      // pointermove 会传入一个鼠标位置信息event
+      function onDragMove(event) {
+        if (dragTarget) {
+          // dragTarget.parent 整个页面
+          // toLocal 计算容器相对于另一点的局部位置。
+          // event.global与event.page 都是鼠标的位置
+          // dragTarget.position 原本的位置
+          dragTarget.parent.toLocal(event.global, null, dragTarget.position);
+        }
+      }
+
+      function onDragStart() {
+        //存储对数据的引用
+        //*这是因为多点触控*
+        //*我们想跟踪这种特殊触摸的移动*
+
+        //对下个的透明度  this 是传入的bunny精灵
+        this.alpha = 0.5;
+        // 赋值给拖动目标
+        dragTarget = this;
+        //加入监控
+        app.stage.on("pointermove", onDragMove);
+      }
+
+      function onDragEnd() {
+        if (dragTarget) {
+          //去除监控
+          app.stage.off("pointermove", onDragMove);
+          //透明度
+          dragTarget.alpha = 1;
+          //对象
+          dragTarget = null;
+        }
+      }
+    })();
+  </script>
+</body>
+</html>

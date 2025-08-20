@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const fruits = ['apple', 'banana', 'orange', 'grape', 'watermelon'];
+        const groupedByLength = Map.groupBy(fruits, fruit => fruit.length);
+
+        console.log(groupedByLength);
+        // Map {
+        //   5 => [ 'apple' ],
+        //   6 => [ 'banana' ],
+        //   8 => [ 'orange', 'grape' ],
+        //   9 => [ 'watermelon' ]
+        // }
+        
+    </script>
+</body>
+</html>

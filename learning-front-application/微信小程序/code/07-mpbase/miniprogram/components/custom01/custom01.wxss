@@ -1,0 +1,7 @@
+
+/* 在自定义组件中如果需要 Vant weapp 组件的样式，需要解除样式的隔离,shared */
+.van-button--primary{
+  font-size: 28rpx !important;
+  background-color: lightcoral !important;
+  border: 1px solid lightcoral !important;
+}

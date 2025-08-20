@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="600px" height="400px"></canvas>
+    <br />
+    <button id="clear">清空</button>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        let isDown = false;
+        let beginPoint = null;
+        let points = [];
+        // 设置线条颜色
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 1;
+        ctx.lineJoin = "round";
+        ctx.lineCap = "round";
+        canvas.addEventListener("mousedown", down, false); //按下鼠标按键时触发
+        canvas.addEventListener("mousemove", move, false); //移动鼠标时触发
+        canvas.addEventListener("mouseup", up, false); //释放鼠标按键时触发
+        canvas.addEventListener("mouseout", up, false); //鼠标离开元素时触发
+        // 鼠标按下
+        function down(evt) {
+            isDown = true;
+            beginPoint = getPos(evt);
+        }
+
+        // 鼠标移动
+        function move(evt) {
+            if (!isDown) return;
+            const endPoint = getPos(evt);
+            drawLine(beginPoint, endPoint);
+            beginPoint = endPoint;
+        }
+
+        // 抬起鼠标
+        function up(evt) {
+            if (!isDown) return;
+            const endPoint = getPos(evt);
+            drawLine(beginPoint, endPoint);
+            beginPoint = null;
+            isDown = false;
+        }
+
+        // 定位赋值
+        function getPos(evt) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top,
+            };
+        }
+        // 绘制
+        function drawLine(beginPoint, endPoint) {
+            ctx.beginPath();
+            ctx.moveTo(beginPoint.x, beginPoint.y);
+            ctx.lineTo(endPoint.x, endPoint.y);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        function drawLine(beginPoint, endPoint) {
+            ctx.beginPath();
+            ctx.moveTo(beginPoint.x, beginPoint.y);
+            ctx.lineTo(endPoint.x, endPoint.y);
+            ctx.stroke();
+            ctx.closePath();
+        }
+
+        document.getElementById("clear").onclick = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+    </script>
+</body>
+</html>

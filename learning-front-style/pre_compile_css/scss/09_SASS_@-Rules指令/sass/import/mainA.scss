@@ -1,0 +1,10 @@
+.p1{
+    content: '导入scss';
+    font-size: 16px;
+    a{
+        font-size: 14px;
+        &:hover{
+            color: blue;
+        }
+    }
+}

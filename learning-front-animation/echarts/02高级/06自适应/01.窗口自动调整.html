@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="../js/echarts-5.5.js"></script>
+    </head>
+    <body>
+        <div style="width: 600px; height: 400px"></div>
+        <script>
+            let divBox = document.querySelector("div");
+            var mCharts = echarts.init(divBox);
+            var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二牛", "大强"];
+            var yDataArr = [70, 92, 87, 64, 67, 75, 86, 93];
+            var option = {
+                xAxis: {
+                    type: "category",
+                    data: xDataArr,
+                },
+                yAxis: {
+                    type: "value",
+                },
+                series: [
+                    {
+                        name: "语文",
+                        type: "bar",
+                        data: yDataArr,
+                    },
+                ],
+            };
+            mCharts.setOption(option);
+
+            /* 监听 window 窗口大小变化的事件
+                window.onresize = function () {
+                    mCharts.resize();
+                }*/
+            // 另一种方法
+            window.onresize = mCharts.resize;
+        </script>
+    </body>
+</html>

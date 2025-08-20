@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite } from "../js/pixi.mjs";
+
+        //使用立即执行函数进行调用
+        (async () => {
+            // 创建一个新的应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 400,
+                height: 400,
+                background: "#1099bb",
+            });
+
+            // 将应用程序画布添加到到文档正文
+            document.body.appendChild(app.canvas);
+
+            // 创建一个精灵并添加到舞台上
+            const container = new Container();
+
+            app.stage.addChild(container);
+
+            // 加载对应资源获取纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            // 在容器中创建一个5x5的兔子网格
+            for (let i = 0; i < 25; i++) {
+                const bunny = new Sprite(texture);
+
+                bunny.x = (i % 5) * 40;
+                bunny.y = Math.floor(i / 5) * 40;
+                container.addChild(bunny);
+            }
+
+            // 移动容器到中心
+            container.x = app.screen.width / 2;
+            container.y = app.screen.height / 2;
+
+            // 将兔子精灵居中放置在本地容器坐标中
+            container.pivot.x = container.width / 2;
+            container.pivot.y = container.height / 2;
+
+            // 监听动画更新
+            app.ticker.add(time => {
+                // 不断旋转容器！
+                // *使用delta创建与帧无关的变换*
+                container.rotation -= 0.01 * time.deltaTime;
+            });
+        })();
+    </script>
+</body>
+</html>

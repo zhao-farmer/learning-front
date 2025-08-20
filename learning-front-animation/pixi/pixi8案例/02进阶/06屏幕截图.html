@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite, Text, TextStyle } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                background: "#111",
+                height: 600,
+                width: 800,
+            });
+
+            // 添加用用程序画布到桌面上
+            document.body.appendChild(app.canvas);
+
+            // 创建一个新的应用程序
+            const container = new Container();
+            // 创建容器框架
+            const containerFrame = new Container();
+            // 将第一个容器添加到容器框架中
+            containerFrame.addChild(container);
+            // 应用框架添加到舞台上
+            app.stage.addChild(containerFrame);
+
+            // 加载兔子图片纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            // 创建5x5的兔子网格在容器上
+            for (let i = 0; i < 25; i++) {
+                //纹理添加到精灵里
+                const bunny = new Sprite(texture);
+
+                bunny.x = (i % 5) * 40;
+                bunny.y = Math.floor(i / 5) * 40;
+                container.addChild(bunny);
+            }
+
+            // 移动框架容器到屏幕中央
+            containerFrame.x = app.screen.width / 2;
+            containerFrame.y = app.screen.height / 2;
+
+            // 将兔子精灵居中放置在本地容器坐标中
+            // pivot 此显示对象在其局部空间中的旋转、缩放和倾斜中心。该位置是枢轴在父对象局部空间中的投影。
+            container.pivot.x = container.width / 2;
+            container.pivot.y = container.height / 2;
+
+            // 监听动画更新
+            app.ticker.add(time => {
+                //不断旋转容器！
+                //*使用delta创建与帧无关的变换*
+                container.rotation -= 0.01 * time.deltaTime;
+            });
+
+            let screenshot;
+
+            // 截取截图并下载
+            async function takeScreenshot() {
+                //如果对象不为空 直接清理
+                if (screenshot !== undefined) {
+                    screenshot.remove();
+                }
+                //渲染停止
+                app.stop();
+                //当前东起转换成base64数据
+                const url = await app.renderer.extract.base64(containerFrame);
+
+                // 创建a标签
+                screenshot = document.createElement("a");
+                // a标签加入
+                document.body.append(screenshot);
+                // a标签的位置
+                screenshot.style.position = "fixed";
+                screenshot.style.top = "20px";
+                screenshot.style.left = "20px";
+                screenshot.download = "screenshot";
+                //给予其赋值 如果点击就会下载
+                screenshot.href = url;
+
+                //创建图片对象
+                const image = new Image();
+                //宽度为屏幕的五分之一
+                image.width = app.screen.width / 5;
+                //设置url
+                image.src = url;
+                //将image的html代码 放入到截屏标签中
+                screenshot.innerHTML = image.outerHTML;
+                // 设置渲染开始
+                app.start();
+            }
+            // 设置可以监控
+            app.stage.eventMode = "static";
+            // 点击页面大小，整个页面
+            app.stage.hitArea = app.screen;
+            // 用户按下鼠标时 执行截图方法
+            app.stage.on("pointerdown", takeScreenshot);
+
+            // 新增文本风格
+            const style = new TextStyle({
+                fontFamily: "Roboto",
+                fill: "#999",
+            });
+            // 创建截屏文字
+            const screenshotText = new Text({ text: "点击可以截屏", style });
+            // 截屏文字x位置 屏幕的宽度减去文字宽度的一半    y位置 文字高度的一半
+            screenshotText.x = Math.round((app.screen.width - screenshotText.width) / 2);
+            screenshotText.y = Math.round(screenshotText.height / 2);
+            // 将文本添加到舞台上
+            app.stage.addChild(screenshotText);
+        })();
+    </script>
+</body>
+</html>

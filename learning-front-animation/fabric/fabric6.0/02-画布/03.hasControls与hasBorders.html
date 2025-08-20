@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="canvas" style="border: 1px solid #ccc;"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from '../index.min.mjs'
+
+        // 获取动态画布
+        let canvas =new fabric.Canvas('canvas')
+
+        let rect =new fabric.Rect({
+            top:60,
+            left:60,
+            width:60,
+            height:60,
+            fill:'#08d9d6',
+            hasControls:false,// 取消控制角
+            hasBorders:false// 取消控制边
+        })
+
+        canvas.add(rect)
+    </script>
+</body>
+</html>

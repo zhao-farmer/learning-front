@@ -1,0 +1,6 @@
+.test {
+  format-a-d: "repetitions: 3 file: "directory/file.less"";
+  format-a-d-upper: 'repetitions: 3 file: %22directory%2Ffile.less%22';
+  format-s: "repetitions: 3 file: directory/file.less";
+  format-s-upper: 'repetitions: 3 file: directory%2Ffile.less';
+}

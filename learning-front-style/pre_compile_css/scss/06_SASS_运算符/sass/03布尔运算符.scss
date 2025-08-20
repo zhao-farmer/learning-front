@@ -1,0 +1,27 @@
+// scss 代码编辑
+$width: 100;
+$height: 200;
+$last: false;
+div {
+    // 两个条件都满足时
+    @if $width > 50 and $height < 300 {
+        font-size: 16px;
+    }
+    @else {
+        font-size: 20px;
+    }
+    // 任意条件满足时
+    @if $width > 200 or $height < 300 {
+        color: red;
+    }
+    @else {
+        color: blue;
+    }
+    // 判断是否为真
+    @if not $last {
+        line-height: 2em;
+    }
+    @else {
+        line-height: 1em;
+    }
+}

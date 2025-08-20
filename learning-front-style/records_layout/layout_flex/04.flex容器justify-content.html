@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>justify-content Example</title>
+        <style>
+            .flex-container {
+                display: flex;
+                flex-flow: row nowrap; /* 设置主轴为水平且不换行 */
+                width: 400px;
+                height: 100px;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                border: 1px solid #000;
+                position: relative;
+                padding-bottom: 20px;
+            }
+
+            .flex-container span{
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+                color: #059635;
+            }
+
+            .flex-item {
+                flex: 0 0 50px; /* 固定宽度为 50px */
+                height: 80%;
+                margin: 5px;
+                background-color: #999;
+                color: #fff;
+                text-align: center;
+                line-height: 80px;
+                border: 1px solid #666;
+            }
+
+            .flex-container-start {
+                justify-content: flex-start;
+            }
+
+            .flex-container-end {
+                justify-content: flex-end;
+            }
+
+            .flex-container-center {
+                justify-content: center;
+            }
+
+            .flex-container-between {
+                justify-content: space-between;
+            }
+
+            .flex-container-around {
+                justify-content: space-around;
+            }
+            .flex-container-evenly {
+                justify-content: space-evenly;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Justify Content Example</h2>
+
+        <ul class="flex-container flex-container-start">
+            <li class="flex-item">1</li>
+            <li class="flex-item">2</li>
+            <li class="flex-item">3</li>
+            <span>justify-content: flex-start</span>
+        </ul>
+
+        <ul class="flex-container flex-container-end">
+            <li class="flex-item">1</li>
+            <li class="flex-item">2</li>
+            <li class="flex-item">3</li>
+            <span>justify-content: flex-end</span>
+        </ul>
+
+        <ul class="flex-container flex-container-center">
+            <li class="flex-item">1</li>
+            <li class="flex-item">2</li>
+            <li class="flex-item">3</li>
+            <span>justify-content: center</span>
+        </ul>
+
+        <ul class="flex-container flex-container-between">
+            <li class="flex-item">1</li>
+            <li class="flex-item">2</li>
+            <li class="flex-item">3</li>
+            <span>justify-content: space-between</span>
+        </ul>
+
+        <ul class="flex-container flex-container-around">
+            <li class="flex-item">1</li>
+            <li class="flex-item">2</li>
+            <li class="flex-item">3</li>
+            <span>justify-content: space-around</span>
+        </ul>
+        <ul class="flex-container flex-container-evenly">
+            <li class="flex-item">1</li>
+            <li class="flex-item">2</li>
+            <li class="flex-item">3</li>
+            <span>justify-content: space-evenly</span>
+        </ul>
+    </body>
+</html>

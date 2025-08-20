@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+		canvas{
+			background:#f2f2f2;
+		}
+	</style>
+  <script></script>
+ </head>
+ <body>
+	<canvas width="400" height="400" id="canvas">您的浏览器不支持canvas标签</canvas> 
+	<br>
+	<canvas width="400" height="400" id="canvas2"></canvas>
+	<script>
+		var ctx=canvas.getContext('2d');
+		ctx.fillRect(0,0,50,50);
+		ctx.fillRect(100,0,50,50);
+		ctx.fillRect(200,0,50,50);
+		ctx.fillRect(300,0,50,50);
+		ctx.fillRect(50,50,50,50);
+		ctx.fillRect(150,50,50,50);
+		ctx.fillRect(250,50,50,50);
+		ctx.fillRect(350,50,50,50);
+		ctx.fillRect(0,100,50,50);
+		ctx.fillRect(100,100,50,50);
+		ctx.fillRect(200,100,50,50);
+		ctx.fillRect(300,100,50,50);
+		ctx.fillRect(50,150,50,50);
+		ctx.fillRect(150,150,50,50);
+		ctx.fillRect(250,150,50,50);
+		ctx.fillRect(350,150,50,50);
+		ctx.fillRect(0,200,50,50);
+		ctx.fillRect(100,200,50,50);
+		ctx.fillRect(200,200,50,50);
+		ctx.fillRect(300,200,50,50);
+		ctx.fillRect(50,250,50,50);
+		ctx.fillRect(150,250,50,50);
+		ctx.fillRect(250,250,50,50);
+		ctx.fillRect(350,250,50,50);
+		ctx.fillRect(0,300,50,50);
+		ctx.fillRect(100,300,50,50);
+		ctx.fillRect(200,300,50,50);
+		ctx.fillRect(300,300,50,50);
+		ctx.fillRect(50,350,50,50);
+		ctx.fillRect(150,350,50,50);
+		ctx.fillRect(250,350,50,50);
+		ctx.fillRect(350,350,50,50);
+ 
+		var ctx2=canvas2.getContext('2d');
+		var x=0;
+		var y=0;
+		var w=50;
+		var h=50;
+		for(var i=0;i<8;i++){
+			y=i*100;
+			for(var j=0;j<4;j++){
+				x=j*100;
+				ctx2.fillRect(x,y,w,h);
+			}
+		}
+		for(var i=0;i<8;i++){
+			y=i*100+50;
+			for(var j=0;j<4;j++){
+				x=j*100+50;
+				ctx2.fillRect(x,y,w,h);
+			}
+		}
+ 
+	</script>
+ </body>
+</html>

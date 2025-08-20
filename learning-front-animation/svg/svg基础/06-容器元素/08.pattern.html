@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="150" >
+        <defs>
+          <pattern id="triangle" viewBox="0,0,10,10" width="10%" height="10%">
+            <polygon points="0, 0 0, 2 0, 10 5, 5" />
+          </pattern>
+        </defs>
+      
+        <!-- 使用fill或stroke属性引用 -->
+        <!-- 呈现为无数个小三角平铺满圆以及轮廓 -->
+        <circle cx="50" cy="50" r="50" fill="url(#triangle)" />
+        <circle
+          cx="180"
+          cy="50"
+          r="40"
+          fill="none"
+          stroke-width="20"
+          stroke="url(#triangle)" />
+      </svg>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person{
+            state = {
+                a:1,
+                b:2
+            }
+            constructor(name,age){
+                this.name = name
+                this.age = age
+                // 替换的是这里
+                // this.state = {
+                //     a:1,
+                //     b:2
+                // }
+            }
+        }
+        let obj = new Person("kerwin",100)
+        console.log(obj);
+    </script>
+</body>
+</html>

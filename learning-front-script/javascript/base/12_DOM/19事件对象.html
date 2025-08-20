@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      #box1 {
+        width: 300px;
+        height: 300px;
+        background-color: greenyellow;
+      }
+
+      .box2 {
+        width: 250px;
+        height: 250px;
+        background-color: yellow;
+      }
+      .box3 {
+        width: 200px;
+        height: 200px;
+        background-color: orange;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1">
+      <div class="box2">
+        <div class="box3"></div>
+      </div>
+    </div>
+
+    <a href="https//lilichao.com" id="chao">超链接</a>
+
+    <script>
+      /* 
+            在DOM中存在着多种不同类型的事件对象
+            // 可进入网站进行查询  https://developer.mozilla.org/zh-CN/docs/Web/API/Event
+                - 多种事件对象有一个共同的祖先 Event
+                    - event.target  触发事件的对象
+                    - event.currentTarget 绑定事件的对象 （同this）
+                    - event.stopPropagation() 停止事件的传到
+                    - event.preventDefault() 取消默认行为
+                - 事件的冒泡（bubble）
+                    - 事件的冒泡就是指事件的向上传到
+                    - 当元素上的某个事件被触发后，其祖先元素上的相同事件也会间接被触发
+                        不希望事件冒泡时，可以通过事件对象来取消冒泡
+      */
+
+      const box1 = document.getElementById("box1");
+      const box2 = document.querySelector(".box2");
+      const box3 = document.querySelector(".box3");
+      const chao = document.querySelector("#chao");
+
+      chao.addEventListener("click", (event) => {
+        event.preventDefault(); //取消默认行为
+        alert("被点了");
+      });
+
+      box1.addEventListener("click", function (event) {
+        // alert(event);
+        /* 
+            在事件的响应函数中
+                event.target 表示的时触发事件的对象
+                this 绑定事件的对象
+        */
+
+        console.log(event.target);
+        console.log(this);
+        console.log(event.currentTarget);
+
+        alert("hello 我是box1");
+      });
+
+      box2.addEventListener("click", function (event) {
+        alert("我是box2");
+      });
+      box3.addEventListener("click", function (event) {
+        event.stopPropagation(); //取消事件的冒泡
+        alert("我是box3");
+      });
+    </script>
+  </body>
+</html>

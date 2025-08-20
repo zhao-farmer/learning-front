@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定样式_补充</title>
+    <!-- 引入Vue -->
+    <script  type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .basic{
+            width: 400px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        .happy{
+            border: 4px solid red;  
+            background-color: rgba(255, 255, 0, 0.64);
+            background: linear-gradient(30deg,yellow,pink,orange,yellow);
+        }
+        .sad{
+            background-color:gray;
+            border: 4px solid green;
+        }
+        .normal{
+            border: 2px solid black;
+            background-color:skyblue;
+        }
+        .at1{
+            background-color: chartreuse;
+        }
+        .at2{
+            font-size: 20px;
+        }
+        .at3{
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 创建一个容器 -->
+    <div id="root">
+        <!-- 使用方法得到数据 括号不能省略-->
+        <div class="basic" :class="classWay()" >{{name}}</div>
+        <div class="basic" :style="styleWay()" >{{name}}</div>
+        </br>
+         <!-- 修改绑定的对象 使样式改变 -->
+        <div class="basic" :class="classArr" @click="changeClassWay">{{name}}</div>
+        <div class="basic" :style="styleObj" @click="changeStyleWay">{{name}}</div>
+        </br>
+        <!-- 使用表达式直接判断要实现的样式 简单判断与复杂判断 -->
+        <div class="basic" :class="{happy:divShow1 === 1}" @click="divShow1 = 1">{{name}}</div>
+        <div class="basic" :class="[divShow2 === 1?'happy':'sad']" @click="divShow2 = 1">{{name}}</div>
+        </br>
+        <!-- 使用小括号进行计算使用 -->
+        <div class="basic" :style="{'font-size': (fsize + 1) + 'px' }" @click="divShow2 = 1">{{name}}</div>
+       
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'绑定样式_补充',
+                mood:'normal',
+                classArr: ['at1','at2','at3'],
+                a:'at1',
+                b:'at2',
+                c:'at3',
+                classObj:{
+                    at1:false,
+                    at2:false
+                },
+                fsize:40,
+                styleObj:{
+                    fontSize: '40px',
+                    color:'red'
+                },
+                styleObj2:{
+                    backgroundColor:'orange'
+                },
+                styleArr:[
+                    {
+                        fontSize: '40px',
+                        color:'red'
+                    },
+                    {
+                        backgroundColor:'green'
+                    }
+                ],
+                divShow1:0,
+                divShow2:0,
+            },
+            methods: {
+                classWay(){
+                    let tt =  ['at1','at2']
+                    return tt
+                },
+                styleWay(){
+                    return {'font-size':'30px','color':'yellow'}
+                },
+                changeClassWay(){
+                    this.classArr = [this.a,this.b]
+                },
+                changeStyleWay(){
+                    this.styleObj = {  fontSize: '20px',color:'blue'}
+                },
+
+
+                changeMood(){                 
+                    const arr = ['happy','sad','normal']
+                    let index = Math.floor(Math.random() * 3)
+                    this.mood = arr[index]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

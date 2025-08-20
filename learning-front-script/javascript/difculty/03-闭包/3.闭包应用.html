@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let count = 1;
+        function fn(){
+            count++
+            console.log(`函数被调用${count}次`);
+        }
+        fn() //1
+        fn() //2
+
+        // 问题：这个count是个全局变量，很容易被修改
+        // 闭包优化
+        function fn2(){
+            let count = 1
+            function fun(){
+                count++
+                console.log(`函数被调用${count}次`);
+            }
+        }
+        const result = fn()
+        result() //2
+        result() //3
+    </script>
+</body>
+</html>

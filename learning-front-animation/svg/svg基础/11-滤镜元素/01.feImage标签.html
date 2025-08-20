@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+  <svg width="200px" height="200px">
+    <defs>
+      <filter id="blendFilter">
+        <feImage href="./images/fire.png" y="10" height="180" result="p1" />
+        <feImage href="./images/flower.png" y="10" height="180" result="p2" />
+  
+        <!-- 相乘 -->
+        <feBlend mode="multiply" in="p1" in2="p2" />
+      </filter>
+    </defs>
+    <rect width="200" height="200" filter="url(#blendFilter)" />
+  </svg>
+</body>
+</html>

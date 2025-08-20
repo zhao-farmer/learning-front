@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = ["aaa","bbb","ccc"]
+
+        // 旧版本的in 拿到的是索引
+        for(let i in arr){
+            console.log(i);
+        }
+
+        // 直接拿到对应的值
+        for(let i of arr){
+            console.log(i);
+        }
+
+        // for of 使用了 Symbol.iterator进行获取值
+        console.log(arr);
+        
+        // 获取所有数据
+        arr[Symbol[Symbol.iterator]]
+        // 省略写法
+        let iter = arr[Symbol.iterator]()
+        // 返回值就是遍历器对象
+        console.log(iter);
+        
+
+        console.log(iter.next());
+        console.log(iter.next());
+        console.log(iter.next());
+
+
+        // 遍历字符串
+        let str = 'kerwin'
+        let iter2 = str[Symbol.iterator]()
+        console.log(iter2.next());
+        console.log(iter2.next());
+        console.log(iter2.next());
+        console.log(iter2.next());
+
+
+        // 伪数组
+
+        function test(){
+            for(let i of arguments){
+                console.log(i);
+            }
+        }
+        test(1,2,3,4)
+
+    </script>
+</body>
+</html>

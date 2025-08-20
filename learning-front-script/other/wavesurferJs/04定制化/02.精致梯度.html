@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script type="module">
+            import WaveSurfer from "../mjs/wavesurfer.js";
+
+            // 创建画布渐变
+            const ctx = document.createElement("canvas").getContext("2d");
+            const gradient = ctx.createLinearGradient(0, 0, 0, 150);
+            gradient.addColorStop(0, "rgb(200, 0, 200)");
+            gradient.addColorStop(0.7, "rgb(100, 0, 100)");
+            gradient.addColorStop(1, "rgb(0, 0, 0)");
+
+            // 带有渐变的默认样式
+            WaveSurfer.create({
+                container: document.body,
+                waveColor: gradient,
+                progressColor: "rgba(0, 0, 100, 0.5)",
+                url: "../assest/audio.wav",
+            });
+
+            // SoundCloud风格-竖柱
+            WaveSurfer.create({
+                container: document.body,
+                waveColor: gradient,
+                barWidth: 2,
+                progressColor: "rgba(0, 0, 100, 0.5)",
+                url: "../assest/audio.wav",
+            });
+        </script>
+    </body>
+</html>

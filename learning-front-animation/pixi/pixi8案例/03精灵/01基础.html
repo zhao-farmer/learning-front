@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite } from "../js/pixi.mjs";
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb",
+                width: 600,
+                height:400,
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            // 加载兔子纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            // 创建兔子精灵
+            const bunny = new Sprite(texture);
+
+            // 设置精灵的锚点
+            bunny.anchor.set(0.5);
+
+            // 移动精灵到屏幕的中央
+            bunny.x = app.screen.width / 2;
+            bunny.y = app.screen.height / 2;
+
+            // 将精灵添加到画布上
+            app.stage.addChild(bunny);
+
+            // 监听动画更新
+            app.ticker.add(time => {
+                //为了好玩，让我们稍微旋转一下兔子先生。
+                //*如果以100%的性能运行，增量为1*
+                //*创建与帧无关的转换*
+                bunny.rotation += 0.1 * time.deltaTime;
+            });
+        })();
+    </script>
+</body>
+</html>

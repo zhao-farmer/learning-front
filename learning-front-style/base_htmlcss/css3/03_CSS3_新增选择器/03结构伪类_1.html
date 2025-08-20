@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>伪类选择器</title>
+    <style>
+        /* 选中的是div的第一个儿子p元素  ——看结构1 */
+        /* div>p:first-child{
+            color: red;
+        } */
+
+         /* 选中的是div的第一个儿子p元素  ——看结构2 */
+         /* div>p:first-child{
+            color: red;
+        } */
+
+        /* 选中的是div的后代p元素，且p的父亲是谁无所谓，但p必须是其其父亲的第一个儿子 ——看结构13 */
+         /* div p:first-child{
+            color: red;
+        } */
+    </style>
+</head>
+<body>
+    <!-- 结构1 -->
+    <!-- <div>
+        <p class="first">赵六：68分</p>
+        <span>张三：98分</span>
+        <p>李四：88分</p>
+        <p>王五：78分</p>   
+    </div> -->
+
+    <!-- 结构2 -->
+    <!-- <div>
+        <span>张三：98分</span>
+        <p>李四：88分</p>
+        <p>王五：78分</p>
+        <p class="first">赵六：68分</p>
+    </div> -->
+
+    <!-- 结构3 -->
+    <p>测试1</p>
+    <div>
+        <p>测试2</p>
+        <marquee>
+            <p>测试3</p>
+            <p>张三：98分</p>
+        </marquee>
+        <p>李四：88分</p>
+        <p>王五：78分</p>
+        <p class="first">赵六：68分</p>
+    </div>
+</body>
+</html>

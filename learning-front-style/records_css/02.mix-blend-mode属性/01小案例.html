@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .text-box {
+        width: 1500px;
+        height: 500px;
+        background: linear-gradient(to right, black 50%, white 50%);
+        /* mix-blend-mode: hue; */
+        border: solid 1.5px black;
+        margin: 200px auto;
+        line-height: 500px;
+        font-size: 600;
+      }
+
+      .text {
+        color: #fff;
+        font-size: 50px;
+        font-weight: 600;
+        mix-blend-mode: difference;
+        transition: all 0.2s linear;
+      }
+
+      .text-box:hover > .text {
+        transform: translateX(500px);
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text-box">
+      <div class="text">Java-HTML5-CSS3-JS</div>
+    </div>
+  </body>
+</html>

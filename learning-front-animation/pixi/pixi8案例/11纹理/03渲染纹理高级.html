@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite, RenderTexture } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width:800,
+                height:600,  
+            });
+
+            // 应用程序添加到页面上
+            document.body.appendChild(app.canvas);
+
+            const stageSize = {
+                width: app.screen.width,
+                height: app.screen.height,
+            };
+
+            // 创建两个渲染纹理。。。这些动态纹理将用于将场景本身绘制出来
+            let renderTexture = RenderTexture.create(stageSize);
+            let renderTexture2 = RenderTexture.create(stageSize);
+            const currentTexture = renderTexture;
+
+            // 创建一个使用我们上面创建的渲染纹理的新角色
+            const outputSprite = new Sprite(currentTexture);
+
+            // 对齐精灵
+            outputSprite.x = 400;
+            outputSprite.y = 300;
+            outputSprite.anchor.set(0.5);
+
+            // 添加到舞台
+            app.stage.addChild(outputSprite);
+
+            //新建一个容器
+            const stuffContainer = new Container();
+
+            stuffContainer.x = 400;
+            stuffContainer.y = 300;
+
+            //添加到舞台上
+            app.stage.addChild(stuffContainer);
+
+            // 各个集合
+            const fruits = [
+                "../assets/images/rt_object_01.png",
+                "../assets/images/rt_object_02.png",
+                "../assets/images/rt_object_03.png",
+                "../assets/images/rt_object_04.png",
+                "../assets/images/rt_object_05.png",
+                "../assets/images/rt_object_06.png",
+                "../assets/images/rt_object_07.png",
+                "../assets/images/rt_object_08.png",
+            ];
+
+            // 加载这些纹理
+            await Assets.load(fruits);
+
+            // 创建项目数组
+            const items = [];
+
+            // 现在创建一些项目并将其随机放置在物品容器中
+            for (let i = 0; i < 20; i++) {
+                // 创建一个精灵 通过余数 获取正确的值
+                const item = Sprite.from(fruits[i % fruits.length]);
+
+                // 设置随机位置
+                item.x = Math.random() * 400 - 200;
+                item.y = Math.random() * 400 - 200;
+                // 设置锚点
+                item.anchor.set(0.5);
+                // 放到容器中展示
+                stuffContainer.addChild(item);
+                // 数据放入缓存数组 进行后续处理
+                items.push(item);
+            }
+
+            // 用于旋转
+            let count = 0;
+
+            app.ticker.add(() => {
+                for (let i = 0; i < items.length; i++) {
+                    // 旋转每个项目
+                    const item = items[i];
+                    // 开启自身的旋转
+                    item.rotation += 0.1;
+                }
+
+                count += 0.01;
+
+                // 两个渲染纹理进行交换
+                const temp = renderTexture;
+                renderTexture = renderTexture2;
+                renderTexture2 = temp;
+
+                // 设置新的纹理
+                outputSprite.texture = renderTexture;
+
+                // 逆时针旋转 也就是所哪些小额精灵也会跟着一起旋转
+                stuffContainer.rotation -= 0.01;
+                //  并根据count与sin函数 获取一个周期性质的变化
+                outputSprite.scale.set(1 + Math.sin(count) * 0.2);
+
+                // 将舞台渲染为纹理
+                // 每次将渲染过的纹理给添加上到舞台上
+                //* “true” 在渲染内容之前清除纹理*
+                app.renderer.render({
+                    container: app.stage,
+                    target: renderTexture2,
+                    clear: false,
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

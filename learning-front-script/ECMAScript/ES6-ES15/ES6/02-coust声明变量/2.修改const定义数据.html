@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1 修改应用类型变量
+        const myobj = {
+            name:'kerwin',
+            age:100
+        }
+
+        // myobj = 'dwa'
+
+        myobj.name = 'tiechui'
+        console.log(myobj);
+        
+
+        //fresze 冻结属性 无法改变任何属性
+        const myobj2 = Object.freeze({
+            name:'kerwin',
+            age:100
+        })
+        myobj2.name = 'dongjie'
+        console.log(myobj2);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .table {
+            display: table;
+            background: pink;
+        }
+        .row {
+            display: table-row;
+        }
+        .cell {
+            display: table-cell;
+            border: 1px solid #cccccc;
+        }
+        .header-group {
+            display: table-header-group;
+            width: 200px;
+            height: 10px;
+            margin-left: 50px;
+            padding: 10px;
+        }
+        .body-group {
+            display: table-row-group;
+            width: 200px;
+            height: 100px;
+            margin-left: 50px;
+            padding: 10px;
+        }
+        .footer-group {
+            display: table-footer-group;
+            width: 200px;
+            height: 10px;
+            margin-left: 50px;
+            padding: 10px;
+        }
+    </style>
+        
+</head>
+<body>
+    <div class="table">
+        <div class="header-group">
+            <div class="row row1">
+            <div class="cell cell1">header张三</div>
+            <div class="cell cell2">header李四</div>
+            <div class="cell cell3">header王五</div>
+            </div>
+            <div class="row row1">
+            <div class="cell cell1">header张三</div>
+            <div class="cell cell2">header李四</div>
+            <div class="cell cell3">header王五</div>
+            </div>
+            <span>111111</span>
+        </div>
+        <div class="body-group">
+            <div class="row row2">
+            <div class="cell cell1">body张三三</div>
+            <div class="cell cell2">body李四四</div>
+            <div class="cell cell3">body王五五</div>
+            </div>
+            <span>222222</span>
+        </div>
+        <div class="footer-group">
+            <div class="row row2">
+            <div class="cell cell1">footer张三三三</div>
+            <div class="cell cell2">footer李四四四</div>
+            <div class="cell cell3">footer王五五五</div>
+            </div>
+            <span>333333</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <input type="text" id="search">
+    <script>
+        const {  fromEvent } = rxjs;
+        const { debounceTime } = rxjs.operators;
+
+        const input = document.getElementById('search');
+        fromEvent(input, 'input').pipe(debounceTime(300))
+        .subscribe(() => console.log('搜索:', input.value));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');
+
+        //index用于确认绘制的步骤
+        let index = 0;
+        //绘制函数
+        function render(){
+            ctx.clearRect(0,0,600,400)
+            index += 0.01;
+            if(index > 1){
+                index = 0;
+            }
+            //开始x 开始y 结束x 结束y
+            let linearGradient = ctx.createLinearGradient(100, 200, 400, 500);
+            linearGradient.addColorStop(0,"red");
+            linearGradient.addColorStop(index,"#ffcccc");
+            linearGradient.addColorStop(1,"blue");
+            ctx.fillStyle = linearGradient;
+            //位置x 位置y 宽度 高度
+            ctx.fillRect(100,200,300,300);
+            requestAnimationFrame(render);
+        }
+        //requestAnimationFrame 请求动画帧 依赖浏览器刷新频率
+        requestAnimationFrame(render);
+     </script>
+</body>
+</html>

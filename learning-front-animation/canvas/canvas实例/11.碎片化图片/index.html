@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <canvas id="myCanvas" width="333" height="500" style="background-color: black"></canvas>
+    </div>
+    <script>
+      let image = new Image();
+      image.src = "./images/women.jpg";
+      let boxWidth, boxHeight;
+      // 拆分成 10 行，10 列
+
+      let rows = 20,
+        columns = 30,
+        counter = 0;
+
+      image.onload = function () {
+        // 计算每一行，每一列的宽高
+        boxWidth = image.width / columns;
+        boxHeight = image.height / rows;
+
+        // 循环渲染
+        requestAnimationFrame(animate);
+      };
+      let canvas = document.getElementById("myCanvas");
+
+      let context = canvas.getContext("2d");
+
+      function animate() {
+        // 随机渲染某个模块
+        let x = Math.floor(Math.random() * columns);
+        let y = Math.floor(Math.random() * rows);
+        // 核心
+
+        context.drawImage(
+          image,
+          x * boxWidth, // canvas 中横坐标起始位置
+          y * boxHeight, // canvas 中纵坐标起始位置
+          boxWidth, // 画图的宽度(小碎片图像的宽)
+          boxHeight, // 画图的高度(小碎片图像的高)
+          x * boxWidth, // 从大图的 x 坐标位置开始画图
+          y * boxHeight, // 从大图的 y 坐标位置开始画图
+          boxWidth, // 从大图的 x 位置开始，画多宽(小碎片图像的宽)
+          boxHeight // 从大图的 y 位置开始，画多高(小碎片图像的高)
+        );
+        counter++;
+        // 如果模块渲染了 90%，就让整个图片显示出来。
+        if (counter > columns * rows * 0.9) {
+          context.drawImage(image, 0, 0);
+        } else {
+          requestAnimationFrame(animate);
+        }
+      }
+    </script>
+  </body>
+</html>

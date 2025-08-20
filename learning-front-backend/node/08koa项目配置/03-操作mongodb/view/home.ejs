@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 拦截器配置
+
+        // request 拦截
+        axios.interceptors.request.use(
+            function (config) {
+                // 本地token传给后端，用于验证用户
+                const token = localStorage.getItem("token")
+                config.headers.Authorization = `Bearer ${token}`
+
+                return config;
+            },
+            function (error) {
+                return Promise.reject(error);
+            }
+        );
+
+        // response 拦截
+        axios.interceptors.response.use(
+            function (response) {
+                // 同样放到token中
+                const {authorization} = response.headers
+                authorization && localStorage.setItem("token",authorization)
+                
+                return response;
+            },
+            function (error) {
+                if(error.response.status == 401){
+                    localStorage.removeItem("token")
+                    location.href = "/login"
+                }
+                return Promise.reject(error);
+            }
+        );
+    </script>
+</head>
+<body>
+    <h1>
+        用户管理
+        <button id="exit">退出登录</button>
+    </h1>
+
+    <hr>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>用户名</td>
+                <td>年龄</td>
+            </tr>
+        </thead>
+        <!-- 往这里插入数据 -->
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script>
+   
+        var exit = document.querySelector("#exit");
+
+        axios.get("/home/list?page=1&limit=10").then(res=>{
+            res = res.data
+            var tbody = document.querySelector("tbody")
+            tbody.innerHTML = res.map(item=>`
+                <tr>
+                    <td>${item._id}</td>    
+                    <td>${item.username}</td>    
+                    <td>${item.age}</td>    
+                </tr>
+            `).join("")
+        })
+
+        exit.onclick=()=>{
+            localStorage.removeItem("token") 
+            location.href = "/login"
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // flat() flatMap()
+        // lodash 以前使用的
+
+        let arr = [1,2,3,[4,5,6]]
+        //扁平化处理
+        let arr1 = arr.flat()
+        console.log(arr,arr1);
+        
+
+        let arr3 = [
+            ["安庆","安阳","鞍山"],
+            ["北京","保定","包头"]
+        ]
+        console.log(arr3.flat());
+        
+
+        let arr4 = [
+            {
+                name:'A',
+                list:["安庆","安阳","鞍山"]
+            },
+            {
+                name:'B',
+                list:["北京","保定","包头"]
+            }
+           
+        ]
+        // 使用flatMap设置那一组数据进行扁平化处理
+        let res = arr4.flatMap(function(item){
+            return item.list
+        })
+        console.log(res);
+        
+       
+    </script>
+</body>
+</html>

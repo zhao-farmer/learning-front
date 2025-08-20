@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            canvas{
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="500" height="200"></canvas>
+        <div id="text1">鼠标移动坐标为:</div>
+        <div id="text2">鼠标按下坐标为:</div>
+        <div id="text3">鼠标松开坐标为:</div>
+        <div id="text4">鼠标拖拽坐标为:</div>
+
+        <script>
+            // 定义鼠标位置计算函数，我们一般命名到一个js模块中导入使用
+            const getMouse = element => {
+                let mouse = { x: 0, y: 0 }; // 存储鼠标位置信息
+                element.addEventListener("mousemove", e => {
+                    let x = e.pageX;
+                    let y = e.pageY;
+                    // 计算鼠标在canvas画布中的相对位置
+                    mouse.x = x - element.offsetLeft;
+                    mouse.y = y - element.offsetTop;
+                });
+                return mouse;
+            };
+
+            // canvas对象 与目标对象
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+            const mouse = getMouse(canvas);
+
+
+            // 拖拽状态
+            let isDragging = false;
+            let startX, startY, offsetX, offsetY;
+            let rect = { x: 50, y: 50, width: 100, height: 100 };
+
+            // 清理原图并画新图
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+                text4.innerHTML = `图形拖拽坐标为:${rect.x}, ${rect.y}`;
+            }
+
+            
+            // 默认画出拖拽目标
+            draw()
+
+            
+            // 鼠标移动 mousemove
+            canvas.addEventListener("mousemove", event => {
+                text1.innerHTML = `鼠标移动坐标为:${mouse.x}, ${mouse.y}`;
+                if (isDragging) {
+                    var x = event.offsetX;
+                    var y = event.offsetY;
+                    rect.x = x + offsetX;
+                    rect.y = y + offsetY;
+                    draw();
+                }
+            });
+            // 鼠标按下 mousedown
+            canvas.addEventListener("mousedown", event => {
+                text2.innerHTML = `鼠标按下坐标为:${mouse.x}, ${mouse.y}`;
+                var x = event.offsetX;
+                var y = event.offsetY;
+                if (x >= rect.x && x <= rect.x + rect.width && y >= rect.y && y <= rect.y + rect.height) {
+                    isDragging = true;
+                    startX = x;
+                    startY = y;
+                    offsetX = rect.x - startX;
+                    offsetY = rect.y - startY;
+                }
+            });
+            // 鼠标松开 mouseup
+            canvas.addEventListener("mouseup", () => {
+                text3.innerHTML = `鼠标松开坐标为:${mouse.x}, ${mouse.y}`;
+                isDragging = false;
+            });
+
+        </script>
+    </body>
+</html>

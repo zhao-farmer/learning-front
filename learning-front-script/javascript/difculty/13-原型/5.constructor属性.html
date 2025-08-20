@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // constructor 单词 构造函数
+        function Star(){
+
+        }
+        const ldh = new Star()
+        console.log(Star.prototype);
+        console.log(Star.prototype.constructor === Star);
+        // 原型上的 prototype.constructor 指回原来的 函数
+
+        // Star.prototype.sing = function(){
+        //     console.log("唱歌");
+        // }
+        // Star.prototype.dance = function(){
+        //     console.log("跳舞");
+        // }
+
+        console.log(Star.prototype);    //{}
+        Star.prototype = {
+            // 重新指回创建这个原型对象的 构造函数
+            constructor:Star,
+            sing:function(){
+                console.log("唱歌");
+            },
+            dance:function(){
+                console.log("唱歌");
+            },
+        }
+        console.log(Star.prototype);    //sing:{},dance:{}
+        
+    </script>
+</body>
+</html>

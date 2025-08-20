@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*
+            属性名
+                - 通常属性名就是一个字符串，所以属性名可以是任何值，没有什么特殊要求
+                    但是 如果你的属性名太特殊了，不能直接使用，需要使用[]来设置
+                    虽然如此，但是我们还是强烈建议属性名也按照标识符的规范命名
+                - 也可以使用符号(symbol)作为属性名
+                    获取这种属性时，也必须使用symbol
+                  使用symbol添加的属性，通常时那些不希望被外界访问的属性
+
+                - 使用[]去操作属性时，可以使用变量
+            属性值
+                - 对象的属性值可以使用任何类型,也可以是个对象
+            使用typeof检查一个对象，它返回的是Object
+        */
+
+        let obj = Object();
+        obj.name = "孙悟空";
+        obj.if = "哈哈";//不建议
+        obj.let = "let";//不建议
+        obj["1211515@#@@#！！#"] = "呵呵";  //不建议
+
+
+        let mySymbol = Symbol()
+        //使用symbol作为属性名
+        obj[mySymbol] = "通过symbol添加的属性";
+        console.log(obj);
+        console.log(obj[mySymbol]);
+
+        obj.age = 18;
+        obj['gender'] = '男';
+
+        console.log(obj.gender);
+        console.log(obj['gender']);
+
+
+        let str = "address";
+        obj[str] = "花果山";    //等价于 obj["address"] = "花果山";
+
+        obj.str = "haha"; //使用.的形式添加属性时，不能使用变量
+
+        console.log(obj);
+
+
+
+        let obj2 = Object();
+        obj2.a = 123;
+        obj2.b = "hello"
+        obj2.c = true
+        obj2.d = 123n
+        obj2.f = Object()
+        obj2.f.name = '猪八戒';
+        obj2.f.age = 28;
+
+        console.log(obj2);
+
+        console.log(typeof obj);
+
+        //检查对象是否有属性
+        /* 
+            in 运算符
+                - 用来检查对象中是否含有某个属性
+                - 语法 属性名 in obj
+                - 如果有返回true,没有返回false
+        
+        */
+        console.log("name" in obj, "haha" in obj);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

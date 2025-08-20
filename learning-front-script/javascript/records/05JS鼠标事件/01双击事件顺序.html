@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            height: 400px;
+            width: 400px;
+            background-color: skyblue;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        点击这里
+    </div>
+    <div class="result">
+
+    </div>
+
+    <script>
+        const box = document.querySelector(".box");
+        const result = document.querySelector(".result");
+
+        box.addEventListener( "click", function (event) {
+            console.log("click触发了");
+            let newNode = document.createElement("p");
+            newNode.innerHTML = "click触发了";
+            result.appendChild(newNode)
+        }, false);
+        box.addEventListener( "mousedown", function (event) {
+            console.log("mousedownk触发了");
+            let newNode = document.createElement("p");
+            newNode.innerHTML = "mousedownk触发了";
+            result.appendChild(newNode)
+
+        }, false);
+        box.addEventListener( "mouseup", function (event) {
+            console.log("mouseup触发了");
+
+            let newNode = document.createElement("p");
+            newNode.innerHTML = "mouseup触发了";
+            result.appendChild(newNode)
+        }, false);
+        box.addEventListener( "dblclick", function (event) {
+            console.log("dblclick触发了");
+
+            let newNode = document.createElement("p");
+            newNode.innerHTML = "dblclick触发了";
+            result.appendChild(newNode)
+        }, false);
+    </script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+// scss 代码编辑
+$width: 100px;
+div {
+    width: $width / 2; //使用变量
+    z-index: round($number: 10) / 2; //使用函数
+    height: (500px / 2); //使用圆括号
+    margin-left: 5px + 8/2; //使用了+表达式
+}

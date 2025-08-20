@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>喷雾笔刷 SprayBrush</title>
+</head>
+<body>
+    <canvas id="c" width="600" height="400" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 初始化
+        const canvas = new fabric.Canvas("c", {
+            isDrawingMode: true,
+        });
+
+        let sprayBrush = new fabric.SprayBrush(canvas);
+        canvas.freeDrawingBrush = sprayBrush;
+
+        // 喷雾画笔颜色
+        sprayBrush.color = "pink";
+
+        // 喷雾画笔颜色
+        sprayBrush.width = 20; 
+
+        // 喷雾密度（每块的点数）
+        sprayBrush.density = 3;
+
+        // 喷点宽度 与density保持一致最好
+        sprayBrush.dotWidth = 3;
+
+        // 喷点宽度变化
+        sprayBrush.dotWidthVariance = 2;
+        
+        // 画板范围
+        sprayBrush.limitedToCanvasSize = true;
+
+        // 是否应该删除重叠的点（矩形）（出于性能原因）
+        sprayBrush.optimizeOverlapping = false;
+
+        // 点的不透明度是否应该随机
+        sprayBrush.randomOpacity = true;
+
+        // 阴影
+        sprayBrush.shadow = new fabric.Shadow({
+            blur: 10,
+            offsetX: 10,
+            offsetY: 10,
+            color: "#30e3ca",
+        });
+
+        // 省略 
+        // strokeDashArray 虚线 
+        // strokeLineCap 笔刷的线尾样式
+        // strokeLineJoin 笔刷的角样式
+        // strokeMiterLimit 笔刷的最大斜接长度（用于strokeLineJoin = “斜接”）
+    </script>
+</body>
+</html>

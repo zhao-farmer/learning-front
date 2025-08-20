@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [11,12,13,14,15]
+        let res = arr.find(value=>value>13)
+        console.log(res);
+
+        let resIndex = arr.findIndex(value=>value>13)
+        console.log(resIndex);
+
+
+        // 从后向前查询
+        let resLast = arr.findLast(value=>value>13)
+        console.log(resLast);
+
+        let resLastIndex = arr.findLastIndex(value=>value>13)
+        console.log(resLastIndex);
+    </script>
+</body>
+</html>

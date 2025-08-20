@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flexbox Example with align-self</title>
+        <style>
+            .flex-container {
+                display: flex;
+                justify-content: space-around;
+                align-items: center; /* This will be overridden by align-self */
+                height: 200px;
+                background-color: #f2f2f2;
+            }
+
+            .flex-item {
+                margin: 10px;
+                padding: 20px;
+                background-color: #66b3ff;
+                color: white;
+                text-align: center;
+                border-radius: 5px;
+            }
+
+            /* Using align-self to override alignment for a specific item */
+            .flex-item:nth-child(2) {
+                align-self: flex-start; /* This item will start at the top */
+            }
+
+            .flex-item:nth-child(3) {
+                align-self: flex-end; /* This item will end at the bottom */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="flex-container">
+            <div class="flex-item">Item 1</div>
+            <div class="flex-item">Item 2</div>
+            <div class="flex-item">Item 3</div>
+        </div>
+    </body>
+</html>

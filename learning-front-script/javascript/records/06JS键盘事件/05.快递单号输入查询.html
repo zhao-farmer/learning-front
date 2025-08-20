@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>快递单号输入查询</title>
+    <style>
+        .box {
+            width: 250px;
+            margin: 100px auto;
+            position: relative;
+        }
+        
+        .poput {
+            width: 160px;
+            padding: 5px 5px;
+            line-height: 20px;
+            font-size: 12px;
+            background-color: #f1f1f1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .5);
+            position: absolute;
+            left: 80px;
+            top: 2px;
+            display: none;
+        }
+        
+        .poput::before {
+            content: "";
+            width: 0;
+            height: 0;
+            border: 7px solid red;
+            border-color: #f1f1f1 transparent transparent;
+            position: absolute;
+            top: 30px;
+            left: 20px;
+        }
+        
+        .lastBox {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div>
+            公司名称：<input type="text" placeholder="圆通快递" disabled="disabled">
+        </div>
+        <div class="poput">123</div>
+        <div class="lastBox">
+            快递单号：<input type="text" id="text">
+        </div>
+    </div>
+    <script>
+        window.onload = function() {
+            // 获取文本输入框
+            var text = document.querySelector("#text");
+            // 获取弹出框
+            var poput = document.querySelector(".poput");
+            // 给文本框添加键盘按键弹起事件
+            text.addEventListener("keyup", function(e) {
+                // 判断文本输入框是否为空
+                if (this.value == "") {
+                    // 为空弹框就隐藏
+                    poput.style["display"] = "none";
+                } else {
+                    // 否则弹框出现，并且将文本输入框内的值赋值给弹出框
+                    poput.style["display"] = "block";
+                    poput.innerText = this.value;
+                }
+            })
+            // 给文本输入框添加失去鼠标焦点时的事件
+            text.addEventListener("blur", function() {
+                // 失去焦点后，弹框隐藏
+                poput.style["display"] = "none";
+            })
+            //给文本输入框添加鼠标获取焦点时的事件
+            text.addEventListener("focus", function() {
+                // 判断文本输入框是否为空
+                if (this.value == "") {
+                    // 为空弹框就隐藏
+                    poput.style["display"] = "none";
+                } else {
+                    // 否则弹框出现，并且将文本输入框内的值赋值给弹出框
+                    poput.style["display"] = "block";
+                    poput.innerText = this.value;
+                }
+            })
+        }
+    </script>
+</body>
+</html>

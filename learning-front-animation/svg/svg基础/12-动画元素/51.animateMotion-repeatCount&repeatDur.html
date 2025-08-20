@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <title>Document</title>
+  </head>
+  <body>
+    <svg width="200" height="200">
+      <path id="motionPath" d="M10,10 C50,50 150,50 190,10" stroke="gray" fill="none"/>
+      <!-- 使用结束次数 -->
+      <circle x="10" y="10" r="5" fill="red">
+        <animateMotion 
+          dur="2s" 
+          repeatCount="2" >
+          <mpath xlink:href="#motionPath"/>
+        </animateMotion>
+      </circle>
+      <!-- 使用结束时间 -->
+      <circle x="10" y="10" r="5" fill="blue">
+        <animateMotion 
+          begin="1s"
+          dur="2s" 
+          repeatDur="5s">
+          <mpath xlink:href="#motionPath"/>
+        </animateMotion>
+      </circle>
+    </svg>
+  </body>
+</html>

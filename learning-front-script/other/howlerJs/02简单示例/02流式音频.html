@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">播放</button>
+    <script src="../js/howler.js"></script>
+    <script>
+        let button =  document.getElementById('btn')
+        button.onclick = ()=>{
+            load()
+        }
+        function load(){
+            var sound = new Howl({
+                src: ['../assest/longtime.mp3'],
+                html5: true
+            });
+            sound.play();
+        }
+    </script>
+</body>
+</html>

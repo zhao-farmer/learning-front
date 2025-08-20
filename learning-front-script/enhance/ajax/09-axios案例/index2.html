@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+         <button id="get">get请求</button>
+        <button id="abort">abort</button>
+        <script>
+            var oget = document.querySelector("#get");
+            const conntroller = new AbortController();
+
+            // 拦截器
+            oget.onclick = function(){
+                axios({
+                    method: "GET",
+                    url: "http://localhost:3005/users",
+                    signal: conntroller.signal
+                }).then(response => {
+                    console.log(response);
+                }).catch(reason => {
+                    console.log(reason);
+                });
+            }
+
+            abort.onclick = function(){
+                conntroller.abort()
+            }
+           
+        </script>
+    </body>
+</html>

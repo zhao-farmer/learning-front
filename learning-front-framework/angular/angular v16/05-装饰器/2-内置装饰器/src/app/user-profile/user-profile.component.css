@@ -1,0 +1,51 @@
+.profile-container {
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin: 10px;
+  max-width: 500px;
+  transition: all 0.3s ease;
+}
+
+.profile-container.active {
+  border-color: #2196F3;
+  box-shadow: 0 0 10px rgba(33, 150, 243, 0.3);
+}
+
+.profile-container.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.profile-content {
+  margin-top: 15px;
+}
+
+.profile-field {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.profile-field label {
+  width: 100px;
+  font-weight: bold;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0b7dda;
+}

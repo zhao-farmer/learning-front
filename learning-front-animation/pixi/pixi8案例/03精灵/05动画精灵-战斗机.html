@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, AnimatedSprite, Texture } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                background: "#1099bb",
+                width: 600,
+                height: 400,
+            });
+
+            // 将应用程序添加到页面中
+            document.body.appendChild(app.canvas);
+
+            // 加载动画精灵页
+            await Assets.load("../assets/spritesheet/fighter.json");
+
+            // 创建一个精灵数组，里面的数据来自精灵页
+            const frames = [];
+
+            for (let i = 0; i < 30; i++) {
+                const val = i < 10 ? `0${i}` : i;
+
+                // 自从精灵表被pixi加载器加载以来，它就神奇地工作了
+                frames.push(Texture.from(`rollSequence00${val}.png`));
+            }
+
+            // 创建一个AnimatedSprite（带回Flash时代的回忆，对吧？）
+            const anim = new AnimatedSprite(frames);
+
+            /*
+              * AnimatedSprite继承了PIXI精灵的所有属性
+              * 所以你可以改变它的位置、锚、遮蔽它等
+              */
+            anim.x = app.screen.width / 2;
+            anim.y = app.screen.height / 2;
+            anim.anchor.set(0.5);
+            anim.animationSpeed = 0.5;
+            anim.play();
+
+            app.stage.addChild(anim);
+
+            // 设置旋转动画
+            app.ticker.add(() => {
+                anim.rotation += 0.01;
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function *gen(){
+            let res1 = yield "aaa"    //产出
+            console.log("gen内部",res1);
+            let res2 = yield "bbb"
+            console.log("gen内部",res2);
+        }
+
+        let g = gen()
+        // 第一次传入的参数无意义
+        // 第一步：yield "aaa" 停掉
+        // 第二步： [传入-2222222] 值给了 res1
+        let res1 = g.next("传入-1111111")
+        console.log(res1);  
+        // {value: 'aaa', done: false}
+        
+        let res2 = g.next("传入-2222222")
+        console.log(res2);
+        // gen内部 传入-2222222
+        // {value: 'bbb', done: false}
+
+        let res3 = g.next("传入-3333333")
+        console.log(res3);
+        // gen内部 传入-3333333
+        // {value: undefined, done: true}
+    </script>
+</body>
+</html>

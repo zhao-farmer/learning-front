@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+            // 定义鼠标事件
+            const getMouse = (element) => {
+                let mouse = { x: 0, y: 0 } // 存储鼠标位置信息
+                element.addEventListener('mousemove', e => {
+                    let x = e.pageX
+                    let y = e.pageY
+                    // 计算鼠标在canvas画布中的相对位置
+                    mouse.x = x - element.offsetLeft
+                    mouse.y = y - element.offsetTop
+                })
+                return mouse
+            }
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            const ball = new Ball(canvas.width / 2, canvas.height / 2,30);
+            const smallBall = new Ball(canvas.width / 2, canvas.height / 2, 25, 'red')
+
+            const mouse = getMouse(canvas);
+            // 定义缓动系数
+            const easing = 0.03;
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                const vx = (mouse.x - ball.x) * easing
+                const vy = (mouse.y - ball.y) * easing
+
+                ball.x += vx
+                ball.y += vy
+
+                ball.fill(ctx)
+
+                const vx2 = (ball.x - smallBall.x) * easing
+                const vy2 = (ball.y - smallBall.y) * easing
+
+                smallBall.x += vx2
+                smallBall.y += vy2
+
+                smallBall.fill(ctx)
+
+            })();
+        </script>
+    </body>
+</html>

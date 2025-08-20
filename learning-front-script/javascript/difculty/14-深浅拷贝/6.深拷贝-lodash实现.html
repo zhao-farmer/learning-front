@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 先引用 -->
+    <script src="./lodash.min.js"></script>
+    <script>
+        const obj = {
+            uname:'pink',
+            age:18,
+            hobby:['乒乓球','足球'],
+            family:{
+                baby:'小pink'
+            }
+        }
+        const o = _.cloneDeep(obj)
+        o.family.baby = '老pink'
+        console.log(o,obj);  // o.family: {baby:'老pink'} {baby:'小pink'}
+        
+        
+    </script>
+</body>
+</html>

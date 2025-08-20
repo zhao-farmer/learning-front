@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="600" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取静态画布
+        const canvas = new fabric.StaticCanvas("c1");
+        
+        const filter = new fabric.filters.HueRotation({
+            rotation: 0.25 // 反转值，从-1到1。
+        });
+
+        // 图片
+        let img = new Image();
+        img.src="./assest/001.jpg"
+
+        img.onload = () =>{
+            let fabricImage1 = new fabric.FabricImage(img,{
+                    scaleX:0.4,       // x轴比例
+                    scaleY:0.4,       // y轴比例
+                    left: 0,
+                    top: 0,
+                }
+            )
+            canvas.add(fabricImage1);
+
+             // 正反转值
+            fabricImage1.filters.push(filter);
+            fabricImage1.applyFilters();
+
+
+            let fabricImage2 = new fabric.FabricImage(img,{
+                    scaleX:0.4,       // x轴比例
+                    scaleY:0.4,       // y轴比例
+                    left: 300,
+                    top: 0,
+                }
+            )
+            canvas.add(fabricImage2);
+            // 负反转值
+            filter.rotation = -0.25
+            fabricImage2.filters.push(filter);
+            fabricImage2.applyFilters();
+
+            canvas.renderAll(); 
+        }
+    </script>
+</body>
+</html>

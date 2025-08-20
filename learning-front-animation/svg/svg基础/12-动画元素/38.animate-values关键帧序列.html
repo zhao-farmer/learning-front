@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="600" height="200">
+        <!-- 多阶段动画 -->
+        <circle cx="100" cy="100" fill="blue">
+            <animate 
+                attributeName="r" 
+                values="30;80;30" 
+                dur="1s" 
+                repeatCount="indefinite"
+            />
+        </circle>
+        <!-- 颜色渐变序列 -->
+        <circle cx="240" cy="100" r="50">
+            <animate 
+                attributeName="fill" 
+                values="orange;#4ed8a1;#a2d8d5" 
+                dur="5s" 
+                repeatCount="indefinite"
+            />
+        </circle>
+        <!-- 位置变化 -->
+        <circle cx="360" cy="100" r="50" fill="red">
+            <animate 
+                attributeName="cx" 
+                values="360; 420; 480; 420; 360" 
+                dur="4s"
+                repeatCount="indefinite"
+            />
+        </circle>
+    </svg>
+</body>
+</html>

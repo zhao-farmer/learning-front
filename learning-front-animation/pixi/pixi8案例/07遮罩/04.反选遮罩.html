@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Graphics } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建一个应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 800,
+                height: 600,
+            });
+
+            // 添加程序到网页中
+            document.body.appendChild(app.canvas);
+
+
+            const rect = new Graphics().rect(0, 0, 400, 400).fill("red");
+            const masky = new Graphics().star(160, 160, 5, 100).fill("yellow");
+
+            masky.width = 240;
+            masky.height = 240;
+
+            rect.setMask({
+                mask: masky,
+                inverse: true,  // 开启反选，只把遮罩部分去除
+            });
+
+            app.stage.addChild(rect, masky);
+            app.stage.position.set(
+                app.screen.width / 2 - 200, 
+                app.screen.height / 2 - 200
+            );
+        })();
+    </script>
+</body>
+</html>

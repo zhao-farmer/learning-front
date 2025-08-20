@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            function Star(uname, age) {
+                this.uname = uname;
+                this.age = age;
+                this.sing = function () {
+                    console.log("我会唱歌");
+                };
+            }
+            const ldh = new Star("刘德华", 18);
+            const zxy = new Star("张学友", 19);
+            console.log(ldh.sing === zxy.sing); //结果是false 说明俩函数不一样
+            // 两个对象都有sing 函数 指向的不是同一地址
+        </script>
+    </body>
+</html>

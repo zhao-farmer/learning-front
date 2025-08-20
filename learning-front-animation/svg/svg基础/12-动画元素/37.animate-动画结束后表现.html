@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="400" height="200">
+        <!-- 保持动画最终效果 -->
+        <rect x="10" y="20" width="50" height="50" fill="red">
+            <animate 
+                attributeName="x" 
+                from="0" 
+                to="100" 
+                dur="2s" 
+                begin="click"
+                fill="freeze"
+            />
+        </rect>
+        <!-- 动态恢复初始状态 -->
+        <rect x="10" y="80" width="50" height="50" fill="green">
+            <animate 
+                attributeName="x" 
+                from="0" 
+                to="100" 
+                dur="2s" 
+                begin="click"
+                fill="remove"
+            />
+        </rect>
+    </svg>
+</body>
+</html>

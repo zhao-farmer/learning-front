@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            箭头函数的返回值可以直接写在箭头后
+            如果直接在箭头后设置对象字面量为返回值时，对象字面量必须使用（）括起来
+        */
+        // const sum = (a, b) => {
+        //     return a + b;
+        // }
+        const sum = (a, b) => a + b;
+
+        // 错误写法 return fn = () => { name: '孙悟空' }
+        let fn = () => ({ name: '孙悟空' })
+
+        let result = sum(123, 456)
+        result = fn()
+        console.log(result);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

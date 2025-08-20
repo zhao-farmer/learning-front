@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div style="display: flex; margin: 1rem 0; gap: 1rem">
+            <button>播放/暂停</button>
+
+            <label> 播放器速率: <span id="rate">2.00</span>x </label>
+
+            <label> 0.25x <input type="range" min="0" max="4" step="1" value="2" /> 4x </label>
+
+            <label>
+                <input type="checkbox" checked />
+                保持音高
+            </label>
+        </div>
+        <!-- 导入文件 -->
+        <script src="../js/wavesurfer.min.js"></script>
+        <script>
+            const wavesurfer = WaveSurfer.create({
+                container: document.body,
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/librivox.mp3",
+                audioRate: 2, // 设置初始播放速率
+            });
+
+            let preservePitch = true;
+            // 播放速度
+            const speeds = [0.25, 0.5, 1, 2, 4];
+
+            // 切换音高保存
+            document.querySelector('input[type="checkbox"]').addEventListener("change", e => {
+                preservePitch = e.target.checked;
+                // 设置高音
+                wavesurfer.setPlaybackRate(wavesurfer.getPlaybackRate(), preservePitch);
+            });
+
+            // 设置播放速率
+            document.querySelector('input[type="range"]').addEventListener("input", e => {
+                const speed = speeds[e.target.valueAsNumber];
+                document.querySelector("#rate").textContent = speed.toFixed(2);
+                wavesurfer.setPlaybackRate(speed, preservePitch);
+                wavesurfer.play();
+            });
+
+            // 播放/暂停
+            document.querySelector("button").addEventListener("click", () => {
+                wavesurfer.playPause();
+            });
+        </script>
+    </body>
+</html>

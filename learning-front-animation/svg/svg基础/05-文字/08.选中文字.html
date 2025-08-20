@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg id="svgSelect">
+        <text x="100" y="30">
+            <tspan x="100" y="30">line1 第一行</tspan>
+            <tspan x="100" y="60">line2 第二行</tspan>
+            <tspan x="100" y="90">line3 第三行</tspan>
+        </text>
+    </svg>
+
+    <script>
+        let svg = document.getElementById('svgSelect')
+        svg.addEventListener('mouseup',()=>{
+            var select = document.getSelection();
+            console.log(`起始行内容：${select.anchorNode.nodeValue}`);
+            console.log(`起始行开始位置：${select.anchorOffset}`);
+            console.log(`结束行内容：${select.focusNode.nodeValue}`);
+            console.log(`结束行开始位置：${select.focusOffset}`);
+        })
+    </script>
+</body>
+</html>

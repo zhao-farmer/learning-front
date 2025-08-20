@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <audio id="audio2"  src="00.aac"></audio>
+
+    <script>
+        // 1. 获取html的音频元素
+        let audio1 = document.getElementById('audio1')
+
+        // 2. dom创建音频元素
+        let audio2 = document.createElement('audio')
+        audio2.src = "00.aac";
+
+        // 3. js创建音频元素
+        var audio3 = new Audio();
+        audio3.src = "00.aac";
+
+
+        //在控制台上 一次输出 audio1.play() audio2.play() audio3.play()
+    </script>
+</body>
+</html>

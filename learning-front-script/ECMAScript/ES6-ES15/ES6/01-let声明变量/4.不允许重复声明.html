@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 使用var是允许重新声明的
+         function func() {
+            var a = 10;
+            var a = 20;
+        }
+
+        // 报错
+        function func() {
+            var b = 10;
+            // let b = 20;  无法定义
+        }
+
+        // 报错
+        function func() {
+            let c = 10;
+            // let c = 1;   无法定义
+        }
+    </script>
+</body>
+</html>

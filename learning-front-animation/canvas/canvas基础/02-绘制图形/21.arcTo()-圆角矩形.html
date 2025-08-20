@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+        ctx.moveTo(40, 20);
+        ctx.lineTo(160, 20);
+        ctx.arcTo(180, 20, 180, 40, 20);
+        ctx.moveTo(180, 40);
+        ctx.lineTo(180, 110);
+        ctx.arcTo(180, 130, 160, 130, 20);
+        ctx.moveTo(160, 130);
+        ctx.lineTo(40, 130);
+        ctx.arcTo(20, 130, 20, 110, 20);
+        ctx.moveTo(20, 110);
+        ctx.lineTo(20, 40);
+        ctx.arcTo(20, 20, 40, 20, 20);
+        ctx.stroke();
+
+    </script>
+</body>
+</html>

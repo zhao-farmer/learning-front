@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Color, Container, Texture, Sprite, Graphics, Text, TextStyle, BlurFilter, FillGradient } from "../js/pixi.mjs";
+
+        //使用立即执行函数进行调用
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 应用程序初始化
+            await app.init({ 
+                background: "#1099bb",
+                width: 800,
+                height:600,
+            });
+
+            // 应用程序页面添加到网页上
+            document.body.appendChild(app.canvas);
+
+            // 加载纹理
+            await Assets.load([
+                "../assets/images/eggHead.png", 
+                "../assets/images/flowerTop.png", 
+                "../assets/images/helmlok.png", 
+                "../assets/images/skully.png"
+            ]);
+
+            const REEL_WIDTH = 160;
+            const SYMBOL_SIZE = 150;
+
+            // 创建不同的插槽符号
+            const slotTextures = [
+                Texture.from("../assets/images/eggHead.png"),
+                Texture.from("../assets/images/flowerTop.png"),
+                Texture.from("../assets/images/helmlok.png"),
+                Texture.from("../assets/images/skully.png"),
+            ];
+
+            // 创建卷轴信息数组
+            const reels = [];
+            //创建一个滚动容器
+            const reelContainer = new Container();
+            // 判断几条reel（卷轴）
+            for (let i = 0; i < 5; i++) {
+                //新增容器
+                const rc = new Container();
+                //并设置列的位置
+                rc.x = i * REEL_WIDTH;
+                // 添加容器内
+                reelContainer.addChild(rc);
+
+                //设置卷轴信息，并把创建的容器赋予其中一个属性
+                const reel = {
+                    container: rc,
+                    symbols: [],
+                    position: 0,
+                    previousPosition: 0,
+                    blur: new BlurFilter(),
+                };
+
+                //滤镜的位置
+                reel.blur.blurX = 0;
+                reel.blur.blurY = 0;
+                //将卷轴的滤镜信息赋予新建的容器
+                rc.filters = [reel.blur];
+
+                // 构建每一列上每个符号
+                for (let j = 0; j < 4; j++) {
+                    //随机显示4个图片上的一个 作为新建精灵的纹理
+                    const symbol = new Sprite(slotTextures[Math.floor(Math.random() * slotTextures.length)]);
+                    // 缩放精灵以适应符号区域。  宽与高与精灵宽与高比例更小的赋予 设置的比例
+                    symbol.scale.x = symbol.scale.y = Math.min(SYMBOL_SIZE / symbol.width, SYMBOL_SIZE / symbol.height);
+
+                    // y轴的位置与循环j值相关
+                    symbol.y = j * SYMBOL_SIZE;
+                    // x值 设置为容器的宽度 减去精灵本身的宽度的一半  如果部位整数进行四舍五入
+                    symbol.x = Math.round((SYMBOL_SIZE - symbol.width) / 2);
+                    // 将当前数据加入到卷轴信息中
+                    reel.symbols.push(symbol);
+                    // 每一个精灵都加入到当前列的容器里
+                    rc.addChild(symbol);
+                }
+                // 卷轴信息加入到数组中
+                reels.push(reel);
+            }
+            // 将卷轴容器加入到舞台上
+            app.stage.addChild(reelContainer);
+
+            //覆盖顶部与底部 并放入到reelContainer（容器）
+            const margin = (app.screen.height - SYMBOL_SIZE * 3) / 2;
+            //y轴起始位置 margin 高度减去要显示的高度 除以2
+            reelContainer.y = margin;
+            //x轴起始位置 宽度减去要显示宽度 除以2
+            reelContainer.x = Math.round(app.screen.width - REEL_WIDTH * 5) / 2;
+            // 上半部分设置黑色
+            const top = new Graphics().rect(0, 0, app.screen.width, margin).fill({ color: 0x0 });
+            // 下半部分设置黑色
+            const bottom = new Graphics().rect(0, SYMBOL_SIZE * 3 + margin, app.screen.width, margin).fill({ color: 0x0 });
+
+            // 创建渐变填充
+            const fill = new FillGradient(0, 0, 0, 36 * 1.7);
+
+            // colors 两个颜色之间出现的颜色 将循环的颜色放入控件中加载，并转成16位
+            const colors = [0xffffff, 0x00ff99].map(color => Color.shared.setValue(color).toNumber());
+
+            //多少分之一 减价对应的颜色
+            colors.forEach((number, index) => {
+                const ratio = index / colors.length;
+
+                fill.addColorStop(ratio, number);
+            });
+
+            //添加文本的样式
+            const style = new TextStyle({
+                fontFamily: "Arial",
+                fontSize: 36,
+                fontStyle: "italic",
+                fontWeight: "bold",
+                fill: { fill },
+                stroke: { color: 0x4a1850, width: 5 },
+                dropShadow: {
+                    color: 0x000000,
+                    angle: Math.PI / 6,
+                    blur: 4,
+                    distance: 6,
+                },
+                wordWrap: true,
+                wordWrapWidth: 440,
+            });
+
+            const playText = new Text("启动滚动!", style);
+            //添加下面中间的位置
+            playText.x = Math.round((bottom.width - playText.width) / 2);
+            //app.screen.height - margin 下方的位置  剩下的是设置文本的位置
+            playText.y = app.screen.height - margin + Math.round((margin - playText.height) / 2);
+            //8.0之后不建议使用容器之外定义子项
+            bottom.addChild(playText);
+
+            // 添加头部文本
+            const headerText = new Text("PIXI怪物老虎机!", style);
+
+            headerText.x = Math.round((top.width - headerText.width) / 2);
+            headerText.y = Math.round((margin - headerText.height) / 2);
+            top.addChild(headerText);
+
+            app.stage.addChild(top);
+            app.stage.addChild(bottom);
+
+            // 设置交互性。
+            // 点击时触发信息
+            bottom.eventMode = "static";
+            //鼠标样式改为手指类型
+            bottom.cursor = "pointer";
+            //添加事件  鼠标点击时触发事件  addListener与on一样都是监控用的
+            bottom.addListener("pointerdown", () => {
+                startPlay();
+            });
+
+            let running = false;
+
+            // 功能开始播放。
+            function startPlay() {
+                //防止多次点击
+                if (running) return;
+                running = true;
+
+                //循环每条数组
+                for (let i = 0; i < reels.length; i++) {
+                    //每一列的对象
+                    const r = reels[i];
+                    //判断0-3之间
+                    const extra = Math.floor(Math.random() * 3);
+                    //目标对象  当前位置 + 10 + (0-15) + (0-3)
+                    const target = r.position + 10 + i * 5 + extra;
+                    // 定制时间 最小2500 最大 2500 + 1800 + 1800 = 5100
+                    const time = 2500 + i * 600 + extra * 600;
+                    //将配置加入 寻要循环的位置
+                    tweenTo(r, "position", target, time, backout(0.5), null, i === reels.length - 1 ? reelsComplete : null);
+                }
+            }
+
+            // 当前轮询是否已结束
+            function reelsComplete() {
+                running = false;
+            }
+
+            // 监听动画更新
+            app.ticker.add(() => {
+                // 更新插槽
+                for (let i = 0; i < reels.length; i++) {
+                    //获取对象
+                    const r = reels[i];
+                    //根据速度更新模糊滤镜y值。
+                    //如果也考虑到时间，这会更好。现在模糊取决于帧率。
+                    // 设置Y轴模糊度
+                    r.blur.blurY = (r.position - r.previousPosition) * 8;
+                    //之前的位置
+                    r.previousPosition = r.position;
+
+                    // 循环其中的条状容器 .
+                    for (let j = 0; j < r.symbols.length; j++) {
+                        // 每一个对象
+                        const s = r.symbols[j];
+                        //当前对象的Y轴
+                        const prevy = s.y;
+                        //新的Y值
+                        // 下面的事件中 position都是从初始值一直到目标值
+                        // 每次posion变化 y轴也会花生变化
+
+                        s.y = ((r.position + j) % r.symbols.length) * SYMBOL_SIZE - SYMBOL_SIZE;
+                        // y轴 一直会随着r.position 变化而花生变化
+                        // 当position 从大于1的数回到1时，y轴也会花生相应的变化
+                        // console.log(s.y, prevy);
+
+                        // 能整除4 且有余数(小数)的新值都是负数
+                        // 能整除4 无余数 新值也是负值 但整除4等于1 时 下面的判断就会出现错误
+                        // 不能整除4 不管有没有余数都不会发生改变
+
+                        //结果是 symbols.length 下四个精灵  每个循环四次都会改变一下纹理
+                        // y轴移动时 还会改变纹理的成功了
+                        if (s.y < 0 && prevy > SYMBOL_SIZE) {
+                            //获取新的随机纹理
+                            s.texture = slotTextures[Math.floor(Math.random() * slotTextures.length)];
+                            //x轴y轴改变
+                            s.scale.x = s.scale.y = Math.min(SYMBOL_SIZE / s.texture.width, SYMBOL_SIZE / s.texture.height);
+                            //x轴也改变
+                            s.x = Math.round((SYMBOL_SIZE - s.width) / 2);
+                        }
+                    }
+                }
+            });
+
+            // 非常简单且实用函数 在实际产品中，这应该被一个适当的library （库）所取代。
+            const tweening = [];
+
+            function tweenTo(object, property, target, time, easing, onchange, oncomplete) {
+                const tween = {
+                    object,
+                    property,
+                    propertyBeginValue: object[property],
+                    target,
+                    easing,
+                    time,
+                    change: onchange,
+                    complete: oncomplete,
+                    start: Date.now(),
+                };
+
+                tweening.push(tween);
+
+                return tween;
+            }
+            // 监听动画更新
+            app.ticker.add(() => {
+                //获取当前时间
+                const now = Date.now();
+                //移除集合
+                const remove = [];
+                //循环替换集合
+                for (let i = 0; i < tweening.length; i++) {
+                    //获取当前对象
+                    const t = tweening[i];
+                    //判断 当前获取的时间减去开始插入时的时间 再除以定制时间 随着时间的增长 会越来越趋近于1
+                    //值是0-1 越来越接近于1
+                    const phase = Math.min(1, (now - t.start) / t.time);
+                    // t.object等于当前数列的对象 设置的当前属性position  = lerp函数[上次移动位置,目标对象,箭头函数 ]
+                    //位置  最后的值大于 t.easing(phase)接近于想要的位置
+                    t.object[t.property] = lerp(t.propertyBeginValue, t.target, t.easing(phase));
+                    // console.log(t.propertyBeginValue, t.target, t.easing(phase), t.object[t.property]);
+                    //t.change存在，执行change函数，默认为空
+                    if (t.change) t.change(t);
+                    //如果都是1
+                    if (phase === 1) {
+                        //将目标对象 赋予position
+                        t.object[t.property] = t.target;
+                        //如果是最后一位开始将运行状态running改为true
+                        if (t.complete) t.complete(t);
+                        //将对象插入到移除列表中
+                        remove.push(t);
+                    }
+                }
+                //按照循环进行删除
+                for (let i = 0; i < remove.length; i++) {
+                    tweening.splice(tweening.indexOf(remove[i]), 1);
+                }
+            });
+
+            //基本警报功能
+            function lerp(a1, a2, t) {
+                return a1 * (1 - t) + a2 * t;
+            }
+
+            // tweenjs的回退功能。
+            // 直接返回一个箭头函数  这个箭头函数传入的值是0-1 传入的值越接近1返回的值也越接近于1
+            function backout(amount) {
+                // --t 传入的数据先前去1
+                // 如果t等于0.1  --t等于 0.9 t * t = 0.81  结果等于 0.81 * -0.58 + 1 = 0.311499999999999
+                // 如果t > 0.67 小于时 返回值 大于1
+                return t => --t * t * ((amount + 1) * t + amount) + 1;
+            }
+        })();
+    </script>
+</body>
+</html>

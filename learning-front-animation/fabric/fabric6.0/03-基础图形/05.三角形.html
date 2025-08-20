@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+        <script type="module">
+            // 引入文件
+            import * as fabric from "../index.min.mjs";
+
+            // 获取动态画布
+            const canvas = new fabric.Canvas("c1");
+
+            const triangle = new fabric.Triangle({
+                top: 100,
+                left: 100,
+                width: 80, // 底边长度
+                height: 100, // 底边到对角的距离
+                fill: 'blue'
+            })
+            canvas.add(triangle)
+
+
+        </script>
+    </body>
+</html>

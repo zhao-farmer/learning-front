@@ -1,0 +1,17 @@
+@var: red;
+
+// var放到引入上方
+#page1 {
+  @var: white;
+  #header {
+    color: @var; // white
+  }
+}
+
+// var放到引入下方
+#page2 {
+    #header {
+        color: @var; // white
+    }
+    @var: white;
+}

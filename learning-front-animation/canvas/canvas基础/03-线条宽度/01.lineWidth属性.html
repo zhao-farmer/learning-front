@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+        
+        //lineWidth值为5
+        //ctx.beginPath();
+        ctx.moveTo(20, 20);
+        ctx.lineTo(180, 20);
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        //lineWidth值为10
+        ctx.beginPath();
+        ctx.moveTo(20, 70);
+        ctx.lineTo(180, 70);
+        ctx.lineWidth = 10;
+        ctx.stroke();
+
+        //lineWidth值为15
+        ctx.beginPath();
+        ctx.moveTo(20, 120);
+        ctx.lineTo(180, 120);
+        ctx.lineWidth = 15;
+        ctx.stroke();
+
+        // 曲线设置
+        ctx.beginPath();
+        ctx.arc(140, 140, 100, 0, -90 * Math.PI / 180, false);
+        ctx.lineWidth = 5;
+        ctx.stroke();
+
+        
+
+    </script>
+</body>
+</html>

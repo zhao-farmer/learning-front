@@ -1,0 +1,45 @@
+.parent {
+  color: orange;
+}
+.child1 {
+  background-color: skyblue;
+}
+
+.child2 {
+  background-color: deepskyblue;
+}
+
+.parent .step-child {
+  background-color: purple;
+}
+
+.block {
+  width: 1000px;
+}
+.block__element {
+  font-size: 12px;
+}
+.block__element--modifier {
+  font-size: 16px;
+}
+
+.block--modifier {
+  font-size: 14px;
+}
+
+@media print {
+  .page {
+    width: 8in;
+  }
+}
+.page {
+  color: red;
+}
+@media screen {
+  .parent2 {
+    color: blue;
+  }
+}
+.parent2 {
+  width: 100px;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .d1 {
+            /* 设置该属性 包含子元素的浮动 使其占据普通文档流位置 */
+            display: flow-root;
+            background: #ccc;
+        }
+        .d1-1 {
+            float: left;
+            width: 30px;
+            height: 30px;
+            background: red;
+        }
+        .d1-2 {
+            float: right;
+            width: 40px;
+            height: 40px;
+            background: yellow;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="d1">
+        <div class="d1-1">
+            1111
+        </div>
+        <div class="d1-2">
+            2222
+        </div>
+    </div>
+    <div class="d2">
+        这是第二个盒子
+    </div>
+</body>
+</html>

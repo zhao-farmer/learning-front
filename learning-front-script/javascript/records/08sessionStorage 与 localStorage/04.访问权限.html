@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 在页面A中设置sessionStorage和localStorage
+        sessionStorage.setItem('sessionKey', 'sessionValue');
+        localStorage.setItem('localKey', 'localValue');
+
+        // 在页面A的不同标签页中尝试访问数据
+        // sessionStorage的数据只能在创建它的标签页中访问
+        // localStorage的数据可以在所有标签页中访问
+
+        // 在页面B（同一域下的另一个页面）中尝试访问数据
+        // 可以访问localStorage的数据
+        const localData = localStorage.getItem('localKey');
+
+        // 尝试访问sessionStorage的数据将失败，因为它是页面A特有的
+        // const sessionData = sessionStorage.getItem('sessionKey');
+    </script>
+</body>
+</html>

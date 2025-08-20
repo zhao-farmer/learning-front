@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            p {
+                margin: 0;
+            }
+            .parent {
+                display: table;
+                width: 100%;
+                table-layout: fixed;
+            }
+            .left,
+            .centerWrap,
+            .right {
+                display: table-cell;
+            }
+            .center {
+                margin: 0 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent" style="background-color: lightgrey">
+            <div class="left" style="background-color: lightblue">
+                <p>left</p>
+            </div>
+            <div class="centerWrap">
+                <div class="center" style="background-color: pink">
+                    <p>center</p>
+                    <p>center</p>
+                    <p>center</p>
+                    <p>center</p>
+                </div>
+            </div>
+            <div class="right" style="background-color: lightgreen">
+                <p>right</p>
+            </div>
+        </div>
+    </body>
+</html>

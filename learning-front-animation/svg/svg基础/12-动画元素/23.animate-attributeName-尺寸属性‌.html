@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="200">
+        <rect x="10" y="20" width="50" height="50" fill="red">
+          <animate 
+                attributeName="y" 
+                attributeType="XML"
+                from="0" 
+                to="100" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+        <rect x="80" y="30" width="70" height="50" fill="green">
+            <animate 
+                  attributeName="rx" 
+                  attributeType="XML"
+                  from="0" 
+                  to="30" 
+                  dur="2s" 
+                  repeatCount="indefinite"
+              />
+          </rect>
+       
+        <circle cx="235" cy="55" r="25" fill="blue">
+            <animate 
+                attributeName="r" 
+                attributeType="XML"
+                from="25" 
+                to="50" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </circle>
+    </svg>
+</body>
+</html>
+

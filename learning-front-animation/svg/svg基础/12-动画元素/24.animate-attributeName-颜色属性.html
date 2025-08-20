@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="200">
+        <!-- 处理填充颜色 -->
+        <rect x="10" y="30" width="50" height="50" fill="red" >
+          <animate 
+                attributeName="fill" 
+                attributeType="XML"
+                from="red" 
+                to="green" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+        <!-- 处理边框颜色 -->
+        <rect x="80" y="30" width="70" height="50" fill="none" stroke-width="6" stroke="green">
+            <animate 
+                attributeName="stroke" 
+                attributeType="XML"
+                from="green" 
+                to="blue" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+       
+        <!-- 处理渐变动画 -->
+        <defs>
+            <linearGradient id="MyGradient">
+                <stop offset="5%" stop-color="lightblue">
+                    <animate 
+                        attributeName="stop-color" 
+                        attributeType="XML"
+                        from="lightblue" 
+                        to="lightgreen"
+                        dur="2s" 
+                        repeatCount="indefinite"
+                    />
+                </stop>
+                <stop offset="95%" stop-color="lightpink" >
+                    <animate 
+                        attributeName="stop-color" 
+                        attributeType="XML"
+                        from="lightpink" 
+                        to="red"
+                        dur="2s" 
+                        repeatCount="indefinite"
+                    />
+                </stop>
+            </linearGradient>
+        </defs>
+        <rect fill="url(#MyGradient)" x="180" y="30" width="100" height="50"/>
+    </svg>
+</body>
+</html>
+

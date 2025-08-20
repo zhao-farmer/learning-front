@@ -1,0 +1,8 @@
+@import './head_1.less';//如果.css 导入css文件
+@import './head_2.less';//.less 导入less文件
+@import './head_3.less';//导入head_3.less
+header{
+  .mixin_head();//调用 head_2.less里面混合器
+  background-color:@color;//使用head_3.less的变量
+  color:red;
+}

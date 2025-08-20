@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            #box {
+                width: 200px;
+                height: 200px;
+                background-color: green;
+            }
+            .test {
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                text-align: center;
+                background-color: mediumpurple;
+                color: red;
+                float: left;
+                margin: 5px;
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <!--动画-->
+        <button id="btn1">隐藏box</button>
+        <button id="btn2">显示box</button>
+        <button id="btn3">切换</button>
+
+        <button id="btn4">上滑box</button>
+        <button id="btn5">下滑box</button>
+        <button id="btn6">滑动切换</button>
+
+        <button id="btn7">淡入、淡出、切换</button>
+        <div id="box"></div>
+
+        <!--队列显示-->
+        <div>
+            <button id="testBtn">队列显示</button>
+        </div>
+        <div class="test">找</div>
+        <div class="test">到</div>
+        <div class="test">好</div>
+        <div class="test">工</div>
+        <div class="test">作</div>
+        <script src="../js/jquery.3.7.1.js"></script>
+
+        <script>
+            $(function () {
+                /*隐藏 hide*/
+                $("#btn1").click(function () {
+                    $("#box").hide(1000);
+                });
+
+                /*显示 show*/
+                $("#btn2").click(function () {
+                    $("#box").show(1000);
+                });
+
+                /*切换 toggle*/
+                $("#btn3").click(function () {
+                    $("#box").toggle(1000);
+                });
+
+                /*滑动*/
+                $("#btn4").click(function () {
+                    $("#box").slideUp(1000); //上滑 slideUp
+                });
+                $("#btn5").click(function () {
+                    $("#box").slideDown(1000); //下滑 slideDown
+                });
+                $("#btn6").click(function () {
+                    $("#box").slideToggle(1000); //切换 slideToggle
+                });
+
+                /*淡入淡出*/
+                $("#btn7").click(function () {
+                    // $("#box").fadeIn(1000);  //淡入 fadeIn
+                    // $("#box").fadeOut(1000);  //淡出 fadeOut
+                    // $("#box").fadeToggle(1000);  //切换 fadeToggle
+
+                    $("#box").fadeTo("slow", 0.5, function () {
+                        //淡出到指定透明度 fadeTo(速度,透明度,回调函数-可选项)
+                        //回调函数：前面的事情做完之后要做什么
+                        console.log(1111);
+                    });
+                });
+
+                /*队列显示*/
+                $("#testBtn").click(function () {
+                    //方法1
+                    /*$(".test").eq(0).show(400,function () {
+                        $(".test").eq(1).show(400,function () {
+                            $(".test").eq(2).show(400,function () {
+                                $(".test").eq(3).show(400,function () {
+                                    $(".test").eq(4).show(400,function () {
+
+                                    })
+                                })
+                            })
+                        })
+                    })*/
+
+                    //方法2
+                    $(".test").first().show(400, function myShow() {
+                            $(this).next(".test").show(400, myShow); //递归调用（自己调自己）
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

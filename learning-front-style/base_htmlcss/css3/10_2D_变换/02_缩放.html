@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02_缩放</title>
+    <style>
+        .outer{
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            margin: 0 auto;
+            margin-top: 100px;
+            position: relative;
+        }
+        .inner{
+            width: 200px;
+            height: 200px;
+            background-color: skyblue;
+            transform: scaleX(1.5) scaleY(1.5);
+        }
+        /* 缩放12px以下 */
+        span{
+            display: inline-block;
+            font-size: 20px;
+            transform: scale(0.5);
+        }
+ 
+    </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inner">你好啊</div>
+    </div>
+    <span>你好啊</span>
+</body>
+</html>

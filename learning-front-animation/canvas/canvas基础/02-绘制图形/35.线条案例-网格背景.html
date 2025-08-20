@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+          var canvas = document.getElementById('c1');
+          var ctx = canvas.getContext('2d');
+
+          function drawGrid(context,color,stepx,stepy){
+               ctx.strokeStyle=color;
+               ctx.lineWidth = 0.5;
+
+               for(var i =stepx+0.5;i<ctx.canvas.width;i+=stepx) {
+                    ctx.beginPath();
+                    ctx.moveTo(i,0);
+                    ctx.lineTo(i,ctx.canvas.height);
+                    ctx.stroke();
+               }
+               for(var i = stepy+0.5;i<ctx.canvas.height;i+=stepy){
+                    ctx.beginPath();
+                    ctx.moveTo(0,i);
+                    ctx.lineTo(ctx.canvas.width,i);
+                    ctx.stroke();
+               }
+          }
+          drawGrid(ctx,'lightgray',10,10);
+
+     </script>
+</body>
+</html>

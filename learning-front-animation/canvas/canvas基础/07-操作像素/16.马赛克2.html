@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        class Arrow {
+            #color = "skyblue";
+            constructor(x, y, content) {
+                this.x = x;
+                this.y = y;
+                this.content = content;
+            }
+            draw(ctx) {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+
+                // 图形
+                ctx.fillStyle = this.#color;
+                ctx.beginPath();
+                ctx.moveTo(-50, -25);
+                ctx.lineTo(0, -25);
+                ctx.lineTo(0, -50);
+                ctx.lineTo(50, 0);
+                ctx.lineTo(0, 50);
+                ctx.lineTo(0, 25);
+                ctx.lineTo(-50, 25);
+                ctx.closePath();
+                ctx.fill();
+
+                // 文字
+                ctx.strokeStyle = "orange";
+                ctx.font = "200 16px Arial";
+                ctx.strokeText(this.content, -35, 5);
+
+                ctx.restore();
+            }
+        }
+
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext("2d");
+
+        // 箭头
+        let arrow = new Arrow(300, 200, "马赛克2");
+        arrow.draw(ctx);
+
+        var img = new Image();
+        img.src = "./images/1.jpg";
+
+        img.onload = function () {
+            ctx.drawImage(img, 10, 10, 200, 370);
+
+            const width = c1.width;
+            const height = c1.height;
+
+            // 获取对象 并开始反转
+            let imageData = ctx.getImageData(10, 10, 200, 370);
+            const data = imageData.data;
+
+            // 按照像素块处理
+            const blockSize = 5;
+
+            // 按块处理图像
+            for (let y = 0; y < height; y += blockSize) {
+                for (let x = 0; x < width; x += blockSize) {
+                    // 首先计算当前块的平均颜色
+                    let r = 0,
+                        g = 0,
+                        b = 0,
+                        a = 0;
+                    let pixelCount = 0;
+
+                    // 累加块内所有像素颜色
+                    for (let by = 0; by < blockSize && y + by < height; by++) {
+                        for (let bx = 0; bx < blockSize && x + bx < width; bx++) {
+                            const pixelIndex = ((y + by) * width + (x + bx)) * 4;
+                            r += data[pixelIndex]; // 红色通道
+                            g += data[pixelIndex + 1]; // 绿色通道
+                            b += data[pixelIndex + 2]; // 蓝色通道
+                            a += data[pixelIndex + 3]; // Alpha通道
+                            pixelCount++;
+                        }
+                    }
+
+                    // 计算平均颜色
+                    r = Math.round(r / pixelCount);
+                    g = Math.round(g / pixelCount);
+                    b = Math.round(b / pixelCount);
+                    a = Math.round(a / pixelCount);
+
+                    // 将平均颜色应用到整个块
+                    for (let by = 0; by < blockSize && y + by < height; by++) {
+                        for (let bx = 0; bx < blockSize && x + bx < width; bx++) {
+                            const pixelIndex = ((y + by) * width + (x + bx)) * 4;
+                            data[pixelIndex] = r;
+                            data[pixelIndex + 1] = g;
+                            data[pixelIndex + 2] = b;
+                            data[pixelIndex + 3] = a;
+                        }
+                    }
+                }
+            }
+
+            ctx.putImageData(imageData, 380, 10);
+        };
+    </script>
+</body>
+</html>

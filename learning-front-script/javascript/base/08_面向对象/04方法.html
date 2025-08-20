@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        /* 
+            方法的定义：
+                对象或类中内部使用的函数
+            使用方式方式
+                对象实例.方法名()
+            普通方法
+                函数添加方法
+                    方法名 = function(){}
+                实例直接定义
+                    方法名(){}
+                调用
+                    const 类对象 = new 类名()
+                    类对象.方法名()
+                this指向
+                    实例方法中this就是当前实例
+                使用属性
+                    this.属性
+            静态方法 
+                定义
+                    static 方法名(){}
+                调用
+                    类名.方法名()
+                this指向
+                    静态方法中this指向的是当前类
+                使用属性
+                    只能使用静态属性 也是this.属性 
+                    不过由于指向当前类会有一些自己的特殊的属性 如： this.name = 类名
+
+        */
+
+        class Person {
+            name = '孙悟空';
+            //添加方法的一种方式
+            sayHello = function () {
+
+            }
+            //添加方法 （实例方法）
+            sayHello2() {
+                console.log("大家好，我是" + this.name);
+            }
+
+            static nickname = '齐天大圣';
+            //添加静态方法
+            static test() {
+                console.log(this.name); //Person
+                console.log(this.nickname); //齐天大圣
+            }
+        }
+        //实例调用
+        const p1 = new Person();
+        p1.sayHello2()
+
+        //静态调用
+        Person.test()
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

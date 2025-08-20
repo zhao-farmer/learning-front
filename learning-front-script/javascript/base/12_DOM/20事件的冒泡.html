@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      #box1 {
+        width: 100px;
+        height: 100px;
+        background-color: greenyellow;
+        border-radius: 50%;
+        position: absolute;
+      }
+      #box2 {
+        height: 400px;
+        width: 400px;
+        background-color: orange;
+      }
+
+      #box3 {
+        height: 200px;
+        width: 200px;
+        background-color: tomato;
+      }
+      #box4 {
+        height: 100px;
+        width: 100px;
+        background-color: skyblue;
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box1"></div>
+
+    <div id="box2"></div>
+    <!--   事件的冒泡和元素的样式无关，和结构相关 -->
+    <div id="box3" onclick="alert(3)">
+      <div id="box4" onclick="alert(4)"></div>
+    </div>
+
+    <script>
+      /*
+            使小绿球可以跟随鼠标一起移动
+            冒泡事件阻止 event.stopPropagation()
+        */
+      const box1 = document.getElementById("box1");
+      const box2 = document.getElementById("box2");
+
+      document.addEventListener("mousemove", (event) => {
+        box1.style.left = event.x + "px";
+        box1.style.top = event.y + "px";
+      });
+      box2.addEventListener("mousemove", (event) => {
+        event.stopPropagation();
+      });
+    </script>
+  </body>
+</html>

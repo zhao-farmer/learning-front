@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+  
+
+
+        let s = new Set()
+
+        let proxy = new Proxy(s,{
+            get(target,key){
+                console.log("get");
+                // 判断如果是方法，修正this指向
+                let value = target[key]
+                if(value instanceof Function){
+                    // call apply bind
+                    // 这里是绑定原本的对象
+                    return value.bind(target)
+                }
+                // 不是就正常返回
+                return value
+            },
+            set(target,key,value){
+                // 走默认行为
+                Reflect.set(target,key,value)
+                // 简略写法
+                // Reflect.set(...arguments)
+            }
+        })
+    </script>
+</body>
+</html>

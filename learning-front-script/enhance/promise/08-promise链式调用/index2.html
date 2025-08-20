@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax(url){
+            return new Promise((resolve,reject)=>{
+                var xhr = new XMLHttpRequest();
+                xhr.open("get",url,true)
+                xhr.send()
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4){
+                        if(xhr.status>=200 && xhr.status <300){
+                            // 成功
+                            resolve(JSON.parse(xhr.responseText))
+                        }else{
+                            // 失败
+                            reject(xhr.responseText)
+                        }
+                    }
+                }
+            })
+        }
+
+        var name = "kerwin"
+
+        ajax(`http://localhost:3000/news?author=${name}`).then(res=>{
+            console.log(res[0].id);
+
+            // 不能直接返回Promise对象 会一直处于pending 状态
+            // return new Promise(()=>{})
+
+            return ajax(`http://localhost:3000/comments?newsId=${res[0].id}`)
+        }).then(res=>{
+            console.log("111",res);
+        })
+    </script>
+</body>
+</html>

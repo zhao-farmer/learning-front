@@ -1,0 +1,4 @@
+<!--pages/detail/detail.wxml-->
+<view>{{name}}</view>
+
+<button type="warn" plain bind:tap="updateName">更新数据</button>

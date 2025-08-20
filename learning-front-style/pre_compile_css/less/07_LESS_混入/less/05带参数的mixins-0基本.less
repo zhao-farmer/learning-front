@@ -1,0 +1,8 @@
+.mixin(@color; @padding; @margin: 8) {
+    color: @color;
+    padding: @padding;
+    margin: @margin @margin @margin @margin;
+}
+.box {
+    .mixin(#008000,2);
+}

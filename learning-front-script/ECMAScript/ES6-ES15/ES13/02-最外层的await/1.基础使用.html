@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 必须规定 type="module" -->
+    <script type="module">
+        // await is only valid in async functions and the top level bodies of modules
+        function ajax(){
+            return new Promise(resolve=>{
+                setTimeout(() => {
+                    resolve("data-111111")
+                }, 1000);
+            })
+        }
+
+        let res = await ajax()
+        console.log(res);
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        canvas{
+            border: 1px solid #ccc
+        }
+    </style>
+</head>
+<body>
+
+     <canvas id="c1" width="600" height="400" ></canvas>
+
+     <script>
+        //1.找到画布
+        var c1 = document.getElementById("c1");
+        //2.获取画笔，上下文对象
+        var ctx = c1.getContext('2d');
+
+        //位移  translate 位移坐标系，水平位移和垂直位移
+        ctx.translate(100,100)
+        ctx.fillRect(0,0,50,50);
+        ctx.translate(100,100)
+        ctx.fillRect(0,0,50,50);
+     </script>
+</body>
+</html>

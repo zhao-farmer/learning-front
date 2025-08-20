@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var option = {
+            xAxis: {
+                type: "category",
+                data: ["小明", "小红", "小王"],
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+                    data: [
+                        {
+                            value: 70,
+                            itemStyle: {
+                                //  径向渐变方式一 ==========================================
+                                // RadialGradient前三个分参数别代表圆心（x,y），半径（数值0-1）
+                                color: new echarts.graphic.RadialGradient(0.5, 0.5, 0.8, [
+                                    {
+                                        offset: 0,
+                                        color: "red",
+                                    },
+                                    {
+                                        offset: 1,
+                                        color: "yellow",
+                                    },
+                                ]),
+                            },
+                        },
+                        // 方式二
+                        {
+                            value: 92,
+                            itemStyle: {
+                                //  径向渐变方式二 =========================================
+                                // x 0.5 y 0.5 代表圆心，r 代表半径
+                                color: {
+                                    type: "radial",
+                                    x: 0.5,
+                                    y: 0.5,
+                                    r: 0.9,
+                                    colorStops: [
+                                        {
+                                            offset: 0,
+                                            color: "red", // 0% 处的颜色
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: "blue", // 100% 处的颜色
+                                        },
+                                    ],
+                                    global: false, // 缺省为 false
+                                },
+                            },
+                        },
+                        {
+                            value: 87,
+                            itemStyle: {
+                                //  多渐变 + 弧形渐变
+                                color: {
+                                    type: "radial",
+                                    x: 0,
+                                    y: 0,
+                                    r: 2,
+                                    colorStops: [
+                                        {
+                                            offset: 0,
+                                            color: "red", // 0% 处的颜色
+                                        },
+                                        {
+                                            offset: 0.5,
+                                            color: "green", // 50% 处的颜色
+                                        },
+                                        {
+                                            offset: 1,
+                                            color: "pink", // 100% 处的颜色
+                                        },
+                                    ],
+                                    global: false, // 缺省为 false
+                                },
+                            },
+                        },
+                    ],
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

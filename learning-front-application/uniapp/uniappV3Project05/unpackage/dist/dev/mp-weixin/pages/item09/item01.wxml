@@ -1,0 +1,1 @@
+<view class="content data-v-748a34ac"><button class="data-v-748a34ac" bindtap="{{a}}">删除存储Name</button><button class="data-v-748a34ac" bindtap="{{b}}" type="warn">删除所有缓存</button></view>

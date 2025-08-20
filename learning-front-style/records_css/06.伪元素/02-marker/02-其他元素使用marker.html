@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+        p.marker {            
+            display: list-item;        
+        }        
+        p::marker {            
+            color: red;            
+            content: '★';          
+        }
+    </style>
+</head>
+<body>
+    <h3>没有设置list-item：</h3>      
+    <div>                 
+       <p>Peaches</p>        
+       <p>Apples</p>        
+       <p>Plums</p>      
+    </div>      
+    <h3>设置list-item：</h3>        
+    <div>                       
+       <p class="marker">Peaches</p>            
+       <p class="marker">Apples</p>            
+       <p class="marker">Plums</p>        
+    </div>
+</body>
+</html>

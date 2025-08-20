@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(){
+            // 函数中的两个对象，无法被外部的window，self 等顶层对象访问
+            // 使用完成后，里面的内容全部清除掉
+            let o1 = {}
+            let o2 = {}
+            o1.a = o2
+            o2.a = o1
+            return "引用计数无法回收"
+        }
+    </script>
+</body>
+</html>

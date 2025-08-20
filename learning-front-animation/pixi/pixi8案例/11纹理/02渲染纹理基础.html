@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite, RenderTexture, SCALE_MODES } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb", 
+                width:800,
+                height:400,  
+            });
+
+            // 应用程序添加到网页中
+            document.body.appendChild(app.canvas);
+
+            const container = new Container();
+
+            app.stage.addChild(container);
+
+            // 加载兔子纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            //进行for循环
+            for (let i = 0; i < 25; i++) {
+                const bunny = new Sprite(texture);
+
+                // 选择位置
+                bunny.x = (i % 5) * 30;
+                bunny.y = Math.floor(i / 5) * 30;
+                // 旋转角度
+                bunny.rotation = Math.random() * (Math.PI * 2);
+                // 添加到页面上
+                container.addChild(bunny);
+            }
+
+            //创建刷新纹理
+            const rt = RenderTexture.create({
+                width: 300,
+                height: 300,
+                scaleMode: SCALE_MODES.LINEAR,
+                resolution: 1,
+            });
+
+            // 创建精灵 并设置位置 使用的是刷新尽量
+            const sprite = new Sprite(rt);
+
+            sprite.x = 450;
+            sprite.y = 60;
+            app.stage.addChild(sprite);
+
+            /*
+              * 使用addChild方法将所有兔子纹理添加到容器中
+              * 当你这样做时，所有的兔子精灵都会成为容器的子项，当容器移动时，
+              * 它的所有孩子也是如此。
+              * 这为您提供了很大的灵活性，并使您更容易在屏幕上定位元素
+              */
+            container.x = 100;
+            container.y = 60;
+
+            //使用渲染纹理 进行复制
+            app.renderer.render(container, { renderTexture: rt });
+        })();
+    </script>
+</body>
+</html>

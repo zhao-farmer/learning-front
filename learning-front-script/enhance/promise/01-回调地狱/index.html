@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax(url,successCb,errorCb){
+            setTimeout(() => {
+                // 如果成功
+                successCb()
+                // 如果失败
+                errorCb()
+            }, 1000);
+        }
+
+        ajax("111",()=>{
+            console.log("ajax成功");
+            
+        },()=>{
+            console.log("ajax失败");
+        })
+    </script>
+</body>
+</html>

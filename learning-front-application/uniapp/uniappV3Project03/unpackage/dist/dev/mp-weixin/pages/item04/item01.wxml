@@ -1,0 +1,1 @@
+<view class="{{['box', a && 'active']}}"> v-bind绑定class类1 </view><view class="{{['box', b]}}"> v-bind绑定class类1 </view><view class="box" style="{{'width:' + '300px' + ';' + ('height:' + c) + ';' + ('font-size:' + d)}}"> 内联样式 </view>

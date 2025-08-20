@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, BitmapText } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb", 
+                width: 800,
+                height:400,   
+            });
+
+            // 添加应用程序到网页中
+            document.body.appendChild(app.canvas);
+
+            // 加载文图字体
+            await Assets.load('./font/desyrel.xml');
+
+            // 创建位图文本
+            const bitmapFontText = new BitmapText({
+                text: "bitmap fonts are supported!\nWoo yay!",
+                style: {
+                    fontFamily: "Desyrel",
+                    fontSize: 55,
+                    align: "left",
+                },
+            });
+
+            //设置位置
+            bitmapFontText.x = 50;
+            bitmapFontText.y = 200;
+
+            //加载到舞台上
+            app.stage.addChild(bitmapFontText);
+        })();
+    </script>
+</body>
+</html>

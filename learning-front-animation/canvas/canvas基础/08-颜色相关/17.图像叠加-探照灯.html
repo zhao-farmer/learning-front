@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        canvas{
+            background-image: url(./images/5.jpeg);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        
+        var canvas = document.getElementById('c1');
+        var ctx = canvas.getContext('2d');
+
+        var w = canvas.width ;
+        var h = canvas.height ;
+
+        var offsetX, offsetY;
+        function reOffset() {
+            var BB = canvas.getBoundingClientRect();
+            offsetX = BB.left;
+            offsetY = BB.top;
+        }
+
+        window.onresize = function(e) {
+            reOffset();
+        }
+       
+        canvas.addEventListener('mousemove', (e)=>{
+            e.preventDefault();
+            e.stopPropagation();
+
+            mouseX = parseInt(e.clientX - offsetX);
+            mouseY = parseInt(e.clientY - offsetY);
+
+            draw(mouseX, mouseY, 100);
+        }, false);
+
+        function draw(cx, cy, radius) {
+            ctx.save();
+            ctx.clearRect(0, 0, w, h);
+
+            // 径向渐变
+            var radialGradient = ctx.createRadialGradient(cx, cy, 1, cx, cy, radius);
+            radialGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+            radialGradient.addColorStop(.65, 'rgba(0, 0, 0, 1)');
+            radialGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+            ctx.beginPath();
+
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, w, h);
+
+            ctx.globalCompositeOperation = 'destination-out';
+
+            ctx.arc(cx, cy, radius, 0, Math.PI * 2, false);
+            ctx.fillStyle = radialGradient;
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        // 初始调用
+        reOffset();
+        draw(w / 2, h / 2, 100);
+    </script>
+</body>
+</html>

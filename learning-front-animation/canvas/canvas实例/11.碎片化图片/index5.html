@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图片碎片化加载</title>
+    <style>
+      #imageContainer {
+        position: relative;
+        width: 500px;
+        height: 500px;
+        border: 1px solid #ccc;
+      }
+      .imageFragment {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="imageContainer">
+      <!-- 图片碎片容器 -->
+    </div>
+
+    <script>
+      const imageContainer = document.getElementById("imageContainer");
+      const imageSrc = "./images/women.jpg"; // 替换为你的图片路径
+      const fragmentSize = 100; // 碎片大小，可以自定义
+      const fragmentDelay = 200; // 加载延迟，单位毫秒
+
+      const img = new Image();
+      img.onload = () => {
+        const imgWidth = img.width;
+        const imgHeight = img.height;
+        const fragmentCountX = Math.ceil(imgWidth / fragmentSize);
+        const fragmentCountY = Math.ceil(imgHeight / fragmentSize);
+
+        // 创建所有碎片元素
+        for (let y = 0; y < fragmentCountY; y++) {
+          for (let x = 0; x < fragmentCountX; x++) {
+            const fragment = document.createElement("div");
+            fragment.classList.add("imageFragment");
+            fragment.style.left = `${x * fragmentSize}px`;
+            fragment.style.top = `${y * fragmentSize}px`;
+            fragment.style.width = `${fragmentSize}px`;
+            fragment.style.height = `${fragmentSize}px`;
+            fragment.style.backgroundImage = `url(${imageSrc})`;
+            fragment.style.backgroundPosition = `-${x * fragmentSize}px -${y * fragmentSize}px`;
+            imageContainer.appendChild(fragment);
+
+            // 设置延迟后显示碎片
+            setTimeout(() => {
+              fragment.style.opacity = 1;
+            }, y * fragmentDelay);
+          }
+        }
+      };
+
+      img.src = imageSrc; // 开始加载图片
+    </script>
+  </body>
+</html>

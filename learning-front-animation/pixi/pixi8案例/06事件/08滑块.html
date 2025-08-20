@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Text, Graphics, Sprite, SCALE_MODES } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                antialias: true, 
+                background: "#1099bb",  
+                width: 800,
+                height: 600, 
+            });
+
+            // 应用程序添加到舞台上
+            document.body.appendChild(app.canvas);
+
+            //屏幕的宽度与高度
+            const stageHeight = app.screen.height;
+            const stageWidth = app.screen.width;
+
+            // 确保点击覆盖整个舞台
+            app.stage.hitArea = app.screen;
+
+            // 使用滑块
+            const sliderWidth = 320;
+            const slider = new Graphics().rect(0, 0, sliderWidth, 4).fill({ color: 0x272d37 });
+
+            //滑块的x与y轴
+            slider.x = (stageWidth - sliderWidth) / 2;
+            slider.y = stageHeight * 0.75;
+
+            // 画的操作
+            const handle = new Graphics().circle(0, 0, 8).fill({ color: 0xffffff });
+
+            handle.y = slider.height / 2;
+            handle.x = sliderWidth / 2;
+            handle.eventMode = "static";
+            handle.cursor = "pointer";
+
+            handle.on("pointerdown", onDragStart).on("pointerup", onDragEnd).on("pointerupoutside", onDragEnd);
+
+            app.stage.addChild(slider);
+            slider.addChild(handle);
+
+            // 加载兔子纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            // 添加兔子精灵对于使用滑块扩展大小
+            const bunny = app.stage.addChild(Sprite.from(texture));
+
+            // 纹理的宽展方式
+            bunny.texture.baseTexture.scaleMode = SCALE_MODES.NEAREST;
+            // 比例、锚点、位置
+            bunny.scale.set(3);
+            bunny.anchor.set(0.5);
+            bunny.x = stageWidth / 2;
+            bunny.y = stageHeight / 2;
+
+            // 添加标题
+            const title = new Text({
+                text: "拖动滑块以更改兔子的比例.",
+                style: {
+                    fill: "#272d37",
+                    fontFamily: "Roboto",
+                    fontSize: 20,
+                    align: "center",
+                },
+            });
+
+            //是否绕过精灵位置
+            title.roundPixels = true;
+            //设置位置
+            title.x = stageWidth / 2;
+            title.y = 40;
+            // 设置锚点
+            title.anchor.set(0.5, 0);
+            // 添加到舞台上
+            app.stage.addChild(title);
+
+            // 监听滑块上的移动操作
+            function onDragStart() {
+                app.stage.eventMode = "static";
+                app.stage.addEventListener("pointermove", onDrag);
+            }
+
+            // 松开控制柄后，停止拖动反馈
+            function onDragEnd(e) {
+                app.stage.eventMode = "auto";
+                app.stage.removeEventListener("pointermove", onDrag);
+            }
+
+            // 更新操作时的位置 & 进行移动操作时控制大小
+            function onDrag(e) {
+                //半个操作球宽度
+                const halfHandleWidth = handle.width / 2;
+                // 操作y位置到鼠标一致，固定再(4, screen.height - 4)
+                // 判断最大值 （半个球的宽度 与最小值（滑动条距离初始位置的宽度 ，滑动条宽度-半个操作球的宽度））
+
+                handle.x = Math.max(
+                  halfHandleWidth, 
+                  Math.min(
+                    slider.toLocal(e.global).x, 
+                    sliderWidth - halfHandleWidth
+                  )
+                );
+                // 标准化操作位置 在1与-1之间
+                // 操作球的x位置 除以滑动条的宽度  初始位置0 结果 -1 结束位置 结果 1
+                const t = 2 * (handle.x / sliderWidth - 0.5);
+
+                //比例设置 3 * 0.1 - 3 * 2.1
+                bunny.scale.set(3 * (1.1 + t));
+            }
+        })();
+    </script>
+</body>
+</html>

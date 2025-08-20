@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 对象 非线性
+
+        let obj = {
+            0:"kerwin",
+            1:"tiechui",
+            2:"ganger",
+        }
+
+        // for(let i of obj){
+        //     console.log(i);
+        // }
+
+
+        // 加载额外信息可以使用
+        let obj2 = {
+            0:"kerwin",
+            1:"tiechui",
+            2:"ganger",
+            [Symbol.iterator]:Array.prototype[Symbol.iterator],
+            length:3
+        }
+       
+        for(let i of obj2){
+            console.log(i);
+        }
+
+        // 模拟迭代器
+        let obj3 = {
+            code:200,
+            name:'obj2',
+            list:["kerwin","tiechui","gangdan"],
+            [Symbol.iterator](){
+                let index = 0
+                // let _this = this
+                return {
+                    next:()=>{
+                        return { 
+                            value:this.list[index++],
+                            done:index === (this.list.length+1)?true:false 
+                        }
+                    }
+                }
+            }
+        }
+
+        let iter = obj2[Symbol.iterator]()
+
+        console.log(iter);
+        
+        console.log(iter.next());
+        console.log(iter.next());
+        console.log(iter.next());
+        console.log(iter.next());
+
+
+   
+        
+    </script>
+</body>
+</html>

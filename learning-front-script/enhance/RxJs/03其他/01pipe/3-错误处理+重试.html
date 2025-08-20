@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <input type="text" id="search" />
+    <script>
+        const { ajax } = rxjs.ajax;
+        const { retry, catchError } = rxjs.operators;
+
+        ajax.getJSON('https://api.example.com/data').pipe(
+            retry(3), // 失败时重试3次
+            catchError(error => of({ status: 'error', message: '请求失败' })) // 兜底
+        ).subscribe(console.log);
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="waveform"></div>
+        <p>
+            <label>
+                <input type="checkbox" checked="${loop}" />
+                返回区域起点
+            </label>
+            <label style="margin-left: 2em"> 聚焦: <input type="range" min="10" max="1000" value="10" /> </label>
+        </p>
+
+        <script type="module">
+            // 导入区域插件
+            import WaveSurfer from '../mjs/wavesurfer.js'
+            import RegionsPlugin from '../mjs//plugins/regions.esm.js'
+
+            // 初始化区域插件
+            const regions = RegionsPlugin.create();
+
+            // 创建WaveSurfer实例
+            const ws = WaveSurfer.create({
+                container: "#waveform",
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/audio.wav",
+                plugins: [regions],
+            });
+
+            // 创建区域时为其提供随机颜色
+            const random = (min, max) => Math.random() * (max - min) + min;
+            const randomColor = () => `rgba(${random(0, 255)}, ${random(0, 255)}, ${random(0, 255)}, 0.5)`;
+
+            // 在特定时间范围内创建一些区域
+            ws.on("decode", () => {
+                // 区域
+                regions.addRegion({
+                    start: 0,
+                    end: 8,
+                    content: "调整区域",
+                    color: randomColor(),
+                    drag: false,
+                    resize: true,
+                });
+                regions.addRegion({
+                    start: 9,
+                    end: 10,
+                    content: "狭小区域",
+                    color: randomColor(),
+                    minLength: 1,
+                    maxLength: 10,
+                });
+                regions.addRegion({
+                    start: 12,
+                    end: 17,
+                    content: "拖拽区域",
+                    color: randomColor(),
+                    resize: false,
+                });
+
+                // 标记（零长度区域）
+                regions.addRegion({
+                    start: 19,
+                    content: "标记",
+                    color: randomColor(),
+                });
+                regions.addRegion({
+                    start: 20,
+                    content: "第二个标记",
+                    color: randomColor(),
+                });
+            });
+
+            regions.enableDragSelection({
+                color: "rgba(255, 0, 0, 0.1)",
+            });
+
+            // 区域重新播放时触发
+            regions.on("region-updated", region => {
+                console.log("Updated region", region);
+            });
+
+            // 单击时循环一个区域
+            let loop = true;
+            // 使用复选框切换循环
+            document.querySelector('input[type="checkbox"]').onclick = e => {
+                loop = e.target.checked;
+            };
+
+            {
+                let activeRegion = null;
+                regions.on("region-in", region => {
+                    console.log("region-in", region);
+                    activeRegion = region;
+                });
+                regions.on("region-out", region => {
+                    console.log("region-out", region);
+                    if (activeRegion === region) {
+                        if (loop) {
+                            region.play();
+                        } else {
+                            activeRegion = null;
+                        }
+                    }
+                });
+                regions.on("region-clicked", (region, e) => {
+                    e.stopPropagation(); // 防止触发波形点击
+                    activeRegion = region;
+                    region.play(true);
+                    region.setOptions({ color: randomColor() });
+                });
+                // 当用户点击波形中的任何位置时，重置活动区域
+                ws.on("interaction", () => {
+                    activeRegion = null;
+                });
+            }
+
+            // 在滑块更改时更新缩放级别
+            ws.once("decode", () => {
+                document.querySelector('input[type="range"]').oninput = e => {
+                    const minPxPerSec = Number(e.target.value);
+                    ws.zoom(minPxPerSec);
+                };
+            });
+        </script>
+    </body>
+</html>

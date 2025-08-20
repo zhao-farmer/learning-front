@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite, Point } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序性
+            await app.init({  
+                width: 800,
+                height: 600,   
+            });
+
+            // 添加应用程序到网页中
+            document.body.appendChild(app.canvas);
+
+            // 加载纹理
+            await Assets.load([
+                "../assets/images/bg_plane.jpg", 
+                "../assets/images/cells.png", 
+                "../assets/images/flowerTop.png"
+            ]);
+
+            app.stage.eventMode = "static";
+
+            const bg = Sprite.from("../assets/images/bg_plane.jpg");
+
+            // 作为背景添加到舞台上
+            app.stage.addChild(bg);
+
+            const cells = Sprite.from("../assets/images/cells.png");
+
+            cells.scale.set(1.5);
+
+            //获取外星人精灵
+            const mask = Sprite.from("../assets/images/flowerTop.png");
+
+            mask.anchor.set(0.5);
+            mask.x = 310;
+            mask.y = 190;
+
+            //外星人精灵设置为遮罩
+            cells.mask = mask;
+
+            app.stage.addChild(mask, cells);
+
+            // 设置目标点
+            const target = new Point();
+
+            reset();
+
+            //重置目标点
+            function reset() {
+                //为了设置图片cells.png合适的大小 （520 * 380）
+                target.x = Math.floor(Math.random() * 550);
+                target.y = Math.floor(Math.random() * 300);
+            }
+
+            // 动画遮罩
+            app.ticker.add(() => {
+                // 初始点减去遮罩的x与y的位置
+                // 如果是两个点相错的位置 每次乘以0.1 会以加速度递减的方式向目标点移动
+                // 直至最接近目标点
+                mask.x += (target.x - mask.x) * 0.1;
+                mask.y += (target.y - mask.y) * 0.1;
+
+                // console.log(mask.x, mask.y, target.x, target.y);
+
+                //判断下次 遮罩减去目标点 绝对值是否小于1
+                // 接近目标点之后 开始获取一个全新目标点，虽然遮罩离目标点已经很近 但是无法完全一致
+                //如果小于1 重置目标位置
+                if (Math.abs(mask.x - target.x) < 1) {
+                    reset();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

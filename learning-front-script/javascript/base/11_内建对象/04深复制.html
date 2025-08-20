@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        const obj = {
+            name: '孙悟空',
+            friend: {
+                name: "猪八戒"
+            }
+        }
+
+        // 对obj进行浅赋值
+        const obj2 = Object.assign({}, obj);
+        console.log('obj', obj);                //{name: '孙悟空', friend: {name:'沙和尚'}}
+        console.log('obj2', obj2);              //{name: '孙悟空', friend: {name:'沙和尚'}}
+
+
+        //对obj进行深复制
+        const obj3 = structuredClone(obj)
+        obj3.friend.name = '唐僧';
+        console.log('obj', obj);               //{name: '孙悟空', friend: {name:'沙和尚'}}
+        console.log('obj2', obj3);             //{name: '孙悟空', friend: {name:'唐僧'}}
+
+
+        //对obj进行深复制
+        const str = JSON.stringify(obj)
+        const obj4 = JSON.parse(str)
+        obj4.friend.name = '白龙马';             //{name: '孙悟空', friend: {name:'沙和尚'}}
+        console.log('obj', obj);
+        console.log('obj2', obj4);               //{name: '孙悟空', friend: {name:'白龙马'}}
+
+        const obj5 = JSON.parse(JSON.stringify(obj));
+        obj5.friend.name = '玉帝老儿';
+        console.log('obj', obj);                 //{name: '孙悟空', friend: {name:'沙和尚'}}
+        console.log('obj2', obj5);              //{name: '孙悟空', friend: {name:'玉帝老儿'}}
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

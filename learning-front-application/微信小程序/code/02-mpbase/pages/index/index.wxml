@@ -1,0 +1,16 @@
+
+<!-- 第一种绑定事件的方式： bind:事件名 -->
+<button type="primary" bind:tap="handler">绑定事件</button>
+
+<!-- 第二种绑定事件的方式： bind事件名 -->
+<button type="warn" bind:tap="handler">绑定事件</button>
+
+<!-- 在小程序中，input输入框 默认没有边框，需要自己添加样式 -->
+<input type="text" bindinput="getInputVal"/>
+
+<view class="line"></view>
+
+<view class="catch" bind:tap="parentHanldler">
+  <!-- 使用catch绑定能阻止冒泡 -->
+  <button catch:tap="btnHandler">按钮</button>
+</view>

@@ -1,0 +1,5 @@
+.son2{
+  background-color: lightsalmon;
+  height: 200rpx;
+  width: 700rpx;
+}

@@ -1,0 +1,2 @@
+<!--pages/market/market.wxml-->
+<view wx:for="{{numList}}" wx:key="*this">{{item}}</view>

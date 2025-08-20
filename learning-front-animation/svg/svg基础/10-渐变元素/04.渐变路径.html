@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="800" height="300">
+        <defs>
+            <linearGradient id="linear-grad">
+                <stop offset="0" stop-color="#f7ff00" />
+                <stop offset="1" stop-color="#db36a4" />
+            </linearGradient>
+            <radialGradient id="radial-grad">
+                <stop offset="0" stop-color="#f7ff00" />
+                <stop offset="1" stop-color="#db36a4" />
+            </radialGradient>
+    
+            <path id="grad-path" d="M 50,50 H 200 V 150 L 50,100 V 200 H 200"/>
+        </defs>
+    
+        <use xlink:href="#grad-path" stroke="black" fill="none" stroke-width="3" />
+        <use xlink:href="#grad-path" stroke="url(#linear-grad)" fill="none" stroke-width="9" x="250" />
+        <use xlink:href="#grad-path" stroke="url(#radial-grad)" fill="none" stroke-width="9" x="500" />
+    </svg>
+</body>
+</html>

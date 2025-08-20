@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr =[1,3,5]
+        const newArr =arr.map((item,index)=>{
+            debugger    
+            console.log(item)   // 当前元素
+            console.log(index)  // 当前元素索引号
+            return item+10  //让当前元素+10
+        })
+        console.log(newArr) //[11,13，15]
+    </script>
+</body>
+</html>

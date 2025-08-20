@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div id="msg"></div>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext('2d');
+        
+        //在纵坐标100处绘制一条横线
+        ctx.moveTo(0, 100);
+        ctx.lineTo(300, 100);
+        ctx.strokeStyle = "purple";
+        ctx.stroke();
+
+        ctx.font = "20px Arial";
+        
+        ctx.textBaseline = "alphabetic";
+        ctx.fillText("alphabetic", 10, 100);
+        
+        ctx.textBaseline = "top";
+        ctx.fillText("top", 110, 100);
+        
+        ctx.textBaseline = "middle";
+        ctx.fillText("middle", 160, 100);
+        
+        ctx.textBaseline = "bottom";
+        ctx.fillText("bottom", 230, 100);
+
+    </script>
+</body>
+</html>

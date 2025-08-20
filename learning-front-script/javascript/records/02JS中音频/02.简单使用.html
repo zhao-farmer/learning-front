@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <audio src="music.mp3" ></audio>
+
+    <script>
+          // 获取对象
+          let audio1 = document.querySelector("audio");
+
+        // 1. 播放音频：
+        audio.play();
+
+        // 2. 暂停音频：
+        audio.pause();
+
+        // 3. 设置或获取音频播放位置（单位：秒）：
+        // 3.1 设置音频播放位置
+        audio.currentTime= 10;
+        // 3.2 获取音频播放位置
+        var playbackPosition = audio.currentTime;
+
+        // 4. 设置或获取音频音量（0.0 到 1.0）：
+        // 4.1 设置音量
+        audio.volume= 0.5;
+        // 4.2 获取音量
+        var volume = audio.volume;
+
+        // 5. 设置或获取音频循环播放：
+        // 5.1 设置循环播放
+        audio.loop= true;
+        // 5.2 获取是否循环播放
+        var isLooping = audio.loop;
+
+        // 6. 加载音频数据：
+        audio.load();
+
+        // 7. 监听音频播放结束事件：
+        audio.addEventListener('ended', function() {
+            console.log('Audio playback ended.');
+        });
+
+    </script>
+</body>
+</html>

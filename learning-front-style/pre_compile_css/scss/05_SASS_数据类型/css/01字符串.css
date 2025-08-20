@@ -1,0 +1,8 @@
+p::before {
+  content: "hello";
+  color: red;
+}
+p::after {
+  content: "world";
+  color: red;
+}

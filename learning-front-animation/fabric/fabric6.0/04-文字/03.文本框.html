@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1"); 
+
+        // 文本框
+        const textbox = new fabric.Textbox('这是文本框', {
+            width: 250
+        })
+        
+        canvas.add(textbox)
+       
+    </script>
+</body>
+</html>

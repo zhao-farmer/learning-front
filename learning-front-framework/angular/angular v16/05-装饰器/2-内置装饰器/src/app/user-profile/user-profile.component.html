@@ -1,0 +1,25 @@
+<div class="profile-container" [class.loading]="isLoading">
+  <h2 #profileHeader>{{ userData?.userName || '加载中...' }}</h2>
+
+  <div *ngIf="!isLoading" class="profile-content">
+    <div class="profile-field">
+      <label>用户名:</label>
+      <span>{{ userData?.userName }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>年龄:</label>
+      <span>{{ userData?.age  }}</span>
+    </div>
+
+    <div class="profile-field">
+      <label>主题:</label>
+      <select [(ngModel)]="theme" (change)="changeTheme(theme)">
+        <option value="light">浅色</option>
+        <option value="dark">深色</option>
+      </select>
+    </div>
+
+    <button (click)="updateProfile()">更新资料</button>
+  </div>
+</div>

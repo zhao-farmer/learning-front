@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <p>123</p>
+    <script>
+        function foo(){
+            try{
+                // 可能发生错误的代码 要写到 try
+                const p = document.querySelector('.p')
+                p.style.color = 'red'
+            }catch(error){
+                 // 拦截错误，提示浏览器提供的错误信息，但是不中断程序的执行
+                 console.log(error.message);
+                 throw new Error('你看看，选择器错误了吧')
+                 // 中止代码继续执行
+                 // return
+            }finally{
+                // 不管你程序对不对，一定会执行的代码
+                alert("弹出对话框")
+            }
+            console.log("如果出现错误，我不会执行");
+        }
+        foo()
+    </script>
+</body>
+</html>

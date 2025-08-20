@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("c1");
+        const ctx = canvas.getContext("2d");
+
+        // 创建一个锥形渐变
+        // 开始角度为 0
+        // 中心位置为 100, 100
+        const gradient = ctx.createConicGradient(0, 100, 100);
+
+        // 添加五个色标
+        gradient.addColorStop(0, "red");
+        gradient.addColorStop(0.25, "orange");
+        gradient.addColorStop(0.5, "yellow");
+        gradient.addColorStop(0.75, "green");
+        gradient.addColorStop(1, "blue");
+
+        // 设置填充样式并绘制矩形
+        ctx.fillStyle = gradient;
+        ctx.fillRect(20, 20, 200, 200);
+    </script>
+</body>
+</html>

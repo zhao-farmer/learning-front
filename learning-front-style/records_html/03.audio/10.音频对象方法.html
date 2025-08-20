@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">播放</button>
+    <button id="btn2">暂停</button>
+    <script>
+        var audio = new Audio();
+        audio.src = "00.aac";
+
+        //load():设置preload的属性值
+	    audio.load("none");
+
+        let btn1 = document.getElementById("btn1")
+        btn1.onclick = () => {
+            // 播放
+            audio.play()
+        }
+
+        let btn2 = document.getElementById("btn2")
+        btn2.onclick = () => {
+            // 播放
+            audio.pause()
+        }
+    </script>
+</body>
+</html>

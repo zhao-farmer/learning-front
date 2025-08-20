@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <input type="text" id="search" />
+    <script>
+        const { ajax } = rxjs.ajax;
+        const { retryWhen, delay, mergeMap } = rxjs.operators;
+
+        ajax.getJSON("https://api.example.com/data")
+            .pipe(
+                retryWhen(errors =>
+                    errors.pipe(
+                        mergeMap((error, attempt) => {
+                            if (attempt >= 2) throw error; // 最多重试2次
+                            return of(error).pipe(delay(1000)); // 延迟1秒后重试
+                        })
+                    )
+                )
+            )
+            .subscribe(console.log);
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="500" height="100" viewBox="0 0 100 20">
+        <!-- <symbol>在它自己的坐标系中 -->
+        <symbol id="myDot" width="10" height="10" viewBox="0 0 2 2">
+          <circle cx="1" cy="1" r="1" fill="lightblue" />
+        </symbol>
+      
+        <!-- 实例化<symbol> -->
+        <use href="#myDot" x="5" y="5" style="opacity:1.0" />
+        <use href="#myDot" x="20" y="5" style="opacity:0.8" />
+        <use href="#myDot" x="35" y="5" style="opacity:0.6" />
+        <use href="#myDot" x="50" y="5" style="opacity:0.4" />
+        <use href="#myDot" x="65" y="5" style="opacity:0.2" />
+    </svg>
+</body>
+</html>

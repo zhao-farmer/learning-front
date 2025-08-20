@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+          //找到画布
+          var c1 = document.getElementById("c1");
+          //找到画笔
+          var ctx = c1.getContext('2d');
+         
+          //1.绘制一张脸
+          ctx.beginPath()
+          ctx.arc(75,75,50,0,Math.PI * 2);
+          ctx.stroke()
+          ctx.closePath()
+
+          //2.绘制一张嘴巴
+          ctx.beginPath()
+          ctx.arc(75,75,30,0,Math.PI)
+          ctx.stroke()
+          ctx.closePath()
+
+          //3.绘制两个眼睛
+          ctx.beginPath()
+          ctx.arc(60,65,5,0,Math.PI * 2)
+          ctx.stroke()
+          ctx.closePath()
+          ctx.beginPath()
+          ctx.arc(90,65,5,0,Math.PI * 2)
+          ctx.stroke()
+          ctx.closePath()
+
+     </script>
+</body>
+</html>

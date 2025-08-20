@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>xxx</li>
+        <li>xxx</li>
+        <li>xxx</li>
+    </ul>
+    <script>
+        // 有了迭代器才能使用 解构赋值与展开运算符
+        // 展开运算符默认调用迭代器
+        // ...解构赋值
+        // ...展开
+
+        let obj2 = {
+            0:"kerwin",
+            1:"tiechui",
+            2:"ganger",
+            [Symbol.iterator]:Array.prototype[Symbol.iterator],
+            length:3
+        }
+
+        console.log([...obj2]);
+        
+
+        let oli = document.querySelectorAll("li")
+        console.log([...oli]);
+        console.log(Array.from(oli));
+        
+        
+
+    </script>
+</body>
+</html>

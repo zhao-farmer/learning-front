@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            #card {
+                width: 600px;
+                height: 400px;
+                background: url(./images/1.gif)
+                    no-repeat center;
+                border: 1px solid rgba(0, 0, 0, 0.5);
+            }
+        </style>
+    </head>
+    <body>
+        <div id="card">
+            <canvas id="canvasOne" width="600" height="400"></canvas>
+        </div>
+
+        <script>
+
+                var canvas = document.getElementById("canvasOne");
+                var ctx = canvas.getContext("2d");
+                var card = document.getElementById("card");
+                var width = card.offsetWidth;
+                var height = card.offsetHeight;
+                canvas.width = width;
+                canvas.height = height;
+
+                var isDrawing;
+                var lastPoint;
+                var brush = new Image();
+
+                brush.src = "./images/3.png";
+
+                canvas.addEventListener("mousedown", mouseDown, false);
+                canvas.addEventListener("touchstart", mouseDown, false);
+                canvas.addEventListener("mousemove", mouseMove, false);
+                canvas.addEventListener("touchmove", mouseMove, false);
+                canvas.addEventListener("mouseup", mouseUp, false);
+                canvas.addEventListener("touchend", mouseUp, false);
+
+                function distanceBetween(point1, point2) {
+                    return Math.sqrt(Math.pow(point2.x - point1.x, 2) + Math.pow(point2.y - point1.y, 2));
+                }
+
+                function angleBetween(point1, point2) {
+                    return Math.atan2(point2.x - point1.x, point2.y - point1.y);
+                }
+
+                // Only test every 'stride' pixel. 'stride'x faster
+                // but might lead to inaccuracy
+                function getFilledInPixels(stride) {
+                    if (!stride || stride < 1) {
+                        stride = 1;
+                    }
+                    var pixels = ctx.getImageData(0, 0, width, height);
+                    var pdata = pixels.data;
+                    var len = pdata.length;
+                    var total = len / stride;
+                    var count = 0;
+                    // console.log(len);
+
+                    // Iterate over all pixels
+                    for (var i = 0; i < len; i += stride) {
+                        if (parseInt(pdata[i]) === 0) {
+                            count++;
+                        }
+                    }
+
+                    return Math.round((count / total) * 100);
+                }
+
+                function getMouse(e, canvas) {
+                    var offsetX = 0;
+                    var offsetY = 0;
+                    var mx;
+                    var my;
+
+                    if (canvas.offsetParent !== undefined) {
+                        do {
+                            offsetX += canvas.offsetLeft;
+                            offsetY += canvas.offsetTop;
+                        } while ((canvas = canvas.offsetParent));
+                    }
+
+                    mx = (e.pageX || e.touches[0].clientX) - offsetX;
+                    my = (e.pageY || e.touches[0].clientY) - offsetY;
+
+                    return {
+                        x: mx,
+                        y: my,
+                    };
+                }
+
+                function handlePercentage(filledInPixels) {
+                    filledInPixels = filledInPixels || 0;
+                    console.log(filledInPixels + "%");
+                    if (filledInPixels > 90) {
+                        canvas.parentNode.removeChild(canvas);
+                    }
+                }
+
+                function mouseDown(e) {
+                    isDrawing = true;
+                    lastPoint = getMouse(e, canvas);
+                }
+
+                function mouseMove(e) {
+                    if (!isDrawing) {
+                        return;
+                    }
+
+                    var currentPoint = getMouse(e, canvas);
+                    var dist = distanceBetween(lastPoint, currentPoint);
+                    var angle = angleBetween(lastPoint, currentPoint);
+                    var x;
+                    var y;
+
+                    for (var i = 0; i < dist; i++) {
+                        x = lastPoint.x + Math.sin(angle) * i - 25;
+                        y = lastPoint.y + Math.cos(angle) * i - 25;
+                        ctx.globalCompositeOperation = "destination-out";
+
+                        // 这里需要修改
+                        ctx.drawImage(brush, x, y);
+
+                        // 或者下面的笔擦
+                        // var radius = 30;
+                        // var fillStyle = '#fff';
+                        // ctx.beginPath();
+                        // ctx.arc(x, y, radius, 0, Math.PI * 2, true);
+                        // ctx.closePath();
+                        // ctx.fill();
+                    }
+
+                    lastPoint = currentPoint;
+                    handlePercentage(getFilledInPixels(32));
+                }
+
+                function mouseUp(e) {
+                    isDrawing = false;
+                }
+
+                function draw() {
+                    ctx.save();
+                    ctx.fillStyle = "#ddd";
+                    ctx.fillRect(0, 0, width - 2, height - 2);
+                    ctx.restore();
+                }
+
+                draw();
+          
+        </script>
+    </body>
+</html>

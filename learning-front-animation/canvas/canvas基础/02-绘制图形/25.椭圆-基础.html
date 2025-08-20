@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="400" height="200"></canvas>
+
+        <script>
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+
+            ctx.beginPath();
+            // 参数依次为：x坐标，y坐标，椭圆的水平半径，椭圆的垂直半径，旋转角度，起始角，结束角
+            ctx.ellipse(200, 100, 100, 50, 0, 0, Math.PI * 2); 
+            ctx.stroke(); // 或者 ctx.fill();
+        </script>
+    </body>
+</html>

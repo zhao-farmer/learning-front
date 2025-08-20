@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "触底与下拉加载",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

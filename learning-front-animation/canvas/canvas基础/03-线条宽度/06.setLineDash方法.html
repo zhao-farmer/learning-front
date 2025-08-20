@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        //找到画布
+        var c1 = document.getElementById("c1");
+        //获取画笔
+        var cxt = c1.getContext('2d');
+        
+        cxt.lineWidth = 50
+        cxt.strokeStyle = 'skyblue'
+        cxt.moveTo(50, 50)
+        cxt.lineTo(500, 50)
+        // 只传1个参数，实线与空白都是 10px
+        cxt.setLineDash([10]) 
+        cxt.stroke()
+
+
+        cxt.beginPath()
+        cxt.moveTo(50, 150)
+        cxt.lineTo(500, 150)
+        // 2个参数，此时，实线是 10px, 空白 20px
+        cxt.setLineDash([10, 20]) 
+        cxt.stroke()
+        
+        
+        cxt.beginPath()
+        cxt.moveTo(50, 250)
+        cxt.lineTo(500, 250)
+        // 传3个以上的参数，此例：10px实线，20px空白，5px实线，10px空白，20px实线，5px空白
+        cxt.setLineDash([10, 20, 5]) 
+        cxt.stroke()
+ 
+     </script>
+</body>
+</html>

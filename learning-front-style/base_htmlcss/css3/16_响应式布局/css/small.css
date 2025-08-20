@@ -1,0 +1,6 @@
+  /* 最小屏幕 */
+  @media screen and (max-width:768px) {
+    h1{
+        background-color: orange;
+    }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                }
+
+                stroke(ctx){
+                    ctx.strokeStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.stroke()
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            // 创建图形
+            let ball = new Ball(0,canvas.height / 2,30)
+
+           // 初始化x轴方向的速度为8，摩擦力系数为0.985
+            let vx = 8;
+            let friction = 0.985;
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                ball.x += vx
+                ball.fill(ctx)
+
+                vx *= friction
+   
+                // 这个数字会无限接近于0 这里为了循环直接小于千分之一
+                if(vx < 0.001){
+                    vx = 8;
+                    ball.x = 0;
+                }
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>否定伪类选择器</title>
+    <style>
+     
+     /* 选中的是否选的复选框 或单选牛牛 */
+     input:checked{
+        width: 100px;
+        height: 100px;
+     }
+     /* 选中的是被禁用的input元素 */
+     input:disabled{
+        background-color: gray;
+     }
+    /* 选中的是可用的input元素 enabled可以省略*/
+     input:enabled{
+        background-color: green;
+     }
+    </style>
+</head>
+<body>
+    <input type="checkbox">
+    <input type="radio" name="gender">
+    <input type="radio" name="gender">
+    <input type="text">
+    <input type="text" disabled>
+</body>
+</html>

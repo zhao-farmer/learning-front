@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>多边形裁剪</title>
+     <style>
+        .box{
+            display: flex;
+            flex-wrap: wrap;
+            width: 400px;
+            gap: 10px;
+        }
+        /* 三角形 */
+        .outer_01{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        /* 菱形 */
+        .outer_02{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        /* 梯形 */
+        .outer_03{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+        }
+        /* 平行四边形 */
+        .outer_04{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+        }
+        /* 五边形 */
+        .outer_05{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+        }
+        /* 六边形 */
+        .outer_06{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        }
+        /* 七边形 */
+        .outer_07{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 75% 100%, 25% 100%, 0% 60%, 10% 20%);
+        }
+        /* 八边形 */
+        .outer_08{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%); 
+        }
+     </style>
+</head>
+<body>
+    <div class="box">
+        <!-- 三角形 -->
+        <div class="outer_01"></div>
+        <!-- 菱形 -->
+        <div class="outer_02"></div>
+        <!-- 梯形 -->
+        <div class="outer_03"></div>
+         <!-- 平行四边形 -->
+        <div class="outer_04"></div>
+        <!-- 五边形 -->
+        <div class="outer_05"></div>
+        <!-- 六边形 -->
+        <div class="outer_06"></div>
+        <!-- 七边形 -->
+        <div class="outer_07"></div>
+        <!-- 八边形 -->
+        <div class="outer_08"></div>
+    </div>
+</body>
+</html>

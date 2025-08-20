@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, MeshPlane } from "../js/pixi.mjs";
+
+        //使用立即执行函数进行调用
+        (async () => {
+            // 创建一个应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                background: "#1099bb",
+                width: 800,
+                height: 600,
+            });
+
+            // 应用程序加载到网页中
+            document.body.appendChild(app.canvas);
+
+            // 添加草的纹理
+            const texture = await Assets.load("../assets/images/bg_grass.jpg");
+
+            // 创建一个草平面并添加到舞台上
+            // 三个参数 1.要在平面上使用的纹理。 2.x轴上的顶点数 3 y轴上的顶点数 10x10 一百个点  每个点两个值作为一个顶点 所以有200个数据
+
+            const plane = new MeshPlane({ texture, verticesX: 10, verticesY: 10 });
+
+            plane.x = 100;
+            plane.y = 100;
+
+            app.stage.addChild(plane);
+
+            // 拿出所有的顶点位置
+            const { buffer } = plane.geometry.getAttribute("aPosition");
+
+            console.log(buffer);
+
+            // 监听动画更新
+            let timer = 0;
+
+            app.ticker.add(() => {
+                // 稍微随机化垂直位置以创建运动。
+                for (let i = 0; i < buffer.data.length; i++) {
+                    // 这么多点一直随着页面变化 每一行都除以10 斜线位置的变化是相同的
+                    buffer.data[i] += Math.sin(timer / 10 + i) * 0.5;
+                }
+                buffer.update();
+                timer++;
+            });
+        })();
+    </script>
+</body>
+</html>

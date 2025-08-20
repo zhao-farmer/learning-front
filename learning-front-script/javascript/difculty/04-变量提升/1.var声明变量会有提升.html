@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.把所有var声明的变量提升到 当前作用域的最前面
+        // 2.只提升声明，不提升赋值
+
+        // 全局作用域
+        // 相当于使用 var num;
+        console.log(num + "件");    //undefined件
+        var num = 10
+
+
+        // 局部作用域
+        function fn(){
+            // 相当于使用 var num;
+            console.log(num + "件");    //undefined件
+            var num = 10
+        }
+        fn()
+
+        
+    </script>
+</body>
+</html>

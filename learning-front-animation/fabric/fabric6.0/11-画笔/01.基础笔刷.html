@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>BaseBrush</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1", {
+            isDrawingMode: true,
+        });
+
+
+        console.log(c1);
+
+        // 画笔投影
+        const brushShadow = new fabric.Shadow({
+            blur: 10,
+            offsetX: 10,
+            offsetY: 10,
+            affectStroke: true,
+            color: "#30e3ca",
+        });
+
+        // 创建笔刷
+        // BaseBrush 并不实现画笔 实现画笔靠的是onMouseMove
+        // 其他画笔都是实现了 onMouseDown onMouseMove onMouseUp
+        const brush = new fabric.BaseBrush(canvas);
+
+        brush.width = 20; // 画笔宽度
+        brush.shadow = brushShadow; // 阴影
+        brush.color = "pink"; // 画笔颜色
+        brush.limitedToCanvasSize = true; // 能否超出当前画板
+        brush.strokeDashArray = [20, 50]; // 行程破折号数组
+        brush.strokeLineCap = "round"; // 线条结尾的画笔风格 butt | round | square
+        brush.strokeLineJoin = "miter"; // 画笔的角落风格 bevel | round | miter
+        brush.strokeMiterLimit = 100; // 最大斜接长度
+
+        // 笔刷设置在画布上
+        canvas.freeDrawingBrush = brush;
+
+        // 鼠标按下时触发
+        brush.onMouseDown = function (t, e) {
+            console.log("画图开始");
+        };
+
+        // 鼠标移动时触发
+        brush.onMouseMove = function (t, e) {
+            console.log("画图中");
+        };
+
+        // 鼠标松开时触发
+        brush.onMouseUp = function (t) {
+            console.log("画图结束");
+        };
+    </script>
+</body>
+</html>

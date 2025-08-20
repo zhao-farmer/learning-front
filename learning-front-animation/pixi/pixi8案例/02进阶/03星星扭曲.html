@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                height:600,
+                width:800, 
+            });
+
+            // 应用程序添加到页面上
+            document.body.appendChild(app.canvas);
+
+            // 加载星星纹理
+            const starTexture = await Assets.load("../assets/images/star.png");
+
+            //星星数量
+            const starAmount = 1000;
+            //摄像机z轴
+            let cameraZ = 0;
+            //视厂
+            const fov = 20;
+            //基础速度
+            const baseSpeed = 0.025;
+            //速度
+            let speed = 0;
+            //曲速
+            let warpSpeed = 0;
+            // 星星伸展
+            const starStretch = 5;
+            // 星星基础大小
+            const starBaseSize = 0.05;
+
+            // 创建星星集合
+            const stars = [];
+
+            for (let i = 0; i < starAmount; i++) {
+                // star 精灵对象
+                const star = {
+                    sprite: new Sprite(starTexture),
+                    z: 0,
+                    x: 0,
+                    y: 0,
+                };
+                //设置精灵的锚点
+                star.sprite.anchor.x = 0.5;
+                star.sprite.anchor.y = 0.7;
+                //放入随机位置
+                randomizeStar(star, true);
+                //将每个star精灵添加到画布上
+                app.stage.addChild(star.sprite);
+                //将star 添加集合中
+                stars.push(star);
+            }
+            //星星的随机位置
+            function randomizeStar(star, initial) {
+                //z轴 如果为true 开始随机0-2000 之内的数据 否则摄像机轴 加上0-1000 加上2000
+                star.z = initial ? Math.random() * 2000 : cameraZ + Math.random() * 1000 + 2000;
+
+                // 放射性随机的坐标来确认star位置 ，这样没有star撞到相机
+                // 角度 0 到 6.28.. 之间
+                const deg = Math.random() * Math.PI * 2;
+                // 距离
+                const distance = Math.random() * 50 + 1;
+                //正弦 余弦 都在 -1到1 之间
+                star.x = Math.cos(deg) * distance;
+                star.y = Math.sin(deg) * distance;
+            }
+
+            // 每5秒更改一次飞行速度
+            setInterval(() => {
+                //五秒钟等于0 五秒钟等于1
+                warpSpeed = warpSpeed > 0 ? 0 : 1;
+            }, 5000);
+
+            // 监听动画更新
+            app.ticker.add(time => {
+                // 简单的缓缓移动 当用于真实时，应将其更改为适当的慢动功能
+                // 第一次  warpSpeed等于1 speed越来越接近1
+                // 第二次  由接近1的数 开始无线接近于0 会出现 4.662602347812701e-9 这样的数 其实这个数比0.0000010177704155697795 更小
+                speed += (warpSpeed - speed) / 20;
+                //判断摄像机的z轴 默认是0 一直再变大
+                // 如果 time.deltaTime 等于1 最大加的值 12.5  最小加的值 2.5
+                // warpSpeed 是1的时候 cameraZ增长的快 是0的时候 cameraZ增长的慢
+                cameraZ += time.deltaTime * 10 * (speed + baseSpeed);
+
+                //循环一千颗星星
+                for (let i = 0; i < starAmount; i++) {
+                    // 每一颗星星的对象
+                    const star = stars[i];
+                    //当前星星的z轴小于摄像机的z轴  重新设定位置
+                    // 由于摄像机一直会增大 star的z轴也会变化
+                    if (star.z < cameraZ) randomizeStar(star);
+
+                    // 用非常简单的投影将star的三维位置映射到二维
+                    // 这个z 调整后 1-1000  + 2000 距离
+                    // 随着 cameraZ慢慢增大 得到的结果又会慢慢缩小 达到某个阈值又会从头开始
+                    const z = star.z - cameraZ;
+
+                    // 第一次x 与y 都在 -1 到1 之间 星星对象中精灵的位置 都在中心一个点上
+                    // 视厂 屏幕距离 (fov / z) * app.renderer.screen.width 其实就是判断距离屏幕眼镜的z轴距离，这个应该学习图形学的时候会学到吧
+                    star.sprite.x = star.x * (fov / z) * app.renderer.screen.width + app.renderer.screen.width / 2;
+                    star.sprite.y = star.y * (fov / z) * app.renderer.screen.width + app.renderer.screen.height / 2;
+
+                    // 计算star的尺度和自转。
+                    const dxCenter = star.sprite.x - app.renderer.screen.width / 2;
+                    const dyCenter = star.sprite.y - app.renderer.screen.height / 2;
+                    //距离中心点 sqrt平方根
+                    const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
+                    if (i % 1000 == 0) {
+                        console.log(speed, distanceCenter);
+                    }
+
+                    //距离比例
+                    const distanceScale = Math.max(0, (2000 - z) / 2000);
+
+                    //x 的比例 星星基础比例 x 距离比例
+                    star.sprite.scale.x = distanceScale * starBaseSize;
+
+                    //恒星朝向中心，因此y轴朝向中心。
+                    //根据我们移动的速度和拉伸系数来缩放恒星
+                    //取决于它离中心有多远。
+
+                    // y轴比例 星星基础比例 x 距离比例
+                    // speed越来越接近1 y轴会边长
+                    // distanceCenter speed越接近0变化越小 speed越接近1变化越大
+                    star.sprite.scale.y = distanceScale * starBaseSize + (distanceScale * speed * starStretch * distanceCenter) / app.renderer.screen.width;
+                    //atan2 返回值再 -PI与PI之间 代表旋转的角度在0度与360度之间
+                    star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

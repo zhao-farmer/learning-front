@@ -1,0 +1,1 @@
+{"version":3,"file":"requestDomo.js","sources":["D:/soft/HBuilderX/plugins/uniapp-cli-vite/uniPage:/cGFnZXMvcmVxdWVzdERvbW8wMS9yZXF1ZXN0RG9tby52dWU"],"sourcesContent":["import MiniProgramPage from 'E:/study/2024study/uniapp/uniappV3Project06/pages/requestDomo01/requestDomo.vue'\nwx.createPage(MiniProgramPage)"],"names":[],"mappings":";;;;;;;;;;;;;AACA,GAAG,WAAW,eAAe;"}

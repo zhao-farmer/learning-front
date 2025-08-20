@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button onmouseup="whichButton(event)">点击</button>
+    <script>
+        var whichButton = function (e) {
+            switch (e.button) {
+                case 0:
+                    console.log('Left button clicked.');
+                    break;
+                case 1:
+                    console.log('Middle button clicked.');
+                    break;
+                case 2:
+                    console.log('Right button clicked.');
+                    break;
+                default:
+                    console.log('Unexpected code: ' + e.button);
+            }
+        }
+    </script>
+</body>
+</html>

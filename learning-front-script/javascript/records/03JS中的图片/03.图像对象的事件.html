@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./images/00.jpg " width="240" height="400" name="wu1" onmouseover="changImage('wu1')" onmouseout="resetImage('wu1')">
+
+    <script type="text/javascript">
+        function changImage(imgName) {
+            document.images[imgName].src="./images/02.jpg";
+        }
+        function resetImage(imgName) {
+            document.images[imgName].src="./images/01.jpg";
+        }
+    </script>
+   
+</body>
+</html>

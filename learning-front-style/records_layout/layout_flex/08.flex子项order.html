@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Flex Order Example</title>
+        <style>
+            .flex-container {
+                display: flex;
+                list-style: none;
+                padding: 0;
+            }
+            .flex-item {
+                margin: 10px;
+                padding: 20px;
+                background-color: lightblue;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="flex-container">
+            <li class="flex-item" style="order: 3">Item 1,order: 3</li>
+            <li class="flex-item" style="order: 1">Item 2,order: 1</li>
+            <li class="flex-item" style="order: 2">Item 3,order: 2</li>
+        </ul>
+    </body>
+</html>

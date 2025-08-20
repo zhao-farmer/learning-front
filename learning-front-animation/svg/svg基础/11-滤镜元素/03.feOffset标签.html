@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+        <defs>
+          <filter id="offset">
+            <feOffset dx="50" dy="50" />
+          </filter>
+        </defs>
+      
+        <!-- 原图 -->
+        <image href="./images/fire.png"  width="200" height="200" />
+      
+        <!-- 偏移之后 -->
+        <image href="./images/fire.png" filter="url(#offset)" width="200" height="200" />
+    </svg>
+</body>
+</html>

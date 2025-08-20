@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        //找到画布
+        var c1 = document.getElementById("c1");
+        //获取画笔
+        var ctx = c1.getContext('2d');
+        
+        // 六段♥
+        ctx.moveTo(75, 40);
+        ctx.bezierCurveTo(75, 37, 70, 25, 50, 25);
+        ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+        ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+        ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+        ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+        ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+        ctx.stroke();
+
+
+        // 二段♥
+        ctx.beginPath()
+        ctx.moveTo(300,200);
+        //起点 两个控制点一个终点
+        ctx.bezierCurveTo(350,150,400,200,300,280)
+        ctx.bezierCurveTo(200,200,250,150,300,200)
+        ctx.stroke()
+        ctx.closePath()
+     </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<view class="layout data-v-4103fe66"><view wx:for="{{a}}" wx:for-item="item" wx:key="c" class="row data-v-4103fe66"><view class="title data-v-4103fe66">{{item.a}}</view><view class="content data-v-4103fe66">{{item.b}}</view></view></view>

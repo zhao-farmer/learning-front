@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("c1");
+        const ctx = canvas.getContext("2d");
+
+        // 图形阴影
+        ctx.shadowOffsetX = -5;
+        ctx.shadowOffsetY = -5;
+        ctx.shadowColor = "LightSkyBlue";
+        ctx.shadowBlur = 1;
+        ctx.fillStyle = "HotPink";
+        ctx.fillRect(30, 30, 50, 50);
+
+        // 文字阴影
+        var text = "绿叶学习网";
+        ctx.font = "bold 30px 微软雅黑";
+        ctx.shadowOffsetX = 5;
+        ctx.shadowOffsetY = 5;
+        ctx.shadowColor = "LightSkyBlue";
+        ctx.shadowBlur = 10;
+        ctx.fillStyle = "HotPink";
+        ctx.fillText(text, 100, 90);
+
+
+        // 图片阴影
+        var image = new Image();
+        image.src = "./images/2.png";
+
+        image.onload = function () {
+            //定义阴影
+            ctx.shadowOffsetX = 5;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowColor = "HotPink";
+            ctx.shadowBlur = 10;
+            ctx.drawImage(image, 10, 140,200,200);
+        }
+
+    </script>
+</body>
+</html>

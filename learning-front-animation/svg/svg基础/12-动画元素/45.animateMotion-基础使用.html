@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="400" height="200">
+        <path id="myPath" d="M40,40 Q150,300 300,40" fill="none"/>
+        <circle x="40" y="40" r="20" fill="red">
+          <animateMotion dur="2s" repeatCount="indefinite">
+            <mpath xlink:href="#myPath"/>
+          </animateMotion>
+        </circle>
+    </svg>
+</body>
+</html>

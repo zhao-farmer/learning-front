@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        // 1.Echats最基本的代码结构
+        // 2.x轴数据:['张三','李四','王五','闰土','小明','茅台','二妞'','大强']
+        // 3.y轴数据：[88,92,63,77,94,80,72,86]
+        // 4.将type的值设置为bar
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+
+                    data: yDataArr,
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

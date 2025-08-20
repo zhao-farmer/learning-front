@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 旧的逻辑运算符
+        let a = 1
+        a+=2  // 等于a = a+2
+
+        // 新的逻辑运算符 &&= ||= ??=
+        let b = true
+        let c = false
+        b &&=c //等于 b = b && c
+        b &&=c //等于 b = b && c
+
+        let obj = {
+            introduction:0
+        }
+        obj.introduction ??= "这个人很懒"
+        // 与下面这个相等
+        // obj.introduction = obj.introduction ?? "这个人很懒"
+    </script>
+</body>
+</html>

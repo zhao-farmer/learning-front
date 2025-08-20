@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            Math （数学）
+                - Math 一个工具类
+                - Math中为我们提供了数学运算相关的一些常量和方法
+                - 常量
+                    Math.PI 圆周率
+                - 方法
+                    Math.abs() 求一个数的绝对值
+                    Math.min() 求多个值中的最小值
+                    Math.max() 求多个值中最大值
+                    Math.pow(x,y) 求x值得y次方
+                    Math.sqrt() 求一个数得平方根
+
+                    //不同得方式求整
+                    Math.floor()    向下取整
+                    Math.ceil()     向上取整
+                    Math.round()    四舍五入
+                    Math.trunc()    直接去除小数位
+
+                    Math.random()   生成一个0~1之间得随机数
+        */
+
+        console.log(Math);
+
+        let result = Math.abs(10)
+        console.log(result);
+        result = Math.abs(-10)
+        console.log(result);
+        result = Math.min(10, 20, 30, 40);
+        console.log(result);
+        result = Math.max(10, 20, 30, 40);
+        console.log(result);
+        result = Math.pow(4, 2) //等价于 4 ** 2
+        console.log(result);
+        result = Math.sqrt(4) //等价于 4** .5
+
+
+        let num = 2.9999999;
+        console.log(Math.floor(num));
+        num = -2.9999999;
+        console.log(Math.floor(num));
+
+
+        //向上取整
+        result = Math.ceil(1.1)
+        //四舍五入
+        result = Math.round(1.4)
+        //直接去除小数
+        result = Math.trunc(1.4)
+
+        for (let index = 0; index < 50; index++) {
+
+            /* 
+                生成0-5之间得随机数
+                    Math.random() -> 0 - 1
+                生成0 - x之间得随机数：
+                    Math.round(Nath.random() * x)
+                    Math.floor(Math.random() * ( x + 1 ) )
+                生成x - y 之间得随机数
+                    Math.round(Math.random() * ( y- x) + x)
+                
+            */
+            //0 - 5
+            // result = Math.random(Math.random * 5)
+            // result = Math.floor(Math.random * 6)
+            //1 - 6
+            // result = Math.random(Math.random * 5 + 1)
+            //11 - 20
+            result = Math.random(Math.random * 9 + 11)
+            if (result === 0) {
+                console.log(result);
+            }
+        }
+        console.log('执行完毕');
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

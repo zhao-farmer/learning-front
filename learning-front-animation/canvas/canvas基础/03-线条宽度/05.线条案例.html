@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="300" height="300" ></canvas>
+     <script>
+        //找到画布
+        var c1 = document.getElementById("c1");
+        //获取画笔
+        var ctx = c1.getContext('2d');
+        
+        //设置线段样式 最基本的的 也是默认也是 butt mitter
+        ctx.beginPath()
+        ctx.moveTo(20,20);
+        ctx.lineTo(50,80);
+        ctx.lineTo(80,20);
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'butt';
+        ctx.lineJoin = 'mitter';
+        ctx.stroke();
+        ctx.closePath()
+        
+        //半圆
+        ctx.beginPath()
+        ctx.moveTo(120,20);
+        ctx.lineTo(150,80);
+        ctx.lineTo(180,20);
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'round';
+        ctx.stroke();
+        ctx.closePath()
+
+        //正方式
+        ctx.beginPath()
+        ctx.moveTo(220,20);
+        ctx.lineTo(250,80);
+        ctx.lineTo(280,20);
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'square';
+        ctx.stroke();
+        ctx.closePath()
+
+        //外侧相连的角
+        ctx.beginPath()
+        ctx.moveTo(20,120);
+        ctx.lineTo(50,180);
+        ctx.lineTo(80,120);
+        ctx.lineWidth = 20;
+        ctx.lineJoin = 'mitter';
+        ctx.stroke();
+        ctx.closePath()
+
+        
+        //角被磨圆了
+        ctx.beginPath()
+        ctx.moveTo(120,120);
+        ctx.lineTo(150,180);
+        ctx.lineTo(180,120);
+        ctx.lineWidth = 20;
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+        ctx.closePath()
+
+        //角被折平了
+        ctx.beginPath()
+        ctx.moveTo(220,120);
+        ctx.lineTo(250,180);
+        ctx.lineTo(280,120);
+        ctx.lineWidth = 20;
+        ctx.lineJoin = 'bevel';
+        ctx.stroke();
+        ctx.closePath()
+
+        //斜截面设置 适用于 mitter
+        ctx.beginPath()
+        ctx.moveTo(20,220);
+        ctx.lineTo(50,280);
+        ctx.lineTo(80,220);
+        ctx.lineWidth = 20;
+        ctx.lineJoin = 'mitter';
+        ctx.miterLimit = 2;
+        ctx.stroke();
+        ctx.closePath()
+      
+     </script>
+</body>
+</html>

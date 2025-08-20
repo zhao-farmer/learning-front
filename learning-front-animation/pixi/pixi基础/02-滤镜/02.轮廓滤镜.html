@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <!-- 导入pixi -->
+    <script src="../js/pixi7.js"></script>
+    <script src="../js/pixi-filters.js"></script>
+    <script>
+        //创建应用
+        const app = new PIXI.Application({
+            width: 800,
+            height: 600,
+            background: 0x1099bb,
+            //设置像素比例
+            resolution: window.devicePixelRatio || 1,
+        });
+
+        //将应用画布添加到DOM中
+        document.body.appendChild(app.view);
+        //创建一个纹理
+        const texture = PIXI.Texture.from("../assest/mujian.png");
+        //创建一个精灵
+        const sprite = new PIXI.Sprite(texture);
+        //设置精灵的位置
+        sprite.x = app.screen.width / 2;
+        sprite.y = app.screen.height / 2;
+
+        //设置精灵的锚点
+        sprite.anchor.set(0.5);
+
+        //将精灵添加到舞台
+        app.stage.addChild(sprite);
+
+        //创建轮廓滤镜
+        const outLineFilter = new PIXI.filters.OutlineFilter(10, 0xffc14d); //2为轮廓宽度,0x00000 为轮廓颜色
+        const glowFilter = new PIXI.filters.GlowFilter({
+            distance: 50,
+            outerStrength: 3,
+            innerStrength: 0,
+            color: 0xff0000,
+            quality: 0.5,
+        });
+
+        //将轮廓滤镜添加到精灵上
+        sprite.filters = [outLineFilter, glowFilter];
+    </script>
+</body>
+</html>

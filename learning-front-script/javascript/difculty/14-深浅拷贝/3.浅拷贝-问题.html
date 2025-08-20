@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const obj = {
+            uname:'pink',
+            age:18,
+            family:{
+                baby:'小pink'
+            }
+        }
+
+        // 浅拷贝
+        const o = {...obj}
+        o.age = 20
+        o.family.baby = '老pink'
+        console.log(o,obj); // family.baby 都是 老pink
+        
+
+    </script>
+</body>
+</html>

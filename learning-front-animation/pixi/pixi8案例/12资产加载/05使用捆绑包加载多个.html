@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite } from "../js/pixi.mjs";
+
+        // 创建应用程序
+        const app = new Application();
+
+        async function init() {
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb", 
+                height:400, 
+                width: 600 
+            });
+
+            // 添加应用程序到网页中
+            document.body.appendChild(app.canvas);
+
+            // 清单示例
+            const manifestExample = {
+                bundles: [
+                    {
+                        name: "load-screen",
+                        assets: [
+                            {
+                                alias: "flowerTop",
+                                src: "../assets/images/flowerTop.png",
+                            },
+                        ],
+                    },
+                    {
+                        name: "game-screen",
+                        assets: [
+                            {
+                                alias: "eggHead",
+                                src: "../assets/images/eggHead.png",
+                            },
+                        ],
+                    },
+                ],
+            };
+
+            // 加载清单示例
+            await Assets.init({ manifest: manifestExample });
+
+            // 捆绑包也可以在后台加载！
+            Assets.backgroundLoadBundle(["load-screen", "game-screen"]);
+
+            makeLoadScreen();
+        }
+
+        async function makeLoadScreen() {
+            //从加载屏幕捆绑包中获取资产。
+            //如果捆绑包已经下载，promise会立即解析！
+            const loadScreenAssets = await Assets.loadBundle("load-screen");
+
+            // 从解析的加载纹理创建新的Sprite
+            const goNext = new Sprite(loadScreenAssets.flowerTop);
+
+            goNext.anchor.set(0.5);
+            goNext.x = app.screen.width / 2;
+            goNext.y = app.screen.height / 2;
+            app.stage.addChild(goNext);
+
+            goNext.eventMode = "static";
+            goNext.cursor = "pointer";
+
+            goNext.on("pointertap", async () => {
+                goNext.destroy();
+                makeGameScreen();
+            });
+        }
+
+        async function makeGameScreen() {
+            //在这里等你拿到资产
+            //如果用户在到达游戏屏幕时在加载屏幕上花费了足够的时间
+            //资产已完全加载，promise立即解析！
+            const loadScreenAssets = await Assets.loadBundle("game-screen");
+
+            // 从解析的加载纹理创建新的Sprite
+            const goBack = new Sprite(loadScreenAssets.eggHead);
+
+            goBack.anchor.set(0.5);
+            goBack.x = app.screen.width / 2;
+            goBack.y = app.screen.height / 2;
+            app.stage.addChild(goBack);
+
+            goBack.eventMode = "static";
+            goBack.cursor = "pointer";
+
+            goBack.on("pointertap", async () => {
+                goBack.destroy();
+                // 进行返回执行
+                makeLoadScreen();
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>

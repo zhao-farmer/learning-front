@@ -1,0 +1,2 @@
+<!--pages/cart/cart.wxml-->
+<navigator url="/pages/list/list">跳转到list页面</navigator>

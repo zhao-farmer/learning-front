@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>05逻辑运算符</title>
+    <script>
+        /* 
+            !  逻辑非
+                - ！可以用来对一个值进行非运算
+                - 它可以对一个布尔值进行取反操作
+                    true -> false
+                    false -> true
+                -如果对一个非布尔值进行取反，他会先将其转换成布尔值然后进行取反
+                    可以利用这个特点将其他类型转换成布尔值
+                -类型转换
+                    转换字符串
+                        显示转换 String()
+                        隐式转换 +""
+                    转换为数值
+                        显示转换 Number()
+                        隐式转换 +
+                    转换为布尔值
+                        显示转换 Boolean()
+                        隐式转换 !!
+            && 逻辑与
+
+            || 逻辑或
+        */
+        let a = true
+        a = !a
+        console.log(a); //false
+
+        let x = 123;
+        x = x + "";
+        console.log(typeof x, x); //string 123
+        x = true;
+        x = x + "";
+        console.log(typeof x, x); //string true
+
+
+        let y = "123";
+        y = +y;
+        console.log(typeof y, y); //number 123
+        y = false;
+        y = +y;
+        console.log(typeof y, y); //number 0
+
+        let z = "123";
+        z = !!z;
+        console.log(typeof z, z); //boolean true
+        z = 0;
+        z = !!z;
+        console.log(typeof z, z); //boolean false
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

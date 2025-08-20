@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         var xhr = new XMLHttpRequest()
+
+        xhr.open("get","http://localhost:3000/list")
+
+        // 发送请求
+        xhr.send()
+
+        // 加载完直接判断
+        xhr.onload = function(){
+            if(/^2\d{2}$/.test(xhr.status)){
+                    console.log(xhr.responseText);
+            }else{
+                console.log("error",xhr.responseText);
+            }
+        }
+    </script>
+</body>
+</html>

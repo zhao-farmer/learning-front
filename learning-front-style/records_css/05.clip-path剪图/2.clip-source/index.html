@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <style>
+      .path {
+        clip-path: url("#svgCircle");
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div>
+      <svg>
+        <defs>
+          <clipPath id="svgCircle">
+            <circle cx="100" cy="100" r="50" />
+          </clipPath>
+        </defs>
+      </svg>
+      <img class="path" src="../images/00.jpg" />
+    </div>
+  </body>
+</html>

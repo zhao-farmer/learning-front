@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            数值 （Number）
+                - 在js中所有的整数和浮点数都是number类型
+                - JS中的数值并不是无限大的，当数值超过一定范围后会显示近似值
+                - Infinity 是一个特殊的数值表示无穷
+                - 所以在JS中进行一些精度比较高的运算时要十分注意
+                - NaN 也是一个特殊的数值，表示非法的数值
+        */
+        let a = 10;
+        console.log(typeof a); //Number
+        a = 10.5;
+        console.log(typeof a); //Number
+
+        a = 99999999999999991;
+        console.log(a); //99999999999999980
+
+        a = 99999 ** 99999;
+        console.log(a); //Infinity
+
+        a = 0.1 + 0.2
+
+        console.log(a); //0.3000000001
+
+        a = 1 - 'a';
+        console.log(a); //NaN
+
+
+        /* 
+            大整数（bigInt）
+                - 大整数用来表示一些表较大的整数
+                - 大整数使用n结尾，它可以表示的数字范围时无限大
+                - 
+        */
+        a = 9999999999999999999999999999999999999999999999999999999999999999999999999999;
+
+        /* 
+            其他进制的表示：
+                二进制 0b
+                八进制 0o
+                十六进制 0x
+        */
+        a = 0b1010;
+        console.log(a); //二进制转换为十进制 10
+        a = 0o10;
+        console.log(a); //八进制转换为十进制 8
+        a = 0xff;
+        console.log(a); //十六进制转换为十进制 255
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

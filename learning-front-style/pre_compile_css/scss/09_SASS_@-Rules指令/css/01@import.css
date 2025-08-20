@@ -1,0 +1,48 @@
+@charset "UTF-8";
+@import "./import/mainB.css";
+@import "foo" screen;
+@import "http://foo.com/bar";
+@import url(foo);
+@import url("http://fonts.googleapis.com/css?family=#{$family}");
+.p1 {
+  content: "导入scss";
+  font-size: 16px;
+}
+.p1 a {
+  font-size: 14px;
+}
+.p1 a:hover {
+  color: blue;
+}
+
+.p1 {
+  content: "导入scss";
+  font-size: 16px;
+}
+.p1 a {
+  font-size: 14px;
+}
+.p1 a:hover {
+  color: blue;
+}
+
+p {
+  content: "mainC";
+}
+
+p {
+  content: "mainD";
+}
+
+.container {
+  color: #111;
+}
+.container span {
+  font-size: 16px;
+}
+.container span a {
+  font-size: 14px;
+}
+.container span a:hover {
+  color: blue;
+}

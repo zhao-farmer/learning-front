@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset='UTF-8'>
+	<style>
+		.box{
+			position: relative;
+			height: 40px;
+			width: 75px;
+		}
+		input{
+			height: 0;
+		}
+
+		input::before {
+			background: #999;
+			border-radius: 50px;
+			content: "";
+			height: 80%;
+			position: absolute;
+			top: 50%;
+			transform: translate(4px, -50%);
+			width: 88%;
+		}
+
+		input::after {
+			background: #fff;
+			border-radius: 50px;
+			content: "";
+			height: 25px;
+			opacity: 0.6;
+			position: absolute;
+			top: 50%;
+			transform: translate(7px, -50%);
+			transition: all .4s;
+			width: 25px;
+		}
+		input:checked::before {
+			background: #409eff;
+		}
+		input:checked::after {
+			opacity: 1;
+			transform: translate(170%, -50%);
+		}
+	</style>
+</head>
+
+<body>	
+	<div class="box">	
+		<input type="checkbox">
+	</div>
+	
+</body>
+
+</html>

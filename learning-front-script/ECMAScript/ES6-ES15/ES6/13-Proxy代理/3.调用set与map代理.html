@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 调用set与map的代理 
+        // 访问属性与方法都在get方法拦截到（如：proxy.size proxy.add），必须有返回
+        // 如果是方法，必须修正this指向，指向原本数据类型的方法
+        
+
+        let s = new Set()
+
+        let proxy = new Proxy(s,{
+            get(target,key){
+                console.log("get");
+                // 判断如果是方法，修正this指向
+                let value = target[key]
+                if(value instanceof Function){
+                    // call apply bind
+                    // 这里是绑定原本的对象
+                    return value.bind(target)
+                }
+                // 不是就正常返回
+                return value
+            },
+            set(){
+                console.log("set");
+            }
+        })
+    </script>
+</body>
+</html>

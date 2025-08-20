@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="search">
+    <h1 id="title"></h1>
+    <ul id="list"></ul>
+    <script>
+
+        var osearch = document.querySelector("#search")
+        var otitle= document.querySelector("#title")
+        var olist= document.querySelector("#list")
+     
+        // 异步
+        osearch.oninput = function(){
+           return;
+            
+            fetch(`http://localhost:3005/news?author=${osearch.value}`)
+            .then(res=>res.json())
+            .then(res=>{
+                
+                if(res.length>0){
+                    // 标题
+                    otitle.innerHTML = res[0].title
+
+                    return fetch(`http://localhost:3005/comments?newsId=${res[0].id}`)
+                        .then(res=>res.json())
+                }else{
+                    otitle.innerHTML = ""
+                    return res
+                }
+            })
+            .then(res=>{
+                console.log(res);
+                // join("") 去除中间逗号
+                olist.innerHTML = res.map(item=>`
+                    <li>
+                        ${item.body}
+                    </li>
+                `).join("")
+            })
+        }
+
+        // 同步
+        osearch.oninput = async function(){
+           var res = await fetch(`http://localhost:3005/news?author=${osearch.value}`)
+            .then(res=>res.json())
+            
+            var result
+            if(res.length>0){
+                // 标题
+                otitle.innerHTML = res[0].title
+                result = await fetch(`http://localhost:3005/comments?newsId=${res[0].id}`)
+                    .then(res=>res.json())
+            }else{
+                otitle.innerHTML = ""
+                result = res
+            }
+
+            console.log(result);
+
+            // join("") 去除中间逗号
+            olist.innerHTML = result.map(item=>`
+                <li>
+                    ${item.body}
+                </li>
+            `).join("")
+        }
+
+        
+        
+    </script>
+</body>
+</html>

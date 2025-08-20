@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+  <body>
+  <script type="module">
+    import { Application, Assets, Point, MeshRope } from "../js/pixi.mjs";
+
+    (async () => {
+      // 创建应用程序
+      const app = new Application();
+
+      // 初始化应用程序
+      await app.init({ 
+          background: "#1099bb", 
+          height:600,
+          width:800, 
+      });
+
+      // 将应用程序添加到页面上
+      document.body.appendChild(app.canvas);
+
+      // 加载图片到纹理上
+      const trailTexture = await Assets.load("../assets/images/trail.png");
+
+      const historyX = [];
+      const historyY = [];
+      // historySize决定了足迹的长度
+      const historySize = 20;
+      // ropeSize决定了步道的平滑程度
+      const ropeSize = 100;
+      const points = [];
+
+      // 创建历史集合
+      for (let i = 0; i < historySize; i++) {
+        //历史x点于历史y点都为20个
+        historyX.push(0);
+        historyY.push(0);
+      }
+      // 创建轨迹点集合
+      for (let i = 0; i < ropeSize; i++) {
+        points.push(new Point(0, 0));
+      }
+
+      //创建一个网绳
+      const rope = new MeshRope({ texture: trailTexture, points });
+
+      // 应用于混合模式
+      rope.blendmode = "add";
+
+      app.stage.addChild(rope);
+
+      let mouseposition = null;
+
+      //开启事件装填是
+      app.stage.eventMode = "static";
+      //点击范围
+      app.stage.hitArea = app.screen;
+      //鼠标移动
+      app.stage.on("mousemove", (event) => {
+        //判断是否为空 如果为空设定为0
+        mouseposition = mouseposition || { x: 0, y: 0 };
+        //鼠标的x轴 于鼠标的y轴
+        mouseposition.x = event.global.x;
+        mouseposition.y = event.global.y;
+      });
+
+      // 监听动画并更新
+      app.ticker.add(() => {
+        if (!mouseposition) return;
+
+        // 更新鼠标的值对于历史数据
+        // 每次鼠标移动都会留有x与y值
+        // 每帧都会获取对应的x与y轴
+
+        //删除最后一个
+        historyX.pop();
+        //添加开头
+        historyX.unshift(mouseposition.x);
+        historyY.pop();
+        historyY.unshift(mouseposition.y);
+
+        // 由于图片是个轨迹状的图片  变形后也是有尾迹的
+        //下面的三次插值 为了轨迹更平滑弄出的计算公式 只需调用即可
+
+        // 更新这些点以与历史记录相对应。
+        for (let i = 0; i < ropeSize; i++) {
+          const p = points[i];
+
+          // 使用三次插值平滑曲线，以防止出现锐边。
+          const ix = cubicInterpolation(historyX, (i / ropeSize) * historySize);
+          const iy = cubicInterpolation(historyY, (i / ropeSize) * historySize);
+
+          //当前点 等于计算出来的点
+          p.x = ix;
+          p.y = iy;
+        }
+      });
+
+      /**
+       * 基于以下公式的三次插值 https://github.com/osuushi/Smooth.js
+       */
+      function clipInput(k, arr) {
+        if (k < 0) k = 0;
+        if (k > arr.length - 1) k = arr.length - 1;
+
+        return arr[k];
+      }
+
+      function getTangent(k, factor, array) {
+        return (factor * (clipInput(k + 1, array) - clipInput(k - 1, array))) / 2;
+      }
+
+      function cubicInterpolation(array, t, tangentFactor = 1) {
+        const k = Math.floor(t);
+        const m = [getTangent(k, tangentFactor, array), getTangent(k + 1, tangentFactor, array)];
+        const p = [clipInput(k, array), clipInput(k + 1, array)];
+
+        t -= k;
+        const t2 = t * t;
+        const t3 = t * t2;
+
+        return (2 * t3 - 3 * t2 + 1) * p[0] + (t3 - 2 * t2 + t) * m[0] + (-2 * t3 + 3 * t2) * p[1] + (t3 - t2) * m[1];
+      }
+    })();
+  </script>
+</body>
+</html>

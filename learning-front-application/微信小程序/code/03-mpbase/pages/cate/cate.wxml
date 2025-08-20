@@ -1,0 +1,48 @@
+<view>{{num}}</view>
+<button bind:tap="updateNum">更新 num</button>
+
+<view class="line"></view>
+
+<view>新增->  姓名：{{ userInfo1.name }} 年龄：{{ userInfo1.age }}</view>
+<view>直接修改->  姓名：{{ userInfo2.name }} 年龄：{{ userInfo2.age }}</view>
+<view>展开运算符->  姓名：{{ userInfo3.name }} 年龄：{{ userInfo3.age }}</view>
+<view>Object.assign()->  姓名：{{ userInfo4.name }} 年龄：{{ userInfo4.age }}</view>
+
+<view>删除单属性 ->  姓名：{{ userInfo5.name }} 年龄：{{ userInfo5.age }}</view>
+<view>删除多属性 ->  姓名：{{ userInfo6.name }} 年龄：{{ userInfo6.age }}</view>
+
+
+<button type="warn" bind:tap="updateUserInfo">修改对象类型数据</button>
+
+<view class="line"></view>
+
+
+<view>
+  基础新增
+  <text wx:for="{{list1}}" wx:key="index"> {{item}}</text>
+</view>
+<view>
+  连接删除
+  <text wx:for="{{list2}}" wx:key="index"> {{item}}</text>
+</view>
+<view>
+  展开新增
+  <text wx:for="{{list3}}" wx:key="index"> {{item}}</text>
+</view>
+<view>
+  基础修改
+  <text wx:for="{{list4}}" wx:key="index"> {{item}}</text>
+</view>
+<view>
+  数组对象修改
+  <text> {{list5[0].name}}</text>
+</view>
+<view>
+  删除方式一
+  <text wx:for="{{list6}}" wx:key="index"> {{item}}</text>
+</view>
+<view>
+  删除方式二
+  <text wx:for="{{list6}}" wx:key="index"> {{item}}</text>
+</view>
+<button type="primary" bind:tap="updateList">修改数组类型数据</button>

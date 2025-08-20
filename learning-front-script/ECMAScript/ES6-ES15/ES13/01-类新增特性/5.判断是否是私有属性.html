@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Cache3 {
+            #obj = {}
+            hasObj(){
+                return #obj in this
+            }
+        }
+        let cache3 = new Cache3()
+        console.log(cache3.hasObj());
+    </script>
+</body>
+</html>

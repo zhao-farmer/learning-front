@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <title>Document</title>
+  </head>
+  <body>
+      <svg width="200" height="200">
+          <text id="tEnglish" x="100" y="100" font-size="20px" >覆盖变色</text>
+          <rect fill="#E0E0E0" width="50" height="50" x="20" y="50">
+              <set 
+                attributeName="fill" 
+                to="#FF8888" 
+                begin="tEnglish.mouseover" 
+                end="tEnglish.mouseout" />
+          </rect>
+      </svg>
+  </body>
+</html>

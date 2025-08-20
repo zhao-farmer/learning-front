@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.代替Object 某些方法
+        let obj = {}
+
+        Object.defineProperty(obj,"name",{
+            value:'kerwin'
+        })
+        console.log(obj);
+
+        // Object 之后的一些方法和属性不再添加到Object 使用使用Reflect代替
+        // 使用Reflect
+        let obj2 = {}
+
+        Reflect.defineProperty(obj2,"name",{
+            value:'kerwin',
+            writable:false, // 是否可以修改
+            enumerable:false    // 是否可以删除
+
+        })
+        console.log(obj2);
+        
+    </script>
+</body>
+</html>

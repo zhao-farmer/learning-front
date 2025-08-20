@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const obj = {
+                a: 1,
+                b: 2,
+                c: 3,
+            };
+            for (var o in obj) {
+                console.log(o); // 遍历出来的是对象中的属性，a,b,c
+                console.log(obj[o]); // 遍历出来的是对象中属性各自对应的值1,2,3
+            }
+
+            const arr = [1, 2, 3, 4, 5];
+            for (var a in arr) {
+                console.log(a); // 输出的是数组索引
+                console.log(arr[a]); // 输出的是数组索引对应的值
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.实例成员：实例对象上的属性与方法属于实例成员
+        function Person(){
+            // 构造函数内部的 this 就是实例对象
+            // 实例对象中动态添加属性
+            this.name = '小明'
+            // 实例对象动态添加方法
+            this.sayHi = function(){
+                console.log("大家好~");
+                
+            }
+        }
+        // 实例化，p1 是 实例对象
+        // p1 实际就是 构造函数内部的 this
+        const p1 = new Person()
+        console.log(p1);
+        console.log(p1.name);   // 访问实例属性
+        p1.sayHi() // 调用实例方法
+        
+        // 2. 构造函数的属性和方法被称为静态成员(静态属性和静态方法)
+        function Person2(name,age){
+            this.name = name
+            this.age = age
+        }
+
+        // 静态属性
+        Person2.eyes = 2
+        Person2.arms = 2
+       
+        //静态方法
+        Person.walk = function(){
+            console.log("^_^人都会走路...");
+            // this 指向 Person
+            console.log(this.eyes);
+        }
+        
+    </script>
+</body>
+</html>

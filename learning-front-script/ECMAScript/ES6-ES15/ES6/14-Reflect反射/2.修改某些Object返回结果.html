@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // 老写法
+            try {
+                Object.defineProperty(target, property, attributes);
+                // success
+            } catch (e) {
+                // fail
+            }
+
+            // 新写法
+            if (Reflect.defineProperty(target, property, attributes)) {
+                // success
+            } else {
+                // fail
+            }
+        </script>
+    </body>
+</html>

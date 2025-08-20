@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            字符串：
+                - 字符串其本质就是一个字符数组
+                - "hello" -> ['h','e','l','l','0']
+                - 字符串的很多方法都和数组是非常相似的
+                - 属性和方法
+                    length 获取字符串的长度
+                    字符串[索引]获取指定位置的字符
+                    str.at()  （实验方法）
+                        - 根据索引获取字符，可以接受负索引
+                    str.charAt()
+                        - 根据索引获取字符，不能传递负数
+                    str.concat()
+                        - 用来连接两个或多个字符串
+                    str.includes()
+                        - 用来检查字符串中是否包含某个内容
+                            有返回true
+                            没有返回false
+                    str.indexOf()
+                    str.lastIndexOf()
+                        - 查询字符串中是否包含某个内容
+                        - 没有查询到返回 -1
+                    str.startsWith()
+                        - 检查一个字符串是否以指定内容开头
+                    str.endsWith()
+                        - 检查一个字符串是否以指定内容结尾
+                    str.padStart()
+                    str.padEnd()
+                        - 通过添加指定的内容 如：补充00
+                    str.replace()
+                        - 使用一个新字符串替换一个指定内容
+                    str.replaceAll()
+                        - 使用一个新字符串替换所有指定内容
+                    str.slice()
+                        - 对字符进行切片
+                    str.substring()
+                        - 截取字符串
+                    str.split()
+                        - 字符串分割成数组 与数组的join()方法相反
+                    str.toLowerCase()
+                        - 将字符串都转成小写
+                    str.toUpCase()  
+                        - 将字符串都转成大写
+                    str.trim()
+                        - 去除前后空格
+                    str.trimStart()
+                        - 去除开始空格
+                    str.trimStart()
+                        - 去除结束空格
+
+        */
+        let str = 'hello';
+        console.log(str.length);
+        console.log(str[1]);
+        for (const char of str) {
+            console.log(char);
+        }
+        console.log(str.at(1), str.at(-1));
+
+
+        str = "hello hello how are you";
+        console.log('是否包含', str.includes('hello'));
+        console.log('位置-从前往后', str.indexOf('hello'));
+        console.log('位置-从后往前', str.lastIndexOf('hello'));
+
+        console.log('以hello开头', str.startsWith('hello'));
+        console.log('以hello结尾', str.endsWith('hello'));
+
+        str = "100"
+        console.log('默认补空格', str.padStart(7));
+        console.log('补字符', str.padStart(7, '0'));
+
+        str = "hello hello how are you";
+        let result = str.replace("hello", "abc");
+        console.log(result);
+
+        result = str.replaceAll("hello", "abc");
+        console.log(result);
+
+        result = str.slice(12, 15);
+        console.log(result);
+        result = str.substring(12, 15);
+        console.log(result);
+        result = str.substring(15, 12);
+        console.log(result);
+        //非标准方法 索引 截取的数量
+        result = str.substr(0, 5);
+        console.log(result);
+
+        str = "abc@def@gh@jqk";
+        result = str.split("@");
+        console.log(result);
+
+
+        str = "A c gggGkj";
+        result = str.toUpperCase();
+        console.log(result);
+        result = str.toLowerCase();
+        console.log(result);
+
+
+        str = "  Acd kjjh kjk ikokik   ";
+        result = str.trim();
+        console.log(result, result.length);
+        result = str.trimStart();
+        console.log(result, result.length);
+        result = str.trimEnd();
+        console.log(result, result.length);
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

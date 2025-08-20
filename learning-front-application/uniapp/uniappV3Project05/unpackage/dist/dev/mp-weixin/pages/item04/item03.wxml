@@ -1,0 +1,1 @@
+<view class="content data-v-2199cdc2"><button class="data-v-2199cdc2" bindtap="{{a}}">删除</button><button class="data-v-2199cdc2" bindtap="{{b}}">输入验证码</button><button class="data-v-2199cdc2" bindtap="{{c}}">提示选择</button></view>

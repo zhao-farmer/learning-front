@@ -1,0 +1,26 @@
+@box:#box;
+@class:.content;
+@w:20px;
+@{box}{//#box{border: 1px solid red;}
+    border: 1px solid red;
+}
+@{class}{
+    width: @w;
+}
+//3.属性变量
+@h:height;
+.wrapper{
+    @{h}:@w*10;
+}
+//4. url变量
+@images:'./img/bg.jpg';
+.aa{
+    width: 100*@w;
+    height: 10*@w;
+    background: url('@{images}');
+}
+//5. 声明变量
+@fontSize:{font-size: 20px;}
+.bb{
+    @fontSize();
+}

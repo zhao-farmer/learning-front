@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 求和函数，计算所有参数的和
+        function getSum(){
+            // arguments 动态参数 只存在于 函数里面
+            // 是伪数组
+            console.log(arguments); // [2,3,4]
+
+            let sum = 0
+            for (let i = 0; i < arguments.length; i++) {
+                sum += arguments[i];
+            }
+            console.log(sum);
+        }
+
+        // 调用求和函数
+        getSum(5,10)    //两个参数
+        getSum(1,2,4)   // 三个参数
+    </script>
+</body>
+</html>

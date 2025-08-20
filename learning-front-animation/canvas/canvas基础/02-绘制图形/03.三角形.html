@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+     
+        ctx.moveTo(50, 300);//首尾重合
+        ctx.lineTo(400, 50);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(50, 300);//首尾重合
+        ctx.stroke();
+      
+    </script>
+</body>
+</html>

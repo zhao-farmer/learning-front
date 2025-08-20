@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+        //整圆
+        ctx.beginPath();
+        ctx.arc(240, 160, 100, 0, 360 * Math.PI / 180);
+        //ctx.closePath();
+        //描边
+        ctx.fillStyle = "#9966FF";
+        ctx.fill();
+        
+        //半圆
+        ctx.beginPath();
+        ctx.arc(160, 160, 100, 0, 180 * Math.PI / 180, true);
+        ctx.closePath();
+        //描边
+        ctx.fillStyle = "HotPink";
+        ctx.fill();
+    
+    </script>
+</body>
+</html>

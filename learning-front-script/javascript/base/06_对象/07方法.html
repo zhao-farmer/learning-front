@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            补充内容
+            方法（method）
+                - 当一个对象的属性指向一个函数
+                那么我们就成这个函数时该对象的方法
+                调用函数就成为调用对象的方法
+        
+        */
+        let obj = {}
+        obj.name = "孙悟空";
+        obj.age = 18;
+
+        // 函数也可以成为一个对象的属性
+        obj.sayHello = function () {
+            alert("hello")
+        }
+        console.log(obj);
+
+        obj.sayHello()
+
+        // document.write()
+        // String()
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

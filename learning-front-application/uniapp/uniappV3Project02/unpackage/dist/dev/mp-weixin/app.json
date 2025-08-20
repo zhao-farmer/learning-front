@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/item01/item01",
+    "pages/item01/item02",
+    "pages/item02/item01",
+    "pages/item03/item01",
+    "pages/item04/item01",
+    "pages/item04/item02",
+    "pages/item05/item01",
+    "pages/item05/item02",
+    "pages/item05/item03",
+    "pages/item06/item01",
+    "pages/item06/item02"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

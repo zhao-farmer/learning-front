@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ch">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>js图片炸裂效果</title>
+    <style type="text/css">
+      body {
+        overflow: hidden;
+        background-color: #000000;
+      }
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      #box {
+        position: absolute;
+        /* 在这里调整大小 */
+        width: 1600px;
+        height: 900px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      #box > div {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+      }
+      #box > div > div {
+        position: absolute;
+        transform-style: preserve-3d;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script type="text/javascript">
+      //图片
+      var imgs = ["images/1.jpg", "images/2.jpg", "images/3.jpg", "images/4.jpg"];
+      //z-index的值，每一次减一
+      var z = 999999;
+      //显示第几张图片
+      var index = 0;
+
+      var box = document.getElementById("box");
+
+      boom(20, 20); //执行函数
+
+      // l传进来几行，t传进来几列
+      function boom(l, t) {
+        //创建一个新的div
+        var oParentNode = document.createElement("div");
+        //设置z-index的值
+        oParentNode.style.zIndex = z;
+        z--;
+        box.appendChild(oParentNode);
+
+        var x = l,
+          y = t;
+        for (var i = 0; i < y; i++) {
+          for (var j = 0; j < x; j++) {
+            //创建碎片
+            var oDiv = document.createElement("div");
+            //添加背景图片
+            oDiv.style.background = "url(" + imgs[index] + ")";
+            oDiv.style.width = box.clientWidth / x + "px";
+            oDiv.style.height = box.clientHeight / y + "px";
+            oDiv.style.left = (box.clientWidth / x) * j + "px";
+            oDiv.style.top = (box.clientHeight / y) * i + "px";
+            oDiv.style.backgroundPositionX = (box.clientWidth / x) * -j + "px";
+            oDiv.style.backgroundPositionY = (box.clientHeight / x) * -i + "px";
+            oDiv.style.transition = Math.random() * 1 + 0.5 + "s";
+            oParentNode.appendChild(oDiv);
+          }
+        }
+
+        var allDiv = oParentNode.children;
+        setTimeout(() => {
+          index++;
+          index == imgs.length && (index = 0);
+
+          boom(l, t); //递归执行
+          for (var i = 0; i < allDiv.length; i++) {
+            allDiv[i].style.transform =
+              "perspective(800px) rotateX(" +
+              (Math.random() * 500 - 250) +
+              "deg) rotateY(" +
+              (Math.random() * 500 - 250) +
+              "deg) translateX(" +
+              (Math.random() * 500 - 250) +
+              "px) translateY(" +
+              (Math.random() * 500 - 250) +
+              "px) translateZ(" +
+              (Math.random() * 500 - 250) +
+              "px)";
+            allDiv[i].style.opacity = 0;
+          }
+        }, 2000);
+
+        setTimeout(function () {
+          oParentNode.remove();
+        }, 3500);
+      }
+
+      // perspective(800px) rotateX((Math.random()*500-250)deg) rotateY((Math.random()*500-250)deg) translateX((Math.random()*500-250)px) translateY((Math.random()*500-250)px) translateZ((Math.random()*500-250)px);
+    </script>
+  </body>
+</html>

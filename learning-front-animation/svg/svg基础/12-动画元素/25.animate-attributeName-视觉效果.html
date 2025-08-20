@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="200">
+        <!-- 处理透明度 -->
+        <rect x="10" y="30" width="50" height="50" fill="red" >
+          <animate 
+                attributeName="opacity" 
+                attributeType="CSS"
+                from="1" 
+                to="0.2" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+        <!-- 处理边框大小-->
+        <rect x="80" y="30" width="70" height="50" fill="none" stroke-width="6" stroke="green">
+            <animate 
+                attributeName="stroke-width" 
+                attributeType="XML"
+                from="10" 
+                to="2" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+        <!-- 处理文字大小-->
+        <text x="200" y="70"  fill="black" style="font-size:40px;">
+            <animate 
+                attributeName="font-size" 
+                attributeType="CSS"
+                from="30" 
+                to="4" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+            我爱学习
+        </text>
+    </svg>
+</body>
+</html>
+

@@ -1,0 +1,19 @@
+// scss 代码编辑
+$number: 1;
+.container1 {
+    @if $number == 1 {
+        color: red;
+    }
+    @else {
+        color: blue;
+    }
+}
+$color: "red";
+.container2 {
+    @if $color != "red" {
+        color: red;
+    }
+    @else {
+        color: blue;
+    }
+}

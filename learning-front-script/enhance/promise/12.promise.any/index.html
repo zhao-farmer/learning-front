@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      const p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve("山姆");
+            }, 1000);
+        });
+
+        const p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject("华润");
+            }, 2000);
+        });
+
+        const p3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject("盒马")
+            }, 3000);
+        });
+        // 如进入三家平台
+        Promise.any([p1, p2, p3]).then( res =>{
+            console.log(res)
+            // 跳转到主页
+        }).catch(err=>{
+            console.log("error");
+        });
+    </script>
+</body>
+</html>

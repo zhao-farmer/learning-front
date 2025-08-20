@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!--jQuery库拥有完整的Ajax兼容套件：其中的函数和方法允许我们在（不刷新）浏览器的情况下从服务器加载数据。-->
+
+        <ul>
+            <!--数据-->
+        </ul>
+
+        <script src="../js/jquery.3.7.1.js"></script>
+        <script>
+            $(document).ready(function () {
+                /*通过Ajax请求外部数据*/
+                $.ajax({
+                    url: "data.json", //发送请求的地址
+                    // dataType:"json"    //返回的数据类型
+                    success: function (data) {
+                        //当请求成功时运行的函数
+
+                        // console.log(data);   //{}
+                        // //数据显示到页面上
+                        // $("ul").html(data.user[0].userName)
+
+                        let userArr = data.user;
+                        // console.log(userArr)
+                        for (let i = 0; i < userArr.length; i++) {
+                            //新的内容加上旧的内容
+                            $("ul").html($("ul").html() + `<li>${data.user[i].userName}  ${data.user[i].tel}</li>`);
+                        }
+                    },
+                });
+            });
+        </script>
+    </body>
+</html>

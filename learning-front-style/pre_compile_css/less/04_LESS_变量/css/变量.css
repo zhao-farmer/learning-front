@@ -1,0 +1,17 @@
+#box {
+  border: 1px solid red;
+}
+.content {
+  width: 20px;
+}
+.wrapper {
+  height: 200px;
+}
+.aa {
+  width: 2000px;
+  height: 200px;
+  background: url('img/bg.jpg');
+}
+.bb {
+  font-size: 20px;
+}

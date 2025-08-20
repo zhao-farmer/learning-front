@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 800px; height: 600px"></div>
+    <script type="module">
+
+        let data = []
+        // 获取本地数据
+        await fetch('../assets/data/001.json')
+          .then(response => response.text())
+          .then(reData => {
+              data = JSON.parse(reData)
+          })
+          .catch(error => console.error('Error:', error));
+        
+        var xyDataArr = [];
+
+        for (let i = 0; i < data.length; i++) {
+            var height = data[i].height;
+            var weight = data[i].weight;
+            var newArr = [height, weight];
+            xyDataArr.push(newArr);
+        }
+
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            xAxis: {
+                type: "value",
+                scale: true,
+            },
+
+            yAxis: {
+                type: "value",
+                //脱离0值比例
+                scale: true,
+            },
+            series: [
+                {
+                    name: "健康比例",
+                    //图形为涟漪动画
+                    type: "effectScatter",
+                    //涟漪动画放大大小
+                    rippleEffect: {
+                        scale: 10,
+                    },
+                    showEffectOn: "emphasis", //render 自动出现涟漪动画 emphasis 鼠标移入时出现
+                    data: xyDataArr,
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

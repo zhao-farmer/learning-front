@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let a = 2;
+        function func() {
+            console.log(a);        // 报错
+            // 只要作用域内出现了同名的 let 或 const，只在块作用域中找
+            let a = 1;
+        }
+        func();
+    </script>
+</body>
+</html>

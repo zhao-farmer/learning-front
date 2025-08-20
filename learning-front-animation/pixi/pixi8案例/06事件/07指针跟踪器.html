@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Graphics } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                antialias: true, 
+                background: "#1099bb",
+                width: 800,
+                height: 600, 
+            });
+
+            // 应用程序添加到网页桑
+            document.body.appendChild(app.canvas);
+
+            // 创建一个圆 填充白色  外部圈黑色 透明度0.87 宽度1
+            const circle = app.stage.addChild(
+                new Graphics()
+                    .circle(0, 0, 8)
+                    .fill({ color: 0xffffff })
+                    .stroke({ color: 0x111111, alpha: 0.87, width: 1 })
+            );
+
+            //设置位置
+            circle.position.set(app.screen.width / 2, app.screen.height / 2);
+
+            // 开启交互
+            app.stage.eventMode = "static";
+
+            //确保整个画布区域是交互式的，而不仅仅是圆圈。
+            app.stage.hitArea = app.screen;
+
+            // 跟随指针
+            app.stage.addEventListener("pointermove", e => {
+                // 位置从 鼠标获取
+                circle.position.copyFrom(e.global);
+            });
+        })();
+    </script>
+</body>
+</html>

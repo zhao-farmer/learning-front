@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="../js/echarts-5.5.js"></script>
+    </head>
+    <body>
+        <div style="width: 600px; height: 400px"></div>
+        <button id="btn1">放大</button>
+        <button id="btn2">缩小</button>
+
+        <script>
+            let divBox = document.querySelector("div");
+            var mCharts = echarts.init(divBox);
+            var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二牛", "大强"];
+            var yDataArr = [70, 92, 87, 64, 67, 75, 86, 93];
+            var option = {
+                xAxis: {
+                    type: "category",
+                    data: xDataArr,
+                },
+                yAxis: {
+                    type: "value",
+                },
+                series: [
+                    {
+                        name: "语文",
+                        type: "bar",
+                        data: yDataArr,
+                    },
+                ],
+            };
+            mCharts.setOption(option);
+
+            // 手动调整
+            btn1.onclick = () => {
+                // 获取当前宽度
+                var currentWidth = parseInt(window.getComputedStyle(divBox).width, 10);
+                // 获取当前高度
+                var currentHeight = parseInt(window.getComputedStyle(divBox).height, 10);
+
+                if (divBox.clientWidth < 800) {
+                    var newWidth = currentWidth + 30; // 增加30像素
+                    divBox.style.width = newWidth + "px"; // 设置新的宽度
+
+                    var newHeight = currentHeight + 20; // 增加20像素
+                    divBox.style.height = newHeight + "px"; // 设置新的高度
+
+                    mCharts.resize();
+                }
+            };
+
+            // 手动调整
+            btn2.onclick = () => {
+                // 获取当前宽度
+                var currentWidth = parseInt(window.getComputedStyle(divBox).width, 10);
+                // 获取当前高度
+                var currentHeight = parseInt(window.getComputedStyle(divBox).height, 10);
+
+                if (divBox.clientWidth > 300) {
+                    var newWidth = currentWidth - 30; // 减少30像素
+                    divBox.style.width = newWidth + "px"; // 设置新的宽度
+
+                    var newHeight = currentHeight - 20; // 减少20像素
+                    divBox.style.height = newHeight + "px"; // 设置新的高度
+
+                    mCharts.resize();
+                }
+            };
+
+           
+        </script>
+    </body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            // ======== 处理小球半径 =======
+            let ball1 = new Ball(canvas.width / 4, canvas.height / 2);
+            let minRadius = 5;  //最小半径
+            let maxRadius = 50; //最大半径
+            let state1 = 1; // 0缩小 1放大
+            let vRadius = 0;
+
+            // ======== 处理小球透明度 =======
+            let ball2 = new Ball(canvas.width / 2, canvas.height / 2, 50, "rgba(255,102,153,1.0)");
+            let maxOpacity = 1.0;  // 最大透明度
+            let minOpacity = 0.0;  // 最小透明的都
+            let state2 = 1;  // 0缩小 1放大
+            let vOpacity = 0.0; // 自身透明度
+
+            // ======== 处理小球颜色 =======
+            let ball3 = new Ball(canvas.width / 4 * 3, canvas.height / 2, 50);
+            ball3.fill(ctx);
+            // 红绿蓝三原色
+            let red = 255;
+            let green = 0;
+            let blue = 0;
+            // 目标三原色
+            let targetRed = 10;
+            let targetGreen = 255;
+            let targetBlue = 55;
+
+
+
+            // 定义缓动系数
+            const easing = 0.02;
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // ======== 处理小球半径 =======
+                if(state1 == 1){
+                    let value =  maxRadius - ball1.radius;
+                    if(value < 0.01){
+                        state1 = 0
+                    }else{
+                        vRadius = (value) * easing;
+                    }
+                }else{
+                    let value =  ball1.radius - minRadius;
+                    if(value < 0.01){
+                        state1 = 1
+                    }else{
+                        vRadius = - (value) * easing;
+                    }
+                }
+                ball1.radius += vRadius;
+                ball1.fill(ctx);
+
+                // ======== 处理小球透明度 =======
+                if(state2 == 1){
+                    let value =  maxOpacity - vOpacity;
+                    if(value < 0.01){
+                        state2 = 0
+                    }else{
+                        vOpacity += (value) * easing;
+                    }
+                }else{
+                    let value =  vOpacity - minOpacity;
+                    if(value <  0.01){
+                        state2 = 1
+                    }else{
+                        vOpacity -= (value) * easing;
+                    }
+                }
+                ball2.color = "rgba(255,102,153," + vOpacity + ")";
+                ball2.fill(ctx);
+
+
+                // ======== 处理小球颜色 =======
+                let vRed = (targetRed - red) * easing;
+                let vGreen = (targetGreen - green) * easing;
+                let vBlue = (targetBlue - blue) * easing;
+
+                red += vRed;
+                green += vGreen;
+                blue += vBlue;
+
+                let color = "rgba(" + parseInt(red) + "," + parseInt(green) + "," + parseInt(blue) + "," + "1.0)";
+                ball3.color = color;
+
+   
+                ball3.fill(ctx);
+
+                if(vBlue < 0.01){
+                     red = 255;
+                     green = 0;
+                     blue = 0;
+                }
+
+            })();
+        </script>
+    </body>
+</html>

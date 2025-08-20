@@ -1,0 +1,30 @@
+.p1 {
+  content: 12px;
+}
+
+.p2 {
+  content: false;
+}
+
+.p3 {
+  content: "small", "normal", "large";
+}
+
+.p4 {
+  content: 12px, 18px, 24px;
+}
+
+.p5 {
+  content: "small", "normal", "large", "x-large", "xx-large";
+  content: 12px, 18px, 24px, 30px, 36px;
+}
+
+.p6-1 {
+  content: "normal", "large";
+  content: 18px, 24px;
+}
+
+.p6-2 {
+  content: "normal";
+  content: 18px;
+}

@@ -1,0 +1,9 @@
+<!--pages/market/market.wxml-->
+
+<custom07/>
+
+<navigator  class="open-box" url="/pages/list/list" open-type="navigate">navigate 跳转</navigator>
+
+<navigator class="open-box" url="/pages/list/list" open-type="redirect">redirect 跳转</navigator>
+
+

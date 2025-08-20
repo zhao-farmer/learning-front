@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                    // x轴 y轴 速度
+                    this.vx = 0;
+                    this.vy = 0;
+
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+           // 生成随机颜色
+            const getRandomColor = () => {
+                return '#' +
+                (function (color) {
+                    return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)])
+                    && (color.length == 6) ? color : arguments.callee(color)
+                })('')
+            }
+
+            // 定义数组，用来缓存小球
+            let balls = [];
+            // 小球数量
+            const n = 50;
+            // 重力系数
+            const gravity = 0.015;
+
+            // 生成n个小球，小球颜色、vx、vy都是随机值
+            for (let i = 0; i < n; i ++) {
+                // 初始化小球
+                const ball = new Ball(canvas.width / 2, canvas.height / 2,10,getRandomColor(),)
+
+
+                // ===原本随机弹射===
+                ball.vx = Math.random() * 2 - 1 // 生成-1 - 1 的任意数，控制小球运动方向的随机性
+                ball.vy = Math.random() * 2 - 1
+
+                // ===散弹效果===
+                // ball.vx = 3
+                // ball.vy = (Math.random() * 2 - 1) * 3;
+
+                balls.push(ball)
+            }
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                balls.forEach(ball => {
+                    // 边界检测
+                    if (ball.x < -ball.radius
+                    || ball.x > canvas.width + ball.radius
+                    || ball.y < -ball.radius
+                    || ball.y > canvas.height + ball.radius) {
+                        // 超出边界后重新生成
+                        ball.x = canvas.width / 2
+                        ball.y = canvas.height / 2
+
+                        // ===原本随机弹射===
+                        ball.vx = Math.random() * 2 - 1
+                        ball.vy = Math.random() * 2 - 1
+
+                        // ===散弹效果===
+                        //随机产生3~4之间的任意数
+                        // ball.vx = Math.random() + 3;
+                        // ball.vy = (Math.random() * 2 - 1) * 3;
+                    }
+                    ball.fill(ctx)
+
+                    ball.x += ball.vx
+                    ball.y += ball.vy
+                    ball.vy += gravity
+                })
+            })();
+        </script>
+    </body>
+</html>

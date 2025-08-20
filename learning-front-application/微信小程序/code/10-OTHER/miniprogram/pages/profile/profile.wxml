@@ -1,0 +1,2 @@
+<!--pages/profile/profile.wxml-->
+<button type="primary" plain bind:tap="login">登录</button>

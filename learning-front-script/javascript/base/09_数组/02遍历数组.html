@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        //任何类型的值都可以称为数组中的元素
+        const arr1 = [1, 'hello', true, null, { name: '孙悟空' }, () => { }]
+
+        //创建数组时尽量要确保数组中存储的数据的类型时相同的
+        arr = ['孙悟空', '猪八戒', '沙和尚']
+
+        /*
+            遍历数组
+                - 遍历数组简单理解,就是获取数组中的每一个元素
+        
+        */
+
+        for (let i = 0; i < arr.length; i++) {
+            const element = arr[i];
+            console.log(element);
+        }
+
+
+        /* 
+            定义一个Person类，类中由两个属性name和age
+                然后创建几个Person对象，将其添加到一个数组中
+
+            遍历数组，并打印未成年人的信息
+        */
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        const pesonArr = [
+            new Person('孙悟空', 18),
+            new Person('沙和尚', 38),
+            new Person('红孩儿', 8)
+        ]
+
+        for (let index = 0; index < pesonArr.length; index++) {
+            const element = pesonArr[index];
+            if (element.age < 18) {
+                console.log(element);
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

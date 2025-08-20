@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 常量
+        // const myname = "zhangsan"
+        // 初始化后不能再改
+        // myname = 'wanger'
+
+        // 2.不能重复定义
+        // const myname = 'lisi'
+
+        // 3.块级
+        // {
+        //     const myname = "zhangsan"
+        // }
+        // console.log(myname);
+
+        // 4.声明不提升
+        // const myname = "zhangsan"
+        // function test(){
+        //     console.log(myname);
+        //     const myname = 'lisi'
+        // }
+        
+        // 5.不予顶层对象挂钩
+        const myage = 100
+        console.log(window.myage);
+        
+    </script>
+</body>
+</html>

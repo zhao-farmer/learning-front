@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const obj = {
+            uname:'pink'
+        }
+        function fn(x,y){
+            console.log(this); //obj
+            console.log(x+y); //3
+        }
+        // 1.调用函数
+        // 2.改变this指向
+        fn.call(obj,1,2)
+    </script>
+</body>
+</html>

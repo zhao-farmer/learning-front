@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="login">登录</button>
+    <script type="module">
+        // 1. 无法使用动态导入的僵化问题
+        /*  
+            ES11之前无法使用import动态导入
+            
+            
+            if(管理员){
+                import a from './1.js'
+            }else{
+                import b from './2.js'
+            }
+                
+            导致的问题，导入的文件必须全部导入，比较臃肿且相同类型需要重新命名
+        */
+
+
+        // 2.ES11的动态导入
+        const admin = "管理员"
+        const user = "普通用户"
+        function login(){
+            return user
+        }
+
+        let obtn = document.querySelector("#login")
+        obtn.onclick = function(){
+            let role = login()
+            console.log(role);
+
+            render(role)
+        }
+
+        // 方式一：Promise 使用 then 获取结果
+        function render(value){
+            if(value === "管理员"){
+                // 加载1.js
+                let res1 = import("../js/1.js") // 返回的是Promise对象
+                res1.then(res=>{
+                    console.log(res);
+                })
+            }else{
+                // 加载2.js
+                import("./js/2.js")
+            }
+        }
+
+        // 方式二：导入是Promise 可以配置async await
+        async function render2(value){
+            if(value === "管理员"){
+                let res1 = await import("./js/1.js") 
+                console.log(res1);
+                
+            }else{
+                let res2 = await import("./js/2.js") 
+                console.log(res2);
+            }
+        }
+
+        // 3. 如框架种的动态导入
+        /* 
+            
+            list = ["a.vue","b.vue","c.vue"]
+            list.foreach(item=>{
+                import(item)
+            })
+        
+        */
+    </script>
+</body>
+</html>

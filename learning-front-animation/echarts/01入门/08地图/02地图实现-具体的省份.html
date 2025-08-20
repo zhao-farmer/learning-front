@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 600px; border: 1px solid #f00"></div>
+    <script type="module">
+        //1. 加载安徽省地图的矢量数据
+        //2. 在ajax的回调函数中注册地图矢量数据 echarts.registerMap("anhui",矢量地图数据)
+        //3. 配置geo的type为'map',map为'anhui'
+        //4. 通过zoom调整缩放比例
+        //5. 通过center调整中心点
+
+        // 1. 初始化对象
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        // 2. 获取本地地图数据
+        let ret = [];
+        await fetch("../assets/map/安徽省.json")
+            .then(response => response.text())
+            .then(reData => {
+                ret = JSON.parse(reData);
+            })
+            .catch(error => console.error("Error:", error));
+
+        // 3. 注册数据
+        echarts.registerMap("anhui", ret);
+
+        // 4. 设置配置项
+        var option = {
+            geo: {
+                type: "map",
+                map: "anhui", //chinaMap需要和registerMap中的第一个参数保持一致
+                roam: true, //设置允许缩放以及拖动的效果
+
+                label: {
+                    show: true, //展示标签
+                },
+                zoom: 1.2, //设置初始化的缩放
+                center: [116.507676, 31.752889], //设置地图中心点的坐标 从打印的ret中可以获取
+            },
+        };
+
+        // 5. 加载配置项
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+.second-list {
+  list-style-type: disc;
+}  
+:where(ol[class]) {
+  list-style-type: none;
+}
+
+header p {
+  color: blue;
+}
+
+:is(header, section) p {
+  color: green;
+}
+
+p {
+  color: blue;
+}
+
+:where(header, section) p {
+  color: blue;
+}
+   
+    </style>
+</head>
+<body>
+<div>
+    <h2>First list no class</h2>
+    <ol>
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+    </ol>
+</div>
+<div>
+    <h2>Second list with class</h2>
+    <ol class="second-list">
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+    </ol>
+</div>
+
+<div>
+    <h2>Third list with class</h2>
+    <ol class="third-list">
+        <li>List Item 1</li>
+        <li>List Item 2</li>
+    </ol>
+</div>
+
+
+<header>
+    <p>This is a paragraph text.</p>
+</header>
+    
+</body>
+</html>

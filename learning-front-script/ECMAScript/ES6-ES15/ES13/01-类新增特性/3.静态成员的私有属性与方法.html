@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       class Cache{
+            static #count = 0
+            static getCount(){
+                return this.#count;
+            }
+            tail(){
+                console.log(this.getCount());
+                
+            }
+        }
+
+        let store = new Cache()
+        store.tail()
+    </script>
+</body>
+</html>

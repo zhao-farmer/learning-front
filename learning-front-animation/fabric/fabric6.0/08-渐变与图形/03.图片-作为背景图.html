@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+        
+        // 图片
+        let img = new Image();
+        img.src="./assest/001.jpg"
+
+        img.onload = () =>{
+
+            // 使用 FabricImage 加载图片
+            let FabricImage = new fabric.FabricImage(img,{
+                    // 拉甚至canvas大小
+                    scaleX: canvas.width / img.width, // 计算出图片要拉伸的宽度
+                    scaleY: canvas.height / img.height // 计算出图片要拉伸的高度
+                }
+            )
+            canvas.add(FabricImage);
+        }
+    </script>
+</body>
+</html>

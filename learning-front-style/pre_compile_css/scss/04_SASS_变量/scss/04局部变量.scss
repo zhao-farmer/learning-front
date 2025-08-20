@@ -1,0 +1,8 @@
+// scss 代码编辑
+.container {
+    $font-size: 16px;
+    font-size: $font-size;
+    .wrapper {
+        font-size: $font-size;
+    }
+}

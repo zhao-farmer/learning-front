@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="200"></canvas>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+
+        var data = [0, 40, 20, 10, 50, 10, 55];
+        var padding = 40; // 图表周围的填充
+        var xStep = (canvas.width - 2 * padding) / (data.length - 1); // x轴上每一步的大小
+        var maxY = Math.max(...data); // 数据中的最大值，用于缩放y轴
+
+        // 绘制坐标轴
+        ctx.beginPath();
+        ctx.moveTo(padding, 0);
+        ctx.lineTo(padding, canvas.height - 20);
+        ctx.lineTo(canvas.width - padding, canvas.height - 20);
+        ctx.stroke();
+
+        // 绘制数据点
+        for (var i = 0; i < data.length; i++) {
+            var x = padding + i * xStep;
+            var y = canvas.height - 20 - (data[i] / maxY) * (canvas.height - 2 * padding);
+
+            // 绘制数据点
+            ctx.beginPath();
+            ctx.arc(x, y, 2, 0, 2 * Math.PI);
+            ctx.fillStyle = "#3357FF";
+            ctx.fill();
+
+            // 绘制连接线
+            if (i > 0) {
+                ctx.beginPath();
+                ctx.moveTo(prevX, prevY);
+                ctx.lineTo(x, y);
+                ctx.strokeStyle = "#3357FF";
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            // 更新上一个点的坐标
+            var prevX = x;
+            var prevY = y;
+        }
+    </script>
+</body>
+</html>

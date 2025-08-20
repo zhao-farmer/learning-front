@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="200" height="200" id="c" style="border: 1px solid #ccc;"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from '../index.min.mjs'
+        
+        const canvas = new fabric.Canvas('c') // 这里传入的是canvas的id
+
+        // 创建一个长方形
+        const rect = new fabric.Rect({
+            top: 30, // 距离容器顶部 30px
+            left: 30, // 距离容器左侧 30px
+            width: 100, // 宽 100px
+            height: 60, // 高 60px
+            fill: 'red' // 填充 红色
+        })
+
+        // 在canvas画布中加入矩形（rect）。add是“添加”的意思
+        canvas.add(rect)
+
+    </script>
+</body>
+</html>

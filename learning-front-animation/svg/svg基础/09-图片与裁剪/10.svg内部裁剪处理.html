@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <svg height="600" width="800">
+            <defs>
+                <clipPath id="myClippingPath">
+                    <circle stroke="#000000" stroke-miterlimit="10" cx="400" cy="250" r="200" />
+                </clipPath>
+            </defs>
+            <!-- the element you want to apply the clipPath to can be any SVG element -->
+            <g id="my-graphic" clip-path="url(#myClippingPath)">
+                <image xlink:href="./images/004.png" xx="0" y="0" width="720" height="450"/>
+            </g>
+        </svg>
+    </body>
+</html>

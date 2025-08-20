@@ -1,0 +1,16 @@
+// 所有操作数被转换成相同的单位
+@var_1: 5cm + 10mm; // 结果是 6cm  10mm === 1cm
+@var_2: 2 - 3cm - 5mm; // 结果是 -1.5cm；5mm === 0.5cm
+@var_3: 2 + 5px - 3cm; // 结果是 4px; cm-->px单位换算无效，则忽略3cm的单位
+@base: 5%;
+@base_1: @base * 2; // 结果是 10%
+@base_2: @base + @base_1; // 结果是 15%
+
+@base: 2cm * 3mm; // 结果是 6cm
+.box {
+    width: 100 + 10px;
+    width: 100 - 20px;
+    width: 100 * 2px;
+    width: (100 / 25rem);  //除法
+    height: 100 / 25rem;
+}

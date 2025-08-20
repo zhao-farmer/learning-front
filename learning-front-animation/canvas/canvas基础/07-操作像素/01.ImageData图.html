@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("c1");
+        const ctx = canvas.getContext("2d");
+
+
+        let height = 100;
+        let width = 100;
+
+        // 1. 透明图
+        const imgData1 = new ImageData(height, width)
+        ctx.putImageData(imgData1,0,0);
+
+
+        // 2. 通过 Uint8ClampedArray 使用 ImageData
+        let u8cArray = []
+        let redArray = [255, 0, 0, 255];
+        // 100 * 100 的 红色
+        for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 100; i++) {
+                u8cArray.push(...redArray)
+            }
+        }
+        let clampedArray = new Uint8ClampedArray(u8cArray);
+        const imgData2 = new ImageData(clampedArray,100, 100)
+        ctx.putImageData(imgData2,100,0);
+       
+        // 3. 创建图后设置图像颜色
+        const imagedata3 = new ImageData(height, width)
+        const length = imagedata3.data.length
+        for (let i = 0; i < length; i += 4) {
+            // 设置为绿色
+            imagedata3.data[i] = 0
+            imagedata3.data[i + 1] = 255
+            imagedata3.data[i + 2] = 0
+            imagedata3.data[i + 3] = 255
+        }
+        ctx.putImageData(imagedata3, 200, 0)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+// scss 代码编辑
+$color: #f00;
+$border_color: #0ff;
+$border-color: #ff0;
+$borderColor: #00f;
+.container {
+    color: $color;
+    border-color: $border_color;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    原始函数-模糊搜索
+    <input type="text" id="mysearch1">
+    箭头函数-模糊搜索
+    <input type="text" id="mysearch2">
+    <script>
+        let osearch1 = document.querySelector("#mysearch1")
+        osearch1.oninput = function(){
+            // console.log(this.value);
+            let _this = this;
+            setTimeout(function(){
+                // 这个this指向window
+                // console.log(this);
+                console.log(_this.value);
+                
+                
+                console.log(`发送${_this.value}到后端`);
+            },1000)
+        }
+
+
+        let osearch2 = document.querySelector("#mysearch2")
+        // 绑定事件不使用箭头函数 否则指向的this 不是触发事件
+        osearch2.oninput = function(){
+            
+            // 这里的this 直接指向父作用域
+            setTimeout(()=>{
+                console.log(this.value);
+                console.log(`发送${this.value}到后端`);
+            },1000)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <!-- SVG图形 -->
+    <svg width="100" height="100">
+        <circle cx="50" cy="50" r="20" fill="green" id="circle-js"></circle>
+    </svg>
+
+    <script>
+        var circle = document.getElementById("circle-js");
+        var radius = 20;
+        let step = 0.1;
+        let state = 0;
+        function render() {
+            if (radius > 50) {
+                state = 0;
+            } else if (radius < 20) {
+                state = 1;
+            }
+
+            if (state == 0) {
+                radius -= step;
+            }
+
+            if (state == 1) {
+                radius += step;
+            }
+
+            circle.setAttribute("r", radius); // 更新半径
+            requestAnimationFrame(render);
+        }
+
+        render();
+    </script>
+</body>
+</html>

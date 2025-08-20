@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="400" height="300">
+        <!-- linear 线性变化 -->
+        <rect x="10" y="20" width="50" height="50" fill="red">
+            <animate 
+                attributeName="x" 
+                from="0" 
+                to="100" 
+                dur="2s" 
+                calcMode="linear"
+                repeatCount="indefinite"
+            />
+        </rect>
+        <!-- paced 匀速插值 -->
+        <rect x="10" y="80" width="50" height="50" fill="green">
+            <animate 
+                attributeName="x" 
+                from="0" 
+                to="150" 
+                dur="2s" 
+                calcMode="paced"
+                repeatCount="indefinite"
+            />
+            <animate 
+                attributeName="y" 
+                from="0" 
+                to="200" 
+                dur="2s" 
+                calcMode="paced"
+                repeatCount="indefinite"
+            />
+            
+        </rect>
+         <!-- discrete 离散模式 -->
+         <rect x="10" y="140" width="50" height="50" fill="blue">
+            
+            <animate 
+                attributeName="fill" 
+                values="red;green;blue" 
+                calcMode="discrete" 
+                dur="1s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+         <!-- spline 过度曲线插值 -->
+         <rect x="10" y="200" width="50" height="50" fill="purple">
+            <animate 
+                attributeName="opacity"
+                from="0" 
+                to="1"
+                calcMode="spline"
+                keySplines="0.1 0.8 0.9 0.2"
+                dur="1.5s" 
+                repeatCount="indefinite"
+            />
+        </rect>
+    </svg>
+</body>
+</html>

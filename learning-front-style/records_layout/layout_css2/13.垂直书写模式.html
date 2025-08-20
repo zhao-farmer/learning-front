@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>垂直书写模式</title>
+    <style>
+        .vertical-ltr {
+            writing-mode: vertical-rl; /* 从右到左垂直书写 */
+            background-color: pink;
+        }
+        .vertical-rtl {
+            writing-mode: vertical-lr; /* 从左到右垂直书写 */
+            background-color: skyblue;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span  class="vertical-ltr">
+            这是垂直书写模式，
+            <br>
+            从右到左排列的文本。
+        </span>
+        <span  class="vertical-rtl">
+            这是垂直书写模式，
+            <br>
+            从左到右排列的文本。
+        </span>
+    </div>
+</body>
+</html>

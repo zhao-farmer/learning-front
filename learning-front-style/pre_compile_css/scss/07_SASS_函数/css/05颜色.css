@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/* ====颜色====== */
+.p6 {
+  color: rgb(0, 255, 255);
+  color: rgba(0, 255, 255, 0.3);
+  color: hsl(120, 100%, 50%);
+  color: hsl(120, 100%, 75%);
+  color: hsl(120, 100%, 25%);
+  color: hsl(120, 60%, 70%);
+  color: hsla(120, 100%, 50%, 0.3);
+  color: hsla(120, 100%, 75%, 0.3);
+  color: #bfbfbf;
+  color: #ff7faa;
+  color: black;
+  content: 127;
+  content: 255;
+  content: 255;
+  content: 0;
+  content: 212;
+  content: 255;
+  content: 159.84375deg;
+  content: 100%;
+  content: 74.9019607843%;
+  content: 1;
+  content: 0.5;
+  color: #7f7fff;
+  color: rgba(127, 255, 212, 0.3);
+}

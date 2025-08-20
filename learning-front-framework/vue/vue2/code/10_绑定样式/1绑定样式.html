@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>绑定样式</title>
+    <!-- 引入Vue -->
+    <script  type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        .basic{
+            width: 400px;
+            height: 100px;
+            border: 1px solid black;
+        }
+        .happy{
+            border: 4px solid red;  
+            background-color: rgba(255, 255, 0, 0.64);
+            background: linear-gradient(30deg,yellow,pink,orange,yellow);
+        }
+        .sad{
+            background-color:gray;
+            border: 4px solid green;
+        }
+        .normal{
+            border: 2px solid black;
+            background-color:skyblue;
+        }
+        .at1{
+            background-color: chartreuse;
+        }
+        .at2{
+            font-size: 20px;
+        }
+        .at3{
+            border-radius: 10px;
+        }
+    </style>
+
+</head>
+<body>
+    <!-- 创建一个容器 -->
+    <div id="root">
+        <!-- 绑定class样式--字符串写法,适用于：样式的类名不确定，需要动态指定 -->
+        <div class="basic" :class="mood" @click="changeMood">{{name}}</div>
+        </br>
+        <!-- 绑定class样式--数组写法,适用于：要绑定的样式个数不确定，名字也不确定 -->
+        <div class="basic" :class="classArr">{{name}}</div>
+        <div class="basic" :class="[a,b,c]">{{name}}</div>
+        </br>
+         <!-- 绑定class样式--对象写法,适用于：要绑定的样式个数确定，名字也确定，但要动态决定用不用 -->
+        <div class="basic" :class="classObj">{{name}}</div>
+        <div class="basic" :class="{at1:true,at2:false}">{{name}}</div>
+        </br>
+        <!-- 绑定style样式--对象写法 -->
+        <div class="basic" :style="{fontSize: fsize +'px'}">{{name}}</div>
+        <div class="basic" :style="styleObj">{{name}}</div>
+        <!-- 绑定style样式--数组写法 -->
+        <div class="basic" :style="[styleObj,styleObj2]">{{name}}</div>
+        <div class="basic" :style="styleArr">{{name}}</div>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+        const vm = new Vue({
+            el:'#root',
+            data:{
+                name:'绑定样式',
+                mood:'normal',
+                classArr: ['at1','at2','at3'],
+                a:'at1',
+                b:'at2',
+                c:'at3',
+                classObj:{
+                    at1:false,
+                    at2:false
+                },
+                fsize:40,
+                styleObj:{
+                    fontSize: '40px',
+                    color:'red'
+                },
+                styleObj2:{
+                    backgroundColor:'orange'
+                },
+                styleArr:[
+                    {
+                        fontSize: '40px',
+                        color:'red'
+                    },
+                    {
+                        backgroundColor:'green'
+                    }
+                ]
+            },
+            methods: {
+                changeMood(){                 
+                    const arr = ['happy','sad','normal']
+                    let index = Math.floor(Math.random() * 3)
+                    this.mood = arr[index]
+                }
+            }
+        })
+    </script>
+</body>
+</html>

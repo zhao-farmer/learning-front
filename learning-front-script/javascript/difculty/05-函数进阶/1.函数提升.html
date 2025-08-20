@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.会把所有函数声明提升到当前作用域的最前面
+        // 2.之提升函数声明，不提升函数调用
+
+        // 在执行代码fn()  function fn(){} 已经放到了最前面了
+        fn()
+        function fn(){
+            console.log("函数提升");
+            
+        }
+
+        // function(){} 赋值给了 fun
+        // 只有 fun 提升了
+        // fun() 错误
+        var fun = function(){
+            console.log("函数表达式");
+        }
+
+        // 函数表达式 必须先声明和赋值，后调用，否则会报错
+    </script>
+</body>
+</html>

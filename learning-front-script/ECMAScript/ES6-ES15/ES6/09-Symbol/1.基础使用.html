@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 出现的问题？ 对象修改内部属性也影响对象中的函数
+        let obj = {
+            name:"kerwin",
+            getName(){
+                console.log(this.name);
+            }
+        }
+        obj.name = "tiechui"
+        obj.getName()
+
+        // 使用Symbol
+        let s1 = Symbol()   // 生成了一个symbol类型数据
+        let s2 = Symbol() 
+
+        console.log(s1 === s2); //false
+        
+
+        // 1.不能进行运算
+        // console.log(s1>"aaaa");
+
+        // 2.显示调用toString()
+        console.log(s1.toString);   //结果：Symbol（字符串）
+        
+        // 3.隐式转换boolean 肯定是true
+        if(s1){
+            console.log("执行");
+        }
+
+        
+
+        // 解决问题 创建Symbol唯一值
+        let obj2 = {
+            name:"kerwin",
+            getName(){
+                console.log(this.name);
+            }
+        }
+        let name = Symbol()
+        obj2[name] = "tiechui"
+        
+        // 拿到定义的Symbol
+        console.log(obj2[name]);    //tiechui
+        // 拿到函数中自己的
+        console.log(obj2.name);     //kerwin
+        // 或者直接使用字符串
+        console.log(obj2["name"]);  //kerwin
+
+        // 复杂使用
+        let keys = {
+            name:Symbol(),
+            age:Symbol(),
+            location:Symbol(),
+            test:Symbol(),
+        }
+      
+        let obj3 = {
+            [keys.name]:'kerwin',
+            [keys.age]:100,
+            // 这种无法访问
+            // [Symbol()]:"dalian"
+
+            [keys.location]:"dalian",
+            [keys.test]:function(){
+                console.log("测试函数");
+            }
+        }
+        console.log(obj3);
+        // Symbol(): "kerwin"
+        // Symbol(): 100
+        // Symbol(): "dalian"
+        // Symbol(): ƒ ()
+        
+
+    </script>
+</body>
+</html>

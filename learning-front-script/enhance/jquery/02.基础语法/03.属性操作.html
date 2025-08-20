@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <nav class="nav-content">
+            <ul title="myUl">
+                <li>Home</li>
+                <li>
+                    PageOne
+                    <ul>
+                        <li>魏大勋</li>
+                        <li>李健</li>
+                        <li>刘亦菲</li>
+                    </ul>
+                </li>
+                <li>
+                    Pagetwo
+                    <ul>
+                        <li>于适</li>
+                        <li>张凌赫</li>
+                    </ul>
+                </li>
+                <li>
+                    PageThree
+                    <ul>
+                        <li>周雨彤</li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <button onclick="getHtml()">获取html</button>
+        <button onclick="setHtml()">设置html</button>
+        <hr />
+
+        <input type="text" name="username" />
+        <input type="checkbox" value="1" />
+        <button onclick="getValue()">获取值</button>
+        <button onclick="setValue()">设置值</button>
+        <hr />
+
+        <button onclick="myAttr()">获取\设置元素的属性</button>
+        <button onclick="removeAttr()">删除元素的属性</button>
+
+
+        
+        <script src="../js/jquery.3.7.1.js"></script>
+        <script>
+            //获取html
+            function getHtml() {
+                console.log($(".nav-content").html());
+            }
+
+            //加html，并加上原本的html
+            function setHtml() {
+                $(".nav-content").html($(".nav-content").html() + "<h1>哈哈哈哈</h1>");
+            }
+
+            //获取值
+            function getValue() {
+                // console.log($("input[name='username']").val())
+
+                console.log($("input[type='checkbox']").val());
+            }
+
+            //设置值
+            function setValue() {
+                // let str="月月"
+                // $("input[name='username']").val(str)
+
+                $("input[type='checkbox']").val(2);
+            }
+
+            //获取、设置元素的属性
+            function myAttr() {
+                console.log($("ul").attr("title")); //获取元素属性的值
+
+                // $("ul").attr("title","hehehe");  //设置元素属性的值
+
+                //设置多个属性
+                $("ul").attr({
+                    title: "hehehe",
+                    //添加属性
+                    id: "myUl",
+                });
+            }
+
+            //删除元素的属性
+            function removeAttr() {
+                $("ul").removeAttr("title"); //删除一个
+                $("ul").removeAttr("title id"); //删除多个
+            }
+        </script>
+    </body>
+</html>

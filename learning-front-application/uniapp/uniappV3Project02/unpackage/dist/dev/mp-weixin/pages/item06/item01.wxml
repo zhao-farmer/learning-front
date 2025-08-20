@@ -1,0 +1,1 @@
+<view><button size="mini">按钮1</button><button size="default">按钮2</button><button type="primary">按钮3</button><button type="warn">按钮4</button><button type="primary" plain>按钮5</button><button type="primary" disabled>按钮6</button><button type="primary" loading>按钮7</button></view>

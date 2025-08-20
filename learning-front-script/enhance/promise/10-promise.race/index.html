@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var p1 = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve("data-1111")
+            }, 1000);
+        })
+        var p2 = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve("data-2222")
+            }, 1000);
+        })
+        var p3 = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve("data-3333")
+            }, 1000);
+        })
+    </script>
+</body>
+</html>

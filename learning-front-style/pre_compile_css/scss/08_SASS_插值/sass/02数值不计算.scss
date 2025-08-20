@@ -1,0 +1,6 @@
+// scss 代码编辑
+p {
+    $font-size: 12px;
+    $line-height: 30px;
+    font: #{$font-size}/#{$line-height};
+}

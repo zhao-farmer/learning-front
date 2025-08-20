@@ -1,0 +1,22 @@
+
+/* ====list运算=== */
+.p3{
+
+    content:append((a b c), d); // a b c d 
+    content:append((a b c), (d), comma); // a, b, c, d
+    content:index(a b c, b); // 2 
+    content:index(a b c, f); // null
+    content:is-bracketed([a b c]); // true 
+    content:is-bracketed(a b c); // false
+    
+    content:list-separator(a b c) ; // "space" 
+    content:list-separator(a b c);  // "comma"
+
+    content:join(a b c, d e f); // a b c d e f 
+    content:join((a b c), (d e f), comma); // a, b, c, d, e, f 
+    content:join(a b c, d e f, $bracketed: true); // [a b c d e f]
+    content:length(a b c); // 3
+    content:zip(1px 2px 3px, solid dashed dotted, red green blue); 
+    // 1px solid red, 2px dashed green, 3px dotted blue
+}
+

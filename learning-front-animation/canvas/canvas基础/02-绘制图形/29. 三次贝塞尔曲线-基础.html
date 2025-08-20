@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        //找到画布
+        var c1 = document.getElementById("c1");
+        //获取画笔
+        var ctx = c1.getContext('2d');
+        
+         //绘制三次贝塞尔曲线
+        ctx.moveTo(40, 160);
+        ctx.bezierCurveTo(40, 40, 240, 240, 240, 120);
+        ctx.stroke();
+     </script>
+</body>
+</html>

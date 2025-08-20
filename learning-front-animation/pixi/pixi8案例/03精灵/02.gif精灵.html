@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script src="../js/pixi.js"></script>
+    <!-- 官网没有对应的mjs版本 -->
+    <script src="../js/gif.js"></script>
+    <script type="module">
+        (async () => {
+            // 创建应用程序
+            const app = new PIXI.Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb",
+                width: 600,
+                height:400,
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            const source = await PIXI.Assets.load('../assets/images/chew.gif');
+
+            const gif = new PIXI.GifSprite({ 
+                source,                     // 资源
+                x: app.screen.width / 2,   // 位置-x
+                y: app.screen.height / 2,  // 位置-y
+                anchor: 0.5                 // 锚点
+            });
+
+            app.stage.addChild(gif);
+
+        })();
+    </script>
+</body>
+</html>

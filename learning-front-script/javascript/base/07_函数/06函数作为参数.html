@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function fn(a) {
+            console.log("a = ", a);
+            a()
+        }
+
+        /* 
+            在JS中函数也是一个对象（一等函数）
+                -别的对象能做的事情，函数也可以
+        
+        */
+        let obj = { name: "孙悟空" }
+
+        function fn2() {
+            console.log('我是fn2');
+
+        }
+
+        fn(fn2)
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

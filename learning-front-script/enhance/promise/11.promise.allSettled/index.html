@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const promiseOne = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve("hello 张三");
+            }, 1000);
+        });
+
+        const promiseTwo = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject("hello 李四");
+            }, 2000);
+        });
+
+        const promiseThree = new Promise((resolve, reject) => {
+            setTimeout(() => {
+
+            }, 3000);
+        });
+        Promise.allSettled([promiseOne, promiseTwo, promiseThree]).then(
+            res => console.log(res)
+        );
+        // 如果没有调用resolve()或者reject()，该promise就无法得到一个结果，其中一个没有结果，则什么都不会打印。
+        // 其中一个promise没有结果，则什么都不打印
+    </script>
+</body>
+</html>

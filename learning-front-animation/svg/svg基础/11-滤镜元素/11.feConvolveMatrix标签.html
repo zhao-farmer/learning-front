@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+        <filter id="convolve-filter">
+            <!-- 突出显示图像中的边缘和细节。 -->
+            <feConvolveMatrix
+            in="SourceGraphic"
+            order="3"
+            kernelMatrix="1 1 1
+                        1 -8 1
+                        1 1 1" />
+        </filter>
+        <image href="./images/flower.png" width="200" height="200" filter="url(#convolve-filter)" />
+    </svg>
+</body>
+</html>

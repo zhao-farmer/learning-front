@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 一个pink对象
+        const pink ={
+            name:'pink老师',
+            age: 18
+        }
+        const red = pink
+        console.log(red)    //{name:'pink老师'，age:18}
+        red.name ='red老师'
+        console.log(red)    //{name:'red老师'，age:18}
+        // 但是 pink对象里面的name值也发生了变化
+        console.log(pink)   //{name:'red老师'，age:18}
+    </script>
+</body>
+</html>

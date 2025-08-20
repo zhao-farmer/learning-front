@@ -1,0 +1,11 @@
+<view class="test1">
+  <!-- 如果需要进行事件传参，需要在组件上传递data- -->
+  <button mark:id="31415926" mark:name="张三"
+   bind:tap="btnHandler1">按钮1</button>
+</view>
+
+
+<view class="test2"  bind:tap="btnHandler2"  mark:age="18">
+  <!-- 如果需要进行事件传参，需要在组件上传递data- -->
+  <button mark:id="31415926" mark:name="张三">按钮2</button>
+</view>

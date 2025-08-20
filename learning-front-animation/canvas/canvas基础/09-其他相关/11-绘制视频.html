@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+     <canvas id="c1" width="640" height="640" ></canvas>
+     <video  src="./assest/1.mp4" controls hidden style="height:100px;width:100px;"></video>
+     <button id="btn">播放/暂停</button>
+    
+     <script>
+        //绘制视频
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');
+
+        //获取视频对象
+        var video = document.querySelector("video");
+
+        //获取按钮
+        let btn = document.querySelector("#btn");
+        btn.onclick = function(){
+            if(video.paused){
+                video.play()
+                render()
+            }else{
+                video.pause()
+            }
+            
+        }
+        
+        //logo图片对象
+        let img = new Image();
+        img.src = "./assest/logo.jpeg";
+
+        //刷新方法
+        function render(){
+            //截取视频的的一帧作为图片
+            ctx.drawImage(video,0,0,640,640);
+            //添加水印
+            ctx.drawImage(img,450,490,150,150);
+            requestAnimationFrame(render)
+        }
+     </script>
+</body>
+</html>

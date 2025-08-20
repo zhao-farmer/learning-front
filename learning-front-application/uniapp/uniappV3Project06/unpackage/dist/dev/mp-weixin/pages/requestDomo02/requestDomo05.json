@@ -1,0 +1,5 @@
+{
+  "navigationBarTitleText": "悬浮刷新与顶部",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+}

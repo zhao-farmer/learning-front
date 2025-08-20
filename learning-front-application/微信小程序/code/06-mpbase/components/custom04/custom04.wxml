@@ -1,0 +1,7 @@
+
+<view>{{ num }}</view>
+<view>{{ count }}</view>
+<view>{{ obj.name }}</view>
+<view>{{ arr[1] }}</view>
+<view>{{ label }}</view>
+<button id="btn" type="warn" plain bind:tap="updateData">更新数据保存</button>

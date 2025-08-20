@@ -1,0 +1,29 @@
+{
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/item09/item01",
+          "pathName": "pages/item09/item01",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "pages/item01/item01",
+          "pathName": "pages/item01/item01",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/item05/item01",
+          "pathName": "pages/item05/item01",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

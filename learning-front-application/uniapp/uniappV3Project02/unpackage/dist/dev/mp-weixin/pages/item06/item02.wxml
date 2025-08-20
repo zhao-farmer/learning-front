@@ -1,0 +1,1 @@
+<input type="text" placeholder="请输入内容!" placeholder-style="color:orange"/><input type="number" value="123"/><input type="tel"/><input type="text" value="123" password/><input type="text" value="123" disabled/><input type="text" maxlength="10"/><input type="text" confirm-type="search"/>

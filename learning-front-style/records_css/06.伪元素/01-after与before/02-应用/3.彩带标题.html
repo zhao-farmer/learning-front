@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+     body{
+        width: 600px;
+        padding: 100px;
+     }
+      h1 {
+            position: relative;
+            margin: 0 auto 20px;
+            padding: 10px 40px;
+            text-align: center;
+            background-color: #875e46;
+        }
+        
+        h1::before, h1::after {
+            content: '';
+            width: 80px;
+            height: 100%;
+            background-color: #724b34;
+        
+            /* 定位彩带两端形状的位置，并且放在最底层 */
+            position: absolute;
+            z-index: -1;
+            top: 20px;
+        
+            /* 彩带两端的形状 */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 25% 50%);
+        
+            /* 绘制并定位彩带的阴影三角形 */
+            background-image: linear-gradient(45deg, transparent 50%, #5d3922 50%);
+            background-size: 20px 20px;
+            background-repeat: no-repeat;
+            background-position: bottom right;
+        }
+        
+        h1::before {
+            left: -60px;
+        }
+        
+        h1::after {
+            right: -60px;
+            transform: scaleX(-1); /* 水平翻转 */
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>标题</h1>
+</body>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="c1" width="600" height="400"></canvas>
+        <script>
+            const canvas = document.getElementById("c1");
+            const ctx = canvas.getContext("2d");
+
+            let image = new Image();
+            image.src = "./images/2.png";
+
+            image.onload = function () {
+                ctx.drawImage(image,0,0);
+
+                let data = ctx.getImageData(100, 100, 100, 100);
+			    // 方式1
+                ctx.putImageData(data, 310, 100);
+
+                // 方式2 再次裁剪
+                ctx.putImageData(data, 420, 100,20,20,60,60);
+
+            }
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            ul {
+                list-style: none;
+            }
+            .clearfix::after {
+                display: block;
+                content: "";
+                clear: both;
+            }
+            .box {
+                position: relative;
+                /* width: 1000px; */
+                width: 400px;
+                margin: 10px auto 0;
+                background-color: rgb(239, 203, 140);
+            }
+            .box .left {
+                width: 400px;
+            }
+            .box .left .left-top {
+                position: relative;
+                width: 400px;
+                height: 400px;
+                box-shadow: 0 0 0 1px #999;
+            }
+            .box .left .left-top img {
+                width: 400px;
+                height: 400px;
+            }
+            .box .left .left-top .zhezhao {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 250px;
+                height: 250px;
+                background-color: rgba(253, 253, 253, 0.5);
+                cursor: move; /*改变鼠标指针样式*/
+            }
+            .box .left .left-bottom {
+                width: 400px;
+                background-color: #f1f1f1f1;
+            }
+            .box .left-bottom ul li {
+                float: left;
+                width: 100px;
+                margin: 10px;
+            }
+            .box .left-bottom ul li img {
+                width: 100px;
+            }
+            .box .right {
+                display: none; /*先隐藏掉 */
+                position: absolute;
+                left: 400px;
+                top: 0;
+                overflow: hidden;
+                width: 500px;
+                height: 500px;
+                box-shadow: 0 0 0 1px #f00;
+            }
+            .box .right img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 800px;
+                height: 800px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <!-- 左侧中等图片 -->
+            <div class="left">
+                <div class="left-top">
+                    <img src="./images/02.jpg" alt="" />
+                    <div class="zhezhao"></div>
+                </div>
+                <!-- 下方小图片 -->
+                <div class="left-bottom">
+                    <!-- <span><</span> -->
+                    <ul class="clearfix">
+                        <li><img src="./images/02.jpg" alt="" /></li>
+                        <li><img src="./images/01.jpg" alt="" /></li>
+                        <li><img src="./imgages/03.jpg" alt="" /></li>
+                    </ul>
+                    <!-- <span>></span> -->
+                </div>
+            </div>
+            <!-- 右侧大图 -->
+            <div class="right">
+                <img src="img/img002.jpg" alt="" />
+            </div>
+        </div>
+    </body>
+    <script>
+        var box = document.querySelector(".box"); //获取最外侧div
+        var leftTop = document.querySelector(".left-top"); //获取遮罩与中等图的父级
+        var zhongimg = document.querySelector(".left-top>img"); //获取中等图片
+        var _zhezhao = document.querySelector(".zhezhao"); //获取遮罩层
+        var _rightDatu = document.querySelector(".right"); //获取右侧大图
+        var rightDatu = document.querySelector(".right>img"); //获取右侧大图
+        var imgs = document.querySelectorAll(".left-bottom li"); //获取下方轮播图片的li
+        // 确定好定位关系，利用定位属性的left与top等属性值，结合偏移量数值，再结合鼠标移动事件，来实现让遮罩层随鼠标移动的效果。
+        //再根据偏移量数值来确定 定位的最大值与最小值 从而确定（限制）遮罩层所能移动的范围
+        _zhezhao.onmousemove = function (every) {
+            //鼠标移动事件
+            //.pageX 的偏移值不受滚动条影响  推荐使用此方法
+            //.clientX 的偏移值受滚动条影响
+            // console.log(every.pageX, every.clientX);
+            var lf = every.pageX - _zhezhao.offsetWidth / 2 - box.offsetLeft; //遮罩层距离页面左侧的距离 - 自身内容宽度的一半 - 父元素距离距离页面左侧的距离
+            var tp = every.pageY - _zhezhao.offsetHeight / 2 - box.offsetTop; //等式结果为遮罩层在父级元素中的left/top定位置
+            if (lf <= 0) {
+                //定位的left数值最小范围
+                lf = 0;
+            } else if (lf >= leftTop.offsetWidth - _zhezhao.offsetWidth) {
+                //父级元素 - 遮罩层自身宽度 = 遮罩层可移动的最大宽度
+                lf = leftTop.offsetWidth - _zhezhao.offsetWidth; //定位的left数值最大范围
+            }
+            //竖直方向与水平方向同理
+            if (tp <= 0) {
+                //定位的left数值最小范围
+                tp = 0;
+            } else if (tp >= leftTop.offsetHeight - _zhezhao.offsetHeight) {
+                //父级元素 - 遮罩层自身宽度 = 遮罩层可移动的最大宽度
+                tp = leftTop.offsetHeight - _zhezhao.offsetHeight; //定位的left数值最大范围
+            }
+ 
+            _zhezhao.style.left = lf + "px";
+            _zhezhao.style.top = tp + "px";
+            //下方让对应大图反方向与小图对应移动   取相对应的负值
+            rightDatu.style.left = -lf * 2 + "px"; //此处我们设置小图与大图的比例为 1 ：2
+            rightDatu.style.top = -tp * 2 + "px"; //所以应使大图全部显示同时就要调整大图移动数值的比例
+        };
+        //鼠标放在轮播图上时，将相应的中等图片更换
+        // onmouseover  onmouseout 这两个函数会触发事件冒泡（事件冒泡：是指元素内部的子元素同样会触发事件而造成影响）所以需要进行判断
+        // onmouseenter  onmouseleave 而两个函数不会触发事件冒泡（子元素不会触发事件） 这两个则无需判断
+        for (let i = 0; i < imgs.length; i++) {
+            imgs[i].onmouseover = function (every) {
+                //鼠标移入事件
+                // console.log(every.target.src); //事件作用目标：every.target ; 通过此方法获取小图的src
+                if (every.target.src != undefined) {
+                    zhongimg.src = every.target.src; //把小图的src值 赋值给 zhongimg的src上
+                }
+            };
+        }
+        //鼠标放在中等图片父级上时，将相应的右侧大图更换
+        leftTop.onmouseover = function () {
+            //移入事件
+            rightDatu.src = zhongimg.src; //把中等图的src值 赋值给 右侧大图的src上
+            _rightDatu.style.display = "block"; //并且把右侧大图显示出来
+        };
+        leftTop.onmouseout = function () {
+            //移出事件
+            _rightDatu.style.display = "none"; //并且把右侧大图显示出来
+        };
+    </script>
+</html>

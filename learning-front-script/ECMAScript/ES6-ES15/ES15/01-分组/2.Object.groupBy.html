@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const groupedByColor = Object.groupBy(fruits, fruit => {
+                if (fruit.includes("a")) return "red";
+                if (fruit.includes("o")) return "orange";
+                return "other";
+            });
+
+            console.log(groupedByColor);
+            // {
+            //   red: [ 'apple', 'grape' ],
+            //   orange: [ 'orange' ],
+            //   other: [ 'banana', 'watermelon' ]
+            // }
+        </script>
+    </body>
+</html>

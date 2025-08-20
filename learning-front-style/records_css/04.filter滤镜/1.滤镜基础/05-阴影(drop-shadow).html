@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+            div{
+               display: flex;
+               justify-content: space-around;
+               width: 1000px;
+               margin: 100px auto;
+            }
+            img{
+               width: 200px;
+            }
+            img:nth-child(1) {
+                filter: unset;
+            }
+            img:nth-child(2) {
+                filter: drop-shadow(20px 10px 4px #4444dd);
+            }
+            img:nth-child(3) {
+                filter: drop-shadow(0 -6mm 4mm rgb(160, 0, 210));
+            }
+            img:nth-child(4) {
+                filter: drop-shadow(0 0 0.75rem crimson);
+            }
+    </style>
+</head>
+<body>
+    <div>
+          <img src="./images/1.jpeg" alt="">
+          <img src="./images/1.jpeg" alt="">
+          <img src="./images/1.jpeg" alt="">
+          <img src="./images/1.jpeg" alt="">
+    </div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite } from "../js/pixi.mjs";
+        //使用立即执行函数进行调用
+        (async () => {
+            // 创建一个应用程序
+            const app = new Application();
+
+            // 初始化应用程序 背景颜色brown
+            await app.init({
+                backgroundColor: "brown",
+                width: 600,
+                height: 400,
+            });
+
+            const treeTexture = await Assets.load(`../assets/images/tree.png`);
+
+            const worldContainer = new Container({
+                // 移动这个容器将由GPU驱动
+                isRenderGroup: true,
+            });
+
+            const worldSize = 5000;
+
+            //y轴 0-5000 x轴 也是 0 - 5000
+            for (let i = 0; i < 100000; i++) {
+                const yPos = Math.random() * worldSize;
+
+                const tree = new Sprite({
+                    texture: treeTexture,
+                    x: Math.random() * worldSize,
+                    y: yPos,
+                    scale: 0.25,
+                    anchor: 0.5,
+                });
+
+                worldContainer.addChild(tree);
+            }
+
+            // 按照y轴位置 对树进行排序
+            worldContainer.children.sort((a, b) => a.position.y - b.position.y);
+
+            app.stage.addChild(worldContainer);
+
+            // 将这个应用程序加载到页面上
+            document.body.appendChild(app.canvas);
+
+            let x = 0;
+            let y = 0;
+            //监控鼠标移动 并将鼠标的位置赋予x与y
+            app.canvas.addEventListener("mousemove", e => {
+                x = e.clientX;
+                y = e.clientY;
+            });
+
+            app.ticker.add(() => {
+                //可以看到图片的宽度与高度
+                const screenWidth = app.renderer.width;
+                const screenHeight = app.renderer.height;
+
+                //目标的x轴坐标 x轴相对于屏幕的宽度 * （最大宽度与高度减去屏幕的宽度）
+                const targetX = (x / screenWidth) * (worldSize - screenWidth);
+                const targetY = (y / screenHeight) * (worldSize - screenHeight);
+
+                // 每次都相加 当前的x轴距离与目标x轴距离的十分之一
+                // 每次都加当前距离的十分之一 造成永远没有结束的时候  只有最接近当前鼠标距离的时候
+                worldContainer.x += (-targetX - worldContainer.x) * 0.1;
+                worldContainer.y += (-targetY - worldContainer.y) * 0.1;
+
+                // console.log("鼠标的x与y", x, y);
+                // console.log("容器的x与y", worldContainer.x, worldContainer.y);
+                // console.log("目标的x与y", targetX, targetY);
+                // console.log("屏幕的高度与宽度", screenWidth, screenHeight);
+            });
+        })();
+    </script>
+</body>
+</html>

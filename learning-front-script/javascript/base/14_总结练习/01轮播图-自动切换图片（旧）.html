@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      .outer {
+        width: 1000px;
+        margin: 50px auto;
+        text-align: center;
+      }
+      .outer img {
+        width: 1000px;
+      }
+    </style>
+    <script>
+      window.onload = function () {
+        /* 
+            点击按钮切换图片
+        */
+        //获取info
+        const info = document.getElementById("info");
+
+        //获取到图片 通过标签获取图片
+        const img = document.getElementsByTagName("img")[0];
+
+        //获取两个按钮
+        const prev = document.getElementById("prev");
+        const next = document.getElementById("next");
+
+        console.log(img, prev, next);
+
+        //创建一个数组记录所有图片
+        const imgArr = [
+          "./images/1.jpg",
+          "./images/2.jpg",
+          "./images/3.jpg",
+          "./images/4.jpg",
+          "./images/5.jpg",
+        ];
+
+        //创建一个变量记录当前图片的索引
+        let current = 0;
+
+        /* 
+            图片自动切换的功能 
+        */
+
+        let timer;
+
+        const autoBtn = document.getElementById("autoBtn");
+        autoBtn.onclick = () => {
+          // 开启定时器，切换图片
+          timer = setTimeout(function () {
+            clearTimeout(timer);
+            next.onclick();
+            timer = setTimeout(auto, 3000);
+          }, 3000);
+        };
+
+        info.textContent = `共 ${imgArr.length} 张图片，当前时第${
+          current + 1
+        }张图片`;
+
+        //点击next按钮后，切换图片
+        next.onclick = function () {
+          //切换图片 -> 2.png 就是修改img的src属性
+          current++;
+
+          //检测current的值是否合法
+          if (current > imgArr.length - 1) {
+            current = 0;
+          }
+
+          img.src = imgArr[current];
+          info.textContent = `共 ${imgArr.length} 张图片，当前时第${
+            current + 1
+          }张图片`;
+        };
+        prev.onclick = function () {
+          current--;
+          //检测current的值是否合法
+          if (current < 0) {
+            current = imgArr.length - 1;
+          }
+          img.src = imgArr[current];
+          info.textContent = `共 ${imgArr.length} 张图片，当前时第${
+            current + 1
+          }张图片`;
+        };
+      };
+    </script>
+  </head>
+  <body>
+    <div class="outer">
+      <span id="info">总共n张图片，当前时第m张图片</span>
+      <div class="img-wrapper">
+        <img src="./images/1.jpg" alt="这是一个图片" />
+      </div>
+      <div class="btn-wrapper">
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+        <button id="autoBtn">自动切换</button>
+      </div>
+    </div>
+  </body>
+</html>

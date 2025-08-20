@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .custom-list {
+            list-style-type: "🌂"; /* 设置列表项标记为方块 */
+            list-style-position: inside; /* 将标记放置在列表项内部 */
+            padding-left: 20px; /* 设置列表项的内边距 */
+        }
+        .custom-list div {
+            display: list-item; /* 明确设置列表项显示方式 */
+            margin-bottom: 10px; /* 设置列表项之间的间距 */
+        }
+
+        /* 列表自带的自定义标记 与 list-style-type有冲突 */
+        /* .custom-list div::marker {
+            content: square; 
+        } */
+
+        .custom-list div::before {
+            content: "●"; /* 在列表项前插入自定义标记 */
+            margin-right: 10px; /* 设置自定义标记与列表项内容之间的间距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-list">
+        <div>列表项一</div>
+        <div>列表项二</div>
+        <div>列表项三</div>
+    </div>
+</body>
+</html>

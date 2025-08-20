@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <button id="mybtn">直接使用事件名</button>
+    <button id="mybtn2">bind绑定</button>
+    <button id="mybtn3">bind绑定多个事件（分开绑定）</button>
+    <script src="../js/jquery.3.7.1.js"></script>
+    <script>
+        /*
+            window.οnlοad=function () {
+                console.log(333)  //因需要等资源加载完毕才能执行，导致最后打印
+            }
+            window.οnlοad=function () {
+                console.log(444)
+            }
+            //简写
+            $(function () {
+                console.log(111)
+            })
+            //等同于：
+            $(document).ready(function () {
+                console.log(222)
+            })
+            //类似于：window.οnlοad=function(){}
+        */
+    
+    
+        /*
+            区别 window.onload和$(document).ready() ：
+                1.前者需要等待所有资源加载完毕（js、html、css、img、视频、音频）
+                2.后者只需要等待dom结构加载完毕就可以执行
+                3.前者只会执行一次（多个的话执行最后一个），后者会多次执行（写几个执行几个）
+        */
+    
+        
+        $(function () {
+            /*直接使用事件名*/
+            $("#mybtn").click(function () {
+                console.log("点你妹！！！")
+            })
+            $("#mybtn").mouseover(function () {
+                console.log("看什么！！！")
+            })
+    
+    
+            /*bind绑定*/
+            $("#mybtn2").bind("click mouseover",function () {
+                console.log("哈哈哈")
+            })
+    
+    
+            /*bind绑定多个事件（使用对象的键值对分开绑定）（事件可以有不同的处理程序）*/
+            $("#mybtn3").bind({
+                "click":function () {
+                    console.log("小仙女")
+                },
+                "mouseover":xxn
+            })
+            $("#mybtn3").mouseover(xxn2)
+    
+            function xxn() {
+                console.log("大马猴")
+            }
+            function xxn2() {
+                console.log("小熊猫")
+            }
+    
+    
+            /*取消绑定*/
+            // $("#mybtn3").unbind();  //取消所有绑定
+            // $("#mybtn3").unbind("click");  //取消指定的事件
+            $("#mybtn3").unbind("mouseover",xxn);
+    
+        })
+    </script>
+
+</body>
+</html>

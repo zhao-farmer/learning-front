@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box1">
+        <h1></h1>
+        <ul></ul>
+    </div>
+    <div class="box2">
+        <h1></h1>
+        <img src="" style="width: 100px;">
+        <ul></ul>
+    </div>
+    <script>
+
+        var data1 = {
+            title:"体育",
+            list:["体育-1","体育-2","体育-3"]
+        }
+        var data2 = {
+            title:"综艺",
+            url:'./img/1.jpeg',
+            list:["综艺-1","综艺-2","综艺-3"]
+        }
+
+        class CreteBox{
+            constructor(select,data){
+                this.ele = document.querySelector(select)
+                this.title = data.title
+                this.list= data.list
+
+                //初始化后 立即执行render
+                // this.render()
+            }
+
+            render(){
+                let oh1 = this.ele.querySelector("h1")
+                let oul = this.ele.querySelector("ul")
+                oh1.innerHTML = this.title
+                oul.innerHTML =  this.list.map(item =>{  
+                    return `<li>${item}</li>`
+                }).join("")
+            
+            }
+        }
+
+        let cb = new CreteBox(".box1",data1)
+        cb.render()
+
+        class CreateImgBox extends CreteBox{
+            
+            constructor(select,data){
+                super(select,data)
+                this.imgUrl = data.url
+                // this.render()
+            }
+
+            render(){
+                super.render()
+                let oimg = this.ele.querySelector("img")
+                console.log(this.imgUrl);
+                
+                oimg.src = this.imgUrl
+            }
+        }
+
+        let cib = new CreateImgBox(".box2",data2)
+        cib.render()
+    </script>
+</body>
+</html>

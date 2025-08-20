@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+        <script type="module">
+            // 引入文件
+            import * as fabric from "../index.min.mjs";
+
+            // 获取动态画布
+            const canvas = new fabric.Canvas("c1");
+
+            const triangle = new fabric.Triangle({
+                top: 50,
+                left: 100,
+                width: 80,
+                height: 100, 
+                fill: '', 
+                stroke: "#f6416c", 
+                strokeWidth: 5, 
+                skewX: 30, // x轴拉伸30度
+                skewY: 30 // y轴拉伸30度
+            })
+            canvas.add(triangle)
+
+            const text = new fabric.FabricText('我爱学习',{
+                left:50,
+                top:150,
+                fill: 'blue', 
+                skewX: 45, // x轴方拉伸45度
+                skewY: 20 // y轴拉伸20度
+            })
+            canvas.add(text)
+
+        </script>
+    </body>
+</html>

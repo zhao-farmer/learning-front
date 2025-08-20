@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let pro = new Promise(function(resolve,reject){
+            //执行器函数
+            setTimeout(()=>{
+                if(false){
+                    resolve(1000)  
+                }else{
+                    reject("no 0")
+                }
+            },1000)
+       })
+
+        // 第二种写法
+        pro.then((res)=>{
+            console.log("奖金",res);  
+       }).catch((err)=>{
+            console.log("没有",err);  
+       })
+    </script>
+</body>
+</html>

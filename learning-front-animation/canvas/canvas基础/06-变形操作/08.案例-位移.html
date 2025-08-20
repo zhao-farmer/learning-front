@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border:1px solid black"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');  
+
+        //定义数组，存储7种颜色
+        var colors = ["red", "orange", "yellow", "green", "blue", "navy", "purple"];
+        var rStep = 12;
+        ctx.lineWidth = rStep;
+
+        //循环绘制圆弧
+        for (var i = 0; i < colors.length; i++) {
+            //定义每次向下移动rStep的变换矩阵
+            ctx.translate(0, rStep);
+            //定义颜色
+            ctx.strokeStyle = colors[i];
+            //绘制圆弧
+            ctx.beginPath();
+            ctx.arc(c1.width/2, 250, c1.height/2, 0, 180 * Math.PI / 180, true);
+            ctx.stroke();
+        }
+    </script>
+</body>
+</html>

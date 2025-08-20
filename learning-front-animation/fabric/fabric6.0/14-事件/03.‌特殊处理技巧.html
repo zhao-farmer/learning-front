@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        const rect = new fabric.Rect({
+            top: 100,
+            left: 100,
+            width: 100,
+            height: 50,
+            fill: "#ffde7d",
+        });
+
+        canvas.add(rect);
+
+        document.addEventListener("keydown", function (event) {
+            var moveDistance = 10; // 移动的距离
+
+            switch (event.keyCode) {
+                case 37: // 左箭头键
+                    rect.set("left", rect.left - moveDistance);
+                    break;
+                case 38: // 上箭头键
+                    rect.set("top", rect.top - moveDistance);
+                    break;
+                case 39: // 右箭头键
+                    rect.set("left", rect.left + moveDistance);
+                    break;
+                case 40: // 下箭头键
+                    rect.set("top", rect.top + moveDistance);
+                    break;
+            }
+
+            canvas.renderAll();
+        });
+    </script>
+</body>
+</html>

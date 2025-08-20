@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 外层直接导入 出现了问题 开始与导入会一起执行,原因是代码都停在导入那里了 -->
+    <script type="module">
+        // 异步获取数据
+        console.log("开始");
+        // 会影响其他使用        
+        import moduleA from './1.js'
+        console.log(moduleA);
+        
+        console.log("结束");
+
+    </script>
+    <!-- 解决方案：使用动态导入 -->
+    <script type="module">
+        // 异步获取数据
+        console.log("开始");
+        // 会影响其他使用        
+        let moduleA =  await import('./1.js')
+        console.log(moduleA);
+        
+        console.log("结束");
+
+    </script>
+     
+</body>
+</html>

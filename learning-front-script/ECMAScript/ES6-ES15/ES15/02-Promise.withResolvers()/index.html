@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            const { promise, resolve, reject } = Promise.withResolvers();
+
+            setTimeout(() => {
+                resolve("Success!");
+                // 或者 reject('Error!');
+            }, 1000);
+
+            promise.then(value => {
+                console.log(value); // 输出: Success!
+            }).catch(error => {
+                console.error(error);
+            });
+        </script>
+    </body>
+</html>

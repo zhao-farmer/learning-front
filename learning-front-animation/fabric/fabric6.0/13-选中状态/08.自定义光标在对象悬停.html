@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+        // 圆形
+        const circle = new fabric.Circle({
+            radius: 30,
+            fill: "#f55",
+            top: 70,
+            left: 70,
+        });
+
+        canvas.hoverCursor = "wait"; // 设置等待指针
+
+        canvas.add(circle);
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        // 线性渐变
+        let gradient = new fabric.Gradient({
+            type: "linear", // linear or radial
+            gradientUnits: "pixels", // pixels or pencentage 像素 或者 百分比
+            coords: { x1: 0, y1: 0, x2: 100, y2: 0 }, // 至少2个坐标对（x1，y1和x2，y2）将定义渐变在对象上的扩展方式
+            colorStops: [
+                // 定义渐变颜色的数组
+                { offset: 0, color: "red" },
+                { offset: 0.2, color: "orange" },
+                { offset: 0.4, color: "yellow" },
+                { offset: 0.6, color: "green" },
+                { offset: 0.8, color: "blue" },
+                { offset: 1, color: "purple" },
+            ],
+        });
+
+        // 圆
+        let circle = new fabric.Circle({
+            left: 30,
+            top: 30,
+            radius: 50,
+        });
+
+        circle.set("fill", gradient);
+        canvas.add(circle);
+
+        // 矩形
+        let rect = new fabric.Rect({
+            left: 150,
+            top: 30,
+            height: 100,
+            width: 100,
+            strokeWidth: 8,
+            fill:"",
+        });
+
+        rect.set("stroke", gradient);
+        canvas.add(rect);
+
+        // 文字
+        const text = new fabric.FabricText('我爱学习',{
+            left:30,
+            top:200,
+            fontSize:20,
+        })
+        text.set("stroke", gradient);
+        canvas.add(text);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+  <body>
+  <script type="module">
+    import { Application, Assets, Sprite, SCALE_MODES } from "../js/pixi.mjs";
+
+    (async () => {
+      // 创建应用程序
+      const app = new Application();
+
+      // 初始化应用程序
+      await app.init({ 
+          background: "#1099bb", 
+          width: 400,
+          height: 400, 
+      });
+
+      // 应用程序添加到网页中
+      document.body.appendChild(app.canvas);
+
+      // 加载兔子纹理
+      const texture = await Assets.load("../assets/images/bunny.png");
+
+      // 将纹理的缩放模式设置为最接近以保持像素化
+      texture.baseTexture.scaleMode = SCALE_MODES.NEAREST;
+
+      // 创建兔子精灵
+      const sprite = Sprite.from(texture);
+
+      // 设置锚点与位置
+      sprite.anchor.set(0.5);
+      sprite.x = app.screen.width / 2;
+      sprite.y = app.screen.height / 2;
+
+      // 选择参与互动
+      sprite.eventMode = "static";
+
+      // 鼠标样式
+      sprite.cursor = "pointer";
+
+      // 指针使触摸和鼠标标准化（适用于移动设备和台式机）
+      sprite.on("pointerdown", onClick);
+
+      // Alternatively, use the mouse & touch events:
+      // sprite.on('click', onClick); // mouse-only
+      // sprite.on('tap', onClick); // touch-only
+
+      app.stage.addChild(sprite);
+
+      //点击后比例开始变化
+      function onClick() {
+        sprite.scale.x *= 1.25;
+        sprite.scale.y *= 1.25;
+      }
+    })();
+  </script>
+</body>
+</html>

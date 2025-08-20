@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="200" height="200">
+        <path id="path" d="M10,10 C50,150 150,50 190,190" fill="transparent" stroke="black"/>
+        
+      
+
+        <!-- 自动旋转 -->
+        <rect width="20" height="20" fill="green">
+            <animateMotion 
+            dur="3s" 
+            repeatCount="indefinite" 
+            rotate="auto">
+            <mpath href="#path"/>
+            </animateMotion>
+        </rect>
+
+        <!-- 反方向旋转 -->
+        <rect width="20" height="20" fill="blue">
+            <animateMotion 
+                dur="3s" 
+                repeatCount="indefinite" 
+                begin="0.5s"
+                rotate="auto-reverse">
+                <mpath href="#path"/>
+            </animateMotion>
+        </rect>
+
+        <!-- 角度旋转 目前设置无效 -->
+        <rect width="20" height="20" fill="red">
+            <animateMotion 
+                dur="3s" 
+                repeatCount="indefinite" 
+                begin="1s"
+                rotate="90">
+                <mpath href="#path"/>
+            </animateMotion>
+        </rect>
+    </svg>
+</body>
+</html>

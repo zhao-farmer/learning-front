@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        // 从PixiJS和Three.js导入所需类
+        import { Container, Graphics, Text, WebGLRenderer } from "../js/pixi.mjs";
+        import * as THREE from "../js/three.mjs";
+
+        // 自执行异步函数用于设置演示场景
+        (async () => {
+            // 初始化窗口尺寸
+            let WIDTH = 800;
+            let HEIGHT = 600;
+
+            // === THREE.JS 设置 ===
+            // 创建带抗锯齿和模板缓冲的Three.js WebGL渲染器
+            const threeRenderer = new THREE.WebGLRenderer({ antialias: true, stencil: true });
+
+            // 配置Three.js渲染器尺寸和背景色
+            threeRenderer.setSize(WIDTH, HEIGHT);
+            threeRenderer.setClearColor(0xdddddd, 1); // 浅灰色背景
+            document.body.appendChild(threeRenderer.domElement);
+
+            // 创建Three.js场景
+            const scene = new THREE.Scene();
+
+            // 设置70°视野的透视相机
+            const threeCamera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT);
+
+            threeCamera.position.z = 50; // 将相机后移以查看场景
+            scene.add(threeCamera);
+
+            // 创建立方体网格
+            const boxGeometry = new THREE.BoxGeometry(30, 30, 30);
+            const basicMaterial = new THREE.MeshBasicMaterial({ color: 0x0095dd }); // 蓝色材质
+            const cube = new THREE.Mesh(boxGeometry, basicMaterial);
+
+            scene.add(cube);
+
+            // === PIXI.JS 设置 ===
+            // 创建与Three.js共享WebGL上下文的PixiJS渲染器
+            const pixiRenderer = new WebGLRenderer();
+
+            // 使用共享上下文初始化PixiJS渲染器
+            await pixiRenderer.init({
+                context: threeRenderer.getContext(),
+                width: WIDTH,
+                height: HEIGHT,
+                clearBeforeRender: false, // 不清空画布，由Three.js处理
+            });
+
+            // 创建PixiJS场景图
+            const stage = new Container();
+
+            // 创建黄色圆角矩形UI元素
+            const uiLayer = new Graphics().roundRect(20, 80, 300, 300, 20).fill(0xffff00);
+
+            // 添加文字覆盖层
+            const text = new Text({ text: "Pixi and Three.js", style: { fontFamily: "Arial", fontSize: 24, fill: "black" } });
+
+            uiLayer.addChild(text);
+            stage.addChild(uiLayer);
+
+            // 动画循环
+            function loop() {
+                // 持续旋转立方体
+                cube.rotation.x += 0.01;
+                cube.rotation.y += 0.01;
+
+                // 使用正弦波动画化UI层位置
+                uiLayer.y = ((Math.sin(Date.now() * 0.001) + 1) * 0.5 * WIDTH) / 2;
+
+                // 渲染Three.js场景
+                threeRenderer.resetState();
+                threeRenderer.render(scene, threeCamera);
+
+                // 渲染PixiJS场景
+                pixiRenderer.resetState();
+                pixiRenderer.render({ container: stage });
+
+                // 继续动画循环
+                requestAnimationFrame(loop);
+            }
+
+            // 启动动画循环
+            requestAnimationFrame(loop);
+
+            // 处理窗口大小调整
+            window.addEventListener("resize", () => {
+                WIDTH = window.innerWidth;
+                HEIGHT = window.innerHeight;
+
+                // 更新Three.js渲染器
+                threeRenderer.setSize(WIDTH, HEIGHT);
+                // 更新Three.js相机宽高比确保正确渲染
+                threeCamera.aspect = WIDTH / HEIGHT;
+                threeCamera.updateProjectionMatrix();
+
+                // 更新PixiJS渲染器
+                pixiRenderer.resize(WIDTH, HEIGHT);
+            });
+        })();
+    </script>
+</body>
+</html>

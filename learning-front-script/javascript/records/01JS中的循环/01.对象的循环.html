@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const obj = { a: 1, b: 2, c: 3 };
+        
+        // 1. for in 循环
+        for (let key in obj) {
+            if (obj.hasOwnProperty(key)) { // 检查是否是对象自身的属性
+                console.log(key, obj[key]);
+            }
+        }
+ 
+        // 2. Object.keys()结合forEach
+        Object.keys(obj).forEach(key => {
+            console.log(key, obj[key]);
+        });
+
+        // 3. 使用Object.entries()结合for...of循环
+        for (let [key, value] of Object.entries(obj)) {
+            console.log(key, value);
+        }
+ 
+        // 4. 使用for...of和Object.values()         
+        for (let value of Object.values(obj)) {
+            console.log(value);
+        }
+
+        // 5. 使用Object.entries()和for...of结合解构：
+        for (let [key, value] of Object.entries(obj)) {
+            console.log(key, value);
+        }
+
+
+    </script>
+</body>
+</html>

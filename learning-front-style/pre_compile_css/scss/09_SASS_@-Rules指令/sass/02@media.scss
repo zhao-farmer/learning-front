@@ -1,0 +1,26 @@
+.sidebar01 {
+    width: 300px;
+    @media screen and (orientation: landscape) {
+      width: 500px;
+    }
+  }
+
+
+  @media screen {
+    .sidebar02 {
+      @media (orientation: landscape) {
+        width: 500px;
+      }
+    }
+  }
+
+
+$media: screen;
+$feature: -webkit-min-device-pixel-ratio;
+$value: 1.5;
+
+@media #{$media} and ($feature: $value) {
+  .sidebar03 {
+    width: 500px;
+  }
+}

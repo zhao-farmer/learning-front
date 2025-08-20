@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div id="div1" style="width: 600px; height: 300px; border: 1px solid red"></div>
+    <div id="div2" style="width: 600px; height: 300px; border: 1px solid green"></div>
+
+    <script type="module">
+        // 获取本地数据
+        let response = await fetch("../assets/data/vintage.json");
+        let obj = await response.json();
+
+        // 注册主题
+        echarts.registerTheme("vintage", obj);
+
+        // 使用主题
+        var mCharts1 = echarts.init(document.querySelector("#div1"), "vintage");
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+
+                    data: yDataArr,
+                },
+            ],
+        };
+        mCharts1.setOption(option);
+
+        var mCharts2 = echarts.init(document.querySelector("#div2"));
+
+        let ret = [];
+        await fetch("https://geo.datav.aliyun.com/areas_v3/bound/100000_full.json")
+            .then(response => response.text())
+            .then(reData => {
+                ret = JSON.parse(reData);
+            })
+            .catch(error => console.error("Error:", error));
+
+        // 注册地图
+        echarts.registerMap("chinaMap", ret);
+
+        var option = {
+            geo: {
+                type: "map",
+                map: "chinaMap", //chinaMap需要和registerMap中的第一个参数保持一致
+                roam: false,
+            },
+        };
+        mCharts2.setOption(option);
+
+        // 链接在一起
+        echarts.connect([mCharts1, mCharts2]);
+    </script>
+</body>
+</html>

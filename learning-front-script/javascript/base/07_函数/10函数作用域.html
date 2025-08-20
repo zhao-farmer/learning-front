@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            函数作用域
+                - 函数作用域也是一种局部作用域
+                - 函数作用域在函数调用时产生，调用结束后销毁
+                - 函数每次调用都会产生一个全新的函数作用域
+                - 在函数中定义的变量时局部变量，只能在函数内部访问，外部无法访问
+
+        */
+        function fn() {
+            let a = "fn中的变量a"
+            console.log(a);
+        }
+        fn()
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

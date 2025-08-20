@@ -1,0 +1,7 @@
+.p {
+  content: "1>2" false;
+  content: "1<2" true;
+  content: "1==2" false;
+  content: "1>=2" false;
+  content: "1<=2" true;
+}

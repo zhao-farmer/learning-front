@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <div style="height: 150vh;"></div>
+    <script>
+        const {  fromEvent } = rxjs;
+        const { throttleTime } = rxjs.operators;
+
+
+        fromEvent(window, 'scroll').pipe(throttleTime(1000))
+        .subscribe(() => console.log('滚动事件（每秒最多触发一次）'));
+
+    </script>
+</body>
+</html>

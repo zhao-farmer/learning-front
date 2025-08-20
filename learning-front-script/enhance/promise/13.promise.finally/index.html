@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var p = new Promise((resolve,reject)=>{
+            resolve("aaaa")
+        })
+
+        p.then(res=>{
+            console.log("then");
+            return "1111"
+        }).catch(err=>{
+            console.log("catch");
+        }).finally(()=>{
+            console.log("finally");
+        }).then(res=>{
+            // 链式的 resolve 或 reject 会穿透finally
+            // finally 只是跟着处理数据 用于解决其他信息的
+            console.log(res);
+        })
+    </script>
+</body>
+</html>

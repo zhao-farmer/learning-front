@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>xxxx</li>
+        <li>xxxx</li>
+        <li>xxxx</li>
+        <li>xxxx</li>
+        <li>xxxx</li>
+    </ul>
+    <script>
+        // Array.from剋将一些类数组转成真数组
+
+        // arguments并不是真正的数组  不能使用数组的方法
+        function test(arguments){
+            console.log(arguments[1]);
+            // Array.from将arguments转变真正的数组
+            console.log(Array.from(arguments));
+            
+        }
+        test(1,2,3,4)
+      
+        let olis = document.querySelectorAll("li");
+        console.log(olis);
+        
+        // Array.from 转变成真数组
+        Array.from(olis).map(function(){
+            
+        })
+        
+    </script>
+</body>
+</html>

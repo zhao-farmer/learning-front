@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="800" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取静态画布
+        const canvas = new fabric.StaticCanvas("c1");
+        
+      
+
+        // '#6a0c0c' #e35d5d
+        const filter = new fabric.filters.BlendColor({
+            color: '#e35d5d',   // 红色
+            mode: 'multiply',
+        });
+
+        // 混合类型
+        let modeList = [
+            "multiply",     //  乘
+            "add",          //  加
+            "difference",   //  差
+            "screen",       //  筛
+            "subtract",     //  减
+            "darken",       //  变暗
+            "lighten",      //  变亮
+            "overlay",      //  叠加
+            "exclusion",    //  排除
+            "tint"          //  着色
+        ];
+        
+        // 图片
+        let img = new Image();
+        img.src="./assest/001.jpg"
+
+        img.onload = () =>{
+            for (let i = 0; i < modeList.length; i++) {
+                filter.mode = modeList[i];
+
+                // 混合强度
+                if(i ==  modeList.length - 1){
+                    filter.alpha = 0.7;
+                }
+                let fabricImage = new fabric.FabricImage(img,{
+                        scaleX:0.2,       // x轴比例
+                        scaleY:0.2,       // y轴比例
+                        left: i < 5 ? i * 150 : ( i - 5 ) * 150,
+                        top: i < 5 ? 0 :  200,
+                    }
+                )
+
+                canvas.add(fabricImage);
+                fabricImage.filters.push(filter);
+                fabricImage.applyFilters();
+            }
+            canvas.renderAll();   
+        }
+    </script>
+</body>
+</html>

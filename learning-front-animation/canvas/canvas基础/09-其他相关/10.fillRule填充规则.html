@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+      
+        class Star{
+            constructor(x,y){
+                this.x = x;
+                this.y = y;
+            }
+
+            draw(ctx){
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.lineTo(this.x - 60, this.y + 170 );
+                ctx.lineTo( this.x + 90 , this.y + 50 );
+                ctx.lineTo( this.x - 90,  this.y + 50 );
+                ctx.lineTo( this.x + 60, this.y + 170 );
+                ctx.closePath();
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 5;
+                ctx.stroke()
+            }
+        }
+
+
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext("2d");
+
+        let star1 = new Star(100,10)
+        star1.draw(ctx)
+        ctx.fillStyle = "#f00";
+        ctx.fill(); //默认非零缠绕 */
+
+
+        let star2 = new Star(300,10)
+        star2.draw(ctx)
+        ctx.fillStyle = "#f00";
+        ctx.fill('evenodd'); // 奇偶缠绕*/
+
+    </script>
+</body>
+</html>

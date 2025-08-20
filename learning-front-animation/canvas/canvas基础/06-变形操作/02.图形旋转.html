@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("c1");
+        const ctx = canvas.getContext("2d");
+
+        // 原点
+        ctx.arc(0, 0, 20, 0, 2 * Math.PI);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+
+        // 未旋转的矩形
+        ctx.fillStyle = "gray";
+        ctx.fillRect(100, 0, 120, 20);
+
+        // rotate 进行旋转  旋转的点是起始点  旋转的是坐标系
+        ctx.rotate((45 * Math.PI) / 180);
+        ctx.fillStyle = "red";
+        ctx.fillRect(100, 0, 120, 20);
+    </script>
+</body>
+</html>

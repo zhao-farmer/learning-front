@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTML img srcset 和 sizes 示例</title>
+</head>
+<body>
+
+<picture>
+    <!-- 使用 srcset 提供不同分辨率的图像，sizes 提供图像显示尺寸的信息 -->
+    <source srcset="image-small.jpg 320w,
+                    image-medium.jpg 640w,
+                    image-large.jpg 1024w"
+            sizes="(max-width: 600px) 480px,
+                   (max-width: 1200px) 800px,
+                   1024px">
+    <!-- 当浏览器不支持 <picture> 或 <source> 时，回退到 img 的 src -->
+    <img src="image-default.jpg" alt="Responsive image example">
+</picture>
+
+</body>
+</html>

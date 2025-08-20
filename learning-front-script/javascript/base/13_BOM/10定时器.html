@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 
+            定时器的本质，就是再执行事件后将函数添加到消息队列中
+        
+        */
+
+      //计时开始
+      //   console.time();
+      //   setTimeout(function () {
+      //     //计时结束
+      //     console.timeEnd();
+      //     console.log("定时器执行了~");
+      //   }, 3000);
+
+      //   //使程序卡六秒
+      //   const begin = Date.now();
+      //   while (Date.now() - begin < 6000);
+
+      /* 
+        setInterval() 没间隔一段时间就将函数添加到消息队列中
+            但是如果函数执行的速度比较慢，它使无法确保每次执行的间隔的都是一样的
+      
+      */
+      //   console.time("间隔");
+      //   setInterval(function () {
+      //     console.timeEnd("间隔");
+      //     console.log("定时器执行了~~");
+
+      //     alert("定时器执行");
+
+      //     console.time("间隔");
+      //   }, 3000);
+
+      /* 
+        希望可以确保函数每次执行都有相同间隔
+      */
+      console.time("间隔");
+      setTimeout(function fn() {
+        console.timeEnd("间隔");
+        console.log("函数执行了~");
+        // 再setTimeout的回调函数的最后，再调用一个setTimeout
+        console.time("间隔");
+        setTimeout(fn, 3000);
+      }, 3000);
+
+      /* 
+        问题：111 还是 222 先出现
+            222先出现，222默认就在调用堆当中，先执行完全局调用栈，才会执行消息队列中的数据
+        */
+      setTimeout(function () {
+        console.log(111);
+      }, 0);
+      console.log(222222);
+    </script>
+  </body>
+</html>

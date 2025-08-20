@@ -1,0 +1,24 @@
+<!-- 单向绑定：数据影响页面，但是页面更新不会影响到数据 -->
+<text>单向数据绑定 value值: {{value1}}</text>
+<input type="text" value="{{ value1 }}"/>
+
+<!-- 双向绑定：数据能影响页面，页面更新也能影响数据 -->
+<!-- 如果想实现简易双向绑定，需要在对应属性之前添加 model: -->
+<text>双向数据绑定 value值: {{value2}}</text>
+<input type="text" model:value="{{ value2 }}"/>
+
+<!-- 如果需要获取复选框的选中效果，需要给checked 添加model才可以 -->
+<text>checked值：{{isChecked}}</text>
+<view>
+  <checkbox model:checked="{{ isChecked }}"/> 绑定复选框
+</view>
+
+
+<!-- 注意事项1：属性值只能是一个单一字段的绑定 -->
+<text>测试单一字段 value值: {{value3}}</text>
+<input type="text" model:value="值为 {{value3}}"/>
+
+
+<!-- 注意事项2：属性值不能写数据路径，也就是不支持对象和数组 -->
+<text>测试对象属性值 value值: {{obj.value}}</text>
+<input type="text" model:value="{{obj.value}}"/>

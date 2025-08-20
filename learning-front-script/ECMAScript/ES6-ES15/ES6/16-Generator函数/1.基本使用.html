@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function *gen(){
+            console.log(11);
+            yield   //产出
+            console.log(22);
+            yield
+            console.log(33);
+        }
+        // 驱动起来
+        let g = gen()
+        g.next()
+        g.next()
+        g.next()
+    </script>
+</body>
+</html>

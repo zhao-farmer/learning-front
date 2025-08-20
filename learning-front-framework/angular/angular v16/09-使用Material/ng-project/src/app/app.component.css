@@ -1,0 +1,21 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.content {
+  padding: 20px;
+}
+
+.example-card {
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.example-header-image {
+  background-image: url('https://angular.io/assets/images/logos/angular/angular.svg');
+  background-size: cover;
+}
+
+.example-full-width {
+  width: 100%;
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite, Text, ColorMatrixFilter } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 800,
+                height: 800,
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            // 加载纹理
+            await Assets.load([
+                "../assets/images/bg_rotate.jpg",
+                "../assets/images/bg_scene_rotate.jpg",
+                "../assets/images/light_rotate_2.png",
+                "../assets/images/light_rotate_1.png",
+                "../assets/images/panda.png",
+            ]);
+
+            app.stage.eventMode = "static";
+
+            const bg = Sprite.from("../assets/images/bg_rotate.jpg");
+
+            bg.anchor.set(0.5);
+
+            bg.x = app.screen.width / 2;
+            bg.y = app.screen.height / 2;
+
+            const container = new Container();
+
+            container.x = app.screen.width / 2;
+            container.y = app.screen.height / 2;
+
+            const bgFront = Sprite.from("../assets/images/bg_scene_rotate.jpg");
+
+            bgFront.anchor.set(0.5);
+
+            container.addChild(bgFront);
+
+            const light2 = Sprite.from("../assets/images/light_rotate_2.png");
+
+            light2.anchor.set(0.5);
+            container.addChild(light2);
+
+            const light1 = Sprite.from("../assets/images/light_rotate_1.png");
+
+            light1.anchor.set(0.5);
+            container.addChild(light1);
+
+            const panda = Sprite.from("../assets/images/panda.png");
+
+            panda.anchor.set(0.5);
+
+            container.addChild(panda);
+
+            app.stage.addChild(container);
+
+            // 创建一个颜色矩阵滤镜
+            const filter = new ColorMatrixFilter();
+
+            // 将滤镜加入的容器中
+            container.filters = [filter];
+
+            let count = 0;
+            let enabled = true;
+
+            // 是否已点击 点击后取消 再次点添加上
+            app.stage.on("pointertap", () => {
+                enabled = !enabled;
+                container.filters = enabled ? [filter] : null;
+            });
+
+            // 添加帮助文本
+            const help = new Text({
+                text: "单击或点击以打开/关闭过滤器.",
+                style: {
+                    fontFamily: "Arial",
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    fill: "white",
+                },
+            });
+
+            help.y = app.screen.height - 25;
+            help.x = 10;
+
+            app.stage.addChild(help);
+
+            app.ticker.add(() => {
+                //都在旋转
+                bg.rotation += 0.01;
+                bgFront.rotation -= 0.01;
+                light1.rotation += 0.02;
+                light2.rotation += 0.01;
+
+                //熊猫放大缩小
+                panda.scale.x = 1 + Math.sin(count) * 0.04;
+                panda.scale.y = 1 + Math.cos(count) * 0.04;
+
+                count += 0.1;
+
+                // 动画滤镜
+                const { matrix } = filter;
+                console.log(matrix);
+
+                //matrix  是5*4 分别是 RGBA颜色和Alpha值
+                // 1-6 修改其颜色
+                matrix[1] = Math.sin(count) * 3;
+                matrix[2] = Math.cos(count);
+                matrix[3] = Math.cos(count) * 1.5;
+                matrix[4] = Math.sin(count / 3) * 2;
+                matrix[5] = Math.sin(count / 2);
+                matrix[6] = Math.sin(count / 4);
+            });
+        })();
+    </script>
+</body>
+</html>

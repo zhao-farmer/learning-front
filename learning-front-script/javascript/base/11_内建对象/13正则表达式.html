@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            正则表达式
+                - 正则表达式用来定义一个规则
+                - 通过这个规则计算机可以检查一个字符串是否符合规则
+                    或者将字符串重符合规则的内容提取出来
+                - 正则表达式也是JS中的一个对象
+                    所以要使用正则表达式，需要先创建正则表达式的对象
+            创建
+                对象创建 new RegExp()
+                字面量创建 \\
+            执行验证
+                匹配模式
+                    /i    忽略大小写的功能，是不能单独使用的。
+                    /g    在全文中查找所出现的指定字符串。    
+                    /ig    忽略大小写在全文中查找指定字符串。
+                    /gi    /gi和/ig作用是一样的，都是忽略大小写在全文中查找指定字符串。
+                    /m    多行查找
+                执行方式
+                    test() 方法 直接验证
+                    exec() 方法 可用于分组查看
+        
+        */
+
+        //new RegExp() 可以接受两个参数（字符串）   1.正则表达式 2.匹配模式
+        let reg = new RegExp("a", "i") //通过构造函数来创建一个正则表达式的对象
+        console.log(reg);
+
+        //使用字面量来创建正则表达：/正则表达式 /匹配模式
+        reg = /a/i;
+        console.log(reg);
+        //使用\省略i 
+        reg = /\w/
+        console.log(reg);
+        //使用\\省略i
+        reg = new RegExp("\\w");
+        console.log(reg);
+
+
+
+        reg = new RegExp("a")   // /a/ 标识，检查一个字符串中是否含有a
+
+        let str = 'a'
+        let result = reg.test(str)  //true
+        result = reg.test('b')  //false
+        result = reg.test('abc')    //true
+        result = reg.test('bcabc')  //true
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

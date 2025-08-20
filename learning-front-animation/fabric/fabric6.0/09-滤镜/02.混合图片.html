@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="600" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取静态画布
+        const canvas = new fabric.StaticCanvas("c1");
+
+        // 定义加载图片
+        async function loadImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = reject;
+                img.src = url;
+            });
+        }
+
+        (async () => {
+            // 图片
+            let img = await loadImage("./assest/001.jpg");
+            let filterImg1 = await loadImage("./assest/002.jpeg");
+            let filterImg2 = await loadImage("./assest/003.png");
+
+            let fabricfilterImg1 = new fabric.FabricImage(filterImg1);
+            let fabricfilterImg2 = new fabric.FabricImage(filterImg2);
+
+            const filter = new fabric.filters.BlendImage({
+                image: fabricfilterImg1,
+                mode: "multiply",
+            });
+
+            let fabricImage1 = new fabric.FabricImage(img, {
+                scaleX: 0.4, // x轴比例
+                scaleY: 0.4, // y轴比例
+                left: 0,
+                top: 0,
+            });
+
+            canvas.add(fabricImage1);
+            fabricImage1.filters.push(filter);
+            fabricImage1.applyFilters();
+
+            filter.image = fabricfilterImg2;
+            filter.mode = "mask";
+
+            let fabricImage2 = new fabric.FabricImage(img, {
+                scaleX: 0.4, // x轴比例
+                scaleY: 0.4, // y轴比例
+                left: 300,
+                top: 0,
+            });
+
+            canvas.add(fabricImage2);
+            fabricImage2.filters.push(filter);
+            fabricImage2.applyFilters();
+
+            // 混合类型：正片叠底(multiply) 或 蒙版(mask)
+            //  正片叠底：将将滤波图像的每个通道（R、G、B和A）的值乘以 它们在基本图像中的对应值。
+            //  蒙版：只会看 Alpha通道的过滤器图像，并将这些值应用到基础 图像的alpha通道。
+
+            canvas.renderAll();
+        })();
+    </script>
+</body>
+</html>

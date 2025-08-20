@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg">
+        <filter id="noise1">
+          <feTurbulence baseFrequency="0.03" numOctaves="2" />
+        </filter>
+      
+        <rect x="0" y="0" width="300" height="300" filter="url(#noise1)" />
+    </svg>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 求和函数，计算所有参数的和
+        function getSum(...args){
+            let sum = 0
+            for (let i = 0; i < args.length; i++) {
+                sum += args[i];
+            }
+            console.log(sum);
+        }
+
+        // 调用求和函数
+        getSum(5,10)    //两个参数
+        getSum(1,2,4)   // 三个参数
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<view class="out"><view wx:for="{{a}}" wx:for-item="item" wx:key="b" class="box">box模块-{{item.a}}</view><view wx:for="{{b}}" wx:for-item="item" wx:key="c"> 球星：{{item.a}} - 球衣：{{item.b}}</view></view>

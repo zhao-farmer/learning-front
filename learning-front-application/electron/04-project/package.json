@@ -1,0 +1,14 @@
+{
+  "name": "system",
+  "version": "1.0.0",
+  "main": "main.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "start2": "chcp 65001 && nodemon --exec electron . --watch ./ --ext .js,.html"
+  },
+  "devDependencies": {
+    "electron": "^37.2.1",
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逻辑外边距、边框和内边距示例</title>
+    <style>
+        .logical-box {
+            writing-mode: horizontal-tb; /* 水平书写模式 */
+            margin-inline-start: 30px; /* 内联起始边距 */
+            margin-inline-end: 20px;   /* 内联结束边距 */
+            padding-block-start: 10px; /* 块级起始内边距 */
+            padding-block-end: 15px;   /* 块级结束内边距 */
+            border-inline-start: 5px solid green; /* 内联起始边框 */
+            border-block-start: 3px dashed red;   /* 块级起始边框 */
+        }
+    </style>
+</head>
+<body>
+    <div class="logical-box">
+        这是一个包含逻辑外边距、边框和内边距的元素。
+    </div>
+</body>
+</html>

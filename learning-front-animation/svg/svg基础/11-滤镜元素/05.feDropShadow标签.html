@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="500" height="300" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="shadow">
+            <feDropShadow
+              dx="20"
+              dy="20"
+              stdDeviation="5"
+              flood-color="lightblue"
+              flood-opacity="0.8" />
+          </filter>
+        </defs>
+      
+        <image href="./images/flower.png" filter="url(#shadow)" />
+      </svg>
+</body>
+</html>

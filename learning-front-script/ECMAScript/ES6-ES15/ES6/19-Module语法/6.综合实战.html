@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box1">
+        <h1></h1>
+        <ul></ul>
+    </div>
+    <div class="box2">
+        <h1></h1>
+        <img src="" style="width: 100px;">
+        <ul></ul>
+    </div>
+    <script type="module">
+        import {CreateBox} from './js-class/CreateBox.js'
+        import CreateImgBox from './js-class/CreateImgBox.js'
+
+        var data1 = {
+            title:"体育",
+            list:["体育-1","体育-2","体育-3"]
+        }
+        var data2 = {
+            title:"综艺",
+            url:'./img/1.jpeg',
+            list:["综艺-1","综艺-2","综艺-3"]
+        }
+
+        new CreateBox(".box1",data1)
+        new CreateImgBox(".box2",data2)
+    </script>
+</body>
+</html>

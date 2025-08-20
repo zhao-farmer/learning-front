@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 箭头函数：写法简洁
+
+        // 原始函数（命名式）
+        let test = function(){
+
+        }
+        // 1.直接使用箭头函数
+        let test2 = ()=>{
+            console.log("test");
+        }
+        test2();
+
+        // 如果有返回值
+        // 原始箭头函数
+        let test3 = ()=>{
+            return "111"
+        }
+        // 省略写法
+        let test4 = () =>"111"
+
+        console.log(test3() === test4());   // true
+
+        // 1.只有return 可以省略
+        // 2. 如果返回对象需要注意 对象的{}与函数的{}冲突 对象的外面加上一个小括号 
+        let test5 = ()=>({
+            name:'kerwin',
+            age:100
+        })
+
+        // 3.如果只有一个参数，可以省略()
+        let arr = ["aaa","bbb","ccc"]
+        let newarr = arr.map(item =>`<li>${item}</li>`)
+        // 两个参数不能省略
+        let newarr2 = arr.map((item,index) =>`<li>${item}-${index}</li>`)
+
+        
+        // 4.无法访问arguments,无法new
+        let test6 = () =>{
+            console.log(arguments);
+        }
+        // test6(1,2,3)
+        // new test6()
+
+
+        // 5. 箭头没有this
+        // 或者说this指向外部的this（父作用域）
+
+    </script>
+</body>
+</html>

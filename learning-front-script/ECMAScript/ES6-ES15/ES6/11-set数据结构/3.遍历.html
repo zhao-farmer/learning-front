@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         let s1 = new Set([1,2,3,4])
+         for (const i of s1) {
+            console.log(i);
+         }
+         for (const i of s1.keys()) {
+            console.log(i);
+         }
+         for (const i of s1.values()) {
+            console.log(i);
+         }
+         // 拿到键值键名一样的
+         for (const i of s1.entries()) {
+            console.log(i);
+         }
+
+         let arr = ["aa","bb","cc"]
+         for (let [index,item] of arr.entries()) {
+            console.log(index,item);
+            
+         }
+
+
+         arr.forEach((item,index) => {
+            console.log(index,item);
+         });
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+//导入scss
+@import './import/mainA.scss';
+@import './import/mainA';
+
+
+//导入css与其他类型
+@import "./import/mainB.css";
+@import "foo" screen;
+@import "http://foo.com/bar";
+@import url(foo);
+
+//导入双份 
+@import "./import/mainC", "./import/mainD";
+
+//插值语法导入 
+$family: unquote("Droid+Sans");
+@import url("http://fonts.googleapis.com/css?family=\#{$family}");
+
+
+
+
+$color:#111;
+.container {
+    @import './import/mainG.scss';
+    color: $color; 
+}

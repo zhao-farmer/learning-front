@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 600px;
+        }
+        img{
+            max-width: 100%;
+            max-height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">click</button>
+    <div class="box">
+        <img src="" class="picture">
+    </div>
+  
+
+    <script>
+        const obtn = document.querySelector("#btn");
+        const img = document.querySelector(".picture")
+
+        obtn.onclick = () =>{
+            //获取图片
+            getUrlImage()
+        }
+
+        let url = "https://tea.qingnian8.com/tools/taoShow"
+
+        function getUrlImage(){
+            var xhr = new XMLHttpRequest()
+            xhr.open("get",url)
+            xhr.send()
+            // 可以直接判断
+            xhr.onload = function(){
+                if(/^2\d{2}$/.test(xhr.status)){
+                    render(xhr.responseText)
+                }else{
+                    console.log("error",xhr.responseText);
+                }
+            }
+        }
+
+        getUrlImage()
+
+        function render(res){
+           let data =  JSON.parse(res)
+           img.src = data.data[0].url
+        }
+
+    </script>
+</body>
+</html>

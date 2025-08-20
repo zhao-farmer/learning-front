@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var audio = new Audio();
+        audio.src = "00.mp3";
+
+        // 步骤1
+        audio.addEventListener('loadstart',function(){
+            console.log("loadstart: 开始加载");
+        });
+       
+        // 步骤2
+        audio.addEventListener('progress',function(){
+            console.log("progress: 加载中");
+        });
+        // 步骤3
+        audio.addEventListener('durationchange',function(){
+            console.log("durationchange: 时长改变");
+        });
+        // 步骤4
+        audio.addEventListener('loadedmetadata',function(){
+            console.log("loadedmetadata: 源数据加载完毕");
+        });
+        // 步骤5
+        audio.addEventListener('loadeddata',function(){
+            console.log("loadeddata: :数据开始加载");
+        });
+
+        // 步骤6
+        audio.addEventListener('canplay',function(){
+            console.log("canplay: 音频可以播放的状态");
+        });
+         // 步骤7
+         audio.addEventListener('canplay',function(){
+            console.log("canplaythrough: 可以播放整个音频，音频播放加载完全完成");
+        });
+    </script>
+</body>
+</html>

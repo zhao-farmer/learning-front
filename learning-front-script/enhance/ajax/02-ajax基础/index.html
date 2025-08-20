@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button>aaa</button>
+    <script>
+        // ajax === async javascript and XML
+        // json {"name":"zhangsan"}
+        // ajax(道) 和 XMLHttpRequest(术)
+
+        var xhr = new XMLHttpRequest()
+
+        xhr.open("get","1.json",true)
+        // 第一个参数 get post
+        // 第二个参数 请求地址
+        // 第三个参数 是否异步 只能写成 true 或者不写
+
+        // 发送请求
+        xhr.send()
+
+        // 监听
+        xhr.onreadystatechange = function(){
+            // readystate 是 xhr 对象中的属性, 表示状态 0 1 2 3 4
+            if(xhr.readyState === 4){
+                // 使用 正则表达式 代替 xhr.status === 200
+                if(/^2\d{2}$/.test(xhr.status)){
+                    console.log(xhr.responseText);
+                }else{
+                    console.log("error",xhr.responseText);
+                }
+            }
+        }
+
+        // 加载完直接判断
+        xhr.onload = function(){
+            console.log(xhr.readyState);
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8" />
+      <title>Document</title>
+  </head>
+  <body>
+      <svg width="300" height="300" >
+          <path id="path1" d="M20,20 L280,20" stroke="gray" />
+          <path id="path2" d="M20,200 L280,200" stroke="blue" />
+          <circle r="5" fill="red">
+              <!-- 基础运动 -->
+              <animateMotion 
+                  dur="2s" 
+                  path="M20,20 L280,20" 
+                  fill="freeze" />
+
+              <!-- 叠加偏移运动 -->
+              <animateMotion 
+                  dur="2s" 
+                  path="M0,0 L0,180 -260,180" 
+                  additive="sum" 
+                  begin="2s" 
+                  fill="freeze" />
+          </circle>
+      </svg>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+        <script type="module">
+            // 引入文件
+            import * as fabric from "../index.min.mjs";
+
+            // 获取动态画布
+            const canvas = new fabric.Canvas("c1");
+
+            const line = new fabric.Line(
+                [
+                    10, 10, // 起始点坐标
+                    200, 300 // 结束点坐标
+                ],
+                {
+                    stroke: 'red', // 笔触颜色
+                }
+            )
+            canvas.add(line)
+
+        </script>
+    </body>
+</html>

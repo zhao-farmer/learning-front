@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 800px; height: 600px"></div>
+    <script type="module">
+ 
+        let data = []
+        // 获取本地数据
+        await fetch('../assets/data/001.json')
+          .then(response => response.text())
+          .then(reData => {
+              data = JSON.parse(reData)
+          })
+          .catch(error => console.error('Error:', error));
+        
+        var xyDataArr = [];
+
+        for (let i = 0; i < data.length; i++) {
+            var height = data[i].height;
+            var weight = data[i].weight;
+            var newArr = [height, weight];
+            xyDataArr.push(newArr);
+        }
+
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            xAxis: {
+                type: "value",
+                scale: true,
+            },
+            yAxis: {
+                type: "value",
+                //脱离0值比例
+                scale: true,
+            },
+            series: [
+                {
+                    name: "健康比例",
+                    type: "scatter",
+                    data: xyDataArr,
+                    // symbolSize: 30,
+                    symbolSize: function (arg) {
+                        var height = arg[0] / 100;
+                        var weight = arg[1];
+                        //bmi  = 体重kg/(身高m*身高m) 大于28,就代表肥胖
+                        var bmi = weight / (height * height);
+                        if (bmi > 28) {
+                            return 20;
+                        }
+                        return 5;
+                    },
+                    itemStyle: {
+                        // color: "green",
+                        color: function (arg) {
+                            var height = arg.data[0] / 100;
+                            var weight = arg.data[1];
+                            //bmi  = 体重kg/(身高m*身高m) 大于28,就代表肥胖
+                            var bmi = weight / (height * height);
+                            if (bmi > 28) {
+                                return "red";
+                            }
+                            return "green";
+                        },
+                    },
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

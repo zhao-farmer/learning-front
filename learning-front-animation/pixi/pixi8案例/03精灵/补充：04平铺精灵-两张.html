@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  </head>
+
+  <body>
+    <div id="px-render"></div>
+
+    <script type="module">
+      import { Application, Assets, TilingSprite, Texture } from "../js/pixi.mjs";
+
+      //创建一个 Pixi应用
+      let app = new Application();
+
+      // 初始化应用程序
+      await app.init({
+        width: 1286,
+        height: 640,
+        background: "#fff",
+      });
+
+      let playground = document.getElementById("px-render");
+      //把 Pixi 创建的 canvas 添加到页面上
+      playground.appendChild(app.canvas);
+
+      let texture1 = await Assets.load("../assets/images/wood.jpg");
+      let texture2 = await Assets.load("../assets/images/ground.png");
+
+      let woodScript = new TilingSprite({ texture: texture1, width: 1286, height: 640 });
+
+      let groundScript = new TilingSprite({ texture: texture2, width: 1286, height: 179 });
+      groundScript.y = 640 - 179;
+
+      app.stage.addChild(woodScript);
+      app.stage.addChild(groundScript);
+
+      function gameLoop() {
+        // 循环调用gameLoop
+        requestAnimationFrame(gameLoop);
+        // 更新当前的游戏状态
+        play();
+      }
+
+      //使精灵移动的函数
+      function play() {
+        woodScript.tilePosition.x -= 1;
+        groundScript.tilePosition.x -= 5;
+      }
+      gameLoop();
+    </script>
+  </body>
+</html>

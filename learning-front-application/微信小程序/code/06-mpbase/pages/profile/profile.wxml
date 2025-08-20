@@ -1,0 +1,17 @@
+<custom06 wx:if="{{ num === 1 }}"/>
+
+<button type="warn" bind:tap="handler">销毁自定义组件</button>
+
+<view class="line"></view>
+
+<navigator url="/pages/detail/detail?id=10&title=测试">跳转到详情页面</navigator>
+
+<view class="line"></view>
+
+<custom08/>
+
+<view class="line"></view>
+
+<!-- 属性名是正在 externalClasses 里面定义的元素 -->
+<!-- 属性值必须是一个类名 -->
+<custom09 extend-class="my-class"/>

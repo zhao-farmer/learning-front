@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="c1" width="600" height="400"></canvas>
+        <script>
+            const canvas = document.getElementById("c1");
+            const ctx = canvas.getContext("2d");
+
+            let image = new Image();
+            image.src = "./images/2.png";
+
+            image.onload = function () {
+                ctx.drawImage(image,0,0);
+
+                // 获取图像数据
+                let data = ctx.getImageData(50, 50, 200, 200);
+			    ctx.putImageData(data, 350, 100);
+            }
+
+        </script>
+    </body>
+</html>

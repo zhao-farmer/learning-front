@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [100,60,80]
+        // 数组解构 赋值
+        const [max,min,avg] = arr
+        // 相当于下面的
+        // const max  = arr[0]
+        // const min  = arr[1]
+        // const avg  = arr[2]
+
+        console.log(max);   // 100
+        console.log(avg);   // 80
+        console.log(min);   // 80
+
+
+        // 交换两个变量
+        const a = 1
+        const b = 2;
+        [b,a] = [a,b]
+        console.log(a,b)   //2 1
+        
+    </script>
+</body>
+</html>

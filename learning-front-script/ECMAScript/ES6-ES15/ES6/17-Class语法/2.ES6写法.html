@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            let r = Symbol("run");
+
+            class Person {
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+
+                say() {
+                    console.log(this.name, this.age);
+                }
+
+                // 使用Symbol获取其他类型也可以作为方法名
+                [r](){
+                    console.log(this.name + "跑的贼快！");
+                }
+            }
+
+            let obj = new Person("kerwin", 100);
+
+            // console.log(obj);   /Person {name: 'kerwin', age: 100}
+
+            // Person的属性还是放到原型上
+            console.log(Person === Person.prototype.constructor); //true
+
+            console.log(obj.__proto__ === Person.prototype);    //true
+
+            obj[r]()    //kerwin跑的贼快！
+        </script>
+    </body>
+</html>

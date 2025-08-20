@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Auto Play Video on Scroll</title>
+    <style>
+        body,
+        html {
+            height: 2000px;
+            /* 为了模拟滚动效果 */
+        }
+
+        #myVideo {
+            position: relative;
+            top: 1000px;
+            /* 将视频放置在页面较远的位置，以便滚动 */
+        }
+    </style>
+</head>
+
+<body>
+    <video
+        src="./resource/01.mp4"
+        id="myVideo" width="200" height="300" controls muted>
+    </video>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const videoElement = document.getElementById('myVideo');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // 当元素与视口交叠时播放视频
+                        videoElement.play().catch(error => {
+                            console.error('播放失败', error);
+                        });
+                    } else {
+                        // 当元素离开视口时暂停视频
+                        videoElement.pause();
+                    }
+                });
+            }, {
+                threshold: 0.5 // 可以调整这个值来改变何时开始播放
+            });
+
+            // 开始观察video元素
+            observer.observe(videoElement);
+        });
+    </script>
+</body>
+
+</html>

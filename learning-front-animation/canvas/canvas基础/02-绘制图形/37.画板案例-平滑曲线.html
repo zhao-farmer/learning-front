@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="600px" height="400px"></canvas>
+    <br />
+    <button id="clear">清空</button>
+
+    <script>
+    
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+        let isDown = false;
+        let beginPoint = null;
+        let points = [];
+        // 设置线条颜色
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 1;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+        canvas.addEventListener('mousedown', down, false) //按下鼠标按键时触发
+        canvas.addEventListener('mousemove', move, false) //移动鼠标时触发
+        canvas.addEventListener('mouseup', up, false) //释放鼠标按键时触发
+        canvas.addEventListener('mouseout', up, false) //鼠标离开元素时触发
+
+        // 鼠标按下
+        function down(evt) {
+            isDown = true
+            const { x, y } = getPos(evt)
+            points.push({ x, y })
+            beginPoint = { x, y }
+        }
+        // 鼠标移动
+        function move(evt) {
+            if (!isDown) return
+
+            const { x, y } = getPos(evt)
+            points.push({ x, y })
+
+            if (points.length > 3) {
+                const lastTwoPoints = points.slice(-2)
+                const controlPoint = lastTwoPoints[0]
+                const endPoint = {
+                x: (lastTwoPoints[0].x + lastTwoPoints[1].x) / 2,
+                y: (lastTwoPoints[0].y + lastTwoPoints[1].y) / 2
+                }
+                drawLine(beginPoint, controlPoint, endPoint)
+                beginPoint = endPoint
+            }
+        }
+        // 抬起鼠标
+        function up(evt) {
+            if (!isDown) return
+            const { x, y } = getPos(evt)
+            points.push({ x, y })
+
+            if (points.length > 3) {
+                const lastTwoPoints = points.slice(-2)
+                const controlPoint = lastTwoPoints[0]
+                const endPoint = lastTwoPoints[1]
+                drawLine(beginPoint, controlPoint, endPoint)
+            }
+            beginPoint = null
+            isDown = false
+            points = []
+        }
+        // 定位赋值
+        function getPos(evt) {
+            const rect = canvas.getBoundingClientRect()
+            return {
+                x: evt.clientX - rect.left,
+                y: evt.clientY - rect.top
+            }
+        }
+        // 绘制
+        function drawLine(beginPoint, controlPoint, endPoint) {
+            ctx.beginPath()
+            ctx.moveTo(beginPoint.x, beginPoint.y)
+            ctx.quadraticCurveTo(controlPoint.x, controlPoint.y, endPoint.x, endPoint.y)
+            ctx.stroke()
+            ctx.closePath()
+        }
+    
+
+        document.getElementById("clear").onclick = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+    </script>
+</body>
+</html>

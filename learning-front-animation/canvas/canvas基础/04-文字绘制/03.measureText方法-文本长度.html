@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div id="msg"></div>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+        
+        var text = "我爱学习！我爱学习！";
+        ctx.font = "bold 30px 微软雅黑";
+        ctx.strokeStyle = "red";
+        ctx.strokeText(text, 30, 60);
+
+        var length = ctx.measureText(text).width;
+
+        ctx.fillText("文本宽度："+length, 30, 160);
+       
+    </script>
+</body>
+</html>

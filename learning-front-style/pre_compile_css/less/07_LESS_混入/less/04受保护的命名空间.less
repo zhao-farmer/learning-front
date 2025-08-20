@@ -1,0 +1,9 @@
+
+@mode:false;
+#namespace when (@mode = huge) {  //命名空间守卫
+    .mixin() { /* */ }
+}
+//或者写成
+#namespace {
+    .mixin() when (@mode = huge) { /* */ }   //mixins 守卫
+}

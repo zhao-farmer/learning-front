@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>星空</title>
+</head>
+<body>
+    <svg width="600" height="400" viewBox="-400 -300 800 600" style="background: #001122;">
+        <!-- 一颗星星 -->
+        
+        <polygon id="star" points="0 -10 2 -2 10 0 2 2 0 10 -2 2 -10 0 -2 -2" fill="inhert" />
+      
+        <!--引用出很多星星-->
+        <use x="0" y="0" xlink:href="#star" fill="red" />
+        <use x="-100" y="-100" xlink:href="#star" fill="white" />
+        <use x="100" y="100" xlink:href="#star" fill="blue" />
+        <use x="-100" y="100" xlink:href="#star" fill="green" />
+        <use x="100" y="-100" xlink:href="#star" fill="yellow" />
+    </svg>
+</body>
+</html>

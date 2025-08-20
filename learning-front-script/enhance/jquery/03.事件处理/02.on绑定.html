@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">on绑定事件</button>
+    <button id="btn2">on绑定多个事件</button>
+    <button id="btn3">on绑定多个事件（分开绑定）</button>
+    <script src="../js/jquery.3.7.1.js"></script>
+    <script>
+        /*on绑定事件*/
+        $("#btn").on("click",function () {
+            console.log("小宝贝")
+        })
+    
+    
+        /*on绑定多个事件*/
+        $("#btn2").on("click mouseover",function () {
+            console.log("夢月小宝贝")
+        })
+    
+    
+        /*on绑定多个事件（分开绑定）*/
+        $("#btn3").on({
+            "click":function () {
+                console.log("好想吃辣的")
+            },
+            "mouseover":test
+        })
+        function test() {
+            console.log("啊啊啊好想吃")
+        }
+    
+    
+        /*取消事件*/
+        // $("#btn3").off()   //取消（所有）事件的绑定
+        $("#btn3").off("mouseover")    //取消（指定事件）的绑定
+    
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/requestDomo01/requestDomo",
+    "pages/requestDomo02/requestDomo01",
+    "pages/requestDomo02/requestDomo02",
+    "pages/requestDomo02/requestDomo03",
+    "pages/requestDomo02/requestDomo04",
+    "pages/requestDomo02/requestDomo05",
+    "pages/requestDomo03/requestDomo01",
+    "pages/requestDomo03/requestDomo02",
+    "pages/requestDomo03/requestDomo03"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="300">
+        <!-- 可控制动画的图形 -->
+        <rect id="box" x="50" y="50" width="80" height="80" fill="#4CAF50">
+            <!-- 向左移动 -->
+            <animate 
+                id="move1" 
+                attributeName="x" 
+                from="200" 
+                to="0" 
+                dur="0.8s" 
+                begin="indefinite" 
+                fill="freeze"
+            />
+            <!-- 向右移动 -->
+            <animate 
+                id="move2" 
+                attributeName="x" 
+                from="0" 
+                to="200" 
+                dur="0.8s" 
+                begin="indefinite" 
+                fill="freeze"
+            />
+            <!-- 向上移动 -->
+            <animate 
+               id="move3" 
+               attributeName="y" 
+               from="200" 
+               to="0" 
+               dur="0.8s" 
+               begin="indefinite" 
+               fill="freeze"
+           />
+           <!-- 向下移动 -->
+           <animate 
+               id="move4" 
+               attributeName="y" 
+               from="0" 
+               to="200" 
+               dur="0.8s" 
+               begin="indefinite" 
+               fill="freeze"
+           />
+        </rect>
+    </svg>
+    <script>
+        document.addEventListener("keydown", e => {
+            switch (e.code) {
+                case "ArrowLeft":
+                    document.getElementById("move1").beginElement();
+                    break;
+                case "ArrowRight":
+                    document.getElementById("move2").beginElement();
+                    break;
+                case "ArrowUp":
+                    document.getElementById("move3").beginElement();
+                    break;
+                case "ArrowDown":
+                    document.getElementById("move4").beginElement();
+                    break;
+              
+            }
+        });
+    </script>
+</body>
+</html>

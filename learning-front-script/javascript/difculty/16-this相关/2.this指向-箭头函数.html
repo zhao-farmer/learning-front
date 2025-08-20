@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button class="btn"></button>
+    <script>
+        // 1.箭头函数中的this
+        console.log(this);
+        // 箭头函数
+        const sayHi = function(){
+            console.log(this); // 该箭头函数中的this为函数声明环境中this 一致
+            
+        }
+        // 普通对象
+        const user = {
+            name:'小明',
+            // 该箭头函数中的 this 为函数声明环境中 this 一致
+            walk:()=>{
+                console.log(this); 
+            }
+        }
+        
+        // 2.注意情况1
+        // DMO节点
+        const btn = document.querySelector('.btn')
+        // 箭头函数 此时 this 指向了window
+        btn.addEventListener('click',()=>{
+            console.log(this);
+        })
+        // 普通函数 此时 this 指向了DOM对象
+        btn.addEventListener('click',function(){
+            console.log(this);
+        })
+
+        // 3.注意情况2
+        function Person(){}
+        // 原型对象上添加了箭头函数
+        Person.prototype.walk = () =>{
+            console.log("人都要走路...");
+            console.log(this);  // window
+        }
+        const p1 = new Person()
+        p1.walk()
+    </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 导入文件 -->
+        <script src="../js/wavesurfer.min.js"></script>
+        <script>
+            // Web音频示例
+
+            // 定义 ‌均衡器频带（Equalizer Bands）
+            const eqBands = [32, 64, 125, 250, 500, 1000, 2000, 4000, 8000, 16000];
+
+            // 创建WaveSurfer实例并传递媒体元素
+            const wavesurfer = WaveSurfer.create({
+                container: document.body,
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/audio.wav",
+                mediaControls: true,
+            });
+
+            wavesurfer.on("click", () => wavesurfer.playPause());
+
+            wavesurfer.once("play", () => {
+                // 创建Web音频上下文
+                const audioContext = new AudioContext();
+
+                // 为每个频带创建双二阶滤波器
+                const filters = eqBands.map(band => {
+                    // 设置过滤器 并设置
+                    const filter = audioContext.createBiquadFilter();
+                    filter.type = band <= 32 ? "lowshelf" : band >= 16000 ? "highshelf" : "peaking";
+                    filter.gain.value = Math.random() * 40 - 20;
+                    filter.Q.value = 1; // 谐振
+                    filter.frequency.value = band; // 频率界限
+                    return filter;
+                });
+                // 创建媒体对象
+                const audio = wavesurfer.getMediaElement();
+                // 音频上下文创建媒体节点
+                const mediaNode = audioContext.createMediaElementSource(audio);
+
+                // 按顺序连接过滤器和媒体节点
+                const equalizer = filters.reduce((prev, curr) => {
+                    prev.connect(curr);
+                    return curr;
+                }, mediaNode);
+
+                // 将过滤器连接到音频输出
+                equalizer.connect(audioContext.destination);
+
+                sliders.forEach((slider, i) => {
+                    const filter = filters[i];
+                    filter.gain.value = slider.value;
+                    slider.oninput = e => (filter.gain.value = e.target.value);
+                });
+            });
+
+            // HTML UI
+            // 为每个频带创建一个垂直滑块
+            const container = document.createElement("p");
+            const sliders = eqBands.map(() => {
+                const slider = document.createElement("input");
+                slider.type = "range";
+                slider.orient = "vertical";
+                slider.style.appearance = "slider-vertical";
+                slider.style.width = "8%";
+                slider.min = -40;
+                slider.max = 40;
+                slider.value = Math.random() * 40 - 20;
+                slider.step = 0.1;
+                container.appendChild(slider);
+                return slider;
+            });
+            document.body.appendChild(container);
+        </script>
+    </body>
+</html>

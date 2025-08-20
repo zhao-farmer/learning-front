@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 普通对象
+        const user = {
+            name:'小明',
+            age:18
+        }
+        // 批量声明变量 name age
+        // 同时将数组单元值 小明 18 依次赋值给变量 name age
+        // 对象属性的值将被赋值给与属性名相同的变量
+        const {name,age} = user
+       
+        console.log(name);  //小明
+        console.log(age);  // 18
+
+        
+    </script>
+</body>
+</html>

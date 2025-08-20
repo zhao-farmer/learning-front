@@ -1,0 +1,16 @@
+/**index.wxss**/
+input{
+  border: 1px solid black;
+}
+
+.line{
+  height: 5rpx;
+  background-color: slateblue;
+  margin: 50rpx 0;
+}
+.catch{
+  display: flex;
+  height: 300rpx;
+  background-color: skyblue;
+  align-items: center;
+}

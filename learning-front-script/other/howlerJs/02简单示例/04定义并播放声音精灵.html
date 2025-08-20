@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">播放</button>
+    <script src="../js/howler.js"></script>
+    <script>
+        btn.onclick = ()=>{
+            load()
+        }
+        function load(){
+            var sound = new Howl({
+                src: ['../assest/longtime.mp3'],
+                sprite: {
+                    blast: [0, 3000],
+                    laser: [4000, 1000],
+                    winner: [6000, 5000]
+                }
+            });
+            // Shoot the laser!
+            sound.play('laser');
+        }
+    </script>
+</body>
+</html>

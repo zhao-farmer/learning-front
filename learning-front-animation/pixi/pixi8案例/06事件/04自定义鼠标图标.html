@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite, Texture } from "../js/pixi.mjs";
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({  
+                width: 800,
+                height: 600,    
+            });
+
+            // 添加应用到页面上
+            document.body.appendChild(app.canvas);
+
+            // css的方式加载图标
+            const defaultIcon = `url("../assets/images/bunny.png"),auto`;
+            const hoverIcon = `url("../assets/images/bunny_saturated.png"),auto`;
+
+            // 加载纹理
+            await Assets.load([
+                "../assets/images/bg_button.jpg", 
+                "../assets/images/button.png", 
+                "../assets/images/button_down.png", 
+                "../assets/images/button_over.png"
+            ]);
+
+            // 添加图片的样式
+            app.renderer.events.cursorStyles.default = defaultIcon;
+            app.renderer.events.cursorStyles.hover = hoverIcon;
+
+            // 创建应用程序
+            const background = Sprite.from("../assets/images/bg_button.jpg");
+
+            background.width = app.screen.width;
+            background.height = app.screen.height;
+
+            //添加应用到舞台上
+            app.stage.addChild(background);
+
+            // 从图片路径创建一些纹理
+            const textureButton = Texture.from("../assets/images/button.png");
+            const textureButtonDown = Texture.from("../assets/images/button_down.png");
+            const textureButtonOver = Texture.from("../assets/images/button_over.png");
+
+            const buttons = [];
+
+            //button 位置集合
+            const buttonPositions = [175, 75, 655, 75, 410, 325, 150, 465, 685, 445];
+
+            //for循环
+            for (let i = 0; i < 5; i++) {
+                // 创建精灵
+                const button = new Sprite(textureButton);
+
+                button.anchor.set(0.5);
+                button.x = buttonPositions[i * 2];
+                button.y = buttonPositions[i * 2 + 1];
+
+                // 使按钮具有交互性
+                button.eventMode = "static";
+
+                // 修改鼠标的状态
+                button.cursor = "hover";
+
+                button
+                    //鼠标和触摸事件被标准化为
+                    //指针*事件用于处理不同的
+                    //按钮事件。
+                    .on("pointerdown", onButtonDown)
+                    .on("pointerup", onButtonUp)
+                    .on("pointerupoutside", onButtonUp)
+                    .on("pointerover", onButtonOver)
+                    .on("pointerout", onButtonOut);
+
+                // 仅使用鼠标事件
+                // .on('mousedown', onButtonDown)
+                // .on('mouseup', onButtonUp)
+                // .on('mouseupoutside', onButtonUp)
+                // .on('mouseover', onButtonOver)
+                // .on('mouseout', onButtonOut)
+
+                // 使用仅限触摸的事件
+                // .on('touchstart', onButtonDown)
+                // .on('touchend', onButtonUp)
+                // .on('touchendoutside', onButtonUp)
+
+                // 将其添加到舞台
+                app.stage.addChild(button);
+
+                // 将按钮添加到数组
+                buttons.push(button);
+            }
+
+            // 设置一些不实用的值
+            buttons[0].scale.set(1.2);
+            buttons[2].rotation = Math.PI / 10;
+            buttons[3].scale.set(0.8);
+            buttons[4].scale.set(0.8, 1.2);
+            buttons[4].rotation = Math.PI;
+
+            // 按钮按下
+            function onButtonDown() {
+                this.isdown = true;
+                this.texture = textureButtonDown;
+                this.alpha = 1;
+            }
+            //按钮放开
+            function onButtonUp() {
+                this.isdown = false;
+                //是否已经覆盖 如果是回到执行覆盖的形式
+                if (this.isOver) {
+                    this.texture = textureButtonOver;
+                } else {
+                    //回到纹理类型
+                    this.texture = textureButton;
+                }
+            }
+            //按钮覆盖
+            function onButtonOver() {
+                this.isOver = true;
+                //如果已点击不触发
+                if (this.isdown) {
+                    return;
+                }
+                //纹理覆盖
+                this.texture = textureButtonOver;
+            }
+            //覆盖离开
+            function onButtonOut() {
+                this.isOver = false;
+                //如果已点击不触发
+                if (this.isdown) {
+                    return;
+                }
+                this.texture = textureButton;
+            }
+        })();
+    </script>
+</body>
+</html>

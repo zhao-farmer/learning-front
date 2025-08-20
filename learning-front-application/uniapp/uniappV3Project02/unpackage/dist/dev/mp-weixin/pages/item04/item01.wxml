@@ -1,0 +1,1 @@
+<view class=""><image src="{{a}}" mode="" class="pic1"></image><image src="{{b}}" mode="aspectFill" class="pic2"></image><image src="{{c}}" mode="heightFix" class="pic3"></image><image src="https://qiniu-web-assets.dcloud.net.cn/unidoc/zh/logo.png" mode="heightFix"></image></view>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let obj = {}
+        let proxy = new Proxy(obj,{
+            get(target,key){
+                console.log("get",target[key]);
+                return target[key];
+            },
+            set(target,key,value){
+                // target 对象
+                // key 属性
+                // value 变动的值
+                console.log("set",target,key,value);
+                if(key == "data"){
+                    box.innerHTML = value
+                }
+                target[key] = value
+            },
+            has(){
+                console.log('has');
+                
+                return false
+            }
+        })
+
+        // 当使用in方式时 可以进入has  
+        // 如：'age' in obj
+
+        
+
+    </script>
+</body>
+</html>

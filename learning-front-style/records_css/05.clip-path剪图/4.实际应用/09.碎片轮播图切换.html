@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            .main {
+                border-radius: 20px;
+                width: 600px;
+                height: 400px;
+                overflow: hidden;
+                position: relative;
+            }
+            .imgs {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+            }
+            .photo {
+                height: 100%;
+                width: 100%;
+                position: absolute;
+            }
+            .photo .photo-clip {
+                position: absolute;
+                transition:1s 0.1s linear all;
+            }
+            .photo .photo-clip:nth-of-type(1) {
+                clip-path: polygon(0 0, 25% 0, 0 40%);
+                transform: translate(25%, -84%) scale(0);
+            }
+            .photo .photo-clip:nth-of-type(2) {
+                clip-path: polygon(25% 0, 65% 0, 8% 100%, 0 100%, 0 40%);
+                transform: translate(-50%, 84%) scale(0);
+            }
+            .photo .photo-clip:nth-of-type(3) {
+                clip-path: polygon(65% 0, 85% 0, 28% 100%, 8% 100%);
+                transform: translate(50%, -84%) scale(0);
+            }
+            .photo .photo-clip:nth-of-type(4) {
+                clip-path: polygon(85% 0, 100% 0, 100% 50%, 70% 100%, 28% 100%);
+                transform: translate(-50%, 84%) scale(0);
+            }
+            .photo .photo-clip:nth-of-type(5) {
+                clip-path: polygon(100% 50%, 100% 100%, 70% 100%);
+                transform: translate(80%, -84%) scale(0);
+            }
+            /* 上个步骤的，与原本的方向相反 */
+            .photo.prev .photo-clip:nth-of-type(1){
+                transform: translate(-75%, 84%) scale(0);
+            }
+            .photo.prev .photo-clip:nth-of-type(2){
+                transform: translate(50%, -84%) scale(0);
+            }
+            .photo.prev .photo-clip:nth-of-type(3){
+                transform: translate(-50%, 84%) scale(0);
+            }
+            .photo.prev .photo-clip:nth-of-type(4){
+                transform: translate(50%, -84%) scale(0);
+            }
+            .photo.prev .photo-clip:nth-of-type(5){
+                transform: translate(-30%, 84%) scale(0);
+            }
+
+            /* 当前图像 全部都归于正常 */
+            .photo.current .photo-clip:nth-of-type(1),
+            .photo.current .photo-clip:nth-of-type(2),
+            .photo.current .photo-clip:nth-of-type(3),
+            .photo.current .photo-clip:nth-of-type(4),
+            .photo.current .photo-clip:nth-of-type(5){
+                transform: translate(0, 0) scale(1);
+            }
+
+            .arrow {
+                width: 100%;
+                top: 140px;
+                position: absolute;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .arrow div {
+                font-size: 90px;
+                color: #fff;
+                cursor: pointer;
+                opacity: 0.8;
+            }
+            .arrow div:hover {
+                opacity: 1;
+            }
+            .arrow #prev {
+                transform: skewX(10deg);
+            }
+            .arrow #next {
+                transform: skewX(-10deg);
+            }
+
+            .dot {
+                width: 100%;
+                top: 90%;
+                position: absolute;
+            }
+            .number {
+                position: absolute;
+                right: 5%;
+                display: flex;
+                gap: 5px;
+            }
+            .number div {
+                height: 20px;
+                width: 20px;
+                font-size: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: antiquewhite;
+                clip-path: circle(50% at 50% 50%);
+                cursor: pointer;
+            }
+
+            .number div:hover {
+                transition: all 1s ease;
+                clip-path: inset(0 round 4px);
+            }
+            .number div.active {
+                background: #fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div class="img-list">
+                <div class="photo current">
+                    <img class="photo-clip" src="../images/00.jpg" />
+                    <img class="photo-clip" src="../images/00.jpg" />
+                    <img class="photo-clip" src="../images/00.jpg" />
+                    <img class="photo-clip" src="../images/00.jpg" />
+                    <img class="photo-clip" src="../images/00.jpg" />
+                </div>
+                <div class="photo prev">
+                    <img class="photo-clip" src="../images/01.jpg" />
+                    <img class="photo-clip" src="../images/01.jpg" />
+                    <img class="photo-clip" src="../images/01.jpg" />
+                    <img class="photo-clip" src="../images/01.jpg" />
+                    <img class="photo-clip" src="../images/01.jpg" />
+                </div>
+                <div class="photo">
+                    <img class="photo-clip" src="../images/02.jpeg" />
+                    <img class="photo-clip" src="../images/02.jpeg" />
+                    <img class="photo-clip" src="../images/02.jpeg" />
+                    <img class="photo-clip" src="../images/02.jpeg" />
+                    <img class="photo-clip" src="../images/02.jpeg" />
+                </div>
+                <div class="photo">
+                    <img class="photo-clip" src="../images/03.jpeg" />
+                    <img class="photo-clip" src="../images/03.jpeg" />
+                    <img class="photo-clip" src="../images/03.jpeg" />
+                    <img class="photo-clip" src="../images/03.jpeg" />
+                    <img class="photo-clip" src="../images/03.jpeg" />
+                </div>
+                <div class="photo">
+                    <img class="photo-clip" src="../images/04.jpeg" />
+                    <img class="photo-clip" src="../images/04.jpeg" />
+                    <img class="photo-clip" src="../images/04.jpeg" />
+                    <img class="photo-clip" src="../images/04.jpeg" />
+                    <img class="photo-clip" src="../images/04.jpeg" />
+                </div>
+                <div class="photo">
+                    <img class="photo-clip" src="../images/05.jpeg" />
+                    <img class="photo-clip" src="../images/05.jpeg" />
+                    <img class="photo-clip" src="../images/05.jpeg" />
+                    <img class="photo-clip" src="../images/05.jpeg" />
+                    <img class="photo-clip" src="../images/05.jpeg" />
+                </div>
+            </div>
+
+            <div class="arrow">
+                <!-- 左箭头-->
+                <div id="prev">&lt;</div>
+                <!-- 右箭头-->
+                <div id="next">&gt;</div>
+            </div>
+
+            <!-- 图片下方的数字-->
+            <div class="dot">
+                <div class="number">
+                    <div class="active">1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            //所有的点
+            const numbers = Array.from(document.querySelectorAll(".number div"));
+            //图片的数组
+            const imgArr = Array.from(document.querySelectorAll(".img-list .photo"));
+            /* 
+                自动切换图片
+            */
+            const toggleChange = (function () {
+                let timer;
+                return function () {
+                    if (timer == null) {
+                        timer = setTimeout(function auto() {
+                            changeImg("next");
+                            timer = setTimeout(auto, 2000);
+                        }, 2000);
+                    } else {
+                        clearTimeout(timer);
+                        timer = null;
+                    }
+                };
+            })();
+            toggleChange();
+            const outer = document.querySelector(".main");
+            outer.onmouseenter = () => {
+                console.log("进入");
+                toggleChange();
+            };
+            outer.onmouseleave = () => {
+                console.log("离开");
+                toggleChange();
+            };
+            /* 
+                点击按钮 切换图片
+            */
+            const prevBtn = document.getElementById("prev");
+            const nextBtn = document.getElementById("next");
+             prevBtn.onclick = () => {
+                changeImg("prev");
+            };
+            nextBtn.onclick = () => {
+                changeImg("next");
+            };
+            /* 
+                获取6个小点
+            */
+            document.addEventListener("click", event => {
+                const index = numbers.indexOf(event.target);
+                if (index !== -1) {
+                    changeImg(index);
+                }
+            });
+
+
+             /* 
+                changeImg 用来切换图片
+                参数：
+                    dir 切换图片的方向
+                    next
+                    prev
+            
+            */
+            function changeImg(dir) {
+                // 获取当前图片
+                const current = document.querySelector(".img-list .current");
+                //获取当前要显示图片的索引
+                
+                const index = imgArr.indexOf(current);
+                let next;
+                if (dir == "next") {
+                    next = current.nextElementSibling || imgArr[0];
+                } else if (dir == "prev") {
+                    next = current.previousElementSibling || imgArr.at(-1);
+                } else {
+                    next = imgArr[dir];
+                }
+               
+                // 移除上次标记
+                const prev = document.querySelector(".prev");
+                prev.classList.remove("prev");
+                // 替换上次标记
+                current.classList.replace("current", "prev");
+                // 添加当前标记
+                next.classList.add("current");
+
+                //切换active
+                const currentActive = document.querySelector(".active"); 
+                let newIndex = imgArr.indexOf(next);
+                currentActive.classList.remove("active");
+                numbers[newIndex].classList.add("active");
+            }
+
+           
+        </script>
+    </body>
+</html>

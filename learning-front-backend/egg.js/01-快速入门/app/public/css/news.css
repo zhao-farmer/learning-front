@@ -1,0 +1,8 @@
+/* app/public/css/news.css */
+.news-view.view{
+    background-color: #ccc;
+}
+.news-view.view .item{
+    font-size: 14px;
+    color: salmon;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 创建一个简单的滑块 -->
+        <label>
+            Zoom: <input type="range" min="10" max="1000" value="100" />
+        </label>
+
+        <!--  更多控制 -->
+        <label><input type="checkbox"  value="hideScrollbar" /> Scroll bar</label>
+        <label><input type="checkbox" checked value="autoCenter" /> Auto center</label>
+      
+        <div style="margin: 1em 0 2em;">
+          <button id="play">播放/暂停</button>
+          <button id="backward">回退 5s</button>
+          <button id="forward">前进 5s</button>
+        </div>
+
+
+        <!-- 导入文件 -->
+        <script src="../js/wavesurfer.min.js"></script>
+        <script>
+            const wavesurfer = WaveSurfer.create({
+                container: document.body,
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/audio.wav",
+                // 音频每秒最小像素数 （即缩放级别）
+                minPxPerSec: 100,
+                // 允许拖动光标以查找新位置
+                dragToSeek: true,
+
+                // 隐藏滚动条
+                hideScrollbar:true,
+                // 指针是否一直处于中间
+                autoCenter:true,
+            });
+
+            // 在滑块更改时更新缩放级别
+            // 解码之后执行
+            wavesurfer.once("decode", () => {
+                const slider = document.querySelector('input[type="range"]');
+
+                slider.addEventListener("input", e => {
+                    const minPxPerSec = e.target.valueAsNumber;
+                    wavesurfer.zoom(minPxPerSec);
+                });
+            });
+
+
+            // 更多控制 
+            const playButton = document.querySelector("#play");
+            const forwardButton = document.querySelector("#forward");
+            const backButton = document.querySelector("#backward");
+
+            wavesurfer.once("decode", () => {
+                document.querySelectorAll('input[type="checkbox"]').forEach(input => {
+                    input.onchange = e => {
+                       if(e.target.defaultValue === 'hideScrollbar'){
+                            wavesurfer.setOptions({
+                                [input.value]: !e.target.checked,
+                            });
+                       }else{
+                            wavesurfer.setOptions({
+                                [input.value]: e.target.checked,
+                            });
+                       }
+                    };
+                });
+
+                playButton.onclick = () => {
+                    wavesurfer.playPause();
+                };
+
+                forwardButton.onclick = () => {
+                    wavesurfer.skip(5);
+                };
+
+                backButton.onclick = () => {
+                    wavesurfer.skip(-5);
+                };
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            量词
+                {m}  正好m个
+                {m,} 至少m个
+                {m,n} m-n个
+                + 一个以上，相当于{1,}
+                * 任意数量的a
+                ? 0-1次 {0,1}
+        */
+
+        let re = /a{3}/
+        let result = re.test('aaaa');
+        console.log(result);
+
+        //必须正好三个
+        re = /^a{3}$/;
+        result = re.test('aaaa');
+        console.log(result);
+
+        re = /^ab{3}$/; //只能是三个b
+
+        re = /^(ab){3}$/; // 三个ab
+
+        re = /^[a-z]{3}$/
+        result = re.test('ald');
+
+        console.log(result);
+
+        //表示一个以上
+        re = /^[a-z]{1,}$/
+        result = re.test('a');
+        console.log(result);
+
+        re = /^ba+$/
+        result = re.test('baaa')
+        console.log(result);
+
+        re = /^ba*$/
+        result = re.test('baaaaa')
+        console.log(result);
+
+        re = /^ba?$/
+        result = re.test('baa')
+        console.log(result);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

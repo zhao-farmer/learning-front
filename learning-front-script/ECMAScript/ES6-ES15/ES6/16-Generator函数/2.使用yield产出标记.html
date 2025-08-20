@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function *gen(){
+            console.log(11);
+            yield  "aaa"    //产出
+            console.log(22);
+            yield  "bbb"
+            console.log(33);
+        }
+
+        let g = gen()
+        // 迭代器
+        let res1 = g.next()
+        console.log(res1);  // {value: 'aaa', done: false}
+
+        let res2 =g.next()
+        console.log(res2);  // {value: 'bbb', done: false}
+        
+        let res3 =g.next()
+        console.log(res3);  // {value: undefined, done: true}
+
+        
+        // 结果与迭代器一致 所以可以使用forof
+        function *gen1(){
+            yield  "ccc"    //产出
+            yield  "ddd"
+        }
+        let g1 = gen1()
+        for (const i of g1) {
+            console.log(i);    
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">播放</button>
+    <script src="../js/howler.js"></script>
+    <script>
+        btn.onclick = ()=>{
+                load()
+        }
+        function load(){
+            let sound1 = new Howl({
+                src: ['../assest/01.WAV']
+            });
+            let sound2 = new Howl({
+                src: ['../assest/03.mp3']
+            });
+            sound1.play();
+            sound2.play();
+        }
+    </script>
+</body>
+</html>

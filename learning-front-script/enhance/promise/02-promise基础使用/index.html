@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // promise(承诺) 构造函数
+        // 接受的参数 executor 执行器
+        var mypro = new Promise((resolve,reject)=>{
+            // 如果销售额达到了
+            // resolve()
+            // 如果销售额没达到
+            // reject();
+            setTimeout(() => {
+                // resolve()
+                reject();
+            }, 1000);
+        })
+
+        // 进行时，有承诺、拒绝承诺
+        mypro.then(()=>{
+            console.log("发奖金");
+        },()=>{
+             console.log("不发奖金");
+        })
+
+        // 拒绝承诺
+        mypro.catch(()=>{
+             console.log("不发奖金");
+        })
+
+        // 结合使用
+        mypro.then(()=>{
+            console.log("发奖金");
+        }).catch(()=>{
+             console.log("不发奖金");
+        })
+    </script>
+</body>
+</html>

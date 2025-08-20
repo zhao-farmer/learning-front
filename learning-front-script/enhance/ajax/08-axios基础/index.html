@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" ></script>
+</head>
+<body>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <button id="put">put</button>
+    <button id="patch">patch</button>
+    <button id="delete">delete</button>
+
+    <script>
+
+        var oget = document.querySelector("#get")
+        var opost = document.querySelector("#post")
+        var oput = document.querySelector("#put")
+        var opatch = document.querySelector("#patch")
+        var odelete = document.querySelector("#delete")
+
+        oget.onclick = function(){
+            // 直接调用
+            axios.get("http://localhost:3005/users")
+            .then(res=>{
+                console.log(res);
+            }).catch(err=>{
+                 console.log(res);
+            })
+
+         
+            // url上加参数
+            axios.get("http://localhost:3005/users?id=1")
+            .then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+
+            // 使用params参数
+            axios.get("http://localhost:3005/users",{
+                params:{
+                    name:"lisi"
+                }
+            }).then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+            
+        }
+        opost.onclick = function(){
+            // post 请求 json格式
+            axios.post("http://localhost:3005/users",{
+                name:"xiaohong",
+                age:20
+            }).then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+
+            // 表单方式
+            axios.post("http://localhost:3005/users","name=tiechui&age=80")
+            .then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+
+            // 配置的方式去写
+            axios({
+                method:"post",
+                url:"http://localhost:3005/users",
+                // get params
+                // put post data
+                data:{
+                    name:"gangdan",
+                    age:60
+                }
+            }).then(res=>{
+                console.log(res);
+            })
+        }
+
+        // 全量更新
+        oput.onclick = function(){
+            axios.put("http://localhost:3005/users/2",{
+                age:170
+            }).then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+        }
+
+        // 增量更新
+        opatch.onclick = function(){
+            axios.patch("http://localhost:3005/users/1",{
+                age:170
+            }).then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+        }
+
+        odelete.onclick = function(){
+            axios.delete("http://localhost:3005/users/2").then(res=>{
+                console.log(res.data);
+            }).catch(err=>{
+                 console.log(res);
+            })
+            
+        }
+
+
+        
+    </script>
+</body>
+</html>

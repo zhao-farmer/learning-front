@@ -1,0 +1,19 @@
+
+<button 
+  type="primary"
+  plain
+  open-type="getPhoneNumber"
+  bindgetphonenumber="getphonenumber"
+>
+  快速验证组件
+</button>
+
+<button 
+  type="warn"
+  plain
+  open-type="getRealtimePhoneNumber"
+  bindgetphonenumber="getrealtimephonenumber"
+>
+  快速验证组件
+</button>
+

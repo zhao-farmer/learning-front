@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <label> 聚焦: <input type="range" min="10" max="1000" value="100" /> </label>
+
+        <div id="waveform"></div>
+
+        <script type="module">
+            // Timeline plugin
+            import WaveSurfer from "../mjs/wavesurfer.js";
+            import TimelinePlugin from "../mjs/plugins/timeline.esm.js";
+
+            // 初始化 WaveSurfer
+            const wavesurfer = WaveSurfer.create({
+                container: "#waveform",
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/audio.wav",
+                minPxPerSec: 100,
+                plugins: [TimelinePlugin.create()],
+            });
+
+            // 点击进行播放
+            wavesurfer.on("interaction", () => {
+                wavesurfer.play();
+            });
+
+            // 播放完毕后倒回开头
+            wavesurfer.on("finish", () => {
+                wavesurfer.setTime(0);
+            });
+
+            // 在滑块更改时更新缩放级别
+            wavesurfer.once("decode", () => {
+                const slider = document.querySelector('input[type="range"]');
+
+                slider.addEventListener("input", e => {
+                    const minPxPerSec = e.target.valueAsNumber;
+                    wavesurfer.zoom(minPxPerSec);
+                });
+            });
+        </script>
+    </body>
+</html>

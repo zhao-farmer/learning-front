@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Graphics, Sprite } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 600,
+                height: 400,
+            });
+
+            // 应用程序添加到网页上
+            document.body.appendChild(app.canvas);
+
+            // 创建可用于触发视频的播放按钮
+            const button = new Graphics().roundRect(0, 0, 100, 100, 10).fill(0xffffff, 0.5).beginPath().moveTo(36, 30).lineTo(36, 70).lineTo(70, 50).closePath().fill(0xffffff);
+
+            // 按钮的位置
+            button.x = (app.screen.width - button.width) / 2;
+            button.y = (app.screen.height - button.height) / 2;
+
+            // 在按钮上启用交互性
+            button.eventMode = "static";
+            button.cursor = "pointer";
+
+            // 添加到舞台上
+            app.stage.addChild(button);
+
+            // 加载视频纹理
+            const texture = await Assets.load("../assets/vedio/P1022177.mp4");
+
+            //收听点击/轻击事件以开始播放视频
+            //这对一些移动平台很有用。例如：
+            //ios9及以下版本无法在PIXI中渲染视频
+            //polyfill - https://github.com/bfred-it/iphone-inline-video
+            //ios10及以上版本需要点击/轻击事件来渲染视频
+            //在PIXI中包含音频。没有音轨的视频
+            //没有这个要求
+            button.on("pointertap", () => {
+                // 不再需要按钮了
+                button.destroy();
+
+                // 使用视频纹理创建一个新的Sprite（是的，就是这么简单）
+                const videoSprite = new Sprite(texture);
+
+                // 拉伸以填充整个屏幕
+                videoSprite.width = app.screen.width;
+                videoSprite.height = app.screen.height;
+
+                app.stage.addChild(videoSprite);
+            });
+        })();
+    </script>
+</body>
+</html>

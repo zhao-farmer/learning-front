@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>el与data的两种写法</title>
+    <!-- 引入vue -->
+    <script  type="text/javascript" src="../js/vue.js"></script>
+ 
+</head>
+<body>
+    <!-- 创建一个容器 -->
+    <div id="root">
+      <h1>你好. {{name}}</h1>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+        
+        //el的两种写法
+        //第一种写法
+         new Vue({
+             el:'#root', 
+            data:{
+                name:'B站',
+            }
+        })
+        //第二种写法  更灵活 如使用定时任务去缓慢挂载
+        const v1 = new Vue({
+            data:{
+                name:'B站',
+            }
+        })
+        console.log(v1);
+        v.$mount("#root")   
+
+
+         //data的写法
+        //data 第一种写法:对象式
+         const v2 = new Vue({
+            el:'#root', 
+            data:{
+                name:'B站',
+            },
+        })
+        //data 的第二种写法 函数式
+        const v3 = new Vue({
+            el:'#root', 
+            data:function(){
+                console.log('@@',this); //此处的this式vue的实例函数
+                return{
+                    name:'B站'
+                }
+            },
+            // 这种写法式错误的 不能使用箭头函数
+            data:()=>{
+                console.log('@@',this); //此处的this式window的实例函数
+                return{
+                    name:'B站'
+                }
+            },
+            //最终的简写
+            data(){
+                return{
+                    name:'B站'
+                }
+            },
+        })
+
+    </script>
+</body>
+</html>

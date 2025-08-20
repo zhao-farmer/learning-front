@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Cache {
+            static obj = new Map()
+            static {
+                this.obj.set("name","kerwin")
+                this.obj.set("age",100)
+            }
+            static{
+                console.log(this.obj);
+                
+            }
+        }
+
+         new Cache()
+        
+    </script>
+</body>
+</html>

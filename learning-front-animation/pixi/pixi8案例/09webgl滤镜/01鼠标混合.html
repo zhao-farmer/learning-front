@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+  <body></body>
+  <script type="x-shader/x-fragment" src="shader.frag"></script>
+  <script type="module">
+    import { Application, Assets, Container, Sprite, Rectangle, Filter, Point, GlProgram } from "../../js/pixi.mjs";
+    //都是与webgl相关的 这里暂时不使用
+    import vertex from "../assets/webgl/mouseBlending.vert";
+    import fragment from "../assets/webgl/mouseBlending.frag";
+
+    /**
+     * https://github.com/pixijs/pixi.js/wiki/v5-Creating-Filters
+     */
+
+    (async () => {
+      // 创建应用程序
+      const app = new Application();
+
+      // 初始化应用程序
+      await app.init({ preference: "webgl", resizeTo: window });
+
+      // 添加程序到网页中
+      document.body.appendChild(app.canvas);
+
+      // 加载草纹理
+      const texture = await Assets.load("../assets/images/bg_grass.jpg");
+
+      // 创建一个背景图片
+      const background = new Sprite(texture);
+
+      background.width = app.screen.width;
+      background.height = app.screen.height;
+      app.stage.addChild(background);
+
+      //注意：此着色器在旧设备上不起作用，因为片段着色器中强制使用中等精度
+      //因为v5默认顶点着色器中使用了`inputSize`。片段和顶点着色器中的一致性相同
+      //不能有不同的精度
+
+      const container = new Container();
+      //设置过滤范围
+      container.filterArea = new Rectangle(100, 100, app.screen.width - 200, app.screen.height - 200);
+      //添加到舞台上
+      app.stage.addChild(container);
+
+      //过滤
+      const filter = new Filter({
+        glProgram: new GlProgram({ vertex, fragment }),
+        resources: {
+          localUniforms: {
+            uMouse: { value: new Point(), type: "vec2<f32>" },
+          },
+        },
+      });
+
+      container.filters = [filter];
+
+      app.stage.hitArea = app.screen;
+      app.stage.eventMode = "static";
+      app.stage.on("pointermove", (event) => {
+        filter.resources.localUniforms.uniforms.uMouse.copyFrom(event.global);
+      });
+    })();
+  </script>
+</html>

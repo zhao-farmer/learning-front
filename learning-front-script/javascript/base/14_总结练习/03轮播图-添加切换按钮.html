@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      img {
+        vertical-align: top;
+        width: 640px;
+      }
+      ul {
+        list-style: none;
+      }
+      .outer {
+        width: 640px;
+        height: 390px;
+        margin: 100px auto;
+        position: relative;
+      }
+      .img-list {
+        height: 100%;
+      }
+      .img-list li {
+        position: absolute;
+        opacity: 0;
+        transition: all 0.7s;
+      }
+      li.current {
+        z-index: 1;
+        opacity: 1;
+      }
+      /* 
+        设置两个箭头的样式
+      */
+      .prev-next a {
+        font-size: 60px;
+        color: #7c7c7c;
+        font-weight: bold;
+        text-decoration: none;
+        position: absolute;
+        height: 60px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 2;
+      }
+      .prev-next a:hover {
+        color: #fff;
+      }
+      #next {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <ul class="img-list">
+        <li class="current">
+          <a href="#">
+            <img src="./images/1.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/2.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/3.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/4.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/5.jpg" />
+          </a>
+        </li>
+      </ul>
+      <!-- 添加切换按钮 -->
+      <div class="prev-next">
+        <a id="prev" href="javascript:;"><</a>
+        <a id="next" href="javascript:;">></a>
+      </div>
+    </div>
+    <script>
+      /* 
+            自动切换图片
+        */
+      setTimeout(function auto() {
+        //获取当前显示的图片
+        const current = document.querySelector(".img-list .current");
+        //获取下一个图片
+        const next =
+          current.nextElementSibling || document.getElementsByTagName("li")[0];
+        console.log(next);
+
+        // 切换显示状态
+        current.classList.remove("current");
+        next.classList.add("current");
+
+        setTimeout(auto, 2000);
+      }, 2000);
+      /* 
+          点击按钮 切换图片
+      */
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+
+      prevBtn.onclick = () => {
+        const current = document.querySelector(".img-list .current");
+        //获取下一个图片
+        const next =
+          current.previousElementSibling ||
+          document.querySelector("li:last-child");
+
+        // 切换显示状态
+        current.classList.remove("current");
+        next.classList.add("current");
+      };
+
+      nextBtn.onclick = () => {
+        const current = document.querySelector(".img-list .current");
+        //获取下一个图片
+        const next =
+          current.nextElementSibling ||
+          document.querySelector("li:first-child");
+
+        // 切换显示状态
+        current.classList.remove("current");
+        next.classList.add("current");
+      };
+
+      /* 
+        问题1：能不能简化一下代码
+        问题2：如何设置图片自动切换的关闭与开启
+      
+      */
+    </script>
+  </body>
+</html>

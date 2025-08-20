@@ -1,0 +1,3 @@
+<!--pages/profile/profile.wxml-->
+
+<button open-type="contact"></button>

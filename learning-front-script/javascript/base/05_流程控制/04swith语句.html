@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            switch语句
+                - 语法：
+                    switch(表达式){
+                        case 表达式：
+                            代码...
+                        case 表达式：
+                            代码...
+                        case 表达式：
+                            代码...
+                        case 表达式：
+                            代码...
+                        case 表达式：
+                            代码...
+                    }
+                - 执行的流程
+                    switch语句在执行时，会依次将switch后额表达式和case后的表达式进行全等比较
+                    如果比较结果为true,则自当前case处开始执行代码
+                    如果比较结果为false,则继续比较其他case后的表达式，直到找到true为止
+                    如果所有case都是false,则直接执行default下的    
+                - 注意
+                    当比较结果为true时,会从当前case处开始执行代码
+                        也就是说case时代码执行的起始为止
+                    这就意味这只要是当前case后的代码，都会执行
+                    可以使用break来避免执行其他的case
+                - 总结
+                    switch语和if语句的功能是重复，switch能做的事if也能做，反之亦然
+                        他们最大的不同在于，switch在多个全等判断时，结构比较清晰
+        */
+
+        let num = +prompt("请输入一个数字：");
+
+        switch (num) {
+            case 1:
+                alert("一");
+                break;
+            case 2:
+                alert("二");
+                break;
+            case 3:
+                alert("三");
+                break;
+            case 4:
+                alert("四");
+                break;
+            default:
+                alert("输入数值大于1小于4")
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

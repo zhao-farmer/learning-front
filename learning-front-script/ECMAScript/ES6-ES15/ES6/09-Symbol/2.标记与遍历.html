@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 可以给Symbol 加上标记 可以更好的观察
+        let keys = {
+            name:Symbol("name"),
+            age:Symbol("age"),
+            location:Symbol("location"),
+            test:Symbol("test"),
+        }
+        let obj = {
+            [keys.name]:'kerwin',
+            [keys.age]:100,
+            // 这种无法访问
+            // [Symbol()]:"dalian"
+
+            [keys.location]:"dalian",
+            [keys.test]:function(){
+                console.log("测试函数");
+            }
+        }
+        obj.name = "aaaaaa"
+        console.log(obj);
+
+        // for in遍历 不能获取Symbol
+        for(let i in obj){
+            console.log(i);
+        }
+        // 拿到所有的Symbol属性
+        console.log(Object.getOwnPropertySymbols(obj));
+        
+        // 返回所有属性
+        console.log( Reflect.ownKeys(obj));
+        
+
+        // 可以根据Reflect获取所有属性
+        Reflect.ownKeys(obj).forEach(item=>{
+            console.log(item,obj[item]);
+        })
+
+    </script>
+</body>
+</html>

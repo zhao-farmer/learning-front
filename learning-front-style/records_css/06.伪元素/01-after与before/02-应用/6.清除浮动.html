@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+       .box{
+            height: 800px;
+            width: 400px;
+            background-color: #b9d7d9;
+            padding: 10px 8px ;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+       }
+       .folatset{
+            padding: 3px;
+            border-radius: 5px;
+            background-color: #fff;
+          
+       }
+       .folatset>div{
+            padding: 5px;
+            border: 1px #ccc dashed;
+            background: #e8f2f2;
+            border-radius: 5px;
+       }
+       .folatset>div>span{
+            width: 300px;
+            display: inline-block;
+       }
+     
+       img{
+           float: right;
+           height: 150px;
+       }
+       .set_two::after{
+            content: '';
+            display: block;
+            clear: both;
+            height: 0;
+            visibility:hidden;
+       }
+       .set_three{
+             display: flow-root;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="box">
+       <div class="folatset">
+            <div  class="set_one">
+                <span>未清除浮动</span>
+                <img src="./images/tree.png" >
+           </div>
+        </div>
+         
+       <div class="folatset">
+            <div  class="set_two">
+                <span>方式一 ::after clearfix</span>
+                <img src="./images/tree.png" >
+            </div>
+       </div>
+       <div class="folatset">
+            <div  class="set_three">
+                <span>方式二 flow-root clearfix</span>
+                <img src="./images/tree.png" >
+            </div> 
+       </div>
+    </div>
+</body>

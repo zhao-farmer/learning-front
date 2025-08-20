@@ -1,0 +1,14 @@
+<!--pages/cate/cate.wxml-->
+
+
+<!-- 外部样式类 -->
+<van-button  type="primary"  custom-class="custom-class">外部样式类</van-button>
+
+<!-- 组件类-解除样式隔离 -->
+<custom01/>
+
+
+<!-- 使用CSS变量：如果需要再多个页面或者一个组件中 需要批量修改组件、定制主题 -->
+<van-button type="primary" custom-class="var-css">多个页面</van-button>
+
+<van-button type="primary" custom-class="var-css2" class="my-button"> 一个组件</van-button>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 判断原型链上的值
+        function Person(){}
+        console.log(Person.prototype.__proto__ === Object.prototype);//true
+
+        console.log(Object.prototype);
+        console.log(Object.prototype.__proto__ == null); //true
+        
+        
+        // 判断是否属于原型链上
+        const ldh = new Person()
+        console.log(ldh instanceof Person); //true
+        console.log(ldh instanceof Object); //true
+        console.log(ldh instanceof Array);  //false
+    </script>
+</body>
+</html>

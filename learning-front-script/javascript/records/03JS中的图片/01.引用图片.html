@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <img name="flower" id="mypic" src="./images/00.jpg">
+
+    <script>
+        let dom1 = document.images[0]
+        let dom2 = document.images["flower"]
+        let dom3 = document.getElementById("mypic")
+
+        if(dom1 === dom2 === dom3){
+            console.log("是一样的");
+        }
+    </script>
+</body>
+</html>

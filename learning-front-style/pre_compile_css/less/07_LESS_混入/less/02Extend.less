@@ -1,0 +1,12 @@
+.public {
+    width: 100px;
+    height: 100px;
+}
+nav ul {
+    &:extend(.public);  //继承
+    list-style: none;
+}
+//或者写成
+nav ul:extend(.public) {
+    list-style: none;
+}

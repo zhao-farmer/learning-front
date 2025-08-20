@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite, Graphics, SCALE_MODES, Rectangle, BlurFilter } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建一个应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({  
+                width: 800,
+                height: 600,    
+            });
+
+            // 添加程序到网页中
+            document.body.appendChild(app.canvas);
+
+            // 圆的内半径
+            const radius = 100;
+
+            // 模糊度
+            const blurSize = 32;
+
+            // 加载草地纹理
+            const grassTexture = await Assets.load("../assets/images/bg_grass.jpg");
+
+            // 创建草地背景
+            const background = new Sprite(grassTexture);
+
+            // 添加到舞台上
+            app.stage.addChild(background);
+            background.width = app.screen.width;
+            background.height = app.screen.height;
+
+            // circle参数 x y位置与圆的半径
+            const circle = new Graphics().circle(radius + blurSize, radius + blurSize, radius).fill({ color: 0xff0000 });
+
+            // 这个图形设置模糊滤镜
+            circle.filters = [new BlurFilter(blurSize)];
+
+            // 主动计算其边界
+            const bounds = new Rectangle(0, 0, (radius + blurSize) * 2, (radius + blurSize) * 2);
+            // 创建纹理 由于circle已经含有模糊滤镜了  截取范围也包含滤镜的大小
+            const texture = app.renderer.generateTexture({
+                //目标圆
+                target: circle,
+                //放大缩小按照像素比例进行
+                style: { scaleMode: SCALE_MODES.NEAREST },
+                //纹理的大小
+                resolution: 1,
+                // 截取按照边界截取
+                frame: bounds,
+            });
+            // 这个纹理作为精灵
+            const focus = new Sprite(texture);
+
+            // 添加到舞台上
+            app.stage.addChild(focus);
+
+            // 设置mask
+            background.mask = focus;
+
+            // 设置可交互性
+            app.stage.eventMode = "static";
+            // 设置舞台点击面
+            app.stage.hitArea = app.screen;
+            // 鼠标进行移动 并获取focus的x与y
+            app.stage.on("pointermove", event => {
+                focus.position.x = event.global.x - focus.width / 2;
+                focus.position.y = event.global.y - focus.height / 2;
+            });
+        })();
+    </script>
+</body>
+</html>

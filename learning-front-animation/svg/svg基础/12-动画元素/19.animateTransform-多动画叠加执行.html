@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="200" height="200">
+        <rect x="75" y="75" width="50" height="50" fill="green">
+            <animateTransform 
+                attributeName="transform" 
+                type="translate" 
+                from="0 0" 
+                to="50 50"
+                dur="2s" 
+                repeatCount="indefinite"/>
+            <animateTransform 
+                attributeName="transform" 
+                type="rotate" 
+                from="0 100 100" 
+                to="360 100 100" 
+                dur="2s" 
+                repeatCount="indefinite"
+                additive="sum"
+            />
+        </rect>
+    </svg>
+</body>
+</html>

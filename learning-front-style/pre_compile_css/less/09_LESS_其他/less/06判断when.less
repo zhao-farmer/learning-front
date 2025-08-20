@@ -1,0 +1,16 @@
+@width:1000px;
+@height:400;
+@num:500;
+.mixin() when(@width>900){
+  ul li when(@height>500){
+    background-color: blue;//当变量width大于900且变量height大于500
+  }
+}
+.mixin();
+.nav when(@width>900px) and (@height>300) and (@num>300){// 与 ,使用and
+  background-color:rgb(64, 64, 180);
+}
+.header when(@width>1000),(@height>200){// 或 ,逗号分开
+  background-color: yellow;
+  color:yellow;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border:1px solid black"></canvas>
+    <script>
+
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext("2d");
+
+        let rectHeight = 300;
+        let rectWidth = 300;
+        ctx.strokeRect(15,15,300,300); 
+        
+        let sum = 20;
+        for(let i=1; i< sum; i++){
+
+            let scale = i/sum;
+            let size = 1 - i/sum;
+       
+            ctx.save()
+            ctx.translate(scale * rectWidth/2 ,scale * rectHeight/2)
+            ctx.scale(size,size);
+            ctx.strokeRect(15,15,300,300); // 使用新的设置绘制一个矩形
+            ctx.restore()
+        }
+    </script>
+</body>
+</html>

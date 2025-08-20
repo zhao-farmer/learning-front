@@ -1,0 +1,9 @@
+$bool:false;
+div{
+    @if $bool  {
+        color: red;
+    }
+    @else {
+        color: blue;
+    }
+}

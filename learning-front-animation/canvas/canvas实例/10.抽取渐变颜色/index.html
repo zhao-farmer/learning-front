@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1,
+        .box2 {
+            display: flex;
+            gap: 10px;
+        }
+
+        .text1,
+        .text2 {
+            display: flex;
+            gap: 5px;
+            width: 600px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 浅红 - 红 - 深红 -->
+    <span>颜色变化: 浅红 - 红 - 深红 </span> <br />
+    <canvas id="c1" width="600" height="300"></canvas> <br />
+
+    <span>颜色排列</span>
+    <div class="box1"></div>
+    <div class="text1"></div>
+    <br />
+    <span>颜色变化: 浅绿 - 明绿 - 深绿 </span> <br />
+    <canvas id="c2" width="600" height="300"></canvas>
+    <br />
+    <span>颜色排列</span>
+    <div class="box2"></div>
+    <div class="text2"></div>
+
+
+    <script>
+        let width = 600, height = 400,
+            //取10个颜色
+            colorSize = 10;
+
+        //渐变生成两张图片并展示 
+        //当然不想页面展示只是用js可以使用  document.createElement('canvas')
+
+        var c1 = document.getElementById("c1");
+        var ctx1 = c1.getContext('2d');
+        let linearGradient1 = ctx1.createLinearGradient(0, 200, 600, 200);
+        linearGradient1.addColorStop(0, "#ffeeee");
+        linearGradient1.addColorStop(0.3, "red");
+        linearGradient1.addColorStop(1, "#330000");
+        ctx1.fillStyle = linearGradient1;
+        ctx1.fillRect(0, 0, 600, 400);
+
+        var c2 = document.getElementById("c2");
+        var ctx2 = c2.getContext('2d');
+        let linearGradient2 = ctx2.createLinearGradient(0, 200, 600, 200);
+        linearGradient2.addColorStop(0, "#c1f1c1");
+        linearGradient2.addColorStop(0.3, "#04ff04");
+        linearGradient2.addColorStop(1, "#003500");
+        ctx2.fillStyle = linearGradient2;
+        ctx2.fillRect(0, 0, 600, 400);
+
+        //开始计算 
+        let imageData1 = ctx1.getImageData(0, 0, width, 1);
+        let pixelArr1 = imageData1.data;
+        let imageData2 = ctx2.getImageData(0, 0, width, 1);
+        let pixelArr2 = imageData2.data;
+
+
+        /*RGB转换为16进制*/
+        function colorRgbToHex(rgbStr) {
+            console.log(rgbStr);
+            //十六进制颜色值的正则表达式
+            const reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6}|[0-9a-fA-f]{8}|[0-9a-fA-f]{6}[0-9]{2})$/;
+            if (reg.test(rgbStr)) {
+                return rgbStr
+            } else {
+                const rgbArray = rgbStr.replace(/(?:\(|\)|rgba|rgb|RGBA|RGB)*/g, "").split(" ");
+                console.log(rgbArray);
+
+                let strHex = "#";
+                for (let i = 0; i < rgbArray.length; i++) {
+                    if (i !== 3) {
+                        if (rgbArray[i] == "0") {
+                            strHex += "00"
+                        } else {
+                            let newItem = Number(rgbArray[i]).toString(16)
+                            if (newItem.length < 2) {
+                                newItem = "0" + newItem
+                            }
+                            strHex += newItem
+                        }
+                    } else {
+                        let fourItem = rgbArray[i].replace('/', '');
+                        console.log(fourItem);
+
+                        strHex += fourItem == "1" ? "" : Math.floor((Number(fourItem) * 255)).toString(16)
+                    }
+                }
+                return strHex;
+            }
+        }
+
+
+        //间隔
+        let interval = 4;
+        let rgbResult1 = [];
+        let rgbResult2 = [];
+        let hexResult1 = [];
+        let hexResult2 = [];
+
+        for (let x = 0; x < width; x = x + width / colorSize) {
+            //设置展示的div
+            let r = pixelArr1[0 + x * interval];
+            let g = pixelArr1[1 + x * interval];
+            let b = pixelArr1[2 + x * interval];
+            let a = pixelArr1[3 + x * interval] / 255;
+            let rgb = `rgb(${r} ${g} ${b} /${a})`;
+            let hex = colorRgbToHex(rgb);
+            console.log(hex);
+            rgbResult1.push(rgb);
+            hexResult1.push(hex);
+
+            // 第二个div
+            r = pixelArr2[0 + x * interval];
+            g = pixelArr2[1 + x * interval];
+            b = pixelArr2[2 + x * interval];
+            a = pixelArr2[3 + x * interval] / 255;
+            rgb = `rgb(${r} ${g} ${b} /${a})`;
+            hex = colorRgbToHex(rgb);
+            rgbResult2.push(rgb);
+            hexResult2.push(hex);
+
+        }
+
+        //插入的dom对象
+        let boxItem1 = document.querySelector('.box1');
+        let boxItem2 = document.querySelector('.box2');
+        let textItem1 = document.querySelector('.text1');
+        let textItem2 = document.querySelector('.text2');
+
+        for (let index = 0; index < colorSize; index++) {
+            let rgb1 = rgbResult1[index];
+            let rgb2 = rgbResult2[index];
+            let hex1 = hexResult1[index];
+            let hex2 = hexResult2[index];
+
+            //红色
+            let boxdiv1 = document.createElement('div');
+            boxdiv1.style.height = '20px';
+            boxdiv1.style.width = '20px';
+            boxdiv1.style.backgroundColor = rgb1;
+            let boxSpan1 = document.createElement('span');
+            boxSpan1.style.color = hex1;
+            boxSpan1.innerText = (index + 1) + "." + hex1;
+
+            boxItem1.appendChild(boxdiv1);
+            textItem1.appendChild(boxSpan1);
+
+            //绿色
+            let boxdiv2 = document.createElement('div');
+            boxdiv2.style.height = '20px';
+            boxdiv2.style.width = '20px';
+            boxdiv2.style.backgroundColor = rgb2;
+            let boxSpan2 = document.createElement('span');
+
+            boxSpan2.style.color = hex2;
+
+            boxSpan2.innerText = (index + 1) + "." + hex2;
+            boxItem2.appendChild(boxdiv2);
+            textItem2.appendChild(boxSpan2);
+        }
+
+
+    </script>
+
+</body>
+
+</html>

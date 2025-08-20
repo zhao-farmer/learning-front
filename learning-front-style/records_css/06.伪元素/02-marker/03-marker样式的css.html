@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+    <style>
+        body{
+            padding: 20px;
+        }
+        li {      
+            list-style-type: '?';      
+            font-size: 1rem;    
+        }    
+        /*::marker可覆盖list-style-type设置的图标，并且改变大小跟颜色*/    
+        li:nth-child(2)::marker {      
+            content: '!';      
+            font-size: 2rem;    
+        }    
+        /*实现指上列变更列表项颜色*/    
+        li:nth-child(3):hover::marker {      
+            color: red;    
+        }
+
+    </style>
+</head>
+<body>
+    <ul>    
+        <li>Peaches</li>    
+        <li>Apples</li>    
+        <li>Plums</li>  
+     </ul>
+</body>
+</html>

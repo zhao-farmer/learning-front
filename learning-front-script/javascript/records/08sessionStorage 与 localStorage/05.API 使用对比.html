@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 设置数据
+        sessionStorage.setItem('sessionKey', 'sessionValue');
+        localStorage.setItem('localKey', 'localValue');
+
+        // 获取数据
+        const sessionData = sessionStorage.getItem('sessionKey');
+        const localData = localStorage.getItem('localKey');
+
+        // 删除数据
+        sessionStorage.removeItem('sessionKey');
+        localStorage.removeItem('localKey');
+
+        // 清除所有数据
+        sessionStorage.clear();
+        localStorage.clear();
+
+        // 获取存储数据的长度
+        console.log(sessionStorage.length); // 输出当前sessionStorage的数据项数量
+        console.log(localStorage.length);  // 输出当前localStorage的数据项数量
+
+        // 遍历sessionStorage中的所有数据
+        for (let i = 0; i < sessionStorage.length; i++) {
+            const key = sessionStorage.key(i);
+            const value = sessionStorage.getItem(key);
+            console.log(key, value);
+        }
+
+        // 遍历localStorage中的所有数据
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            const value = localStorage.getItem(key);
+            console.log(key, value);
+        }
+    </script>
+</body>
+</html>

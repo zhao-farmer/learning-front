@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, buildGeometryFromPath, Graphics, GraphicsPath, Mesh, Texture } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建一个应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                backgroundColor: "brown",
+                antialias: true,
+                width: 800,
+                height: 600, 
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            //GraphicsPath 创建一个矩形四个圆
+            const path = new GraphicsPath()
+                .rect(-50, -50, 100, 100)
+                .circle(80, 80, 50)
+                .circle(80, -80, 50)
+                .circle(-80, 80, 50)
+                .circle(-80, -80, 50);
+
+            // 构建geometry
+            const geometry = buildGeometryFromPath({
+                path,
+            });
+
+            const meshes = [];
+
+            //循环两百次
+            for (let i = 0; i < 200; i++) {
+                //随机位置
+                const x = Math.random() * app.screen.width;
+                const y = Math.random() * app.screen.height;
+
+                //创建网格应用 给予不同位置与颜色
+                const mesh = new Mesh({
+                    geometry,
+                    texture: Texture.WHITE,
+                    x,
+                    y,
+                    tint: Math.random() * 0xffffff,
+                });
+
+                //舞台上添加网格
+                app.stage.addChild(mesh);
+
+                //放到网格集合中
+                meshes.push(mesh);
+            }
+
+            //将集合中的网格进行循环
+            app.ticker.add(() => {
+                meshes.forEach(mesh => {
+                    mesh.rotation += 0.01;
+                });
+            });
+        })();
+    </script>
+</body>
+</html>

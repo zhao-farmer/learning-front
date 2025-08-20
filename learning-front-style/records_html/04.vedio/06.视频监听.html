@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Click to Play Video</title>
+</head>
+
+<body>
+    <video
+        src="./resource/01.mp4"
+        id="myVideo" width="200" height="300" controls muted>
+    </video>
+
+    <script>
+        const video = document.getElementById('myVideo');
+
+        // 监听 'play' 事件
+        video.addEventListener('play', function () {
+            console.log('视频开始播放');
+        });
+
+        // 监听 'pause' 事件
+        video.addEventListener('pause', function () {
+            console.log('视频暂停');
+        });
+
+        // 监听 'ended' 事件
+        video.addEventListener('ended', function () {
+            console.log('视频播放结束');
+        });
+
+        // 监听 'timeupdate' 事件
+        video.addEventListener('timeupdate', function () {
+            console.log('当前播放时间:', video.currentTime);
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过构造函数创建普通对象
+        const user = new Object({name:'小明',age:15})
+
+
+        const o={name:'佩奇',age:6 }
+        // 1.获取所有属性名
+        console.log(Object.keys(o)); //返回数组 ['name','age']
+        // 2.获取所有属性值
+        console.log(Object.values(o)); //返回数组 ['佩奇',6]
+        // 3.获取属性名与属性值
+        console.log(Object.entries(o)); //返回嵌套数组 [['name', 'age'],['佩奇',6]]
+
+        // 拷贝对象
+        const oo = {}
+        Object.assign(oo,o)
+        console.log(oo);
+        
+    </script>
+</body>
+</html>

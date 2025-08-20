@@ -1,0 +1,107 @@
+html {
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+    height: 100%;
+}
+body{
+    padding: 0px;
+    margin: 0px;
+}
+
+.titleBar {
+    height: 38px;
+    line-height: 36px;
+    background: #fff1f0;
+    display: flex;
+    border-bottom: 1px solid #f5222d;
+}
+
+.titleBar .title {
+    flex: 1;
+    display: flex;
+    -webkit-app-region: drag;
+}
+
+.titleBar .title .logo {
+    padding-left: 8px;
+    padding-right: 6px;
+}
+
+.titleBar .title .logo img {
+    width: 20px;
+    height: 20px;
+    margin-top: 7px;
+}
+
+.titleBar .title .logo .txt {
+    text-align: left;
+    flex: 1;
+}
+.windowTool{
+    display: flex;
+}
+.windowTool div {
+
+    color: #888;
+    height: 100%;
+    width: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.windowTool div i {
+    font-size: 16px;
+}
+
+.windowTool div:hover {
+    background: #ffccc7;
+}
+
+.windowTool div .close:hover {
+    color: #fff;
+    background: #ff4d4f !important;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+.hidden { 
+    display: none !important; 
+}
+
+#app{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+.content{
+    flex-grow: 1;
+    flex-shrink: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.round{
+    /* 移动至屏幕正中央 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    box-sizing: border-box;
+    width: 380px !important;
+    height: 380px !important;
+    border-radius: 190px;
+    border: 1px solid green;
+    background: #fff;
+    overflow: hidden;
+    pointer-events: auto;
+}

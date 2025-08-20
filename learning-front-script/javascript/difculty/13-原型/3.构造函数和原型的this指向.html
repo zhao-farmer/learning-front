@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let that
+        function Star(uname){
+            that = this
+            this.uname = uname
+        }
+        // 原型对象上的函数也指向 实例对象ldh
+        Star.prototype.sing = function(){
+            console.log("唱歌");
+        }
+
+        // 实例对象ldh
+        // 构造函数里面的 this 就是实例对象 ldh
+        const ldh = new Star('刘德华')
+        console.log(that === ldh);  // true
+        ldh.sing()
+    </script>
+</body>
+</html>

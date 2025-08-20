@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDaataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            title: {
+                text: "成绩展示",
+                textStyle: {
+                    color: "red",
+                },
+                borderWidth: 5,
+                borderColor: "blue",
+                borderRadius: 5,
+                left: 30,
+                top: 10,
+            },
+            tooltip: {
+                //trigger的值 item：移入柱状图中  axis:移入坐标轴中
+                trigger: "axis",
+                //triggerOn mouse 鼠标移入 click:点击
+                triggerOn: "click",
+                // formatter 提示框浮层内容格式器，支持字符串模板和回调函数两种形式。
+                // formatter: "{b}的成绩是{c}",
+                formatter: function (arg) {
+                    return arg[0].name + "的分数是：" + arg[0].data;
+                },
+            },
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+                    data: yDaataArr,
+                },
+            ],
+        };
+
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        ctx.setLineDash([10, 20]);
+
+        // 打印出数据与设定的一样 [10, 20]
+        console.log(ctx.getLineDash()); 
+
+        // 画出虚线
+        ctx.beginPath();
+        ctx.moveTo(0, 50);
+        ctx.lineTo(300, 50);
+        ctx.stroke();
+     </script>
+</body>
+</html>

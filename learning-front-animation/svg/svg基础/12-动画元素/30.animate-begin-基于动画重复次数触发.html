@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="200" height="200">
+        <circle cx="50" cy="50" r="20" fill="blue">
+            <animate 
+                id="move" 
+                attributeName="cx" 
+                from="50" 
+                to="150" 
+                dur="2s" 
+                repeatCount="3" 
+            />
+        </circle>
+        <rect x="30" y="80" width="50" height="50" fill="red">
+            <animate 
+                attributeName="x" 
+                from="0" 
+                to="150" 
+                dur="2s" 
+                begin="move.repeat(2)" 
+            />
+        </rect>
+    </svg>
+</body>
+</html>

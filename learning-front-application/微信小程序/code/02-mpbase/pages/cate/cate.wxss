@@ -1,0 +1,17 @@
+view{
+  display: flex;
+  height: 300rpx;
+  align-items: center;
+}
+
+.test1{
+  background-color: skyblue;
+}
+
+.test2{
+  background-color: orange;
+}
+
+.test3{
+  background-color: purple;
+}

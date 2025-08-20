@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+         .info{
+            width: 900px;
+        }
+
+        .box{
+            display: flex;
+            justify-content: space-around;
+        }
+        .container {
+            width: 150px;
+            height: 150px;
+            margin: 30px;
+            background-color: red;
+            padding: 20px;
+            border: 10px dashed red;
+            background-image: url('../images/001.png');
+        }
+        .container1 {
+            background-clip: border-box;
+        }
+        .container2 {
+            background-clip: padding-box;
+        }
+        .container3 {
+            background-clip: content-box;
+        }
+
+        .text{
+            display: flex;
+            font-size: 18px;
+            color: red;
+            justify-content: space-around;
+        }
+       
+
+    </style>
+</head>
+<body>
+    <div class="info">
+        <div class="box">
+            <div class="container container1"></div>
+            <div class="container container2"></div>
+            <div class="container container3"></div>
+        </div>
+        <div class="text">
+            <span> border-box</span>
+            <span> padding-box</span>
+            <span> content-box</span>
+        </div>
+   </div>
+</body>
+</html>

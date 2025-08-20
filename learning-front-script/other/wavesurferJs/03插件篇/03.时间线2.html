@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="waveform"></div>
+
+        <script type="module">
+            // 自定义时间线插件
+
+            import WaveSurfer from "../mjs/wavesurfer.js";
+            import TimelinePlugin from "../mjs/plugins/timeline.esm.js";
+
+            // 使用自定义选项创建时间线插件实例
+            const topTimeline = TimelinePlugin.create({
+                height: 20,
+                insertPosition: "beforebegin",
+                timeInterval: 0.2,
+                primaryLabelInterval: 5,
+                secondaryLabelInterval: 1,
+                style: {
+                    fontSize: "20px",
+                    color: "#2D5B88",
+                },
+            });
+
+            // 创建第二个时间线
+            const bottomTimeline = TimelinePlugin.create({
+                height: 10,
+                timeInterval: 0.1,
+                primaryLabelInterval: 1,
+                style: {
+                    fontSize: "10px",
+                    color: "#6A3274",
+                },
+            });
+
+            // 创建WaveSurfer的实例
+            const wavesurfer = WaveSurfer.create({
+                container: "#waveform",
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/audio.wav",
+                minPxPerSec: 100,
+                plugins: [topTimeline, bottomTimeline],
+            });
+
+            // 点击播放
+            wavesurfer.once("interaction", () => {
+                wavesurfer.play();
+            });
+        </script>
+    </body>
+</html>

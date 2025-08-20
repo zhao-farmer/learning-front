@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 3.Object.assign
+        let obj1 = {
+            name:'kerwi'
+        }
+        let obj2 = {
+            age:100
+        }
+        // 如果出现相同属性对象 会覆盖前面的
+        let obj3 = {
+            name:'tiechui'
+        }
+        // obj2与obj3 向第一个对象（obj1）上加属性 obj3不能替换
+        console.log(Object.assign(obj1,obj2,obj3));
+        // 可以替换的写法
+        let obj = {}
+        console.log(Object.assign(obj,obj1,obj2,obj3));
+
+    </script>
+</body>
+</html>

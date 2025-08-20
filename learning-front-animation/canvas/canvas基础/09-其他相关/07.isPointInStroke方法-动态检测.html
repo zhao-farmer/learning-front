@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // 创建椭圆路径
+        const ellipse = new Path2D();
+        ellipse.ellipse(150, 75, 40, 60, Math.PI * 0.25, 0, 2 * Math.PI);
+        ctx.lineWidth = 25;
+        ctx.strokeStyle = "red";
+        ctx.fill(ellipse);
+        ctx.stroke(ellipse);
+
+        // 监听鼠标移动
+        canvas.addEventListener("mousemove", event => {
+            // 检查鼠标位置是否在椭圆的描边内
+            const isPointInStroke = ctx.isPointInStroke(ellipse, event.offsetX, event.offsetY);
+            ctx.strokeStyle = isPointInStroke ? "green" : "red";
+
+            // 绘制椭圆
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fill(ellipse);
+            ctx.stroke(ellipse);
+        });
+    </script>
+</body>
+</html>

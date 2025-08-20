@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            // 以往使用的
+            toolBox: {
+                feature: {
+                    dataZoom: {},
+                },
+            },
+            dataZoom: [
+                {
+                    type: "slider",
+                    // type: "inside",
+                    xAxisIndex: 0,
+                },
+                //   {
+                //     type: "slider",
+                //     yAxisIndex: 0,
+                //     // 百分比
+                //     start: 0,
+                //     end: 50,
+                //   },
+            ],
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "line",
+
+                    data: yDataArr,
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

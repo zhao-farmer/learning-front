@@ -1,0 +1,52 @@
+
+// 01、 map-get(map, key) 
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
+.p1{
+    content: map-get($font-sizes, "small");
+}
+
+// 02、 map-has-key(map, key)
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
+.p2{
+    content: map-has-key($font-sizes, "big");
+}
+
+//03、map-keys(map)
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
+.p3{
+    $info :map-keys($font-sizes);
+    content: $info;
+}
+
+//04、map-values(map)
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
+.p4{
+    $info :map-values($font-sizes);
+    content: $info;
+}
+
+
+// 05、map-merge(map1, map2)
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
+$font-sizes2: ("x-large": 30px, "xx-large": 36px);
+.p5{
+    $info :map-merge($font-sizes, $font-sizes2);
+    content:  map-keys($info) ;
+    content:  map-values($info) ;
+}
+
+//06、map-remove(map, keys...)
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px);
+.p6-1{
+    $info :map-remove($font-sizes, "small");
+    content:  map-keys($info) ;
+    content:  map-values($info) ;
+}
+.p6-2{
+    $info :map-remove($font-sizes, "small", "large");
+    content:  map-keys($info) ;
+    content:  map-values($info) ;
+}
+
+
+

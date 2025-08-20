@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+        const { fromEvent, interval } = rxjs;
+        const { switchMap } = rxjs.operators;
+
+        const button = document.getElementById("btn");
+        fromEvent(button, "click").pipe(
+                switchMap(() => interval(1000)) // 每次点击重新开始计时
+            ).subscribe(console.log);
+
+    </script>
+</body>
+</html>

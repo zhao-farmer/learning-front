@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let o = {a:1}
+
+        let m2 = new Map()
+
+        // set get has delete size clear
+        // 设置对象
+        m2.set("name","kerwin")
+        m2.set("age",100)
+        m2.set(o,"大连")
+
+        // 获取对象
+        console.log(m2.get("age"));
+        // 获取对象作为key是获取对象的地址
+        console.log(m2.get(o));
+
+        // 判断是否含有
+        console.log(m2.has('age'));
+        
+        // 删除
+        m2.delete("age");
+        console.log(m2.has('age'));
+
+        // map含有内容的多少
+        console.log(m2.size);
+        
+        // 清理
+        m2.clear()
+        console.log(m2);
+        
+
+
+    </script>
+</body>
+</html>

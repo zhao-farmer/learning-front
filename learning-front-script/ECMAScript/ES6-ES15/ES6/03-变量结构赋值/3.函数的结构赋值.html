@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function getData(){
+            let res = {
+                code:200,
+                data:{
+                    list:["aaa","bbb","ccc"]
+                }
+            }
+
+            test(res)
+        }
+        // 对象直接开始结构
+        function test({code,data:{list}}){
+            console.log(code,list);
+        }
+
+        getData()
+    </script>
+</body>
+</html>

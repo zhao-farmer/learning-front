@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div>
+            用户名
+            <input type="text" id="username">
+        </div>
+        <div>
+            密码
+            <input type="password" id="password">
+        </div>
+        <div>
+            提交
+            <input type="submit" id="login">
+        </div>
+    </div>
+    <script>
+        var ologin = document.querySelector("#login");
+        var username = document.querySelector("#username");
+        var password = document.querySelector("#password");
+        ologin.onclick = () => {            
+            let pathUrl = `/api/login?username=${username.value}&password=${password.value}`;
+            //get请求
+            fetch(pathUrl).then(res => res.json()).then(res => {
+                console.log(res);
+            })
+        }
+    </script>
+</body>
+</html>

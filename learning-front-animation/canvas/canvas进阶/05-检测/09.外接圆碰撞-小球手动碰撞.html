@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+        <div id="msg"></div>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                    // x轴 y轴 速度
+                    this.vx = 0;
+                    this.vy = 0;
+
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+           // 判断圆是否发生了碰撞
+            const checkCircle = (circleA, circleB) => {
+                const dx = circleB.x - circleA.x
+                const dy = circleB.y - circleA.y
+                const distance = Math.sqrt(dx * dx + dy * dy)
+                if (distance < (circleA.radius + circleB.radius)) {
+                    return true
+                }
+                return false
+            }
+                        // 定义鼠标事件
+            const mouseEvent = (element) => {
+                let mouse = { x: 0, y: 0 } // 存储鼠标位置信息
+                element.addEventListener('mousemove', e => {
+                    let x = e.pageX
+                    let y = e.pageY
+                    // 计算鼠标在canvas画布中的相对位置
+                    mouse.x = x - element.offsetLeft
+                    mouse.y = y - element.offsetTop
+                })
+                return mouse
+            }
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            // 定义小球A
+            const ballA = new Ball(canvas.width / 2, canvas.height / 2, 30);
+            const getMouse = mouseEvent(canvas);
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // 定义一个追随鼠标位移的小球B
+                const ballB = new Ball(getMouse.x, getMouse.y, 30, 'red')
+              
+                // 碰撞检测
+                if (checkCircle(ballA, ballB)) {
+                    document.querySelector('#msg').innerHTML = '撞上了！'
+                } else {
+                    document.querySelector('#msg').innerHTML = '没撞上'
+                }
+
+                // 绘制小球
+                ballA.fill(ctx)
+                ballB.fill(ctx)
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite, Rectangle } from "../js/pixi.mjs";
+
+        //使用立即执行函数进行调用
+        (async () => {
+            // 创建一个新的应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 600,
+                height: 400,
+            });
+
+            // 将应用程序画布添加到到文档正文
+            document.body.appendChild(app.canvas);
+
+            // 加载图片到纹理
+            const texture = await Assets.load("../assets/images/eggHead.png");
+
+            // 创建一个数组来存储外星人
+            const aliens = [];
+
+            const totalDudes = 20;
+
+            for (let i = 0; i < totalDudes; i++) {
+                // 创建一个新的外星精灵
+                const dude = new Sprite(texture);
+
+                // 设置锚点，使纹理以角色为中心
+                dude.anchor.set(0.5);
+
+                // 为这家伙设定一个随机比例——没有必要他们都是一样的大小！
+                dude.scale.set(0.5 + Math.random() * 0.3);
+
+                // 最后，让我们把这家伙放在一个随机的位置。。
+                dude.x = Math.random() * app.screen.width;
+                dude.y = Math.random() * app.screen.height;
+
+                //设置随机的颜色 白色为最大值  随机值0-1之间 就包含所有的颜色
+                dude.tint = Math.random() * 0xffffff;
+
+                // 创建一些额外的属性来控制移动：---------------------
+
+                // 以弧度为单位创建随机方向。
+                // 这是一个介于0和PI*2之间的数字，相当于0-360度
+                dude.direction = Math.random() * Math.PI * 2;
+
+                // 这个数字将用于随着时间的推移修改该 dube 的方向
+                dude.turningSpeed = Math.random() - 0.8;
+
+                // 为2-4之间的家伙创建一个随机速度
+                dude.speed = 2 + Math.random() * 2;
+
+                // 最后，我们把这家伙推到外星人阵列中，这样以后就可以很容易地访问它
+                aliens.push(dude);
+
+                app.stage.addChild(dude);
+            }
+
+            // 为小家伙创建一个边界框 屏幕外各多一百距离
+            const dudeBoundsPadding = 100;
+            const dudeBounds = new Rectangle(-dudeBoundsPadding, -dudeBoundsPadding, app.screen.width + dudeBoundsPadding * 2, app.screen.height + dudeBoundsPadding * 2);
+
+            app.ticker.add(() => {
+                // 遍历这些家伙并更新他们的位置
+                for (let i = 0; i < aliens.length; i++) {
+                    const dude = aliens[i];
+
+                    dude.direction += dude.turningSpeed * 0.01;
+                    // 正弦是 -1到1 x轴会一直变化
+                    dude.x += Math.sin(dude.direction) * dude.speed;
+                    // 余弦是 -1到1 y轴也会一直变化  两个结合就变成有幅度的移动，且方向不确定
+                    dude.y += Math.cos(dude.direction) * dude.speed;
+                    // 对象自身的旋转 不会一直很小
+                    dude.rotation = -dude.direction - Math.PI / 2;
+
+                    // 通过测试他们的界限来限制他们的位置。。。
+                    // 1.当x轴 超过左边的时候 当前值x把宽度给加上
+                    // 2.当x轴 超过右边的时候 将宽度进行减去
+                    if (dude.x < dudeBounds.x) {
+                        dude.x += dudeBounds.width;
+                    } else if (dude.x > dudeBounds.x + dudeBounds.width) {
+                        dude.x -= dudeBounds.width;
+                    }
+
+                    // 与x轴相同的道理
+                    if (dude.y < dudeBounds.y) {
+                        dude.y += dudeBounds.height;
+                    } else if (dude.y > dudeBounds.y + dudeBounds.height) {
+                        dude.y -= dudeBounds.height;
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

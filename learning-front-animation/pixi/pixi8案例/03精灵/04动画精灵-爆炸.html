@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, AnimatedSprite, Texture } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                autoStart: false,
+                width: 600,
+                height: 400,
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            // 加载动画精灵页
+            const texture = await Assets.load("../assets/spritesheet/mc.json");
+
+            // 创建一个数组填充仓库中的精灵
+            const explosionTextures = [];
+            let i;
+
+            // 精灵仓库中含有27个数据
+            for (i = 0; i < 26; i++) {
+                const texture = Texture.from(`Explosion_Sequence_A ${i + 1}.png`);
+
+                //将精灵加入进来
+                explosionTextures.push(texture);
+            }
+
+            // 创建动画爆炸精灵并将其随机放置在舞台上
+            for (i = 0; i < 50; i++) {
+                // 创建爆炸动画精灵
+                const explosion = new AnimatedSprite(explosionTextures);
+
+                //将精灵设置到随机位置
+                explosion.x = Math.random() * app.screen.width;
+                explosion.y = Math.random() * app.screen.height;
+                //设置锚点
+                explosion.anchor.set(0.5);
+                //旋转
+                explosion.rotation = Math.random() * Math.PI;
+                // 设置随机大小
+                explosion.scale.set(0.75 + Math.random() * 0.5);
+                // 设置播放时间
+                explosion.gotoAndPlay((Math.random() * 26) | 0);
+                //加入到舞台上
+                app.stage.addChild(explosion);
+            }
+
+            // 动画开始
+            app.start();
+        })();
+    </script>
+</body>
+</html>

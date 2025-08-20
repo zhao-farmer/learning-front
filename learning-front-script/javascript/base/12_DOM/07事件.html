@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <button id="btn" onclick="alert('你点我干嘛')">点击一下</button> -->
+    <button id="btn">点击一下</button>
+    <script>
+      /* 
+            事件 （event）
+             -  事件 就是用户与页面之间发生的交付行为
+                比如： 点击按钮、鼠标移动、双击按钮、敲击键盘、松开按键......
+
+            -  可以通过为事件绑定相应函数（回调函数），来完成和用户之间的交互
+            -  绑定相应函数的方式
+                1.可以直接在元素的属性中设置
+                2.可以通过为元素的指定属性设置回调函数的形式来绑定事件（一个事件只能绑定一个相应函数）
+                3.可以通过元素addEvenetListener()方法绑定事件
+        */
+
+      // 获取到按钮对象
+      const btn = document.getElementById("btn");
+      //为按钮对象的时间属性设置相应函数
+
+      //   btn.onclick = function () {
+      //     alert("我又被点了一下");
+      //   };
+
+      btn.addEventListener("click", function () {
+        alert("我又被点了一下,哈哈哈");
+      });
+      btn.addEventListener("click", function () {
+        alert("我又被点了一下,嘻嘻嘻");
+      });
+      btn.addEventListener("click", function () {
+        alert("我又被点了一下,呜呜呜");
+      });
+    </script>
+  </body>
+</html>

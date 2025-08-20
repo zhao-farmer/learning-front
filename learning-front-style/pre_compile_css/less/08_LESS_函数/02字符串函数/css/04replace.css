@@ -1,0 +1,6 @@
+.test {
+  content: "Hello, Earth!";
+  content: "2 + 2 = 4";
+  content: 'This is a new string.';
+  content: bar-2;
+}

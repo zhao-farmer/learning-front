@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const pc = ['海尔','联想','小米','方正'];
+        const [hr,lx,mi,fz] = pc 
+        console.log(hr,lx,mi,fz);
+
+        const [hr1,lx1,mi1,fz1] = ['海尔','联想','小米','方正'] 
+        console.log(hr1,lx1,mi1,fz1);
+
+        // 请将最大值和最小值返回值解构 max 和 min 两个变量
+        function getValue(){
+            return [100,60]
+        };
+        [max,min] = getValue()
+        console.log(max,min);
+
+
+    </script>
+</body>
+</html>

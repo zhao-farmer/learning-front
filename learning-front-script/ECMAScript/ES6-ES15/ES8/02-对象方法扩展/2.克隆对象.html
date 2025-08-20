@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name:"kerwin",
+            age:100,
+
+            location:{
+                province:"辽宁",
+                city:"大连"  
+            },
+
+            get city(){
+                return this.location.city
+            },
+            set city(value){
+                this.location.city = value
+            },
+
+            // 首字母大写的赋值
+            get uppername(){
+                console.log("get");
+                return this.name.substring(0,1).toUpperCase() + this.name.substring(1)
+            },
+            set uppername(value){
+                console.log("set",value);
+                this.name = value
+            }
+        }
+        console.log('原始值：', obj);  
+        
+        // Object.assign 会造成不完全复制
+        // get set方法并没有复制上
+        let obj1 = {}
+        Object.assign(obj1,obj)
+        console.log('使用Object.assign赋值↓');  
+        console.log(obj1);
+        
+       
+        // console.log(Object.getOwnPropertyDescriptors(obj));
+        
+        let obj2 = {}
+        Object.defineProperties(obj2,Object.getOwnPropertyDescriptors(obj));
+        console.log(" Object.defineProperties +  Object.getOwnPropertyDescriptors 复制↓");
+        console.log(obj2);
+        
+        
+    </script>
+</body>
+</html>

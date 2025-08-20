@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 作为常量
+        const VIDEO = 1;
+        const AUDIO = 2;
+        const IMAGE = 3;
+
+        function play(type){
+            switch(type){
+                case VIDEO:
+                    console.log("视频播放");
+                    break;
+                case AUDIO:
+                    console.log("音频播放");
+                    break;
+                case IMAGE:
+                    console.log("图片播放");
+                    break;
+            }
+        }
+        // 传值不仅可以传入常量还可以传入常量的值
+        play(IMAGE)
+        play(3)
+
+
+        // 使用Symbol后 无法再传入其他参数
+        const VIDEO2 = Symbol();
+        const AUDIO2 = Symbol();
+        const IMAGE2 = Symbol();
+
+        function play(type){
+            switch(type){
+                case VIDEO:
+                    console.log("视频播放");
+                    break;
+                case AUDIO:
+                    console.log("音频播放");
+                    break;
+                case IMAGE:
+                    console.log("图片播放");
+                    break;
+            }
+        }
+
+        play(AUDIO2)
+
+
+    </script>
+</body>
+</html>

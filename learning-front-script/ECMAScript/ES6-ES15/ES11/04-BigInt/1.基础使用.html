@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        console.log(2 ** 53);       //9007199254740992
+        // 超出范围无法再计算
+        console.log(2 ** 53 + 1);   //9007199254740992
+        
+        // 1.使用数值加n
+        let num1 = 123;
+        let num2 = 123n;
+        console.log(num1,num2); //123 123n
+        
+        console.log(num1 == num2);  // true
+        console.log(num1 === num2); // false
+
+        console.log(num1 < num2);  // false
+        console.log(num1 > num2);   // false
+
+        // 2. BigInt函数
+        console.log(BigInt(2));
+        console.log(num2 + BigInt(2));
+
+    </script>
+</body>
+</html>

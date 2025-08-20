@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            p {
+                margin: 0;
+            }
+            .parent {
+                overflow: hidden;
+            }
+            .left,
+            .center,
+            .right {
+                float: left;
+                width: 25%;
+            }
+            .center {
+                width: 50%;
+                padding: 0 20px;
+                background-clip: content-box;
+                box-sizing: border-box;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent" id="parent" style="background-color: lightgrey">
+            <div class="left" style="background-color: lightblue">
+                <p>left</p>
+            </div>
+            <div class="center" style="background-color: pink">
+                <p>center</p>
+                <p>center</p>
+                <p>center</p>
+                <p>center</p>
+            </div>
+            <div class="right" style="background-color: lightgreen">
+                <p>right</p>
+            </div>
+        </div>
+
+        <script>
+            function getCSS(obj, style) {
+                if (window.getComputedStyle) {
+                    return getComputedStyle(obj)[style];
+                }
+                return obj.currentStyle[style];
+            }
+            var oParent = document.getElementById("parent");
+            var oLeft = oParent.getElementsByTagName("div")[0];
+            var oCenter = oParent.getElementsByTagName("div")[1];
+            var oRight = oParent.getElementsByTagName("div")[2];
+            function eqHeight(obj1, obj2) {
+                var oDis = obj1.clientHeight - obj2.clientHeight;
+                if (oDis > 0) {
+                    obj2.style.paddingBottom = parseFloat(getCSS(obj2, "padding-bottom")) + oDis + "px";
+                } else {
+                    obj1.style.paddingBottom = parseFloat(getCSS(obj1, "padding-bottom")) + Math.abs(oDis) + "px";
+                }
+            }
+            eqHeight(oLeft, oCenter);
+            eqHeight(oLeft, oRight);
+        </script>
+    </body>
+</html>

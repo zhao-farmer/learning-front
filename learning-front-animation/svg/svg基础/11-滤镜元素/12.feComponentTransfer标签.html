@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <img src="./images/flower.png" width="200" height='200'>
+
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="colorAdjust">
+            <feComponentTransfer in="SourceGraphic">
+                <feFuncR type="linear" intercept="0.1" />
+                <feFuncG type="linear" intercept="0.5" />
+                <feFuncB type="linear" intercept="0.3" />
+            </feComponentTransfer>
+            </filter>
+        </defs>
+
+        <image href="./images/flower.png" width="200" height="200" filter="url(#colorAdjust)"  />
+    </svg>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<button type="primary" plain bind:tap="sendData" >传递数据</button>

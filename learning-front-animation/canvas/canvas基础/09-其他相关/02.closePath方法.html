@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext("2d");
+    
+        // ========= 未使用closePath =========
+        ctx.arc(70, 70, 50, 0, 180 * Math.PI / 180, true);
+        ctx.stroke();
+
+        ctx.moveTo(20, 180);
+        ctx.lineTo(60, 140);
+        ctx.lineTo(100, 180);
+        ctx.stroke();
+
+        // ========= 使用closePath =========
+        // 这里使用 beginPath防止污染
+        ctx.beginPath();
+
+        ctx.arc(200, 70, 50, 0, 180 * Math.PI / 180, true);
+        ctx.closePath();
+        ctx.stroke();
+
+        ctx.moveTo(150, 180);
+        ctx.lineTo(190, 140);
+        ctx.lineTo(230, 180);
+        ctx.closePath();
+        ctx.stroke();
+
+    </script>
+</body>
+</html>

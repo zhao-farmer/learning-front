@@ -1,0 +1,1 @@
+<view><swiper indicator-dots indicator-color="rgba(255,255,255,0.3)" indicator-active-color="#ffffff" circular autoplay interval="2000"><swiper-item>1111</swiper-item><swiper-item>2222</swiper-item><swiper-item>3333</swiper-item><swiper-item>4444</swiper-item></swiper></view>

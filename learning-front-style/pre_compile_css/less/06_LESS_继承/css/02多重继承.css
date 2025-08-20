@@ -1,0 +1,11 @@
+.father,
+.chird2 {
+  background: #FFFFFF;
+}
+.mother,
+.chird2 {
+  width: 100%;
+}
+.chird2 {
+  border: 1px solid #F0F0F0;
+}

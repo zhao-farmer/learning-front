@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const buf = new ArrayBuffer(2, { maxByteLength: 32 });
+        const view = new Uint8Array(buf);
+        view[0] = 42;
+        console.log(view[0]); // 输出: 42
+
+        buf.resize(12);
+        const newView = new Uint8Array(buf);
+        console.log(newView.length); // 输出: 12
+        console.log(newView[0]); // 输出: 42
+    </script>
+</body>
+</html>

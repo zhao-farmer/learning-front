@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <canvas id="c2" width="600" height="400" ></canvas>
+     <canvas id="c3" width="600" height="400" ></canvas>
+     <script>
+        //第一种 绘制图片的方式 三个参数
+        //参数1 为图片对象
+        //参数2 将图片渲染到画布的水平位置
+        //参数3 将图片渲染到画布的最值位置
+        var c1 = document.getElementById("c1");
+        var ctx1 = c1.getContext('2d');
+        var img = new Image();
+        img.src = './images/1.jpg';
+        img.onload = function(){
+            ctx1.drawImage(img,0,0);
+        }
+
+        //第二种 绘制图片的方式 进行缩放 五个参数
+        //参数1 为图片对象
+        //参数2 将图片渲染到画布的水平位置
+        //参数3 将图片渲染到画布的最值位置
+        //参数4 将图片缩放到对应的宽度
+        //参数5 将图片缩放到对应的高度
+        var c2 = document.getElementById("c2");
+        var ctx2 = c2.getContext('2d');
+        var img = new Image();
+        img.src = './images/1.jpg';
+        img.onload = function(){
+            ctx2.drawImage(img,0,0,600,400);
+        }
+
+
+        //第三种 绘制图片的方式 裁剪后缩放 九个参数
+        //参数1 为图片对象
+        //参数2 裁剪起始点X轴
+        //参数3 裁剪起始点Y轴
+        //参数4 裁剪矩形的宽度
+        //参数5 裁剪矩形的高度
+        //参数6 将图片渲染到画布的水平位置
+        //参数7 将图片渲染到画布的最值位置
+        //参数8 将图片缩放到对应的宽度
+        //参数9 将图片缩放到对应的高度
+        var c3 = document.getElementById("c3");
+        var ctx3 = c3.getContext('2d');
+        var img = new Image();
+        img.src = './images/1.jpg';
+        img.onload = function(){
+            ctx3.drawImage(img,1200,0,1200,800,0,0,600,400);
+        }
+     </script>
+</body>
+</html>

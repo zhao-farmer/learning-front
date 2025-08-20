@@ -1,0 +1,1 @@
+<view class="out data-v-748a34ac"><input class="data-v-748a34ac" type="text" value="{{a}}" bindfocus="{{b}}" bindblur="{{c}}" bindconfirm="{{d}}"/><image src="{{e}}" mode="" class="{{['pic', 'data-v-748a34ac', f]}}"></image></view>

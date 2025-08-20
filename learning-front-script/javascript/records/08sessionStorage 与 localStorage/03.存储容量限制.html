@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       navigator.webkitPersistentStorage.queryUsageAndQuota(
+            function(usage, quota) {
+                console.log('Used:', usage, 'bytes');
+                console.log('Total quota:', quota, 'bytes');
+            },
+            function(error) {
+                console.error('Error:', error);
+            }
+        );
+    </script>
+</body>
+</html>

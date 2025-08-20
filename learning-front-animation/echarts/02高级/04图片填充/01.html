@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script type="module">
+        function loadImage(url) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = url;
+                img.onload = () => resolve(img);
+                img.onerror = e => reject(e);
+            });
+        }
+
+        // 同步调用
+        (async () => {
+            let image1 = await loadImage("../assets/img/001.jpg");
+            let image2 = await loadImage("../assets/img/002.jpg");
+            let image3 = await loadImage("../assets/img/003.jpg");
+
+            var mCharts = echarts.init(document.querySelector("div"));
+
+            var pieData = [
+                {
+                    name: "美女1",
+                    value: 9,
+                    itemStyle: {
+                        //  图片显示 ======================================================
+                        color: {
+                            // 支持为 HTMLImageElement, HTMLCanvasElement，不支持路径字符串
+                            image: image1, 
+                            // 是否平铺，可以是 'repeat-x', 'repeat-y', 'no-repeat'
+                            repeat: "repeat",
+                        },
+                    },
+                },
+                {
+                    name: "美女2",
+                    value: 8,
+                    itemStyle: {
+                        color: {
+                            image: image2,
+                            repeat: "repeat-x",
+                        },
+                    },
+                },
+                {
+                    name: "美女3",
+                    value: 5,
+                    itemStyle: {
+                        color: {
+                            image: image3,
+                            repeat: "no-repeat",
+                        },
+                    },
+                },
+            ];
+            var option = {
+                series: [
+                    {
+                        type: "pie",
+                        data: pieData,
+
+                        roseType: "radius", //南丁格尔图 平涂的每一个区域的半径是不同的，会随着数值的改变而变化
+                    },
+                ],
+            };
+            mCharts.setOption(option);
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var mypro = new Promise((resolve,reject)=>{
+            setTimeout(() => {
+                resolve()
+                // reject();
+            }, 1000);
+        })
+
+        // 操作未完成 pending
+        console.log(mypro);
+
+        // 第一个操作成功 fulfilled
+        // 第二个操作失败 rejected
+        mypro.then(()=>{
+            console.log("发奖金");
+            console.log(mypro);
+        },()=>{
+            console.log("不发奖金111");
+              console.log(mypro);
+        })
+
+    </script>
+</body>
+</html>

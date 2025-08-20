@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>矩形</title>
+     <style>
+        body{
+            display: flex;
+        }
+        .outer{
+            border: 1px solid;
+        }
+        .inside_01{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: inset(5% 20% 15% 10%);
+        }
+        .inside_02{
+            width:100px;
+            height: 100px;
+            background:green;
+            clip-path: inset(-10px 20px 15px 10px);
+           
+        }
+        .inside_03{
+            width:200px;
+            height: 200px;
+            background:skyblue;
+            clip-path: inset(100px 30px 15px 100px);
+        }
+        .inside_04{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: inset(5% 20% 15% 10% round 15px);
+        }
+     </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inside_01"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_02"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_03"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_04"></div>
+    </div>
+</body>
+</html>

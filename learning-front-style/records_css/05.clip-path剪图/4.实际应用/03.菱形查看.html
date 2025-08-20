@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            .box img {
+                width: 500px;
+                height: 312px;
+                transition: all 0.5s ease;
+                -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            .box:hover img {
+                opacity: 0.5;
+                -webkit-clip-path: polygon(50% 0, 99% 50%, 50% 99%, 0 50%);
+                clip-path: polygon(50% 0, 99% 50%, 50% 99%, 0 50%);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <img src="../images/00.jpg" alt="" />
+        </div>
+    </body>
+</html>

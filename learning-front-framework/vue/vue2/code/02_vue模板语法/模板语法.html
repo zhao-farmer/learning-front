@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模板语法</title>
+    <!-- 引入vue -->
+    <script  type="text/javascript" src="../js/vue.js"></script>
+ 
+</head>
+<body>
+    <!-- 创建一个容器 -->
+    <div id="root">
+        <h1>模板语法</h1>
+        <h3>hello. {{name}}</h3>
+        <hr/>
+        <h1>语法指令</h1>
+        <a v-bind:href="school.url"> 点我去{{school.name}}学习1！</a>
+        <a :href="school.url.toUpperCase()"> 点我去{{school.name}}学习2！</a>
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false //设置为 false 以阻止 vue 在启动时生成生产提示。
+        new Vue({
+            el:'#root',
+            data:{
+                name:'jack',
+                school:{
+                    name:'B站',
+                    url:'https://www.bilibili.com/video/BV1Zy4y1K7SH'
+                }
+            }
+          
+        })
+    </script>
+  
+</body>
+</html>

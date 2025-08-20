@@ -1,0 +1,8 @@
+<!--pages/cart/cart.wxml-->
+<view class="parent">
+  <view class="title">父组件，子租价 a 和 子组件 b 是兄弟关系</view>
+  <view class="container">
+    <custom01/>
+    <custom02/>
+  </view>
+</view>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      img {
+        vertical-align: top;
+        width: 640px;
+      }
+      ul {
+        list-style: none;
+      }
+      .outer {
+        width: 640px;
+        height: 390px;
+        margin: 100px auto;
+        position: relative;
+      }
+      .img-list {
+        height: 100%;
+      }
+      .img-list li {
+        position: absolute;
+        opacity: 0;
+        transition: all 0.7s;
+      }
+      li.current {
+        z-index: 1;
+        opacity: 1;
+      }
+      /* 
+        设置两个箭头的样式
+      */
+      .prev-next a {
+        font-size: 60px;
+        color: #7c7c7c;
+        font-weight: bold;
+        text-decoration: none;
+        position: absolute;
+        height: 60px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 2;
+      }
+      .prev-next a:hover {
+        color: #fff;
+      }
+      #next {
+        right: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <ul class="img-list">
+        <li class="current">
+          <a href="#">
+            <img src="./images/1.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/2.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/3.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/4.jpg" />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <img src="./images/5.jpg" />
+          </a>
+        </li>
+      </ul>
+      <!-- 添加切换按钮 -->
+      <div class="prev-next">
+        <a id="prev" href="javascript:;"><</a>
+        <a id="next" href="javascript:;">></a>
+      </div>
+    </div>
+    <script>
+      /* 
+            自动切换图片
+        */
+      const toggleChange = (function () {
+        let timer;
+        return function () {
+          if (timer == null) {
+            timer = setTimeout(function auto() {
+              changeImg("next");
+              timer = setTimeout(auto, 2000);
+            }, 2000);
+          } else {
+            clearTimeout(timer);
+            timer = null;
+          }
+        };
+      })();
+
+      toggleChange();
+
+      const outer = document.querySelector(".outer");
+      outer.onmouseenter = () => {
+        console.log("进入");
+        toggleChange();
+      };
+      outer.onmouseleave = () => {
+        console.log("离开");
+        toggleChange();
+      };
+
+      /* 
+          点击按钮 切换图片
+      */
+      const prevBtn = document.getElementById("prev");
+      const nextBtn = document.getElementById("next");
+
+      prevBtn.onclick = () => {
+        changeImg("prev");
+      };
+
+      nextBtn.onclick = () => {
+        changeImg("next");
+      };
+
+      /* 
+        changeImg 用来切换图片
+          参数：
+            dir 切换图片的方向
+              next
+              prev
+      
+      */
+      function changeImg(dir) {
+        const current = document.querySelector(".img-list .current");
+
+        let next;
+        if (dir == "next") {
+          next =
+            current.nextElementSibling ||
+            document.querySelector("li:first-child");
+        } else if (dir == "prev") {
+          next =
+            current.previousElementSibling ||
+            document.querySelector("li:last-child");
+        }
+        //获取下一个图片
+
+        // 切换显示状态
+        current.classList.remove("current");
+        next.classList.add("current");
+      }
+    </script>
+  </body>
+</html>

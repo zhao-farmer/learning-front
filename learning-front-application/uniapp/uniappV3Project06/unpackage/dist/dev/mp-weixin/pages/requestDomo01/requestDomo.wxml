@@ -1,0 +1,1 @@
+<view class="content data-v-add26405"><view class="layout data-v-add26405"><view wx:for="{{a}}" wx:for-item="item" class="box data-v-add26405"><view class="pic data-v-add26405"><image class="data-v-add26405" src="{{b}}" mode="widthFix"></image></view><view class="text data-v-add26405">@@@</view></view></view></view>

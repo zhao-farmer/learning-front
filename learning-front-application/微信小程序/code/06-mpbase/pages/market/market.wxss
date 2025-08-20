@@ -1,0 +1,9 @@
+.open-box{
+  height: 300rpx;
+  border: 1px solid springgreen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  margin-top: 20rpx;
+}

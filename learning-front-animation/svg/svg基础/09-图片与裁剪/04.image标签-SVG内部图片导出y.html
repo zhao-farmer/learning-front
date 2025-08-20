@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="400" height="400">
+         <!-- 类似闪电的图形 -->
+        <polygon points="0,150 50,50 50,100 100,0" fill="purple" />
+
+        <!-- 绘制一个类似闪电的图形，取消填充色，仅描边 -->
+        <polygon points="100,150 150,50 150,100 200,0" fill="none" stroke="purple" />
+    </svg>
+    <script>
+        function exportSVGAsImage() {
+            const svgElement = document.querySelector("svg");
+            const svgData = new XMLSerializer().serializeToString(svgElement);
+            const canvas = document.createElement("canvas");
+            const context = canvas.getContext("2d");
+
+            canvas.width = svgElement.getAttribute("width");
+            canvas.height = svgElement.getAttribute("height");
+
+            const image = new Image();
+            image.onload = function () {
+                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+                const dataURL = canvas.toDataURL("image/png");
+                const link = document.createElement("a");
+                link.href = dataURL;
+                link.download = "exported-image.png";
+                link.click();
+            };
+            image.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgData);
+        }
+
+        // 运行
+        exportSVGAsImage()
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <script>
+        var image = new Image();
+        image.src = "./images/3.jpeg";
+
+        image.onload = function () {
+            createImageBitmap(image).then(imageBitmap => {
+                const canvas = document.createElement('canvas')
+                canvas.width = imageBitmap.width
+                canvas.height = imageBitmap.height
+                const ctx = canvas.getContext('2d')
+                ctx.drawImage(imageBitmap, 0, 0)
+                
+                document.body.append(canvas)
+            })
+        }
+    </script>
+</body>
+</html>

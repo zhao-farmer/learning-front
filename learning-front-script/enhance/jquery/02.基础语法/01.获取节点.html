@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            p {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="myP">大眼睛</p>
+        <div class="box" id="box1">hello</div>
+        <div class="box" id="box2">hello2</div>
+        <div class="box">hello3</div>
+        <div class="box">hello4</div>
+
+        <script src="../js/jquery.3.7.1.js"></script>
+        <script>
+            /*获取节点样式*/
+            console.log($("p").css("color"));
+            console.log($("p").css("color") == "rgb(255,0,0)"); //false
+            console.log($("p").css("color") == "rgb(255, 0, 0)"); //true
+
+            /*改变样式*/
+            $("p").css("color", "green");
+
+            /*改变多个样式*/
+            $("p").css({
+                color: "green",
+                backgroundColor: "pink",
+                fontSize: "50px",
+            });
+
+            /*事件绑定*/
+            $("p").click(function () {
+                //以函数做为参数的函数，click称作高阶函数
+                console.log("8888");
+            });
+
+            /*原生和jQuery之间的转换*/
+            console.log(document.getElementById("myP"));
+
+            //jQuery => 原生节点
+            console.log($("#myP")[0]);
+            //错误案例：因为innerHTML是原生js的方法
+            console.log(($("#myP").innerHTML = "<h1>错误写法</h1>"));
+
+            //原生节点 => jQuery
+            let myP = document.getElementById("myP");
+            console.log($(myP)); //myP是变量，不需要引号
+
+            /*获取多个元素*/
+            console.log($(".box")); //集合
+            console.log($(".box")[0]); //原生节点
+            console.log($(".box")[1]);
+
+            //通过jQuery获取第几个jQuery对象
+            console.log($(".box").eq(0)); //jQuery对象
+            console.log($(".box").first()); //只有first()，别的不行
+            console.log($(".box").eq(1));
+            console.log($(".box").eq(2));
+
+            /*链式调用*/
+            $(".box").eq(0).css("color", "pink").css("marginLeft", "200px");
+        </script>
+    </body>
+</html>

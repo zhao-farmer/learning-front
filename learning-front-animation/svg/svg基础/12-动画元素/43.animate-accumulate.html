@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="500" height="300">
+        <!-- 初始值 -->
+        <circle cx="80" cy="150" r="50" fill="blue">
+            <animate 
+                attributeName="r" 
+                from="50" 
+                to="60" 
+                repeatCount="3" 
+                accumulate="none" 
+                dur="2s"
+            />
+        </circle>
+
+        <!-- 累加 
+            第一次：50→60
+            第二次：50+60→120
+            第三次：50+60+60→180
+        -->
+        <circle cx="300" cy="150" r="50" fill="red">
+            <animate 
+                attributeName="r" 
+                from="50" 
+                to="60" 
+                repeatCount="3" 
+                accumulate="sum" 
+                dur="2s"
+            />
+        </circle>
+
+    </svg>
+</body>
+</html>

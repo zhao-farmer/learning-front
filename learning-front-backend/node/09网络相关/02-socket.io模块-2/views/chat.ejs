@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="/javascripts/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>聊天室</h1>
+    <h1>
+        当前用户:
+        <b id="user"></b>
+    </h1>
+    <input type="text" id="text"> <button id="send">send</button>
+
+    <select id="select"></select>
+
+    <!-- 建立socket连接 带着token 后端验证 -->
+    <script>
+        var select = document.getElementById("select")
+        var text = document.getElementById("text")
+        var sendBtn = document.getElementById("send")
+        var user= document.querySelector("#user")
+        user.innerHTML = localStorage.getItem("user")
+
+        const WebSocketType = {
+            Error:0, // 错误
+            GroupList:1,    // 获取用户列表
+            GroupChat:2,    // 群聊
+            SingleChat:3    // 单聊
+        }
+        
+        // 引入socket.io js端
+
+        // http 连接
+        // const socket = io(`http://localhost:3000?token=${localStorage.getItem("token")}`);
+        // websocket 连接
+        const socket = io(`ws://localhost:3000?token=${localStorage.getItem("token")}`)
+        // 不管是那种都使用http调用了5次请求，这里ws并没有意义
+
+        socket.on(WebSocketType.GroupChat,(msg)=>{
+            var title = msg.user?msg.user.username + "发送：":"广播：";
+            console.log( title + msg.data);
+            // socket.emit({type:1})
+        })
+
+        // 失败
+        socket.on(WebSocketType.Error,(msg)=>{
+            localStorage.removeItem("token")
+            location.href = "/login"
+        })
+
+        socket.on(WebSocketType.GroupList,(msg)=>{
+            const onlineList = msg.data;
+            select.innerHTML = "";
+            select.innerHTML =  `<option value="all">all</option>` + 
+                onlineList.map(item=>`
+                    <option value="${item.username}">${item.username}</option>
+                `).join("")
+        })
+
+        socket.on(WebSocketType.SingleChat,(msgObj)=>{
+            console.log(msgObj);
+            
+            console.log(msgObj.user.username + "发送：" + msgObj.data );
+        })
+
+        sendBtn.onclick = () =>{
+            if(select.value == "all"){
+                socket.emit(WebSocketType.GroupChat,createMessage(text.value))
+            }else{
+                socket.emit(WebSocketType.SingleChat,createMessage(text.value,select.value))
+            }
+        }
+
+
+        function createMessage(data,to){
+            return {
+                data,
+                to
+            }
+        }
+    </script>
+</body>
+</html>

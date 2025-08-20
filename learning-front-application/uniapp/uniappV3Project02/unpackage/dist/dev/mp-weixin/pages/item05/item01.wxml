@@ -1,0 +1,1 @@
+<view>demo1</view><navigator url="/pages/item05/item02" open-type="reLaunch"> 点击跳转到demo2 </navigator><navigator url="/pages/item05/item03"><image src="{{a}}" mode="heightFix" class="pic3"></image></navigator>

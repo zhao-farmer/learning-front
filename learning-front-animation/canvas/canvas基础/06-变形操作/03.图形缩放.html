@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border: 1px solid #ccc;"></canvas>
+
+    <script>
+        const canvas = document.getElementById("c1");
+        const ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "HotPink";
+        ctx.fillRect(30, 30, 50, 50);
+
+        // 放大缩小 scale坐标系进行了拉伸 
+        // 第一个参数x轴 第二个参数y轴
+        ctx.scale(1.5, 1.5);
+        ctx.fillStyle = "LightSkyBlue";
+        ctx.fillRect(30, 30, 50, 50);
+    </script>
+</body>
+</html>

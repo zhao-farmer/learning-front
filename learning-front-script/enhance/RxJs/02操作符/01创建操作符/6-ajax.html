@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/rxjs/dist/bundles/rxjs.umd.min.js"></script>
+    </head>
+    <body>
+        <script>
+            const { ajax } = rxjs.ajax;
+
+            const apiUrl = "http://localhost:3000/users";
+
+            // 1. get请求
+            ajax.getJSON(apiUrl).subscribe({
+                next: data => console.log("get成功:", data),
+                error: err => console.error("get失败:", err),
+                complete: () => console.log("get请求完成"),
+            });
+
+            // 2. 使用完整的 ajax() 方法
+            ajax({
+                url: apiUrl,
+                method: "GET",
+            }).subscribe(res => console.log(res.response));
+
+            
+            // 3. post请求与header
+            ajax({
+                url: apiUrl,
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    username: "敏敏",
+                    age:10,
+                }),
+            }).subscribe({
+                next: res => console.log("post创建成功:", res.response),
+                error: err => console.error("post创建失败:", err),
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" style="border:1px solid black"></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');  
+
+        //创建image对象
+        var image = new Image();
+        image.src = "./images/3.jpeg";
+
+        image.onload = function () {
+            
+            // 获取pattern对象，用于样式
+            var pattern = ctx.createPattern(image, "no-repeat");
+
+            // 文字
+            var text = "我爱学习！";
+            ctx.font = "bold 80px 微软雅黑";    
+            ctx.fillStyle = pattern;
+            ctx.fillText(text, 50, 100);
+
+            // 圆球
+            ctx.beginPath();
+            ctx.arc(80, 180, 50, 0, 360 * Math.PI / 180, false);
+            ctx.closePath();
+            ctx.fillStyle = pattern;
+            ctx.fill();
+
+            // 方形边框
+            ctx.rect(200, 200, 100, 100);
+            ctx.lineWidth = 20
+            ctx.strokeStyle = pattern;
+            ctx.stroke();
+
+        }
+
+     </script>
+</body>
+</html>

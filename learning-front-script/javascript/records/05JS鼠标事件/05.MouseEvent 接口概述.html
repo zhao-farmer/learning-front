@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" id="checkbox" />
+
+    <script>
+        function simulateClick() {
+            var event = new MouseEvent("click", {
+                bubbles: true,
+                cancelable: true,
+            });
+            var cb = document.getElementById("checkbox");
+            cb.dispatchEvent(event);
+        }
+        simulateClick()
+    </script>
+</body>
+</html>

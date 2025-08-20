@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" style="border:1px solid black"></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');  
+
+        ctx.strokeStyle="#ccc"
+        ctx.setLineDash([10]) 
+        ctx.strokeRect(50, 50, 100, 100);
+
+        ctx.setLineDash([]);
+        ctx.lineWidth = 5;
+       
+        // 位移
+        ctx.strokeStyle="red"
+        ctx.transform(1, 0, 0, 1, 150, 20);
+        ctx.strokeRect(50, 50, 100, 100);
+        // 缩小 
+        ctx.strokeStyle="green"
+        // 对于上次一变形的图形进行操作
+        ctx.transform(0.8, 0, 0, 1.5, 0, 0);
+        ctx.strokeRect(50, 50, 100, 100);
+        // 旋转
+        ctx.strokeStyle="blue"
+        var angle = 30 * Math.PI / 180 
+        ctx.transform(Math.cos(angle), Math.sin(angle), -Math.sin(angle), Math.cos(angle), 0, 0);
+        ctx.strokeRect(50, 50, 100, 100);
+     </script>
+</body>
+</html>

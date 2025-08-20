@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="300px" height="300px"></canvas>
+    <script>
+    
+        var canvas = document.getElementById('myCanvas');
+        var ctx = canvas.getContext('2d');
+
+        var n = 8;
+        var step = 30;
+        for(var y = 0; y < n; y++) {
+            for(var x = 0; x < n; x++) {
+                ctx.fillStyle = "rgb(" + Math.floor(255-255*y/n) + ", " + Math.floor(255-255*x/n) + ", 0)";
+                ctx.fillRect(x*step, y*step, step, step);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDaataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            title: {
+                text: "成绩展示",
+                //标题样式
+                textStyle: {
+                    color: "red",
+                },
+                //标题边框
+                borderWidth: 5,
+                borderColor: "blue",
+                borderRadius: 5,
+                //标题位置
+                left: 30,
+                top: 10,
+            },
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+                    data: yDaataArr,
+                },
+            ],
+        };
+
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

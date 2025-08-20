@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+        
+        // 图片
+        let img = new Image();
+        img.src="./assest/001.jpg"
+
+        img.onload = () =>{
+
+            // 使用 FabricImage 加载图片
+            let FabricImage = new fabric.FabricImage(img,{
+                    angle:45,   // 旋转角度
+                    backgroundColor:"red",  // 背景颜色
+                    border:"blue",  // 边框颜色
+                    borderDashArray: [20, 5, 10, 7], // 选中时，虚线边的规则
+
+                    cropX: 150,   // 从原始图像大小裁剪图像像素。
+                    cropY: 200,   // 从原始图像大小裁剪图像像素。
+                    fill: "green",
+                    flipX: false,    // 水平反转
+                    flipY: false,    // 垂直反转
+
+                    height:400,     // 高度
+                    width:300,      // 宽度
+
+                    left: 100,      // 左边位置距离
+                    top: 100,      // 顶边位置距离
+
+                    padding:20,     // 填充距离
+
+                    scaleX:0.5,       // x轴比例
+                    scaleY:0.5,       // y轴比例
+
+                    // 拉甚至canvas大小
+                    scaleX: canvas.width / img.width, // 计算出图片要拉伸的宽度
+                    scaleY: canvas.height / img.height // 计算出图片要拉伸的高度
+                }
+            )
+            canvas.add(FabricImage);
+        }
+    </script>
+</body>
+</html>

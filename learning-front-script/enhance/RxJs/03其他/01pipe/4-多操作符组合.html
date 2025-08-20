@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <input type="text" id="search" />
+    <script>
+        const { fromEvent } = rxjs;
+        const { scan, throttleTime } = rxjs.operators;
+
+        fromEvent(document, "click")
+            .pipe(
+                throttleTime(1000), // 节流（1秒内只取一次）
+                scan(count => count + 1, 0) // 计数
+            )
+            .subscribe(count => {
+                console.log(`点击次数: ${count}`);
+            });
+    </script>
+</body>
+</html>

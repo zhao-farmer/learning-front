@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态生成表格</title>
+    <style>
+        table {
+            width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        
+        thead tr {
+            height: 40px;
+            background-color: rgb(161, 143, 143);
+        }
+        
+        td,
+        th {
+            border: 1px solid rgb(80, 73, 73);
+        }
+    </style>
+</head>
+ 
+<body>
+    <table cellspacing="0">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>科目</th>
+                <th>成绩</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+ 
+        <tbody>
+ 
+ 
+        </tbody>
+    </table>
+
+    <script>
+        //1、先去准备好学生的数据
+        var datas = [{
+            name: '李大钊',
+            subject: 'javaScript',
+            score: 100
+        }, {
+            name: '陈独秀',
+            subject: 'javaScript',
+            score: 99
+        }, {
+            name: '毛泽东',
+            subject: 'javaScript',
+            score: 97
+        }, {
+            name: '周恩来',
+            subject: 'javaScript',
+            score: 96
+        }, ];
+ 
+        //2、往tbody里面创建行：有几个人(通过数组的长度)我们就创建几行
+        var tbody = document.querySelector('tbody');
+        for (var i = 0; i < datas.length; i++) {
+            //创建   tr行
+            var tr = document.createElement('tr');
+            tbody.appendChild(tr);
+ 
+            //行里面创建单元格 td 单元格的数量取决于每个对象里面的属性个数 for循环遍历对象 datas[i]
+            for (var k in datas[i]) {
+                //创建单元格
+                var td = document.createElement('td');
+ 
+                //把对象里面的属性值 datas[i][k]给td
+                td.innerHTML = datas[i][k];
+                tr.appendChild(td);
+            }
+ 
+            //3、创建有删除2个字的单元格
+            var td = document.createElement('td');
+            td.innerHTML = '<a href="javascript:;">删除</a>';
+            tr.appendChild(td);
+        }
+ 
+        // 4、删除操作
+ 
+        var as = document.querySelectorAll('a');
+        for (var i = 0; i < as.length; i++) {
+            as[i].onclick = function() {
+ 
+                tbody.removeChild(this.parentNode.parentNode);
+            }
+        }
+    </script>
+</body>
+ 
+</html>

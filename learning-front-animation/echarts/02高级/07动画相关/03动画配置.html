@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二牛", "大强"];
+        var yDataArr = [70, 92, 87, 64, 67, 75, 86, 93];
+        var option = {
+            // 控制动画是否开启，默认开启   false 表示关闭
+            animation: true,
+            // 动画的时长，它是以毫秒为单位
+            // animationDuration: 5000,
+            animationDuration: function (arg) {
+                console.log(arg);
+                return 2000 * arg;
+            },
+            animationEasing: "bounceOut",
+            animationThreshold: 8,
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+                    // 最大值、最小值展示
+                    markPoint: {
+                        data: [
+                            {
+                                type: "max",
+                                name: "最大值",
+                            },
+                            {
+                                type: "min",
+                                name: "最小值",
+                            },
+                        ],
+                    },
+                    // 展现平均值
+                    markLine: {
+                        data: [
+                            {
+                                type: "average",
+                                name: "平均值",
+                            },
+                        ],
+                    },
+                    // 数值显示
+                    label: {
+                        show: true,
+                        // 旋转60°
+                        rotate: 60,
+                        position: "inside", // 默认，数值显示在柱的内部
+                    },
+                    // 柱宽度
+                    barWidth: "30%",
+                    data: yDataArr,
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

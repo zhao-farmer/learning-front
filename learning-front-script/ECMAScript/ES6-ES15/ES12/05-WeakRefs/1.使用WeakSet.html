@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6 set map
+
+        // ES6 WeakSet WeakMap ES12 WeakRef
+
+        let obj = {
+            name:"kerwin"
+        }
+        // obj = null
+
+        let s1 = new Set();
+        s1.add("aaaa")
+        s1.add(obj)
+        // 当设置为空 无法再使用has delete等操作
+        obj = null
+        // 跟闭包一样 无法释放 会造成内存泄漏
+
+
+        /* 
+            weakSet
+
+            1. 不能使用基本类型 只能使用复杂类型
+            2. 不存在引用计数+1
+            3. size , for 不能用了
+        */
+        let obj2 = {
+            name:"kerwin"
+        }
+        let s2 = new weakSet();
+        s2.add(obj2) 
+        // 当设置为空 weakSet中的数据也为空
+        // 垃圾回收机制 直接回收
+        obj2 = null
+        // 无法使用size与for
+        console.log( s2.size);
+        
+
+    </script>
+</body>
+</html>

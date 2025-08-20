@@ -1,0 +1,16 @@
+@charset "UTF-8";
+/* ====list运算=== */
+.p3 {
+  content: a b c d;
+  content: a, b, c, d;
+  content: 2;
+  content: true;
+  content: false;
+  content: space;
+  content: space;
+  content: a b c d e f;
+  content: a, b, c, d, e, f;
+  content: [a b c d e f];
+  content: 3;
+  content: 1px solid red, 2px dashed green, 3px dotted blue;
+}

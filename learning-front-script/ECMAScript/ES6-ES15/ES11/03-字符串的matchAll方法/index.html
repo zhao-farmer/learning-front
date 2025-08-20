@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = `
+            <ul>
+                <li>11111</li>
+                <li>22222</li>
+                <li>33333</li>
+                <li>44444</li>
+            </ul>
+        `
+        // 正则表达式
+        let reg = /<li>(.*)<\/li>/g;
+        
+        console.log(str.match(reg));
+        // ['<li>11111</li>', '<li>22222</li>', '<li>33333</li>', '<li>44444</li>']    
+
+        // 方式一：直接分组获取
+        let reg2 = /<li>(?<content>.*)<\/li>/g;
+
+
+        let match = null
+        let list = []
+        while(match = reg2.exec(str)){
+            console.log(match.groups.content);
+            list.push(match.groups.content)
+        }
+        console.log(list);
+        //  ['11111', '22222', '33333', '44444']
+        
+
+        // 方式二：使用matchAll
+      
+        let iobj = str.matchAll(reg2)
+        console.log(iobj);
+        // RegExpStringIterator 对象 属于迭代器  可以使用next() 获取每个
+
+        // 这里使用forof 直接遍历出数据
+        for (const i of iobj) {
+            console.log(i.groups.content);
+        }
+
+        
+        
+
+        // 使用解构直接获取
+        // console.log([...iobj]);
+    </script>
+</body>
+</html>

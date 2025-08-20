@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // 拦截器配置
+
+        // request 拦截
+        axios.interceptors.request.use(
+            function (config) {
+                // 本地token传给后端，用于验证用户
+                const token = localStorage.getItem("token")
+                config.headers.Authorization = `Bearer ${token}`
+
+                return config;
+            },
+            function (error) {
+                return Promise.reject(error);
+            }
+        );
+
+        // response 拦截
+        axios.interceptors.response.use(
+            function (response) {
+                // 同样放到token中
+                const {authorization} = response.headers
+                authorization && localStorage.setItem("token",authorization)
+                
+                return response;
+            },
+            function (error) {
+                if(error.response.status == 401){
+                    localStorage.removeItem("token")
+                    location.href = "/login"
+                }
+                return Promise.reject(error);
+            }
+        );
+    </script>
+</head>
+<body>
+    <h1>mongodb的增删改查的演示</h1>
+     <button id="exit">退出登录</button>
+    <div>
+        <div>用户名：<input id="username" /></div>
+        <div>密码：<input type="password" id="password" /></div>
+        <div>年龄：<input type="number" id="age" /></div>
+        <div><button id="register">注册</button></div>
+    </div>
+    <hr>
+    <div>
+        <button id="update">更新</button>
+        <button id="delete">删除</button>
+    </div>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>用户名</td>
+                <td>年龄</td>
+            </tr>
+        </thead>
+        <!-- 往这里插入数据 -->
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script>
+        var registerbtn = document.querySelector("#register");
+        var updatebtn = document.querySelector("#update");
+        var deletebtn = document.querySelector("#delete");
+        var username = document.querySelector("#username");
+        var password = document.querySelector("#password");
+        var age = document.querySelector("#age");
+        var exit = document.querySelector("#exit");
+
+        registerbtn.onclick = () => {
+            axios.post("/api/user",{
+                username:username.value,
+                password:password.value,
+                age:age.value
+            }).then(res=>{
+                console.log(res.data);
+            })
+           
+        };
+
+        updatebtn.onclick = ()=>{
+             axios.post("/api/user/68872d74e0d6408361cb0e5e",{
+                username:"修改的名字",
+                password:"修改的密码",
+                age:1
+             }).then(res=>{
+                console.log(res.data);
+            })
+        }
+        deletebtn.onclick = ()=>{
+            axios.delete("/api/user/68872d74e0d6408361cb0e5e").then(res=>{
+                console.log(res.data);
+            })
+        }
+
+        axios.get("/api/user?page=1&limit=10").then(res=>{
+            res = res.data
+            var tbody = document.querySelector("tbody")
+            tbody.innerHTML = res.map(item=>`
+                <tr>
+                    <td>${item._id}</td>    
+                    <td>${item.username}</td>    
+                    <td>${item.age}</td>    
+                </tr>
+            `).join("")
+        })
+
+        exit.onclick=()=>{
+            localStorage.removeItem("token") 
+            location.href = "/login"
+        }
+
+    </script>
+</body>
+</html>

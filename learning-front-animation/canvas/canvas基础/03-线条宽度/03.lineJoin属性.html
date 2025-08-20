@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="400"></canvas>
+        <script>
+            var c1 = document.getElementById("canvas");
+            var ctx = c1.getContext("2d");
+
+            var lineJoin = ["round", "bevel", "miter"];
+            ctx.strokeStyle = "red";
+
+            for (var i = 0; i < lineJoin.length; i++) {
+                ctx.lineWidth = 20;
+                ctx.lineJoin = lineJoin[i];
+                ctx.beginPath();
+                ctx.moveTo(10 + i * 150, 30);
+                ctx.lineTo(100 + i * 150, 30);
+                ctx.lineTo(100 + i * 150, 100);
+                ctx.stroke();
+            }
+        </script>
+    </body>
+</html>

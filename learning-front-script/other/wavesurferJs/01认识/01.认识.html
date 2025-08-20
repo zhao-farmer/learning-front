@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="waveform"></div>
+    <!-- 导入文件 -->
+    <script src="../js/wavesurfer.min.js"></script>
+    <script>
+     
+        const wavesurfer = WaveSurfer.create({
+            // 获取对应的id
+            container: '#waveform',
+            // 设置颜色
+            waveColor: '#4F4A85',
+            // 竖针的颜色
+            progressColor: '#383351',
+            // 获取对应的文件
+            url: '../assest/audio.wav',
+        })
+
+        // 当文件准备完成后，直接播放
+        wavesurfer.on('ready', () => {
+            wavesurfer.play()
+        })
+
+    </script>
+</body>
+</html>

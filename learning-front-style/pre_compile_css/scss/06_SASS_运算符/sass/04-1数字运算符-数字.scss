@@ -1,0 +1,59 @@
+// 纯数字相加
+$plus1: 30 + 30; //60
+$plus2: 30px + 30; //60px
+$plus3: 30% + 30%; //60%
+$plus4: 30px + 30pt; //70px
+$plus5: 30px + 30pt + 30pc; //550px
+
+.plus{
+   content: $plus1 $plus2 $plus3 $plus4 $plus5; 
+}
+
+//纯数字相减
+$minus1: 60 - 30; //30
+$minus2: 60px - 30; //30px
+$minus3: 60% - 30%; //30%
+$minus4: 60px - 30pt; //20px
+$minus5: 60px - 30pt - 30pc; //-460px
+
+.minus{
+    content: $minus1 $minus2 $minus3 $minus4 $minus5; 
+ }
+ 
+
+//纯数字相乘
+$multipl1: 60 * 30; //1800
+$multipl2: 60px * 30; //1800px
+$multipl3: 60% * 30; //1800%
+$multipl4: 60px * 30 * 30; //54000px
+
+
+.multipl{
+    content: $multipl1 $multipl2 $multipl3 $multipl4 ; 
+ }
+ 
+
+
+//纯数字相除
+$division1: (60 / 30); //2
+$division2: (60px / 30); //2px
+$division3: (60% / 30%); //2
+$division4: (60px / 30pt); //1.5
+$division5: (60px / 30 / 30); //0.06667px
+
+
+.division{
+    content: $division1 $division2 $division3 $division4 $division5; 
+ }
+ 
+
+//纯数字取模
+$modulo1: 60 % 9; //6
+$modulo2: 60px % 9; //6px
+$modulo3: 60% % 9%; //6%
+$modulo4: 60px % 9pt; //0px
+$modulo5: 60px % 9 % 5; //1px
+
+.modulo{
+    content: $modulo1 $modulo2 $modulo3 $modulo4 $modulo5; 
+ }

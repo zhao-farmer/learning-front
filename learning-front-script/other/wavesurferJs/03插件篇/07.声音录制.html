@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            button {
+                min-width: 5rem;
+                margin: 1rem 1rem 1rem 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1 style="margin-top: 0">按“录制”开始录制 🎙️</h1>
+
+        <button id="record">录制</button>
+        <button id="pause" style="display: none">暂停</button>
+
+        <select id="mic-select">
+            <option value="" hidden>选择麦克风</option>
+        </select>
+
+        <label><input type="checkbox" id="scrollingWaveform" /> 滚动波形</label>
+
+        <label><input type="checkbox" id="continuousWaveform" checked="checked" /> 连续波形</label>
+
+        <p id="progress">00:00</p>
+
+        <div id="mic" style="border: 1px solid #ddd; border-radius: 4px; margin-top: 1rem"></div>
+
+        <div id="recordings" style="margin: 1rem 0"></div>
+
+        <script type="module">
+            // 记录插件 plugin
+
+            import WaveSurfer from "../mjs/wavesurfer.js";
+            import RecordPlugin from "../mjs/plugins/record.esm.js";
+
+            let wavesurfer, record;
+            let scrollingWaveform = false;
+            let continuousWaveform = true;
+
+            const createWaveSurfer = () => {
+                // 销毁上一个wavesurfer实例
+                if (wavesurfer) {
+                    wavesurfer.destroy();
+                }
+
+                // 创建新的Wavesurfer实例
+                wavesurfer = WaveSurfer.create({
+                    container: "#mic",
+                    waveColor: "rgb(200, 0, 200)",
+                    progressColor: "rgb(100, 0, 100)",
+                });
+
+                // 初始化Record插件
+                record = wavesurfer.registerPlugin(
+                    RecordPlugin.create({
+                        renderRecordedAudio: false,
+                        scrollingWaveform,
+                        continuousWaveform,
+                        continuousWaveformDuration: 30, // optional
+                    })
+                );
+
+                // 渲染录制的音频
+                record.on("record-end", blob => {
+                    const container = document.querySelector("#recordings");
+                    const recordedUrl = URL.createObjectURL(blob);
+
+                    // 从录制的音频创建wavesurfer
+                    const wavesurfer = WaveSurfer.create({
+                        container,
+                        waveColor: "rgb(200, 100, 0)",
+                        progressColor: "rgb(100, 50, 0)",
+                        url: recordedUrl,
+                    });
+
+                    // 播放按钮
+                    const button = container.appendChild(document.createElement("button"));
+                    button.textContent = "播放";
+                    button.onclick = () => wavesurfer.playPause();
+                    wavesurfer.on("pause", () => (button.textContent = "播放"));
+                    wavesurfer.on("play", () => (button.textContent = "暂停"));
+
+                    // 下载链接
+                    const link = container.appendChild(document.createElement("a"));
+                    Object.assign(link, {
+                        href: recordedUrl,
+                        download: "recording." + blob.type.split(";")[0].split("/")[1] || "webm",
+                        textContent: "Download recording",
+                    });
+                });
+                pauseButton.style.display = "none";
+                recButton.textContent = "录制";
+
+                record.on("record-progress", time => {
+                    updateProgress(time);
+                });
+            };
+
+            const progress = document.querySelector("#progress");
+            const updateProgress = time => {
+                // 时间将以毫秒为单位，将其转换为mm:ss格式
+                const formattedTime = [
+                    Math.floor((time % 3600000) / 60000), // 分钟
+                    Math.floor((time % 60000) / 1000), // 秒数
+                ]
+                    .map(v => (v < 10 ? "0" + v : v))
+                    .join(":");
+                progress.textContent = formattedTime;
+            };
+
+            const pauseButton = document.querySelector("#pause");
+            pauseButton.onclick = () => {
+                if (record.isPaused()) {
+                    record.resumeRecording();
+                    pauseButton.textContent = "暂停";
+                    return;
+                }
+
+                record.pauseRecording();
+                pauseButton.textContent = "重新开始";
+            };
+
+            const micSelect = document.querySelector("#mic-select");
+            {
+                // 麦克风选择
+                RecordPlugin.getAvailableAudioDevices().then(devices => {
+                    devices.forEach(device => {
+                        const option = document.createElement("option");
+                        option.value = device.deviceId;
+                        option.text = device.label || device.deviceId;
+                        micSelect.appendChild(option);
+                    });
+                });
+            }
+            // 记录按钮
+            const recButton = document.querySelector("#record");
+
+            recButton.onclick = () => {
+                if (record.isRecording() || record.isPaused()) {
+                    record.stopRecording();
+                    recButton.textContent = "录制";
+                    pauseButton.style.display = "none";
+                    return;
+                }
+
+                recButton.disabled = true;
+
+                // 重置wavesurfer实例
+
+                // 获取所选设备
+                const deviceId = micSelect.value;
+                record.startRecording({ deviceId }).then(() => {
+                    recButton.textContent = "停止";
+                    recButton.disabled = false;
+                    pauseButton.style.display = "inline";
+                });
+            };
+
+            document.querySelector("#scrollingWaveform").onclick = e => {
+                scrollingWaveform = e.target.checked;
+                if (continuousWaveform && scrollingWaveform) {
+                    continuousWaveform = false;
+                    document.querySelector("#continuousWaveform").checked = false;
+                }
+                createWaveSurfer();
+            };
+
+            document.querySelector("#continuousWaveform").onclick = e => {
+                continuousWaveform = e.target.checked;
+                if (continuousWaveform && scrollingWaveform) {
+                    scrollingWaveform = false;
+                    document.querySelector("#scrollingWaveform").checked = false;
+                }
+                createWaveSurfer();
+            };
+
+            createWaveSurfer();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        h1 {
+            display: grid;
+            /* 分类散列 左右最小是50px */
+            grid-template-columns: minmax(50px, 1fr) auto minmax(50px, 1fr);
+            align-items: center;
+            text-align: center;
+            /* 元素间的间隔40px */
+            gap: 40px;
+        }
+ 
+        h1::before, h1::after {
+            content: '';
+            /* 上部的裱框采用双线 线的大小6px */
+            border-top: 6px double;
+        }
+    </style>
+    
+</head>
+<body>
+  
+    <h1>标题</h1>
+</body>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax(url){
+            console.log(typeof url);
+            
+            // 判断参数
+            if(typeof url !== "string"){
+                new Promise.reject("参数类型必须是字符串")
+            }
+            
+            // 取缓存
+            var cache = ajax.cache || (ajax.cache = {data:null});
+            if(cache.data){
+                console.log("走缓存");
+                // 使用Promise对象进行转换
+                return Promise.resolve(cache.data);
+            }
+
+            return new Promise((resolve,reject)=>{
+                var xhr = new XMLHttpRequest();
+                xhr.open("get",url,true)
+                xhr.send()
+                xhr.onreadystatechange = function(){
+                    if(xhr.readyState == 4){
+                        if(xhr.status>=200 && xhr.status <300){
+                            console.log("不走缓存");
+                            // 成功
+                            resolve(JSON.parse(xhr.responseText))
+                            // 缓存数据
+                            ajax.cache.data = JSON.parse(xhr.responseText)
+                        }else{
+                            // 失败
+                            reject(xhr.responseText)
+                        }
+                    }
+                }
+            })
+        }
+
+        let file = "1.json"
+        let url = "https://api.kuleu.com/api/MP4_xiaojiejie?type=json"
+
+        function getInfo(params){
+            ajax(params).then(res=>{
+                console.log("success",res);
+            }).catch(err=>{
+                console.log("err",err);
+            })
+        }
+
+        let index = 0;
+        setInterval(() => {
+            index++;
+            if(index%2 === 0){
+                 getInfo(url)
+            }else{
+                 getInfo(20)
+            }
+        }, 2000);
+
+    
+    </script>
+</body>
+</html>

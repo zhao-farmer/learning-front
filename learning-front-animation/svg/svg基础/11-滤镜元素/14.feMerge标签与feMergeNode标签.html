@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+        <filter id="feOffset">
+            <feOffset in="SourceGraphic" dx="50" dy="50" result="offset" />
+        
+            <feGaussianBlur stdDeviation="5" result="blur" />
+        
+            <!-- 同时应用偏移和高斯模糊滤镜 -->
+            <feMerge>
+            <feMergeNode in="offset" />
+            <feMergeNode in="blur" />
+            </feMerge>
+        </filter>
+        
+        <rect
+            width="100"
+            height="100"
+            fill="lightblue"
+            filter="url(#feOffset)" />
+    </svg>
+</body>
+</html>

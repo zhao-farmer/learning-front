@@ -1,0 +1,1 @@
+<view>demo2</view><navigator url="/pages/item05/item01">点击跳转到demo1</navigator>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');
+
+        //（开始x 开始y)->开始圆心  开始半径 （结束x 结束y)->结束圆心 结束半径
+        let radiaGradient = ctx.createRadialGradient(300,200,0,300,200,100);
+
+        radiaGradient.addColorStop(0,"red");
+        radiaGradient.addColorStop(0.3,"#ffcccc")
+        radiaGradient.addColorStop(1,"blue")
+        ctx.fillStyle = radiaGradient;
+          //位置x 位置y 宽度 高度
+        ctx.fillRect(0,0,600,400);
+     </script>
+</body>
+</html>

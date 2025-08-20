@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+        <script type="module">
+            // 引入文件
+            import * as fabric from "../index.min.mjs";
+
+            // 获取动态画布
+            const canvas = new fabric.Canvas("c1");
+
+            const circle = new fabric.Circle({
+                left: 100,
+                top: 100,
+                radius: 50, // 圆的半径 50
+                fill: "red",
+            });
+
+
+            function animate(obj) {
+                obj.animate(
+                    { 
+                        angle: 360 ,
+                        opacity: 0.3,
+                    }, {
+                    duration: 3000,
+                    onComplete: function(){
+                        obj.angle = 0;
+                        obj.opacity = 1;
+                        animate(obj)
+                    },
+                });
+            }
+
+            canvas.add(circle);
+            animate(circle);
+
+            // 池逊刷新页面 配合动画效果
+            (function render(){
+                canvas.requestRenderAll();
+                fabric.util.requestAnimFrame(render);
+            })();
+        </script>
+    </body>
+</html>

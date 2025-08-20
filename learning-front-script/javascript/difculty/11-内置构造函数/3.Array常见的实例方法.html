@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3,4,5]
+        // 1.foreach循环
+        // 1.1 基本语法  arr.foreach(function(当前成员,序列){处理数据})
+        let arr2 = []
+        arr.forEach((item,index)=>{
+            if(index>3){
+                arr2.push(item)
+            }
+        })
+        console.log(arr2);  //[5]
+        
+        // 1.2 可省略序列参数
+        let arr3 = []
+        arr.forEach(item=>{
+            if(item>3){
+                arr3.push(item)
+            }
+        })
+        console.log(arr3); //[4, 5]
+
+        // 1.3 如果数组内是应用类型，可以直接修改值，并改变整个数组 
+        let arr4 = [{name:'wanger'},{name:'zhangsan'}]
+        arr4.forEach(item=>{
+            item.name = item.name + "-改"
+        })
+        console.log(arr4);  // [{name:'wanger-改'},{name:'zhangsan-改'}]
+        
+
+        // 2.fliter() 过滤
+        // 基本语法 arr.filter(function(当前成员,序列,整个数组){return 返回条件})
+        // 返回条件是：true 或 false
+        let arr5 = arr.filter(function(item,index,array){
+            return item>3
+        })
+        console.log(arr5);  //[4, 5]
+        
+
+        // 3.map 抽取数据
+        // 基本语法 arr.map(function(当前成员,序列,整个数组){return 返回条件})
+        // 返回条件是：组成新数组的值
+        let arr6 = arr.map(function(item,index,array){
+            return (item+1) * index
+        })
+        console.log(arr6);  // [0, 3, 8, 15, 24]
+
+        // 4.reduce 返回累计处理的结果
+        // 基本语法 arr.reduce(function(上一次值,当前值){}，初始值)
+        // 如果有起始值 ，将初始值算入求和中
+        let arr7 =  arr.reduce(function(prev,current){
+            return prev + current
+        })
+        console.log(arr7);  // 15
+        
+        // 计算薪资案例
+        const moneyArr = [{
+            name:'张三',
+            salary:10000
+        },{
+            name:'李四',
+            salary:12000
+        },{
+            name:'王五',
+            salary:13000
+        }] 
+        
+        const total = moneyArr.reduce((prev,current)=>{
+            return prev + current.salary
+        },0)
+        console.log(total); // 35000
+        // 上一次值  当前值  返回值 （第一次遍历）
+        // 0        10000   10000
+        // 上一次值  当前值  返回值 （第二次遍历）
+        // 10000    12000   22000
+        // 上一次值  当前值  返回值 （第三次遍历）
+        // 22000    13000   35000  
+    </script>
+</body>
+</html>

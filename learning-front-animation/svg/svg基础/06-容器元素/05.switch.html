@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 显示其 systemLanguage 属性与用户语言匹配的第一个子元素 -->
+        <!--
+            当浏览器的语言设置为中文时显示浅粉色矩形，英文则显示浅蓝色圆形，
+            如果既不是中文或英文，则显示紫色三角形
+        -->
+        <svg width="200" height="200">
+            <switch>
+                <rect width="100" height="100" fill="lightpink" systemLanguage="zh" />
+                <circle cx="50" cy="50" r="50" fill="lightblue" systemLanguage="en" />
+                <polygon points="100, 0 200, 100 0, 100" fill="purple" />
+            </switch>
+        </svg>
+    </body>
+</html>

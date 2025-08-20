@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="400"></canvas>
+        <script>
+            var c1 = document.getElementById("canvas");
+            var ctx = c1.getContext("2d");
+
+            //  ctx.miterLimit 默认为10
+            for (var i = 0; i < 10; i++) {
+                ctx.strokeStyle = "#FF5D43";
+                ctx.lineWidth = 10;
+                ctx.lineJoin = "miter";
+                ctx.beginPath();
+                ctx.moveTo(10, i * 30);
+                ctx.lineTo(100, i * 30);
+                ctx.lineTo(10, i * 33);
+                ctx.stroke();
+            }
+
+            ctx.miterLimit =  20;
+            for (var i = 0; i < 10; i++) {
+                ctx.strokeStyle = "#FF5D43";
+                ctx.lineWidth = 10;
+                ctx.lineJoin = "miter";
+
+                ctx.beginPath();
+                ctx.moveTo(180, i * 30);
+                ctx.lineTo(270, i * 30);
+                ctx.lineTo(180, i * 33);
+                ctx.stroke();
+            }
+
+            ctx.miterLimit =  40;
+            for (var i = 0; i < 10; i++) {
+                ctx.strokeStyle = "#FF5D43";
+                ctx.lineWidth = 10;
+                ctx.lineJoin = "miter";
+
+                ctx.beginPath();
+                ctx.moveTo(360, i * 30);
+                ctx.lineTo(450, i * 30);
+                ctx.lineTo(360, i * 33);
+                ctx.stroke();
+            }
+        </script>
+    </body>
+</html>

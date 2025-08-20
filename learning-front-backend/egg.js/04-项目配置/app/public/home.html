@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>验证</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        td img{
+            width: 80px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>后台系统-用户管理业务</h1>
+    <div>
+        <div>用户名：<input id="username" /></div>
+        <div>密码：<input type="password" id="password" /></div>
+        <div>年龄：<input type="number" id="age" /></div>
+        <div>头像：<input type="file" id="avatar"></div>
+        <div><button id="register">添加用户</button></div>
+    </div>
+    <hr>
+    <div>
+        <button id="show">列表数据</button>
+    </div>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <td>id</td>
+                <td>用户名</td>
+                <td>年龄</td>
+                <td>头像</td>
+            </tr>
+        </thead>
+        <!-- 往这里插入数据 -->
+        <tbody>
+
+        </tbody>
+    </table>
+
+   
+    <script>
+        var registerbtn = document.querySelector("#register");
+        var username = document.querySelector("#username");
+        var password = document.querySelector("#password");
+        var age = document.querySelector("#age");
+        var exit = document.querySelector("#exit");
+        var avatar = document.querySelector("#avatar");
+       
+        
+
+        registerbtn.onclick = () => {
+
+            const formdata = new FormData()
+            formdata.append("username",username.value);
+            formdata.append("password",password.value)
+            formdata.append("age",age.value)
+            formdata.append("avatar",avatar.files[0])
+            
+            axios.post("/api/user/register",formdata,{
+                headers:{
+                   "Content-Type":"multipart/form-data"
+                }
+            }).then(res=>{
+                console.log(res.data);
+            })
+           
+        };
+
+        
+        show.onclick = () =>{
+            axios.get("/api/user/list?page=1&size=10").then(res=>{
+                
+                res = res.data.data.list
+                console.log(res);
+                
+                var tbody = document.querySelector("tbody")
+                tbody.innerHTML = res.map(item=>`
+                    <tr>
+                        <td>${item.id}</td>    
+                        <td>${item.username}</td>    
+                        <td>${item.age}</td>
+                        <td><img src="${item.avatar}"/></td>
+                    </tr>
+                `).join("")
+            })
+        }
+
+
+
+    </script>
+</body>
+</html>

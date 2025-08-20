@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+    </head>
+    <body>
+        <canvas id="c1" width="600" height="400"></canvas>
+        <script>
+            const canvas = document.getElementById("c1");
+            const ctx = canvas.getContext("2d");
+
+            // 方式一
+            const reateImageData1 = ctx.createImageData(100, 100);
+            const length1 = reateImageData1.data.length;
+            for (let i = 0; i < length1; i += 4) {
+                // 红色
+                reateImageData1.data[i] = 255;
+                reateImageData1.data[i + 1] = 0;
+                reateImageData1.data[i + 2] = 0;
+                reateImageData1.data[i + 3] = 255;
+            }
+            // 像素点绘制
+            ctx.putImageData(reateImageData1, 0, 0);
+
+            // 方式二
+            const imagedata = new ImageData(100, 100);
+            const reateImageData2 = ctx.createImageData(imagedata);
+            const length2 = reateImageData2.data.length;
+            for (let i = 0; i < length2; i += 4) {
+                // 设置为绿色
+                reateImageData2.data[i] = 0;
+                reateImageData2.data[i + 1] = 255;
+                reateImageData2.data[i + 2] = 0;
+                reateImageData2.data[i + 3] = 255;
+            }
+            ctx.putImageData(reateImageData2, 110, 0);
+        </script>
+    </body>
+</html>

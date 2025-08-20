@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // ES6 数组与对象都可以最后加逗号
+        let arr = [1,2,]
+
+        let obj = {
+            name:"kerwin",
+        }
+
+        //ES8 可以加逗号 git中会有影响  不加逗号 后续追加参数会有两处修改
+        function test(
+            a,
+            b,
+        ){
+            console.log(a,b);
+        }
+        test(
+            1,
+            2,
+        )
+    </script>
+</body>
+</html>

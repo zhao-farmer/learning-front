@@ -1,0 +1,5 @@
+.son1{
+  background-color: lightseagreen;
+  height: 200rpx;
+  width: 700rpx;
+}

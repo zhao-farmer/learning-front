@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.p1 {
+  content: "导入scss";
+  font-size: 16px;
+}
+.p1 a {
+  font-size: 14px;
+}
+.p1 a:hover {
+  color: blue;
+}

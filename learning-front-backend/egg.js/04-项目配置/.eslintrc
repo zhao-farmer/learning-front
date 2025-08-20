@@ -1,0 +1,6 @@
+{
+  "extends": "eslint-config-egg",
+  "root": true,
+  // 取消验证文档
+  "valid-jsdoc": "off"
+}

@@ -1,0 +1,2 @@
+<!--components/custom01/custom01.wxml-->
+<van-button type="primary">组件按钮</van-button>

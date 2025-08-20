@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            Date 
+                - 在JS中所有得和事件相关得数据都有Date对象来表示
+                - 创建
+                    new Date()
+                -对象的方法
+                    getFullYear() 获取4位年份
+                    getMonth() 返回当前日期的月份(0-11) 索引
+                    getDate() 返回当前是几日
+                    getDay()  返回当前日期是周几(0-6) 0表示周日
+                    ......
+
+                    getTime() 返回当前日期对象时间戳
+                        时间戳：自1970年1月1日0时0分0秒到当前时间所经历的毫秒数
+                        计算机底层存储时间时，使用的都是时间戳
+                    Date.now() 获取当前的时间戳
+        */
+        let d = new Date(); //直接通过new Date() 创建时间对象时，它创建得时当前得时间得对象
+
+        //可以在Date()的构造函数，传入一个表示时间的字符串
+        // 字符串的格式： 月/日/年  时：分：秒
+        d = new Date("10/10/1998 12:22:33")
+        console.log(d);
+        //年-月-日T时：分：秒
+        let d2 = new Date('2019-12-13T23:34:15')
+        console.log(d2);
+        //new Date(年份,月，日，时，分，秒，毫秒)
+        let d3 = new Date(2016, 0, 1, 13, 45, 33);
+        console.log(d3);
+
+
+        let result = d.getFullYear();
+        console.log(result);
+        result = d.getMonth();
+        console.log(result);
+        result = d.getDate();
+        console.log(result);
+        result = d.getDay();
+        console.log(result);
+
+
+        //时间戳
+        //getTime
+        result = (new Date()).getTime()
+        console.log(result);
+
+
+        //使用时间戳创建  标准时间 格林威治时间 
+        result = new Date(2016);
+        console.log(result);
+
+
+        console.log(Date.now());
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

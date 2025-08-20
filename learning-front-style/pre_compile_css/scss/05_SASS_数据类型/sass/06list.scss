@@ -1,0 +1,6 @@
+$block-base-padding: 6px 10px 6px 10px;
+$fonts: ("Helvetica Neue", "Consolas");
+div{
+    padding: $block-base-padding;
+    font-family: $fonts;
+}

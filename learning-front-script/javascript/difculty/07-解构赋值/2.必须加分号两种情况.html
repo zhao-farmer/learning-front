@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.立即执行函数必须加;
+        (function(){})();
+        (function(){})();
+
+        // 2.使用数组的时候
+        const str = 'pink'
+        ;[1,2,3].map(function(item){
+            console.log(item);
+        })
+
+        let a = 1
+        let b = 2
+        ;[b,a] = [a,b]
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/item01/item01",
+    "pages/item01/item02",
+    "pages/item02/item01",
+    "pages/item03/item01",
+    "pages/item04/item01",
+    "pages/item04/item02",
+    "pages/item04/item03",
+    "pages/item04/item04",
+    "pages/item05/item01",
+    "pages/item06/item01",
+    "pages/item07/item01",
+    "pages/item08/item01",
+    "pages/item08/item02",
+    "pages/item09/item01",
+    "pages/item10/item01"
+  ],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "全局配置",
+    "navigationBarBackgroundColor": "#2B9939",
+    "navigationStyle": "default",
+    "backgroundColor": "#CAF0DF",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#FE1C32",
+    "backgroundColor": "#eee",
+    "list": [
+      {
+        "pagePath": "pages/item01/item01",
+        "text": "样式1",
+        "iconPath": "static/images/tabBar/home.png",
+        "selectedIconPath": "static/images/tabBar/home-h.png"
+      },
+      {
+        "pagePath": "pages/item01/item02",
+        "text": "样式2",
+        "iconPath": "static/images/tabBar/classify.png",
+        "selectedIconPath": "static/images/tabBar/classify-h.png"
+      },
+      {
+        "pagePath": "pages/item02/item01",
+        "text": "配置",
+        "iconPath": "static/images/tabBar/user.png",
+        "selectedIconPath": "static/images/tabBar/user-h.png"
+      },
+      {
+        "pagePath": "pages/item06/item01",
+        "text": "测试"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

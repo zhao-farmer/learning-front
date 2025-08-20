@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="floodFilter">
+            <feimage href="./images/fire.png" result="water" />
+            <feimage href="./images/flower.png" result="fire" />
+            <feComposite in="water" in2="fire" operator="xor" k1="0" k2="1" k3="1" k4="0" />
+          </filter>
+        </defs>
+      
+        <image href="./images/water.png" width="150" height="150" filter="url(#floodFilter)"/>
+    </svg>
+</body>
+</html>

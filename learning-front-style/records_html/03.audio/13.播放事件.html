@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">播放</button>
+    <button id="btn2">音量+0.1</button>
+    <button id="btn3">音量-0.1</button>
+    <button id="btn4">重置播放</button>
+    <button id="btn5">暂停</button>
+    <script>
+        var audio = new Audio();
+        audio.src = "00.aac";
+
+        let btn1 = document.getElementById("btn1")
+        btn1.onclick = () => {
+            audio.play()
+        }
+        let btn2 = document.getElementById("btn2")
+        btn2.onclick = () => {
+            console.log(audio.volume);
+            
+            audio.volume+=0.1;
+        }
+        let btn3 = document.getElementById("btn3")
+        btn3.onclick = () => {
+            console.log(audio.volume);
+            audio.volume-=0.1;
+        }
+        let btn4 = document.getElementById("btn4")
+        btn4.onclick = () => {
+            audio.currentTime = 0;
+        }
+
+        let btn5 = document.getElementById("btn5")
+        btn5.onclick = () => {
+            audio.pause()
+        }
+
+
+        audio.addEventListener('timeupdate',function(){
+            console.log("timeupdate: 事件更新");
+        });
+       
+        // 步骤2
+        audio.addEventListener('waiting',function(){
+            console.log("waiting: 等待中");
+        });
+        // 步骤3
+        audio.addEventListener('playing',function(){
+            console.log("playing: 播放中");
+        });
+        // 步骤4
+        audio.addEventListener('play',function(){
+            console.log("play: 播放");
+        });
+        // 步骤5
+        audio.addEventListener('pause',function(){
+            console.log("pause: 暂停");
+        });
+
+        // 步骤6
+        audio.addEventListener('ended',function(){
+            console.log("ended: 结束");
+        });
+         // 步骤7
+         audio.addEventListener('volumechange',function(){
+            console.log("volumechange: 音量改变");
+        });
+ 
+    </script>
+</body>
+</html>

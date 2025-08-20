@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax(){
+            return new Promise((resolve,reject)=>{
+                // resolve("data-111111")
+                reject("err-111111")
+            })
+        }
+
+        // 显示loading
+        ajax().then((data)=>{
+            console.log(data);
+        }).catch(err=>{
+            console.log("err",err);
+        }).finally(()=>{
+            // 隐藏loading
+            console.log("finally");
+        })
+    </script>
+</body>
+</html>

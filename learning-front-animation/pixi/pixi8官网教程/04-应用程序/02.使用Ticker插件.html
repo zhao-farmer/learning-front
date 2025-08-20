@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/pixi8.js"></script>
+</head>
+<body>
+    <script type="module">
+        const app = new PIXI.Application();
+
+        await app.init({
+            width: 600,                 // 宽度
+            height: 400,                // 高度
+            backgroundColor: 0x1099bb,  // 画布颜色
+            backgroundAlpha:0.3         // 画布透明度
+        });
+
+        document.body.appendChild(app.canvas);
+
+        // 添加精灵
+        await PIXI.Assets.load("../assest/bunny.png");
+        const bunny =  PIXI.Sprite.from("../assest/bunny.png");;
+        bunny.anchor.set(0.5);
+        bunny.x = app.screen.width * 0.5;
+        bunny.y = app.screen.height * 0.5;
+        app.stage.addChild(bunny);
+
+
+        
+        // ticker 插件
+        app.ticker.add((ticker) => {
+            bunny.rotation += 1 * ticker.deltaTime;
+        });
+
+        let state = 1
+        // 停止与恢复
+        document.querySelector("canvas").addEventListener("click", function(){
+            if(state){
+                app.stop()
+                state = 0
+            }else{
+                app.start()
+                state = 1
+            }
+        });
+
+    </script>
+</body>
+</html>

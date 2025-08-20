@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {
+            name:"kerwin"
+        }
+        let m1 = new Map();
+        m1.set(obj,"1111")
+        obj = null 
+        // 其中的obj无法回收
+        console.log(m1);
+        
+
+        // 使用 WeakMap
+        let obj2 = {
+            name:"zhao"
+        }
+        let m2 = new WeakMap();
+        m2.set(obj2,"1111")
+        obj2 = null 
+        console.log(m2);
+
+    </script>
+</body>
+</html>

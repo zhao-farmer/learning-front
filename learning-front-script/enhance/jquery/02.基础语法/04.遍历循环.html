@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <input type="checkbox" name="mycb" value="a">aa
+    <input type="checkbox" name="mycb" value="b">bb
+    <input type="checkbox" name="mycb" value="c">cc
+    <input type="checkbox" name="mycb" value="d">dd
+    <input type="checkbox" name="mycb" value="e">ee
+    <input type="checkbox" name="mycb" value="f">ff
+
+
+    <script src="../js/jquery.3.7.1.js"></script>
+    <script>
+        //从前的方法
+        // let cbList=document.getElementsByTagName("input")
+        // console.log(cbList)
+        // for(let i=0;i<cbList.length;i++){
+        //     console.log(cbList[i])
+        // }
+    
+    
+        //jQuery方法
+        let cbLis=$("input[name='mycb']")
+        console.log(cbLis)
+    
+        //循环遍历
+    
+        //全局的方法
+        $.each(cbLis,function (index,element) {
+            console.log(index);  //选择器的 index 位置
+            console.log(element);  //当前的元素
+        })
+    
+        //局部的方法
+        $("input[name='mycb']").each(function (index,element) {
+            console.log(index);
+    
+            if(index==3){
+                return false;  //跳出循环false
+            }
+    
+            $(element).css({
+                "width":"30px",
+                "height":"30px"
+            })
+            console.log(element);
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         let arr = [1, 2, 3, 4, 5];
+
+         // 1.join 数组转换成字符串 join用于拼接
+         // 基本语法  let arrStr = arr.join(需拼接字符串)
+        let value1 = arr.join("-")
+        console.log(value1);  // 1-2-3-4-5
+        
+         // 2.find 查找复合的元素值
+         // 基本语法 arr.filter(callbackFn(当前成员,序列,整个数组){}),thisArg}
+         // thisArg 是 执行 callbackFn 时用作 this 的值。
+         // 结果是查询到的第一个元素
+        let value2 = arr.find(function(item,index,currentArr){
+            return item>3
+        })
+        console.log(value2); //4
+
+
+         // 3.findIndex 查找数组的序列
+         // 与find类似 不过是查询序列
+         let value3 = arr.findIndex(function(item,index,currentArr){
+            return item>3
+        })
+        console.log(value2); //3
+
+
+        // 4. some方法是只要一个成员的返回值是true，则整个some方法的返回值就是true，否则返回false。
+
+        let value4 = arr.some(function (elem, index, arr) {
+            return elem >= 3;
+        });
+        console.log(value4); // true
+
+        // 5.every方法是所有成员的返回值都是true，整个every方法才返回true，否则返回false。
+        let value5 = arr.every(function (elem, index, arr) {
+            return elem >= 3;
+        });
+        console.log(value4); // false
+
+
+        // 6.concat 复制数组(浅复制)
+        let value6 = arr.concat()
+        console.log(value6);    //[1, 2, 3, 4, 5]
+
+        // 7.sort(compareFn(a, b)) 数组排序 toSorted(compareFn(a, b)) 不改变数组进行排序
+        //compareFn(a, b) 返回值	排序顺序
+        //  > 0	a 在 b 后，如 [b, a]
+        //  < 0	a 在 b 前，如 [a, b]
+        //  === 0	保持 a 和 b 原来的顺序
+        const numbers = [3, 1, 4, 1, 5];
+        // [...numbers] 创建一个浅拷贝，因此 sort() 不会改变原始数组。
+        const sorted1 = [...numbers].sort((a, b) => a - b); //从小到大
+        const sorted2 = [...numbers].sort((a, b) => b - a); //从大到小
+        console.log(sorted1);   // [1, 1, 3, 4, 5]
+        console.log(sorted2);   // [5, 4, 3, 1, 1]
+        
+
+        // 8.sp1ice 替换或删除
+        arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧']
+        result = arr.splice(1, 3);
+        console.log(arr);               //['孙悟空']
+        console.log(result);            // ['猪八戒', '沙和尚', '唐僧']
+        //删除并插入 替换
+        arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧']
+        // result = arr.splice(1, 2, '牛魔王');
+        result = arr.splice(1, 2, '牛魔王', '铁扇公主', '红孩儿');
+        console.log(arr);               //['孙悟空', '牛魔王', '铁扇公主', '红孩儿', '唐僧']
+        console.log(result);            //['猪八戒', '沙和尚']
+        //插入
+        arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧']
+        // result = arr.splice(1, 0, '牛魔王', '铁扇公主', '红孩儿');
+        result = arr.splice(3, 0, '牛魔王', '铁扇公主', '红孩儿');
+        console.log(arr);               //['孙悟空', '猪八戒', '沙和尚', '牛魔王', '铁扇公主', '红孩儿', '唐僧']
+        console.log(result);            //[]
+
+        // 9.reverse 数组进行反转
+        arr = ['a', 'b', 'c', 'd']
+        arr.reverse()
+        console.log(arr);               //['d', 'c', 'b', 'a']
+
+
+        
+    </script>
+</body>
+</html>

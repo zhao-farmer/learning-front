@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+        ctx.beginPath();
+        ctx.moveTo(100, 75);
+        ctx.arc(c1.width/2, c1.height/2, 100, 30*Math.PI/180, 120*Math.PI/180, false);
+        ctx.closePath();
+        ctx.strokeStyle = "HotPink";
+        ctx.stroke();
+
+    </script>
+</body>
+</html>

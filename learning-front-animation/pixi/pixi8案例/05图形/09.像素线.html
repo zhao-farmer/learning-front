@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Container, Graphics, Text } from "../js/pixi.mjs";
+
+        /**
+         * 使用Graphics线条创建网格图案
+         * @param graphics - 用于绘制的Graphics对象
+         * @returns 绘制了网格的Graphics对象
+         */
+        function buildGrid(graphics) {
+            // 绘制10条垂直直线，间距10像素
+            for (let i = 0; i < 11; i++) {
+                // 移动到每条线的顶部 (x = i*10, y = 0)
+                graphics
+                    .moveTo(i * 10, 0)
+                    // 向下绘制到底部 (x = i*10, y = 100)
+                    .lineTo(i * 10, 100);
+            }
+
+            // 绘制10条水平直线，间距10像素
+            for (let i = 0; i < 11; i++) {
+                // 移动到每条线的起点 (x = 0, y = i*10)
+                graphics
+                    .moveTo(0, i * 10)
+                    // 向右绘制到终点 (x = 100, y = i*10)
+                    .lineTo(100, i * 10);
+            }
+
+            return graphics;
+        }
+
+        (async () => {
+            // 创建并初始化新的PixiJS应用
+            const app = new Application();
+
+            await app.init({ 
+                antialias: true,
+                width:600,
+                height:400,
+            });
+            document.body.appendChild(app.canvas);
+
+            // 创建两个网格 - 一个使用像素完美线条，一个不使用
+            const gridPixel = buildGrid(new Graphics()).stroke({ color: 0xffffff, pixelLine: true, width: 1 });
+
+            const grid = buildGrid(new Graphics()).stroke({ color: 0xffffff, pixelLine: false });
+
+            // 将网格并排放置
+            grid.x = -100;
+            grid.y = -50;
+            gridPixel.y = -50;
+
+            // 创建容器来容纳两个网格
+            const container = new Container();
+
+            container.addChild(grid, gridPixel);
+
+            // 将容器居中显示在屏幕上
+            container.x = app.screen.width / 2;
+            container.y = app.screen.height / 2;
+            app.stage.addChild(container);
+
+            // 动画变量
+            let count = 0;
+
+            // 添加动画使网格随时间缩放
+            app.ticker.add(() => {
+                count += 0.01;
+                container.scale = 1 + (Math.sin(count) + 1) * 2;
+            });
+
+            // 添加描述性标签
+            const label = new Text({
+                text: "网格对比：标准线条(左) vs 像素完美线条(右)",
+                style: { fill: 0xffffff },
+            });
+
+            // 将标签定位在左上角
+            label.position.set(20, 20);
+            label.width = app.screen.width - 40;
+            label.scale.y = label.scale.x;
+            app.stage.addChild(label);
+        })();
+    </script>
+</body>
+</html>

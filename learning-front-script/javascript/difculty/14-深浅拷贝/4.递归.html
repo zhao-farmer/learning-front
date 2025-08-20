@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 1.递归基本使用
+        let num = 1
+        function fn(){
+            console.log(`这是第${num}次`);
+            if(num >= 6){
+                return
+            }
+            num++
+            fn()    // 函数内部调用函数自己
+        }
+        fn()
+
+        // 2.函数递归:
+        // 利用递归函数实现 setTimeout 模式 setInterval效果
+        function getTime(){
+            let dateStr = new Date().toLocaleString();
+            document.querySelector('div').innerHTML = dateStr
+
+            setTimeout(getTime, 1000);
+        }
+        getTime()
+    </script>
+</body>
+</html>

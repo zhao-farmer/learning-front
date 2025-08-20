@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <!-- 引入Vue -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+      #container {
+        width: 1600px;
+        height: 900px;
+      }
+      #root {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="container"></div>
+    </div>
+  </body>
+  <script>
+    Vue.config.productionTip = false; //阻止 vue 在启动时生成生成提示。
+    new Vue({
+      el: "#root",
+      data: {
+        photoInfo: ["./images/1.jpg", "./images/2.jpg", "./images/3.jpg"],
+        photoDebrisArr: [],
+        ready: true,
+        //行与列
+        rows: 4,
+        columns: 7,
+        groundWidth: 0,
+        groundHeight: 0,
+        currentCount: 0,
+        number: 2,
+        maxSecond: 1,
+      },
+      computed: {
+        maxWidth() {
+          return this.groundWidth * this.number;
+        },
+        maxHeight() {
+          return this.groundHeight * this.number;
+        },
+      },
+      mounted() {
+        this.burst();
+      },
+      methods: {
+        burst() {
+          let img = document.querySelector("#container");
+          var S = 1;
+          this.groundWidth = parseInt(window.getComputedStyle(img)["width"]);
+          this.groundHeight = parseInt(window.getComputedStyle(img)["height"]);
+
+          img.style.background = "url(" + this.photoInfo[0] + ") no-repeat";
+          // var next = function () {
+          //   return (now + 1) % that.info.length;
+          // };
+          // img.onmouseover = function() {
+          // }
+          setInterval(() => {
+            img.innerHTML = "";
+            this.ready = true;
+            this.photoDebrisArr = [];
+            this.shuipian(img);
+          }, 2000);
+        },
+
+        shuipian(img) {
+          this.ready = false;
+          // console.log(img);
+          let html = document.createDocumentFragment();
+          if (this.currentCount == this.photoInfo.length) {
+            img.style.background = "url(" + this.photoInfo[0] + ") no-repeat";
+            this.currentCount = 0;
+          } else {
+            img.style.background = "url(" + this.photoInfo[this.currentCount] + ") no-repeat";
+            this.currentCount = this.currentCount + 1;
+          }
+
+          var k = 0;
+          for (var i = 0; i < this.rows; i++) {
+            for (var j = 0; j < this.columns; j++) {
+              this.photoDebrisArr[k] = {
+                left: (this.groundWidth * j) / this.columns,
+                top: (this.groundHeight * i) / this.rows,
+                endLeft: (this.maxWidth * j) / this.columns - (this.maxWidth - (this.maxWidth - this.groundWidth) / this.columns - this.groundWidth) / 2,
+                endTop: (this.maxHeight * i) / this.rows - (this.maxHeight - (this.maxHeight - this.groundHeight) / this.rows - this.groundHeight) / 2,
+              };
+              let debris = document.createElement("div");
+
+              let url = this.photoInfo[this.currentCount];
+              debris.style.cssText = `   position: absolute; 
+                    width: ${Math.ceil(this.groundWidth / this.columns)}px; 
+                    height: ${Math.ceil(this.groundHeight / this.rows)}px; 
+                    background: url(${url}) - 
+                                ${this.photoDebrisArr[k].left}px - 
+                                ${this.photoDebrisArr[k].top}px 
+                                no-repeat; 
+                    left: ${this.photoDebrisArr[k].left}px; 
+                    top: ${this.photoDebrisArr[k].top}px; 
+                    opacity:1; 
+                    transition:${this.randomNum(0.1, this.maxSecond)}s ease; 
+                `;
+              html.appendChild(debris);
+              k++;
+            }
+          }
+          img.appendChild(html);
+
+          //开始加载数据
+          // this.$nextTick(() => {
+          let debrisAll = img.children;
+          // console.log(this.photoDebrisArr);
+
+          let that = this;
+          setTimeout(() => {
+            let useArr = [...this.photoDebrisArr];
+            // console.log([...useArr]);
+            for (var i = 0; i < debrisAll.length; i++) {
+              let item = useArr[i];
+              // console.log(item);
+              var l = useArr[i].endLeft;
+              var t = useArr[i].endTop;
+              debrisAll[i].style.cssText += ` left : ${l}px; 
+                  top : ${t}px; 
+                  opacity :0; 
+                  transform: perspective(500px) 
+                            rotateX(${this.randomNum(-180, 180)}deg) 
+                            rotateY(${this.randomNum(-180, 180)}deg) 
+                            rotateZ(${this.randomNum(-180, 180)}deg) 
+                            scale(${this.randomNum(1.5, 3)}); 
+                  `;
+            }
+          }, 100);
+        },
+        randomNum(n, m) {
+          return Math.random() * (m - n) + n;
+        },
+      },
+    });
+  </script>
+</html>

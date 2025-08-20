@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');
+        // 画三角形
+        ctx.moveTo(50, 50);
+        ctx.lineTo(200, 50);
+        ctx.lineTo(50, 200);
+        ctx.lineTo(50, 50);
+        ctx.strokeStyle="red";
+        ctx.stroke();
+
+        // 矩形
+        ctx.strokeStyle="green";
+        ctx.strokeRect(100,100,200,200);
+
+        // 文字
+        ctx.strokeStyle="blue";
+        ctx.font = "40px 微软黑体"
+        ctx.strokeText("我爱学习",300,300)
+    </script>
+</body>
+</html>

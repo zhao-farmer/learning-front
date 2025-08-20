@@ -1,0 +1,6 @@
+ul li:first-child {
+  margin-left: 0px;
+}
+ul li:nth-last-child(1) {
+  margin-left: 5px;
+}

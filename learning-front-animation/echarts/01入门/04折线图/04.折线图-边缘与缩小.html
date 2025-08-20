@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+        // var yDataArr = [3000, 2800, 900, 1000, 800, 700, 1400, 1300, 900, 1000, 800, 600];
+        var yDataArr = [3008, 3001, 3007, 3006, 3012, 3001, 3008, 3009, 3003, 3005, 3005, 3007];
+        var option = {
+            xAxis: {
+                type: "category",
+                data: xDataArr,
+                //紧挨边缘
+                boundaryGap: false,
+            },
+            yAxis: {
+                type: "value",
+                //脱离0值比例
+                scale: true,
+            },
+            series: [
+                {
+                    name: "康师傅",
+                    type: "line",
+                    data: yDataArr,
+                },
+            ],
+        };
+
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

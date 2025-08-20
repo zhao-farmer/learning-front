@@ -1,0 +1,8 @@
+p {
+  color: white;
+  font-size: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-shadow: 0 0 10px black;
+}

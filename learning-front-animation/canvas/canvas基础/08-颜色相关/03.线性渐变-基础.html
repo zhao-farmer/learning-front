@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');
+        
+        // 创建一个线性渐变
+        // 渐变起点在 x=20、y=0
+        // 渐变终点在 x=220、y=0
+        const gradient = ctx.createLinearGradient(20, 0, 220, 0);
+
+        // 添加三个色标
+        gradient.addColorStop(0, "green");
+        gradient.addColorStop(0.5, "cyan");
+        gradient.addColorStop(1, "green");
+
+        // 设置填充样式并绘制矩形
+        ctx.fillStyle = gradient;
+        ctx.fillRect(20, 20, 200, 100);
+     </script>
+</body>
+</html>

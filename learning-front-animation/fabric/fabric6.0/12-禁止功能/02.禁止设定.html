@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>禁止设定</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        const rect = new fabric.Rect({
+            top: 100,
+            left: 100,
+            width: 100,
+            height: 50,
+            fill: '#ffde7d',
+            flipX:true,         // 翻转
+            lockSkewingX:30,    // 拉伸
+        })
+
+        // 水平倾斜被锁定
+        rect.lockSkewingX = true
+
+        // 垂直倾斜被锁定
+        rect.lockSkewingY = true
+
+        // 禁止翻转
+        rect.lockScalingFlip = true
+
+
+
+        canvas.add(rect)
+    </script>
+</body>
+</html>

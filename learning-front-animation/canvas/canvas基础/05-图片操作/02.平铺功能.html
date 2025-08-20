@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <style>
+        .box{
+            width: 606px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+        canvas{
+            border: 1px #ccc dashed;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <canvas id="c1" width="300" height="200"></canvas>
+        <canvas id="c2" width="300" height="200"></canvas>
+        <canvas id="c3" width="300" height="200"></canvas>
+        <canvas id="c4" width="300" height="200"></canvas>
+    </div>
+   
+    <script>
+    
+        let ctx1 = document.getElementById("c1").getContext('2d');
+        let ctx2 = document.getElementById("c2").getContext('2d');
+        let ctx3 = document.getElementById("c3").getContext('2d');
+        let ctx4 = document.getElementById("c4").getContext('2d');
+        
+
+        // ================ 使用图片平铺 =================
+
+        var image = new Image();
+        image.src = "./images/2.jpeg";
+
+        image.onload = function () {
+            // 全部平铺
+            var pattern = ctx1.createPattern(image, "repeat");
+            ctx1.fillStyle = pattern;
+            ctx1.fillRect(0, 0, 300, 200);
+
+            // 不平铺
+            pattern = ctx2.createPattern(image, "no-repeat");
+            ctx2.fillStyle = pattern;
+            ctx2.fillRect(0, 0, 300, 200);
+
+        }
+
+        //================ 使用canvas平铺 =================
+
+        //创建canvas元素
+        let bgCanvas = document.createElement("canvas");
+        bgCanvas.width = 40;
+        bgCanvas.height = 40;
+
+        //在新创建的canvas中画一个圆
+        let bgctx = bgCanvas.getContext("2d");
+        bgctx.beginPath();
+        bgctx.arc(20, 20, 20, 0, 360 * Math.PI / 180, true);
+        bgctx.closePath();
+        bgctx.fillStyle = "HotPink";
+        bgctx.fill();
+
+
+        // x轴平铺
+        pattern = ctx3.createPattern(bgCanvas, "repeat-x");
+        ctx3.fillStyle = pattern;
+        ctx3.fillRect(0, 0, 300, 200);
+
+
+        // y轴平铺
+        pattern = ctx4.createPattern(bgCanvas, "repeat-y");
+        ctx4.fillStyle = pattern;
+        ctx4.fillRect(0, 0, 300, 200);
+
+    </script>
+</body>
+</html>

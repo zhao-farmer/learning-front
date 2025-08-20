@@ -1,0 +1,21 @@
+<template>
+    <div>
+        <h2 >学生姓名：{{name}}</h2>
+        <h2>学生性别：{{sex}}</h2>
+        <!-- 会自动聚焦且将传入的值放到input框内 -->
+        <input type="text" v-fbind:value="name">
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'Student', 
+        data(){
+            return {
+                name:'张三',
+                sex: '男',
+            }
+        },
+    }
+</script>
+

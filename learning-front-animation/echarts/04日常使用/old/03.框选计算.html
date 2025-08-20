@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 800px; height: 600px" id="chart"></div>
+    <div id="brushData"></div>
+    <script>
+        // 初始化 ECharts 实例
+        const myChart = echarts.init(document.getElementById("chart"));
+        const brushData = document.getElementById("brushData");
+
+        let xData = ["2022-05-01", "2022-05-02", "2022-05-03", "2022-05-04", "2022-05-05", "2022-05-06", "2022-05-07"]; // x轴数据
+        option = {
+            toolbox: {
+                //框选计算工具栏
+                show: true,
+                feature: {
+                    brush: {
+                        show: true,
+                        title: {
+                            lineX: "框选计算",
+                            clear: "关闭框选",
+                        },
+                    },
+                    saveAsImage: { show: true },
+                },
+                top: 0,
+                right: 15,
+                itemSize: 20, //工具栏 icon 的大小
+            },
+            brush: {
+                toolbox: ["lineX", "clear"],
+                xAxisIndex: 0,
+                brushStyle: {
+                    borderWidth: 1,
+                    color: "rgba(120,140,180,0.2)",
+                    borderColor: "rgba(120,140,180,0.8)",
+                },
+            },
+            xAxis: {
+                type: "category",
+                data: xData,
+            },
+            yAxis: {
+                type: "value",
+            },
+            series: [
+                {
+                    name: "销售量",
+                    type: "line",
+                    data: [150, 230, 224, 218, 135, 147, 260],
+                },
+            ],
+        };
+
+        // 点击框选 brushEnd、brushSelected
+        myChart.on("brushSelected", function (params) {
+            console.log(params);
+            if (params.batch.length < 1 || params.batch[0].areas.length < 1) {
+                brushData.innerHTML = "";
+                return;
+            }
+            var range = params.batch[0].areas[0].coordRange; //根据坐标获取选中区域数据
+            range[range.length - 1] = range[range.length - 1] + 1;
+            var brushed = [],
+                nameData = [],
+                sumData = [],
+                meanData = [];
+            var brushComponent = params.batch[0];
+            for (var sIdx = 0; sIdx < brushComponent.selected.length; sIdx++) {
+                var name = brushComponent.selected[sIdx].seriesName;
+                var values = myChart.getOption().series[sIdx].data.slice(...range);
+                var timeData = xData.slice(...range);
+                var timeRange = "";
+                if (values.length < 1 || timeData.length < 1) {
+                    return;
+                }
+                if (timeData.length === 1) {
+                    timeRange = timeData[0];
+                } else {
+                    timeRange = timeData[0] + "至" + timeData[timeData.length - 1];
+                }
+                var sum = SumNum(values) ? SumNum(values) : 0;
+                var mean = AverageNum(values) ? AverageNum(values) : 0;
+                sumData.push(sum);
+                meanData.push(mean);
+                nameData.push(name);
+                var temp = `${name}：日均值：${mean.toFixed(0)}，总量：${sum}`;
+                brushed.push(temp);
+            }
+            var text = brushed.join("");
+            var brushInfo = timeRange + "\n" + text;
+            // $("#brushData").html(brushInfo);
+            brushData.innerHTML = brushInfo;
+
+            myChart.setOption({
+                title: {
+                    backgroundColor: "blue",
+                    text: brushInfo,
+                    bottom: 0,
+                    right: "10%",
+                    width: 100,
+                    textStyle: {
+                        fontSize: 12,
+                        color: "#fff",
+                    },
+                },
+            });
+        });
+
+        //均值
+        function AverageNum(arr) {
+            let sum = eval(arr.join("+"));
+            let svg = ((sum / arr.length) * 100) / 100;
+            return svg;
+        }
+        //求和
+        function SumNum(arr) {
+            let sum = eval(arr.join("+"));
+            return sum;
+        }
+
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

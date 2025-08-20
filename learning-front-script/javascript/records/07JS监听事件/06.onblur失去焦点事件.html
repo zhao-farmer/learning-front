@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+    //静态注册失去焦点
+    function onblurFun() {
+        console.log("静态注册失去焦点事件");
+        alert('静态:离开文本框了，亲！');
+    }
+    //动态注册 onblur 事件
+    window.onload=function () {
+        var pwd=document.getElementById("passwd");
+        pwd.onblur=function () {
+            console.log('动态注册失去焦点事件');
+            alert('动态:离开文本框了，亲！');
+        }
+    }
+    </script>
+</head>
+<body>
+    用户名：<input type="text" onblur="onblurFun()"> <br/>
+    密码：<input type="passwd" id="passwd"> <br/>
+</body>
+</html>

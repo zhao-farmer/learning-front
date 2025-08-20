@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+        
+        // 绘制路径
+        const path = new fabric.Path("M 0 0 L 200 100 L 170 200 z");
+        path.set({
+            top: 50, // 距离容器顶部距离 50px
+            left: 50, // 距离容器左侧距离 50px
+            fill: "hotpink", // 填充 亮粉色
+            opacity: 0.5, // 不透明度 50%
+            stroke: "black", // 描边颜色 黑色
+            strokeWidth: 10, // 描边粗细 10px
+        });
+        canvas.add(path);
+    </script>
+</body>
+</html>

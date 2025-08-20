@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #box{
+             width: 200px;
+             height: 200px;
+             background-color: green;
+             transition: all .3s;
+         }
+         body{
+             height: 1500px;
+         }
+         #btn5{
+             position: fixed;
+             bottom: 30px;
+             right: 30px;
+         }
+    </style>
+
+</head>
+<body>
+    <button id="btn1">基本自定义动画</button>
+    <button id="btn2">向右移动</button>
+    <button id="btn3">队列动画</button>
+    <button id="btn4">清空动画（中断动画）</button>
+    <div id="box"></div>
+
+    <!--回到顶部-->
+    <button id="btn5">回到顶部</button>
+    <script src="../js/jquery.3.7.1.js"></script>
+
+    <script>
+        /*基本自定义动画*/
+        $("#btn1").click(function () {
+            $("#box").animate(  //animation的参数必须是对象，jQuery的动画只能改变有数字值的属性
+                {
+                    "height":"100px",
+                    "width":"100px",
+                    "opacity":0.5,
+                    // "backgroundColor":"red"  这个改不了
+                },1000,function () {
+                    /*每个jQuery方法的参数都有个回调函数（可选项）*/
+                    $(this).css("background","red");  //写在里面会后变，因为animate执行完了才执行它
+                }
+    
+            ).css("background","yellow");  //写到外面就先变了，因为animate执行完成需要时间
+        })
+    
+    
+        /*向右移动*/
+        $("#btn2").click(function () {
+            $("#box").animate({
+                "margin-left":"+=100px",  //能够识别 +=
+            },300)
+        })
+    
+    
+        /*队列动画*/
+        $("#btn3").click(function () {
+            $("#box")
+                // .delay(3000)
+            .animate({
+                "width":"600px",
+                // "height":"300px"  宽高同时改变
+            },2000)
+                // .delay(3000)   //延迟
+            .animate({
+                "height":"300px"
+            })
+                // .delay(3000)
+            .animate({
+                "opacity":0.5
+            },3000)
+        })
+    
+    
+        /*清空动画*/
+        $("#btn4").click(function () {
+            //stop(布尔值,布尔值)   参数1：是否清空所有队列动画，参数2：是否停留在当前队列的末尾状态-默认false
+            $("#box").stop(true)
+        })
+    
+    
+        /*回到顶部*/
+        $("#btn5").click(function () {
+            $("html").animate({
+                scrollTop:200
+            },1000)
+        })
+    
+    </script>
+
+</body>
+</html>

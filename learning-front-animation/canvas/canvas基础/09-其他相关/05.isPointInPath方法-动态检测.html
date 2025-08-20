@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // 创建圆形
+        const circle = new Path2D();
+        circle.arc(150, 75, 50, 0, 2 * Math.PI);
+        ctx.fillStyle = "red";
+        ctx.fill(circle);
+
+        // 监听鼠标移动
+        canvas.addEventListener("mousemove", (event) => {
+            // 检查鼠标位置是否在圆形内
+            const isPointInPath = ctx.isPointInPath(circle, event.offsetX, event.offsetY);
+            ctx.fillStyle = isPointInPath ? "green" : "red";
+
+            // 绘制圆形
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fill(circle);
+        });
+    </script>
+</body>
+</html>

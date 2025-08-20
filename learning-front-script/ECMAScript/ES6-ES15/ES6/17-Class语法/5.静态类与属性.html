@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            class Person {
+                static myname = "peson类的名字"
+                static mymethod =  function(){
+                    console.log("mymethod");
+                }
+
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+
+                say() {
+                    console.log(this.name, this.age);
+                }
+            }
+
+            // 这里写的是大写
+            // Person.myname = "peson类的名字"
+            // Person.mymethod = function(){
+            //     console.log("mymethod");
+            // }
+
+            let obj = new Person("kerwin",100)
+
+            console.log(Person.myname);
+            console.log(Person.mymethod);
+            
+
+        </script>
+    </body>
+</html>

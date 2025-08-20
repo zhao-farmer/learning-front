@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="../js/echarts-5.5.js"></script>
+    </head>
+    <body>
+        <div style="width: 600px; height: 400px"></div>
+        <script>
+            var mCharts = echarts.init(document.querySelector("div"));
+            let option = {
+                // 功能键
+                toolbox: {
+                    feature: {
+                        saveAsImage: {}, // 导出图片
+                        dataView: {}, // 数据视图
+                        restore: {}, // 重置
+                        dataZoom: {}, //区域缩放
+                        magicType: {
+                            // 切换不同的图表类型
+                            type: ["bar", "line"],
+                        },
+                    },
+                },
+                //标题
+                title: {
+                    text: "期末考试成绩",
+                    link: "http:baidu.com",
+                },
+                //X轴
+                xAxis: {
+                    //x轴
+                    //分类
+                    type: "category",
+                    data: ["张三", "李四", "王五", "赵六"],
+                },
+                //y轴
+                yAxis: {
+                    type: "value",
+                },
+                //显示系列：语文、数学、英语
+                series: [
+                    {
+                        name: "语文",
+                        //显示什么类型的图
+                        type: "bar",
+                        data: [89, 76, 95, 99],
+                        //设置显示当前数
+                        label: {
+                            show: false,
+                        },
+                        //柱形图宽度
+                        barWidth: 15,
+                        //设置显示当前数：true 显示，反之
+                        markPoint: {
+                            data: [
+                                {
+                                    type: "max",
+                                    name: "最大值",
+                                },
+                                {
+                                    type: "min",
+                                    name: "最小值",
+                                },
+                            ],
+                        },
+                    },
+                    {
+                        name: "数学",
+                        //显示什么类型的图
+                        type: "bar",
+                        data: [45, 66, 55, 60],
+                        //设置显示当前数：true 显示，反之
+                        label: {
+                            show: false,
+                        },
+                        barWidth: 15,
+                        //设置最大最小值
+                        markPoint: {
+                            data: [
+                                {
+                                    type: "max",
+                                    name: "最大值",
+                                },
+                                {
+                                    type: "min",
+                                    name: "最小值",
+                                },
+                            ],
+                        },
+                    },
+                ],
+                //图例：表明 什么颜色代表什么学科
+                legend: {
+                    data: ["语文", "数学"],
+                },
+            };
+            // 将配置项设置给echats实力对象
+            mCharts.setOption(option);
+        </script>
+    </body>
+</html>

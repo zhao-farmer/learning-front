@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(x,y){
+            if(!x || !y){
+                throw new Error('用户没有参数传递！')
+            }
+            return x + y
+        }
+        console.log(fn());
+        
+    </script>
+</body>
+</html>

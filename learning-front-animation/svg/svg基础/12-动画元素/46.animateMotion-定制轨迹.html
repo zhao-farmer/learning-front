@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <svg width="400" height="200">
+            <!--直接使用path -->
+            <circle cx="10" cy="10" r="5" fill="red">
+                <animateMotion 
+                  path="M10,10 C50,150 150,50 190,190" 
+                  dur="3s" 
+                  repeatCount="indefinite" 
+                />
+            </circle>
+
+            <!-- 定制轨迹 -->
+            <path id="myPath" d="M10,10 C50,150 150,50 190,190" fill="transparent" stroke="black" />
+            
+            <!-- mpath使用 -->
+            <circle cx="10" cy="10" r="5" fill="blue">
+                <animateMotion 
+                  dur="3s" 
+                  begin="1s"
+                  repeatCount="indefinite"
+                >
+                    <mpath href="#myPath"/>
+                </animateMotion>
+            </circle>
+        </svg>
+    </body>
+</html>

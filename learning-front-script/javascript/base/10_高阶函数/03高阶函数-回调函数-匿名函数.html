@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        /* 
+            高阶函数
+                - 如果一个函数的参数或返回值是函数，则这个函数就称为高阶函数
+                - 为什么要将函数作为函数传递？（回调函数有什么作用？）
+                    - 将函数作为参数，意味着可以对另一个函数动态传递数据
+        */
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        const pesonArr = [
+            new Person('孙悟空', 18),
+            new Person('沙和尚', 38),
+            new Person('红孩儿', 8),
+            new Person('白骨精', 16),
+        ]
+
+        //fliter() 函数来对数组进行过滤
+
+        function filter(arr, cb) {
+            const newArr = [];
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (cb(element)) {
+                    newArr.push(element)
+                }
+            }
+            return newArr
+        }
+
+        let result3 = filter(pesonArr, a => a.name === '孙悟空')
+        console.log(result3);
+        result3 = filter(pesonArr, a => a.age > 18)
+        console.log(result3);
+
+        //过滤出偶数
+        const arr = [1, 2, 3, 5, 6, 7, 8, 9, 10]
+        let result = filter(arr, a => a % 2 == 0)
+        console.log(result);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

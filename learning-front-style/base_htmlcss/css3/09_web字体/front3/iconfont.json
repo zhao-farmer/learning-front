@@ -1,0 +1,44 @@
+{
+  "id": "4192296",
+  "name": "测试",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "36402843",
+      "name": "定位位置",
+      "font_class": "dingweiweizhi",
+      "unicode": "1011f",
+      "unicode_decimal": 65823
+    },
+    {
+      "icon_id": "36402844",
+      "name": "访客邀请",
+      "font_class": "fangkeyaoqing",
+      "unicode": "10120",
+      "unicode_decimal": 65824
+    },
+    {
+      "icon_id": "36402845",
+      "name": "会员",
+      "font_class": "huiyuan",
+      "unicode": "10121",
+      "unicode_decimal": 65825
+    },
+    {
+      "icon_id": "36402846",
+      "name": "监控查看",
+      "font_class": "jiankongchakan",
+      "unicode": "10122",
+      "unicode_decimal": 65826
+    },
+    {
+      "icon_id": "36402847",
+      "name": "活动",
+      "font_class": "huodong",
+      "unicode": "10123",
+      "unicode_decimal": 65827
+    }
+  ]
+}

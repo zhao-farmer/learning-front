@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03_文本溢出</title>
+    <style>
+        ul{
+            height: 400px;
+            width: 400px;
+            border: 1px solid black;
+            font-size: 20px;
+            list-style: none;
+            padding-left: 0;
+        }
+        li{
+            margin-bottom: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            /* text-overflow: clip; */
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body>
+   <ul>
+    <li>一天下了一年的雨量！北京、河北为何会刮“台风”？</li>
+    <li>大快人心！李铁看守所生活“细节”曝光：睡6人大通铺，还要干活</li>
+    <li>2023年各地激励生育补贴标准出炉！生二胎、三胎每月可领多少钱？</li>
+    <li>水煮虾，用冷水还是开水？很多人搞错，难怪肉质又干又柴，腥味重</li>
+    <li>原来他是蔡明儿子！隐瞒34年不愿公开，是蔡明的骄傲更是最大心病</li>
+   </ul>
+</body>
+</html>

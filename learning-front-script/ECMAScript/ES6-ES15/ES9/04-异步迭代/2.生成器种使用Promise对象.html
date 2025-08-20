@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /* 前期测试 - 数组同步遍历器  */
+        let arr = [1,2,3]
+
+        // 变为迭代器
+        let i = arr[Symbol.iterator]()
+        // 第一种： 只用迭代器的next方法
+        console.log(i.next());
+        console.log(i.next());
+        console.log(i.next());
+        console.log(i.next());
+
+        // 第二种：使用forof 遍历
+        for (const i of arr) {
+            console.log(i); 
+        }
+
+        /* 前期测试 - 同步生成器 */
+        function *gen(){
+            yield 111
+            yield 222
+        }
+        let g = gen()
+        console.log(g.next());
+        console.log(g.next());
+        console.log(g.next());
+
+
+
+        // 如果生成器调度的是异步Promise 使用会反直觉
+        function ajax(data){
+            return new Promise(resolve =>{
+                resolve(data)
+            })
+        }
+        // 异步生成器
+        function *gen2(){
+            yield ajax(111)
+            yield ajax(222)
+        }
+        let g2 = gen2() // g就是一个异步遍历器
+ 
+        
+
+        // 只能使用这种方式 处理数据
+        g2.next().value.then(res=>{
+            console.log(res);
+        })
+        g2.next().value.then(res=>{
+            console.log(res);
+        })
+    </script>
+</body>
+</html>

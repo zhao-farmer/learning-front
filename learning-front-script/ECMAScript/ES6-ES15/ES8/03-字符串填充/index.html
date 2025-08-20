@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str = "kerwin"
+
+        // 前面填充x
+        console.log(str.padStart(10,"x"));  // xxxxkerwin
+        // 后面填充x
+        console.log(str.padEnd(10,"x"));    // kerwinxxxx
+        
+        // 值比较小 不填充
+        console.log(str.padStart(5,"x"));   // kerwin
+        console.log(str.padEnd(5,"x"));     // kerwin
+
+
+        let list = []
+
+        for (let i = 0; i < 13; i++) {
+            list.push(String(i).padStart(2,"0"))
+        }
+        console.log(list);  //['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12']
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const str = "ab\uD800c"; // 不完整的高代理项后跟字符
+        const wellFormedStr = str.toWellFormed();
+
+        console.log(wellFormedStr); // 输出: "ab\uFFFDc"
+    </script>
+</body>
+</html>

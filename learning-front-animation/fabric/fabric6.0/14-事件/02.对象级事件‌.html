@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+    <div id="current">当前操作： </div>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+        
+        const rect = new fabric.Rect({
+            top: 100,
+            left: 100,
+            width: 100,
+            height: 50,
+            fill: '#ffde7d'
+        })
+
+        canvas.add(rect)
+
+        rect.on('moving', options => {
+            current.innerHTML = "当前操作：移动"
+            canvas.renderAll()
+        })
+
+        rect.on('scaling', options => {
+            current.innerHTML = "当前操作：缩放"
+            canvas.renderAll()
+        })
+
+        rect.on('rotating', options => {
+            current.innerHTML = "当前操作：旋转"
+            canvas.renderAll()
+        })
+
+    </script>
+</body>
+</html>

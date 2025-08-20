@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        // 椭圆
+        const ellipse = new fabric.Ellipse({
+            top: 20,
+            left: 20,
+            rx: 100,
+            ry: 50,
+            fill: "#ddd",
+            originX: "center", // 旋转x轴：left, right, center
+            originY: "center", // 旋转y轴：top, bottom, center
+        });
+
+        // 文本
+        const text = new fabric.Text("Hello World", {
+            top: 40,
+            left: 20,
+            fontSize: 20,
+            originX: "center",
+            originY: "center",
+        });
+
+        // 建组
+        const group = new fabric.Group([ellipse, text], {
+            top: 50, // 整组距离顶部100
+            left: 50, // 整组距离左侧100
+            angle: -10, // 整组旋转-10deg
+        });
+
+        // 控制第一个元素（椭圆）
+        group.item(0).set("fill", "#ea5455");
+
+        // 控制第二个元素（文本）
+        group.item(1).set({
+            text: "雷猴，世界",
+            fill: "#fff",
+        });
+
+        canvas.add(group);
+    </script>
+</body>
+</html>

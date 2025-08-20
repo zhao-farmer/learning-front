@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表的过滤</title>
+ 
+</head>
+<body>
+    <!-- 创建一个容器 -->
+  
+    <script type="text/javascript">
+      let data = {
+        name:"尚硅谷",
+        address:"地址",
+        a:{
+          b:1
+        }
+      }
+
+      //创建一个监视的实例对象，用于监视data种属性的而变化
+      const obs = new Observer(data)
+      console.log(obs);
+      let vm = {}
+      vm._data = data = obs
+
+
+
+      function Observer(obj){
+        //汇总对象种所有的属性形成一个数组
+        const keys = Object.keys(obj)
+        //遍历
+        keys.forEach((k) =>{
+          Object.defineProperty(this,k,{
+            get(){
+              return obj[k]
+            },
+            set(val){
+              console.log(`${k}`+'被改了，我要去解析模板，生成虚拟DOM,生成虚拟DOM....我要开始忙了。');
+              
+              obj[k] = val
+            }
+          })
+        })
+      }
+
+
+     
+
+
+   </script>
+</body>
+</html>

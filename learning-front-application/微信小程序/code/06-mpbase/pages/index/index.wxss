@@ -1,0 +1,19 @@
+page{
+  padding: 50rpx;
+  box-sizing: border-box;
+}
+
+.line{
+  margin: 40rpx 15rpx;
+  height: 10rpx;
+  background-color: chartreuse;
+}
+
+
+/* 2.组件使用者也能够修改默认的样式 */
+.custom .custom-checkbox .wx-checkbox-input{
+  border: 1px solid lightseagreen !important;
+}
+.custom .custom-checkbox .wx-checkbox-input-checked{
+  background-color: lightseagreen !important;
+}

@@ -1,0 +1,9 @@
+.line{
+  margin: 40rpx 15rpx;
+  height: 10rpx;
+  background-color: chartreuse;
+}
+
+.my-class{
+  color: lightseagreen;
+}

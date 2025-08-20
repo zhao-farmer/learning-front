@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>07类型转换-布尔值</title>
+    <script>
+        /* 
+            1.使用Boolean()函数来将其他类型转换为布尔值
+                -转换的情况
+                    数字：
+                        - 0 和NaN转换为false
+                        - 其余都是true
+                    字符串：
+                        -空串转换false
+                        -其余是true
+                    null与undefined 都转换为false
+
+                    对象：对象会转换为true
+                -所有标识空性的没有的错误的指都会转换为false:
+                    0、NaN、空串、null、undefined、false 
+
+        */
+        let a = 1; //true
+        a = 100;    //true
+        a = 0; //false
+        a = -1 //true
+        a = NaN //false
+        a = Infinity //true
+
+
+        a = 'abc' //true
+        a = 'true' //true
+        a = 'false' //true
+        a = '' //false
+        a = ' ' //true
+
+        a = null
+        a = undefined
+
+        console.log(typeof a, a); //undefined undefined
+
+        a = Boolean(a);
+        console.log(typeof a, a); //boolean false
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

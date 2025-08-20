@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="600" height="400" style="border:1px solid black" ></canvas>
+    <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');      
+        function render() {
+            //清除
+            ctx.clearRect(0,0,600,400)
+            
+            //存档，保存当前坐标位置和上下文对象的状态
+            ctx.save()
+            //初始点移动到中心
+            ctx.translate(300,200);
+            //从水平向右旋转到垂直向上
+            ctx.rotate(-Math.PI / 2);
+
+            //保存
+            ctx.save()
+            //小时对应的点
+            for (let i = 0; i < 12; i++) {
+                //绘制每小时的刻度
+                ctx.beginPath()
+                ctx.moveTo(170,0);
+                ctx.lineTo(190,0);
+                ctx.storeStyle = 'gray'
+                ctx.lineWidth = 8;
+
+                ctx.stroke()
+                ctx.closePath()
+                ctx.rotate(2 * Math.PI / 12)
+            }
+        
+            //分钟对应的点
+            ctx.restore()
+            ctx.save()
+            for (let i = 0; i < 60; i++) {
+                //绘制每小时的刻度
+                ctx.beginPath()
+                ctx.moveTo(180,0);
+                ctx.lineTo(190,0);
+                ctx.storeStyle = 'gray'
+                ctx.lineWidth = 2;
+
+                ctx.stroke()
+                ctx.closePath()
+                ctx.rotate(2 * Math.PI / 60)
+            }
+
+            ctx.restore()
+            ctx.save()
+
+            //获取当前时间
+            var time = new Date();
+            var hour = time.getHours();
+            var min = time .getMinutes();
+            var sec = time.getSeconds();
+            //24小时 转12小时
+            hour = hour >= 12 ? hour - 12 : hour;
+
+
+
+            //绘制秒针
+            ctx.rotate(2 * Math.PI / 60 * sec);
+            ctx.beginPath();
+            ctx.moveTo(-30,0);
+            ctx.lineTo(190,0);
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = 'red';
+            ctx.stroke()
+            ctx.closePath()
+            ctx.restore()
+            ctx.save()
+
+
+            //绘制分针
+            ctx.rotate(2 * Math.PI / 60 * min + 2 * Math.PI / 60 / 60 * sec );
+            ctx.beginPath();
+            ctx.moveTo(-20,0);
+            ctx.lineTo(130,0);
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#888';
+            ctx.stroke()
+            ctx.closePath()
+            ctx.restore()
+            ctx.save()
+
+
+            //绘制时针
+            ctx.rotate( 2 * Math.PI / 12 * hour + 2 * Math.PI / 12 / 60 * min + 2 * Math.PI /12 / 60 /60 * sec);
+            ctx.beginPath();
+            ctx.moveTo(-15,0);
+            ctx.lineTo(110,0);
+            ctx.lineWidth = 8;
+            ctx.strokeStyle = '#333';
+            ctx.stroke()
+            ctx.closePath()
+            ctx.restore()
+
+            //恢复到最开始的地方
+            ctx.restore()
+
+            requestAnimationFrame(render)
+        }
+        render()
+     </script>
+</body>
+</html>

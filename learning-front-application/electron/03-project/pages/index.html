@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Electron</title>
+    <link rel="stylesheet" href="../assets/iconfont/iconfont.css" />
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+    <div id="app">
+        <div class="titleBar">
+            <!-- logo和标题区域 -->
+            <div class="title">
+                <div class="logo">
+                    <img src="../assets/image/logo.png" />
+                </div>
+                <div class="txt">窗口标题</div>
+            </div>
+    
+            <!-- 窗口右上角工具栏，控制窗口的放大、缩小、关闭 -->
+            <div class="windowTool">
+                <div class="minsize">
+                    <i class="iconfont icon-minsize"></i>
+                </div>
+                <div class="restore hidden">
+                    <i class="iconfont icon-maxsize"></i>
+                </div>
+                <div class="maxsize">
+                    <i class="iconfont icon-restore"></i>
+                </div>
+                <div  class="close">
+                    <i class="iconfont icon-close"></i>
+                </div>
+            </div>
+        </div>
+    
+        <div class="content">
+            <button class="change-round">变为圆形</button>
+            <button class="change-win hidden">恢复窗口</button>
+        </div>
+    </div>
+    <script src="./renderer.js"></script>
+</body>
+</html>

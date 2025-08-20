@@ -1,0 +1,12 @@
+@charset "UTF-8";
+/* ====字符串====== */
+.p1 {
+  content: "hello";
+  content: hello;
+  content: 1 1;
+  content: "Hello xiaoming world!";
+  content: 5;
+  content: "hello";
+  content: "HELLO";
+  content: uhfzcsl;
+}

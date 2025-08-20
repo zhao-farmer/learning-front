@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            #main {
+                padding: 10px;
+                border: 2px solid red;
+            }
+            .red {
+                color: red;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main">
+            <h3>标题</h3>
+            <p id="innerP">main里面的p标签</p>
+            <span class="outer">main的span元素</span>
+            <span class="outer">main的span元素</span>
+        </div>
+
+        <h5>main外面的h5</h5>
+        <p>main外面的p标签</p>
+        <p>main外面的p标签</p>
+
+        <span>外面的span元素</span>
+        <span>外面的span元素</span>
+
+        <hr />
+        <!--节点操作-->
+        <h1>在内部插入节点</h1>
+        <button onclick="myAppend()">插入节点作为main的最后一个子节点</button>
+        <button onclick="myPrepend()">插入节点作为main的第一个子节点</button>
+
+        <hr />
+        <h1>外部插入节点</h1>
+        <button onclick="myAfterBefore()">main添加一个弟弟or哥哥元素</button>
+        <button onclick="myClone()">复制节点</button>
+
+        <hr />
+        <button onclick="myRemove()">删除节点</button>
+
+        <hr />
+        <button onclick="myReplace()">节点替换</button>
+
+        <script src="../js/jquery.3.7.1.js"></script>
+        <script>
+            /*========内部插入节点=============*/
+
+            function myAppend() {
+                //子元素.appendTo(父元素)
+                //父元素.append(节点)
+
+                // $("#main").append($("p"));  //插入的已有的节点
+                // $("#main").append($("<div>新的div节点</div>"));  //插入新的节点
+
+                let newDiv = $("<div>新的div节点</div>");
+                $("#main").append(newDiv);
+            }
+
+            function myPrepend() {
+                //在节点（前方）插入新节点
+                $("#main").prepend($("<div class='red'>新的div</div>"));
+            }
+
+            /*========外部插入节点=============*/
+
+            function myAfterBefore() {
+                //添加一个弟弟元素
+                // $("#main").after($("#innerP"));  //after在后方
+                // $("#main").after($("<div>新的内容</div>"));  //还可写成：内容.insertAfter(元素)
+
+                //添加一个哥哥元素
+                $("#main").before($("<div>新的内容</div>")); //before在前方
+            }
+
+            /*复制节点*/
+            function myClone() {
+                //1.复制 2.粘贴
+                //clone(布尔值)   true-（深克隆）把事件和行为一起复制    false-（浅克隆,默认）只克隆节点和内容
+                $("h5").clone(true).appendTo($("#main"));
+            }
+            $("h5").click(function () {
+                alert("克隆测试");
+            });
+
+            /*删除节点*/
+            function myRemove() {
+                $("span").remove(); //删除所有的span
+                $("span").remove(".outer"); //删除类名为.outer的span
+            }
+
+            /*替换节点*/
+            function myReplace() {
+                $("h5").replaceWith("<div>替换h5的div</div>");
+            }
+        </script>
+    </body>
+</html>

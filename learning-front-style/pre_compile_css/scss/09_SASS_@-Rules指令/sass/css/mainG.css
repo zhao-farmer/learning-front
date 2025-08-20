@@ -1,0 +1,9 @@
+span {
+  font-size: 16px;
+}
+span a {
+  font-size: 14px;
+}
+span a:hover {
+  color: blue;
+}

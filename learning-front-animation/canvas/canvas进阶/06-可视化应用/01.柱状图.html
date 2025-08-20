@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="500" height="200"></canvas>
+
+    <script>
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        var data = [100, 200, 150, 250, 220, 140];
+        var width = canvas.width;
+        var height = canvas.height;
+        var barWidth = width / data.length - 10; // 柱子宽度，减去一些间距
+        var maxDataValue = Math.max(...data);
+
+        for (var i = 0; i < data.length; i++) {
+            var barHeight = (data[i] / maxDataValue) * height - 20;
+            ctx.fillStyle = "#3e7bfa";
+            ctx.fillRect(i * (barWidth + 10) + 5, height - barHeight, barWidth, barHeight);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      name="username"
+      value="admin"
+      class="a"
+      disabled="disabled"
+    />
+
+    <script>
+      /* 
+            属性节点（Attr）
+                - DOM也是一个对象，通常不需要获取对象，而是直接通过元素即可完成对其的各种操作
+                - 如何操作属性节点：
+                    方式一：
+                        读取：元素.属性名(注意，class属性需要使用calssName来读取)
+                                读取一个布尔值，会返回true或者false
+                        修改： 元素.属性 = 值  （设置布尔值会有一个类型转换 0 与 “” 转成false)
+                    方式二：
+                        读取： 元素.getAttribute(属性名)
+                        修改： 元素.setAttribute(属性名，属性值)
+
+                        删除： 元素.removeAttribute(属性名)
+
+        
+        */
+      const input = document.getElementsByName("username")[0];
+
+      console.log(input);
+
+      const input2 = document.querySelector("[name=username]");
+
+      console.log(input2);
+
+      console.log(input.name, input.value);
+      console.log(input.className);
+      console.log(input.disabled);
+
+      input.disabled = false;
+      console.log(input.disabled);
+
+      //第二种方式的读取
+      console.log(input.getAttribute("type"));
+
+      input.setAttribute("value", "孙悟空");
+
+      //都是金庸状态
+      input.setAttribute("disabled", true);
+      input.setAttribute("disabled", false);
+
+      //应该这样使用
+      input.setAttribute("disabled", "disabled");
+    </script>
+  </body>
+</html>

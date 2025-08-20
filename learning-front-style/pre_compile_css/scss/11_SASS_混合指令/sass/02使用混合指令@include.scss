@@ -1,0 +1,35 @@
+@mixin large-text {
+    font: {
+      family: Arial;
+      size: 20px;
+      weight: bold;
+    }
+    color: #ff0000;
+}
+
+.page-title {
+    @include large-text;
+    padding: 4px;
+    margin-top: 10px;
+}
+
+@mixin silly-links {
+    a {
+      color: blue;
+      background-color: red;
+    }
+}
+@include silly-links;
+
+
+@mixin highlighted-background { background-color: #fc0; }
+@mixin header-text { font-size: 20px; }
+@mixin compound {
+    @include highlighted-background;
+    @include header-text;
+}
+
+p{
+    @include compound; 
+    padding: 20px;
+}

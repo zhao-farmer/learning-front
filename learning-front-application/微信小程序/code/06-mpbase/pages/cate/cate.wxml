@@ -1,0 +1,18 @@
+
+<custom01>
+  <!-- 默认情况下，自定义组件的子节点内容不会进行展示 -->
+  <!-- 如果想内容进行展示，需要在组件模板中定义 solt 节点 -->
+  <view slot="slot-top">我需要显示到顶部</view>
+  我是子节点内容
+  <view slot="slot-bottom">我需要显示到底部</view>
+</custom01>
+
+<view class="custom parent">
+  <view>
+    <custom02/>
+    <view class="son test">我是父级页面中的结构</view>
+  </view>
+</view>
+
+<!-- <text>我是父级页面中的结构</text> -->
+

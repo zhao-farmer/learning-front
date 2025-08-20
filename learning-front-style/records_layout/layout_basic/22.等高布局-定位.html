@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            p {
+                margin: 0;
+            }
+            .parent {
+                position: relative;
+                height: 40px;
+            }
+            .left,
+            .center,
+            .right {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+            }
+            .left {
+                left: 0;
+                width: 100px;
+            }
+            .center {
+                left: 120px;
+                right: 120px;
+            }
+            .right {
+                width: 100px;
+                right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="parent" style="background-color: lightgrey">
+            <div class="left" style="background-color: lightblue">
+                <p>left</p>
+            </div>
+            <div class="center" style="background-color: pink">
+                <p>center</p>
+                <p>center</p>
+                <p>center</p>
+                <p>center</p>
+            </div>
+            <div class="right" style="background-color: lightgreen">
+                <p>right</p>
+            </div>
+        </div>
+    </body>
+</html>

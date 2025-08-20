@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 公共部分放到原型上
+        const Person = {
+          eays:2,
+          head:1
+        }
+
+        // 女人 构造函数 继承 想要 继承Person
+        function Women(){
+           this.gender = '女'
+        }
+        // Women 通过原型继承 Person
+        // 父构造函数（父类） 子构造函数（子类）
+        // 子类的原型 = new 父类
+        Women.prototype = new Person()
+        // 指回原来的构造函数
+        Women.prototype.constructor = Women
+        const red = new Women()
+        console.log(red);
+        console.log(Women.prototype);
+
+        function Man(){
+           this.gender = '男'
+        }
+        // 第二种继承方式
+        Man.prototype = Person
+        Man.prototype.constructor = Man
+        const pink = new Man()
+        console.log(pink);
+        console.log(Man.prototype);
+        
+
+        // 原型有多种继承方式 是因为js原本的语言缺陷
+    </script>
+</body>
+</html>

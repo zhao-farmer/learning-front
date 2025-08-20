@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js事件实现文字禁止选中功能</title>
+    <style>
+        p {
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+    <p>人物、情节、环境是小说的三要素。情节一般包括开端、发展、高潮、结局四部分，有的包括序幕、尾声。环境包括自然环境和社会环境。 小说按照篇幅及容量可分为长篇、中篇、短篇和微型小说（小小说）。按照表现的内容可分为神话、仙侠、武侠、科幻、悬疑、古传、当代等。按照体制可分为章回体小说、日记体小说、书信体小说、自传体小说。按照语言形式可分为文言小说和白话小说。</p>
+    <script>
+        // onselectstart 禁止选中事件
+        //触发时间为目标对象被开始选中时（即选中动作刚开始，尚未实质性被选中）
+        var p = document.querySelector("p");
+        p.addEventListener("mouseover", function(e) {
+            console.log(e.target);
+            /* user-select 是css3新增的属性，用于设置用户是否能够选中文本。
+            可用于除替换元素外的所有元素
+            取值：
+            [none]：文本不能被选中
+            [text]：可以选择文本（默认）
+            [all]：当所有内容作为一个整体时可以被选中。如果双击或者在上下文上点击子元素，
+                那么被选中的选择的部分将是以该子元素向上回溯的最高祖先元素
+            [Element]：可以选择文本，但选择范围受元素边界的约束
+            */
+            e.target.style["userSelect"] = " none";
+        })
+    </script>
+</body>
+</html>

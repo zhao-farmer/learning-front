@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 初始化画布
+        const canvas = new fabric.Canvas("c1", {
+            backgroundColor: "#a5dee5",
+        });
+
+        const rect = new fabric.Rect({
+            left: 50,
+            top: 50,
+            height: 20,
+            width: 20,
+            fill: "green",
+        });
+
+        const circle = new fabric.Circle({
+        left: 80,
+            top: 80,
+            radius: 40,
+            fill: "red",
+        });
+
+        canvas.add(rect, circle);
+
+        console.log(canvas.toSVG()) // 输出 SVG
+    </script>
+</body>
+</html>

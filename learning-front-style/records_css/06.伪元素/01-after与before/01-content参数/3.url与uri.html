@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .one::before {
+            content: url("./logo_01.png");
+        }
+        /*伪元素添加图片：*/
+        .two:before{
+            /*内容置为空*/
+            content:"";
+            /*设置背景图，并拉伸*/
+            background:url("./logo_01.png") no-repeat center;
+            /*必须设置此伪元素display*/
+            display:inline-block;
+            /*必须设置此伪元素大小（不会被图片撑开）*/
+            background-size:100%;
+            width:100px;
+            height:100px;
+        }
+        a::after{
+            content:"("attr(href)")";
+        }
+
+    </style>
+    
+</head>
+<body>
+ <a href="https://www.baidu.com/" class="one">百度地址</a>
+ <br/>
+ <a href="https://www.baidu.com/" class="two">百度地址</a>
+</body>

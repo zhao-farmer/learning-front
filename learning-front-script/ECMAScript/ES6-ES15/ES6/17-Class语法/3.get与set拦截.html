@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name,age,location){
+                this.name = name;
+                this.age = age;
+                this.location = location
+            }
+
+            // 只做拦截使用 并不返回
+            get location(){
+                console.log("get");
+                // return location  无限循环
+            }
+
+            set location(data){
+                console.log("set",data);
+                // this.location = data 也是无限循环
+            }
+
+        }
+
+        let obj = new Person("kerrwin",100,"dalian")
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadow DOM Example</title>
+    <style>
+        /* 外部样式 */
+        .container {
+            font-size: 20px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="hostElement" class="container">This is the shadow host.</div>
+
+    <script>
+        // 获取 Shadow Host 元素
+        const hostElement = document.getElementById('hostElement');
+
+        // 创建 Shadow Root 并附加到 hostElement 上
+        const shadowRoot = hostElement.attachShadow({ mode: 'open' });
+
+        // Shadow DOM 的内容
+        shadowRoot.innerHTML = `
+            <style>
+                /* Shadow DOM 内部样式 */
+                .shadowContent {
+                    font-size: 16px;
+                    color: blue;
+                }
+            </style>
+            <div class="shadowContent">This is inside the Shadow DOM.</div>
+        `;
+
+        // 外部添加的内容不会影响 Shadow DOM
+        const externalDiv = document.createElement('div');
+        externalDiv.textContent = 'This is outside the Shadow DOM.';
+        document.body.appendChild(externalDiv);
+    </script>
+</body>
+</html>

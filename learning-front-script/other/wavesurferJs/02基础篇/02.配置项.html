@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="waveform"></div>
+        <!-- 导入文件 -->
+        <script src="../js/wavesurfer.min.js"></script>
+        <script>
+            // 所有 wavesurfer 选项集中在一个地方
+
+            const options = {
+                /** HTML元素或CSS选择器（必需） */
+                container: "body",
+                /** 波形的高度（像素） */
+                height: 128,
+                /** 波形的宽度（像素或任何CSS值）；默认为100% */
+                width: 300,
+                /** 将每个音频通道渲染为单独的波形 */
+                splitChannels: false,
+                /** 将波形拉伸到最大高度 */
+                normalize: false,
+                /** 波形的颜色 */
+                waveColor: "#ff4e00",
+                /** 进度蒙版的颜色 */
+                progressColor: "#dd5e98",
+                /** 播放包光标的颜色 */
+                cursorColor: "#ddd5e9",
+                /** 光标宽度 */
+                cursorWidth: 2,
+                /** 用这样的条形图渲染波形： ▁ ▂ ▇ ▃ ▅ ▂ */
+                barWidth: NaN,
+                /** 条形图之间的间距（像素） */
+                barGap: NaN,
+                /** 杆的圆形边框 */
+                barRadius: NaN,
+                /** 波形的垂直缩放因子 */
+                barHeight: NaN,
+                /** 垂直杆对齐 **/
+                barAlign: "",
+                /** 音频每秒最小像素数（即缩放级别）*/
+                minPxPerSec: 1,
+                /** 拉伸波形以填充容器，默认为真 */
+                fillParent: true,
+                /** 音频URL */
+                url: '../assest/audio.wav',
+                /** 是否显示默认音频元素控件 */
+                mediaControls: true,
+                /** 在加载时播放音频 */
+                autoplay: false,
+                /** 传递false以禁用波形点击 */
+                interact: true,
+                /** 允许拖动光标以查找新位置 */
+                dragToSeek: false,
+                /** 隐藏滚动条 */
+                hideScrollbar: false,
+                /** 音频速率 */
+                audioRate: 1,
+                /** 自动滚动容器以保持视口中的当前位置 */
+                autoScroll: true,
+                /** 如果启用了自动滚动，请在播放过程中将光标保持在波形的中心 */
+                autoCenter: true,
+                /** 解码采样率。不影响播放。默认值为8000 */
+                sampleRate: 8000,
+            };
+
+            const wavesurfer = WaveSurfer.create(options);
+
+            wavesurfer.on("ready", () => {
+                wavesurfer.setTime(10);
+            });
+
+            // 为每个选项生成表单输入
+            const schema = {
+                height: {
+                    value: 128,
+                    min: 10,
+                    max: 512,
+                    step: 1,
+                },
+                width: {
+                    value: 300,
+                    min: 10,
+                    max: 2000,
+                    step: 1,
+                },
+                cursorWidth: {
+                    value: 1,
+                    min: 0,
+                    max: 10,
+                    step: 1,
+                },
+                minPxPerSec: {
+                    value: 1,
+                    min: 1,
+                    max: 1000,
+                    step: 1,
+                },
+                barWidth: {
+                    value: 0,
+                    min: 1,
+                    max: 30,
+                    step: 1,
+                },
+                barHeight: {
+                    value: 1,
+                    min: 0.1,
+                    max: 4,
+                    step: 0.1,
+                },
+                barGap: {
+                    value: 0,
+                    min: 1,
+                    max: 30,
+                    step: 1,
+                },
+                barRadius: {
+                    value: 0,
+                    min: 1,
+                    max: 30,
+                    step: 1,
+                },
+                peaks: {
+                    type: "json",
+                },
+                audioRate: {
+                    value: 1,
+                    min: 0.1,
+                    max: 4,
+                    step: 0.1,
+                },
+                sampleRate: {
+                    value: 8000,
+                    min: 8000,
+                    max: 48000,
+                    step: 1000,
+                },
+            };
+
+            const form = document.createElement("form");
+            Object.assign(form.style, {
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                padding: "1rem",
+            });
+            document.body.appendChild(form);
+
+            for (const key in options) {
+                if (options[key] === undefined) continue;
+                const isColor = key.includes("Color");
+
+                const label = document.createElement("label");
+                Object.assign(label.style, {
+                    display: "flex",
+                    alignItems: "center",
+                });
+
+                const span = document.createElement("span");
+                Object.assign(span.style, {
+                    textTransform: "capitalize",
+                    width: "7em",
+                });
+                span.textContent = `${key.replace(/[a-z0-9](?=[A-Z])/g, "$& ")}: `;
+                label.appendChild(span);
+
+                const input = document.createElement("input");
+                const type = typeof options[key];
+                Object.assign(input, {
+                    type: isColor ? "color" : type === "number" ? "range" : type === "boolean" ? "checkbox" : "text",
+                    name: key,
+                    value: options[key],
+                    checked: options[key] === true,
+                });
+                if (input.type === "text") input.style.flex = 1;
+                if (options[key] instanceof HTMLElement) input.disabled = true;
+
+                if (schema[key]) {
+                    Object.assign(input, schema[key]);
+                }
+
+                label.appendChild(input);
+                form.appendChild(label);
+
+                input.oninput = () => {
+                    if (type === "number") {
+                        options[key] = input.valueAsNumber;
+                    } else if (type === "boolean") {
+                        options[key] = input.checked;
+                    } else if (schema[key] && schema[key].type === "json") {
+                        options[key] = JSON.parse(input.value);
+                    } else {
+                        options[key] = input.value;
+                    }
+                    wavesurfer.setOptions(options);
+                    textarea.value = JSON.stringify(options, null, 2);
+                };
+            }
+
+            const textarea = document.createElement("textarea");
+            Object.assign(textarea.style, {
+                width: "100%",
+                height: Object.keys(options).length + 1 + "rem",
+            });
+            textarea.value = JSON.stringify(options, null, 2);
+            textarea.readOnly = true;
+            form.appendChild(textarea);
+        </script>
+    </body>
+</html>

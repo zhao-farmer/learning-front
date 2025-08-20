@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 浏览器的 ES6 环境
+        function f() { console.log('I am outside!'); }
+        (function () {
+            var f = undefined;
+            if (false) {
+                function f() { console.log('I am inside!'); }
+            }
+            f();
+        }());
+        // Uncaught TypeError: f is not a function
+    </script>
+    </body>
+</html>

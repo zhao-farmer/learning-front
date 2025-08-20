@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">播放</button>
+    <button id="btn2">设置音量与播放速率</button>
+    <button id="btn3">重置播放</button>
+    <button id="btn4">获取播放时间</button>
+    <script>
+        var audio = new Audio();
+        audio.src = "00.aac";
+
+        let btn1 = document.getElementById("btn1")
+        btn1.onclick = () => {
+            audio.play()
+        }
+        let btn2 = document.getElementById("btn2")
+        btn2.onclick = () => {
+            audio.volume+=0.1;
+            audio.playbackRate=2;
+        }
+        let btn3 = document.getElementById("btn3")
+        btn3.onclick = () => {
+            audio.currentTime = 0;
+        }
+
+        let btn4 = document.getElementById("btn4")
+        btn4.onclick = () =>{
+            console.log("当前播放时间：",audio.currentTime);
+            console.log("总时长：",audio.duration);
+        }
+ 
+    </script>
+</body>
+</html>

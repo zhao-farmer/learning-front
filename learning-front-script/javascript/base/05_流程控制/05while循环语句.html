@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            循环语句
+                - 通过循环语句可以使指定的代码返回执行
+                - JS中一共有三种循环语句
+                    while语句
+                    wo-while语句
+                    for语句
+                - while语句
+                    - 语法
+                        while(条件表达式){
+                            语句...
+                        }
+                    - 执行流程
+                        while语句在执行时，先对条件表达式进行判断，
+                            如果结果是true，则执行循环体，执行完毕，继续判断
+                            如果为true,则再次执行循环体，执行完毕，继续判断，如痴重复
+                            直到条件表达式结果为false时，循环结束
+        
+        */
+        //当一个循环的条件表达式恒为true时，这个循环就是一个死循环，会一直执行（慎用）
+        // while (true) {
+        //     alert('哈哈')
+        // }
+
+        /* 
+            通常编写一个循环，需要三个要件
+                1.初始表达式 （初始化变量）
+                2.条件表达式 （设置循环运行的条件）
+                3.更新表达式 
+        */
+        //初始表达式
+        let a = 0
+
+        //条件表达式
+        while (a < 5) {
+            alert(a)
+            //更新表达式
+            a++;
+        }
+
+        let i = 0;
+        while (1) {
+            console.log(i);
+            i++;
+            if (i === 5) {
+                break;
+            }
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

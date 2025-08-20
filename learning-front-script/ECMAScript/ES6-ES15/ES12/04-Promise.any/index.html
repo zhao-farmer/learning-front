@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise.all
+        // Promise.race
+        // Promise.allSettled 
+
+        // 登录-会员联盟系统（沃尔玛，华润万家，盒马）
+        // Promise.allSettled 可以满足 不过需要判断
+        // Promise.any //some
+
+        let ajax1 = function(){
+            return new Promise((resolve,reject)=>{
+                // resolve("沃尔玛")
+            })
+        }
+        let ajax2 = function(){
+            return new Promise((resolve,reject)=>{
+                resolve("华润万家")
+            })
+        }
+
+        let ajax3 = function(){
+            return new Promise((resolve,reject)=>{
+                resolve("盒马")
+            })
+        }
+
+        Promise.any([ajax1(),ajax2(),ajax3()]).then(res=>{
+            console.log(res);
+            
+        }).catch(err=>{
+            console.log("err",err);
+            
+        })
+
+
+    </script>
+</body>
+</html>

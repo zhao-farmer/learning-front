@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="get">get</button>
+    <button id="post">post</button>
+    <button id="put">put</button>
+    <button id="patch">patch</button>
+    <button id="delete">delete</button>
+
+    <script>
+
+        var oget = document.querySelector("#get")
+        var opost = document.querySelector("#post")
+        var oput = document.querySelector("#put")
+        var opatch = document.querySelector("#patch")
+        var odelete = document.querySelector("#delete")
+
+        oget.onclick = function(){
+            // 基础使用
+            fetch("http://localhost:3005/users").then((res)=>{
+                console.log(res);
+                
+                res.json().then((res2)=>{
+                    console.log(res2);
+                })
+            })
+
+            // Promise 调整结构
+            fetch("http://localhost:3005/users").then((res)=>{
+                return res.json()
+            }).then(res=>{
+                console.log(res);
+            })
+
+            // ES6 调整结构
+            fetch("http://localhost:3005/users")
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res);
+                })
+
+            // restful 风格调用
+            fetch("http://localhost:3005/users?id=1")
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res);
+                })
+
+            // catch 监控错误
+            fetch("http://localhost:3005/users?id=1")
+                .then(res=>res.json())
+                .then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log("err");
+                })
+
+            // 判断结果路径
+            fetch("http://localhost:3005/users?id=1")
+                .then(res=>{
+                    if(res.ok){
+                        return res.json()
+                    }else{ 
+                        // 直接返回错误 走catch
+                        return Promise.reject({
+                            status:res.status,
+                            statusText:res.statusText
+                        })
+                    }
+                }).then(res=>{
+                    console.log(res);
+                }).catch(err=>{
+                    console.log("err");
+                })
+            
+        }
+        opost.onclick = function(){
+            // form格式调用
+            fetch("http://localhost:3005/users",{
+                method:"post",
+                headers:{
+                    "content-type":"application/x-www-form-urlencoded"
+                },
+                body:"name=zhaoliu&age=100"
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+            })
+
+            // json格式调用
+            fetch("http://localhost:3005/users",{
+                method:"post",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    name:"xiaoming",
+                    age:18
+                })
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+            })
+        }
+
+        // 全量更新
+        oput.onclick = function(){
+            fetch("http://localhost:3005/users/2",{
+                method:"put",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    name:"xiaowang",
+                    age:180
+                })
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+            })
+        }
+
+        // 增量更新
+        opatch.onclick = function(){
+             fetch("http://localhost:3005/users/2",{
+                method:"PATCH",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify({
+                    age:300
+                })
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+            })
+        }
+
+        odelete.onclick = function(){
+            fetch("http://localhost:3005/users/2",{
+                method:"delete",
+                headers:{
+                    "content-type":"application/json"
+                },
+            }).then(res=>res.json())
+            .then(res=>{
+                console.log(res);
+            })
+            
+        }
+
+
+        
+    </script>
+</body>
+</html>

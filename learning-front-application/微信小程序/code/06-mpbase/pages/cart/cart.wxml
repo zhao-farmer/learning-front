@@ -1,0 +1,5 @@
+<custom04 label="标题"/>
+
+<view>{{num}}</view>
+<!-- 需要在自定义组件标签上，使用bind绑定自定义事件 -->
+<custom05 bind:myEvent="getData"/>

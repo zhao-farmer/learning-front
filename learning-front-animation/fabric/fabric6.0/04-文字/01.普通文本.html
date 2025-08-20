@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1"); 
+
+        // 使用 Text 创建不可编辑文本(旧，Text已过期后续不再使用)
+        const text1 = new fabric.Text('我爱学习1')
+        canvas.add(text1)
+        // 这是新版本的
+        const text2 = new fabric.FabricText('我爱学习2',{
+            top:200
+        })
+        canvas.add(text2)
+       
+    </script>
+</body>
+</html>

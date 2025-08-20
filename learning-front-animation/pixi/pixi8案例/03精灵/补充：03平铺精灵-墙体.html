@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      #px-render canvas {
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="px-render"></div>
+
+    <script type="module">
+      import { Application, Assets, TilingSprite, Texture } from "../js/pixi.mjs";
+
+      //创建一个 Pixi应用
+      let app = new Application();
+
+      // 初始化应用程序
+      await app.init({
+        width: 300,
+        height: 300,
+        background: "#fff",
+      });
+
+      //获取存放dom
+      let playground = document.getElementById("px-render");
+      //把 Pixi 创建的 canvas 添加到页面上
+      playground.appendChild(app.canvas);
+
+      //需要加载的图片的地址
+
+      const texture = await Assets.load("../assets/images/brick.jpg");
+
+      //需要用到的平铺精灵
+      let tilingSprite = new TilingSprite({ texture: texture, width: 200, height: 200 });
+
+      //tilingSprite.x = 30;
+      //tilingSprite.y = 30;
+
+      //tilingSprite.tilePosition.x = 30;
+      //tilingSprite.tilePosition.y = 30;
+
+      //tilingSprite.tileScale.x = 1.5;
+      //tilingSprite.tileScale.y = 1.5;
+
+      app.stage.addChild(tilingSprite);
+      //开始游戏循环
+      gameLoop();
+
+      // 将游戏的当前状态设置为play：
+
+      function gameLoop() {
+        // 循环调用gameLoop
+        requestAnimationFrame(gameLoop);
+        // 更新当前的游戏状态
+        play();
+      }
+
+      //使精灵移动的函数
+      function play() {
+        tilingSprite.tilePosition.x -= 1;
+      }
+    </script>
+  </body>
+</html>

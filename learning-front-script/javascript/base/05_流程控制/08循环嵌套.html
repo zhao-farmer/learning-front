@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            在循环中也可以嵌套其他的循环
+        
+            希望在网页中打印出如下图形
+            *****
+            *****
+            *****
+            *****
+            *****
+        
+            *
+            **
+            ***
+            ****
+            *****
+        
+        
+            *****
+            ****
+            ***
+            **
+            *
+        
+            //当循环发生嵌套，外层循环每执行一次，内层循环就会执行一个完成的周期
+        
+        */
+        for (let x = 0; x < 5; x++) {
+            for (let y = 0; y < 5; y++) {
+                document.write("*&nbsp;&nbsp;");
+            }
+            document.write("</br>");
+        }
+        document.write("</br>");
+        for (let x = 0; x < 5; x++) {
+            for (let y = 0; y <= x; y++) {
+                document.write("*&nbsp;&nbsp;");
+            }
+            document.write("</br>");
+        }
+        document.write("</br>");
+        for (let x = 0; x < 5; x++) {
+            for (let y = 0; y < 5 - x; y++) {
+                document.write("*&nbsp;&nbsp;");
+            }
+            document.write("</br>");
+        }
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

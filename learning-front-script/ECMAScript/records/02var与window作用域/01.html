@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var age = 18;
+        function add() {}
+
+        console.log(window.age);            // 18
+        console.log(window.add === add);     // true
+
+        let age = 18;
+        const add = function() {}
+
+        console.log(window.age);            // undefined
+        console.log(window.add === add);     // false
+    </script>
+</body>
+</html>

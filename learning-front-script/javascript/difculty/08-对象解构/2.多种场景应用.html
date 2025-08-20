@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 普通对象
+        const user = {
+            name:'小明',
+            age:18
+        }
+      
+        // 1. 对象解构的变量名 可以重新改名  旧变量名：新变量名
+        // 冒号表示 什么值：赋值给谁
+        const {name:name1,age:age1} = user
+        console.log(name1,age1);
+        
+
+        //2. 解构数组对象
+        const pig = [
+            {
+                uname:'佩奇',
+                age:18
+            }
+        ]
+        const [{name2,age2}] = pig
+        console.log(name2,age2);
+
+        // 3.多级对象解构
+        const pig2 = {
+            name:'佩奇',
+            age:6,
+            family:{
+                mother:'猪妈妈',
+                father:'猪爸爸',
+                brother:'乔治'
+            }
+        }
+        const {name:name3,age:age3,family:{mother,father,brother}} = pig2
+        console.log(mother,father,brother);
+       
+
+
+    </script>
+</body>
+</html>

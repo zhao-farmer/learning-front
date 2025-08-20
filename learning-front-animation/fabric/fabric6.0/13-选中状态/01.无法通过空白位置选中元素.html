@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        // 三角形
+        const triangle1 = new fabric.Triangle({
+            top: 100,
+            left: 50,
+            width: 80, // 底边宽度
+            height: 100, // 底边到定点的距离
+            fill: "blue",
+        });
+
+        // 选择三角形空白位置的时候无法选中，当perPixelTargetFind设为false后可以选中。默认值是false
+        triangle1.perPixelTargetFind = true;
+
+        // 三角形
+        const triangle2 = new fabric.Triangle({
+            top: 100,
+            left: 200,
+            width: 80, // 底边宽度
+            height: 100, // 底边到定点的距离
+            fill: "green",
+        });
+
+        canvas.add(triangle1, triangle2);
+        canvas.selectionFullyContained = true; // 只选择完全包含在拖动选择矩形中的形状
+    </script>
+</body>
+</html>

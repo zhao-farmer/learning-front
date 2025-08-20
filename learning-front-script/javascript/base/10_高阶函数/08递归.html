@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /* 
+            递归
+                - 调用自身的函数称为递归函数
+                - 递归的作用和循环时基本一致
+        */
+
+        // 创建一个函数，可以用来求任意函数的阶乘
+        /* 
+            1! 1
+            2! 1 x 2 = 2
+            3! 1 x 2 x 3 = 6
+            ...
+            10! 1 x2 x 3 x 4 x 5 x 6 x 7 x 8 x 9 x 10 =  xxx
+
+            如何用递归来解决阶乘的问题？
+                5! = 4! x 5
+                4! = 3! x 4
+                3! = 2! x 3
+                2! = 1! x 2
+                1! = 1
+
+            递归的核心思想就是将一个大的问题拆分为一个一个校的问题，小的问题解决了，大的问题也就解决了
+
+            编写递归函数，一定要包含两个条件
+                1.基线条件 -- 递归的终止条件 
+                2.递归条件 -- 如何对问题进行拆分
+
+            递归的作用和循环是一致的，不同点在于，递归思路比较简洁清晰，循环的执行性能比较好
+                在开发中，一般的问题都可以通过循环解决，也是尽量去使用循环，少用递归
+                只在一些使用循环解决比较麻烦的情况下，使用递归
+
+        */
+
+        //循环实现
+        function jiecheng(num) {
+            let result = 1
+            for (let i = 2; i <= num; i++) {
+                result *= i
+            }
+            return result
+        }
+
+        let result = jiecheng(10)
+        console.log(result);
+
+
+        function jieCheng2(num) {
+
+            //基线条件
+            if (num === 1) {
+                return 1;
+            }
+
+            //递归条件
+            //num! = (num-1)! * num
+            return jieCheng2(num - 1) * num;
+        }
+        result = jieCheng2(5)
+        console.log(result);
+        /*
+            jieCheng2(5)
+                - return jieCheng(4) * 5
+                - return jieCheng(3) * 4 * 5
+                - return jieCheng(2) * 3 * 4 * 5
+                - return jieCheng(1) * 2 * 3 * 4 * 5
+                //代表最后一步 不再执行 只返回上面返回的
+                - return 1
+        */
+
+
+
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

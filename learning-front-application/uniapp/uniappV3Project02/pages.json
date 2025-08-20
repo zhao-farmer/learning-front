@@ -1,0 +1,95 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path" : "pages/item01/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "view组件"
+			}
+		},
+		{
+			"path" : "pages/item01/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "text组件"
+			}
+		},
+		{
+			"path" : "pages/item02/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "scollview组件"
+			}
+		},
+		{
+			"path" : "pages/item03/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "swiper组件"
+			}
+		},
+		{
+			"path" : "pages/item04/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "iamge属性"
+			}
+		},
+		{
+			"path" : "pages/item04/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "iamge组件配合swiper组件"
+			}
+		},
+		,
+		{
+			"path" : "pages/item05/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "demo1页面"
+			}
+		},
+		{
+			"path" : "pages/item05/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "demo2页面"
+			}
+		},
+		{
+			"path" : "pages/item05/item03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "demo3页面"
+			}
+		},
+		{
+			"path" : "pages/item06/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "button按钮"
+			}
+		},
+		{
+			"path" : "pages/item06/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "input输入框"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

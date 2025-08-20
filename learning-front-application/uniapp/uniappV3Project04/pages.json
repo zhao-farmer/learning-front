@@ -1,0 +1,150 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path" : "pages/item01/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "创建组件"
+			}
+		},
+		{
+			"path" : "pages/item02/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "props数据传递"
+			}
+		},
+		{
+			"path" : "pages/item03/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "props默认值"
+			}
+		},
+		{
+			"path" : "pages/item03/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "props传递对象"
+			}
+		},
+		{
+			"path" : "pages/item03/item03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "props遍历传递"
+			}
+		},
+		{
+			"path" : "pages/item04/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "插槽01"
+			}
+		},
+		{
+			"path" : "pages/item04/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "插槽02"
+			}
+		},
+		{
+			"path" : "pages/item04/item03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "具名插槽01"
+			}
+		},
+		{
+			"path" : "pages/item04/item04",
+			"style" : 
+			{
+				"navigationBarTitleText" : "具名插槽02"
+			}
+		},
+		{
+			"path" : "pages/item05/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "emit触发事件"
+			}
+		},
+		{
+			"path" : "pages/item06/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "声明周期函数"
+			}
+		},
+		{
+			"path" : "pages/item07/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "defineExpose获取子组件属性与方法"
+			}
+		},
+		{
+			"path" : "pages/item08/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "跳转到指定页面"
+			}
+		},
+		{
+			"path" : "pages/item08/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "onload函数"
+			}
+		},
+		{
+			"path" : "pages/item08/item03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "onReady函数"
+			}
+		},
+		{
+			"path" : "pages/item08/item04",
+			"style" : 
+			{
+				"navigationBarTitleText" : "onShow函数"
+			}
+		},
+		{
+			"path" : "pages/item08/item05",
+			"style" : 
+			{
+				"navigationBarTitleText" : "onHide函数"
+			}
+		},
+		{
+			"path" : "pages/item08/item06",
+			"style" : 
+			{
+				"navigationBarTitleText" : "onUnload函数"
+			}
+		},
+		{
+			"path" : "pages/item08/item07",
+			"style" : 
+			{
+				"navigationBarTitleText" : "onPageScroll函数"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

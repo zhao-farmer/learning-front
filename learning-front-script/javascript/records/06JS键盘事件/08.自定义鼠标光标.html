@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片替换光标功能</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div></div>
+    <script>
+        window.onload = function() {
+            document.addEventListener("mouseover", function(e) {
+                // [cursor]：该属性规定要显示的光标类型(形状)
+                // 该属性规定鼠标指针放在元素边界范围内时所有的光标形状
+                e.target.style["cursor"] = "url(./images/鼠标光标.png),auto";
+            })
+        }
+    </script>
+</body>
+</html>

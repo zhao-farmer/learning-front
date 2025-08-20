@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .wrapper {
+      display: grid;
+      grid-template-columns: 200px 200px 200px;
+      grid-template-rows: 100px 100px 100px;
+      grid-template-areas:
+        "b b a"
+        "b b c"
+        "b b c";
+    }
+    .table-cell {
+      border: black 1px solid;
+      border-radius: 5px;
+      background-color: lightblue; 
+      text-align: center;
+    }
+  </style>
+  <body>
+    <div class="wrapper">
+      <div class="table-cell" style="grid-area: a">One</div>
+      <div class="table-cell" style="grid-area: b">Two</div>
+      <div class="table-cell" style="grid-area: c">Three</div>
+    </div>
+  </body>
+</html>

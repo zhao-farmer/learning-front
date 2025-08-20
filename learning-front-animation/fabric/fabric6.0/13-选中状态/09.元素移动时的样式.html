@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        // 圆形
+        const circle = new fabric.Circle({
+            radius: 30,
+            fill: "#f55",
+            top: 70,
+            left: 70,
+        });
+
+        circle.hasBorders = circle.hasControls = false;
+
+        canvas.add(circle);
+
+        function animate(e, dir) {
+            if (e.target) {
+                fabric.util.animate({
+                    startValue: e.target.get("angle"),
+                    endValue: e.target.get("angle") + (dir ? 10 : -10),
+                    duration: 100,
+                });
+                fabric.util.animate({
+                    startValue: e.target.get("scaleX"),
+                    endValue: e.target.get("scaleX") + (dir ? 0.2 : -0.2),
+                    duration: 100,
+                    onChange: function (value) {
+                        e.target.scale(value);
+                        canvas.renderAll();
+                    },
+                    onComplete: function () {
+                        e.target.setCoords();
+                    },
+                });
+            }
+        }
+        canvas.on("mouse:down", function (e) {
+            animate(e, 1);
+        });
+        canvas.on("mouse:up", function (e) {
+            animate(e, 0);
+        });
+    </script>
+</body>
+</html>

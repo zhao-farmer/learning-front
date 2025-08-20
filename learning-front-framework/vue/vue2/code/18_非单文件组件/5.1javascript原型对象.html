@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型对象</title>
+ 
+</head>
+<body>
+    <script type="text/javascript">
+        Vue.config.productionTip = false 
+        
+        // 定义一个构造函数
+        function Demo(){
+            this.a = 1;
+            this.b = 2;
+        }
+        // 创建一个Demo的实例对象
+        const d = new Demo();
+
+        console.log(Demo.prototype);    // 显示原型属性
+        
+        console.log(d.__proto__);        // 隐式原型属性
+
+        if(Demo.prototype === d.__proto__);
+
+
+        // 程序员通过显示原型属性操作原型对象，追加一个x属性，值为99
+        Demo.prototype.x = 99;
+
+        console.log('@',d.__proto__.x);
+        
+        console.log('#',d.x);
+
+        console.log(d);
+
+    </script>
+</body>
+</html>

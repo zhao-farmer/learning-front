@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 设置sessionStorage和localStorage
+        sessionStorage.setItem('sessionKey', 'sessionValue');
+        localStorage.setItem('localKey', 'localValue');
+
+        // 获取sessionStorage和localStorage
+        const sessionData = sessionStorage.getItem('sessionKey');
+        const localData = localStorage.getItem('localKey');
+
+        // 打印数据
+        console.log(sessionData); // 输出: sessionValue
+        console.log(localData);  // 输出: localValue
+
+        // 清除sessionStorage
+        sessionStorage.removeItem('sessionKey');
+
+        // 清除localStorage
+        localStorage.removeItem('localKey');
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+          /*
+            * createRoundedRect()用于绘制圆角矩形
+            * width、height：分别表示长和宽
+            * r：表示圆角半径
+            * offsetX、offsetY：分别表示左上角顶点坐标
+         */
+         function createRoundedRect(ctx, width, height, r, offsetX, offsetY) {
+            ctx.beginPath();
+            ctx.moveTo(offsetX + r, offsetY);
+            //ctx.lineTo(offsetX + width - r, offsetY);
+            ctx.arcTo(offsetX + width, offsetY, offsetY + width, offsetY + r, r);
+            //ctx.lineTo(offsetX + width, offsetY + height - r);
+            ctx.arcTo(offsetX + width, offsetY + height, offsetX + width - r, offsetY + height, r);
+            //ctx.lineTo(offsetX + r, offsetY + height);
+            ctx.arcTo(offsetX, offsetY + height, offsetX, offsetY + height - r, r);
+            //ctx.lineTo(offsetX, offsetY + r);
+            ctx.arcTo(offsetX, offsetY, offsetX + r, offsetY, r);
+            //ctx.closePath();
+        }
+
+        createRoundedRect(ctx, 100, 100, 20, 20, 20);
+        ctx.fillStyle = "HotPink";
+        ctx.fill();
+
+    </script>
+</body>
+</html>

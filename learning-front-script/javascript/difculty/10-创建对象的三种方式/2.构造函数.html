@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 未使用构造函数
+        const Peppa = {
+            name:'佩奇',
+            age:6,
+            gender:'女'
+        }
+        const George = {
+            name:'乔治',
+            age:3,
+            gender:'男'
+        }
+        const Num = {
+            name:'猪妈妈',
+            age:30,
+            gender:'女'
+        }
+        const Dad = {
+            name:'猪爸爸',
+            age:32,
+            gender:'男'
+        }
+
+        // 使用构造函数
+        function Pig(name,age,gender){
+            this.name = name
+            this.age = age
+            this.gender = gender
+        }
+
+        const Peppa1 = new Pig('佩奇',6,'女')
+        const George1 = new Pig('乔治',3,'男')
+        const Num1 = new Pig('猪妈妈',30,'女')
+        const Dad1 = new Pig('猪爸爸',32,'男')
+
+    </script>
+</body>
+</html>

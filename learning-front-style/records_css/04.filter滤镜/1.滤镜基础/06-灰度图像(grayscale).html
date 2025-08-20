@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+            div{
+               display: flex;
+               justify-content: space-around;
+               width: 1000px;
+               margin: 100px auto;
+            }
+            img{
+               width: 200px;
+            }
+            img:nth-child(1) {
+                filter: unset;
+            }
+            img:nth-child(2) {
+                filter: grayscale(30%);
+            }
+            img:nth-child(3) {
+                filter: grayscale(60%);
+            }
+            img:nth-child(4) {
+                filter: grayscale(100%);
+            }
+    </style>
+</head>
+<body>
+    <div>
+          <img src="./images/1.jpeg" alt="">
+          <img src="./images/1.jpeg" alt="">
+          <img src="./images/1.jpeg" alt="">
+          <img src="./images/1.jpeg" alt="">
+    </div>
+</body>
+</html>

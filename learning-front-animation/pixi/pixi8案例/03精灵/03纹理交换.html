@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Texture, Sprite } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                background: "#1099bb",
+                width: 600,
+                height: 400,
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            // 加载纹理
+            const alien1texture = await Assets.load("../assets/images/flowerTop.png");
+            const alien2texture = await Assets.load("../assets/images/eggHead.png");
+
+            let isAlien1 = true;
+
+            // 使用第一个纹理创建一个新的外星精灵，并将其添加到舞台上
+            const character = new Sprite(alien1texture);
+
+            // 设置精灵的锚点
+            character.anchor.set(0.5);
+
+            // 移动精灵到屏幕的中央
+            character.x = app.screen.width / 2;
+            character.y = app.screen.height / 2;
+
+            app.stage.addChild(character);
+
+            // 使用这个精灵互动
+            character.eventMode = "static";
+            character.cursor = "pointer";
+
+            //点击后交换纹理  触发条件pointertap  按下后并松开触发条件
+            character.on("pointertap", () => {
+                isAlien1 = !isAlien1;
+                // 动态交换纹理
+                character.texture = isAlien1 ? alien1texture : alien2texture;
+            });
+
+            //监听，将目标旋转
+            app.ticker.add(() => {
+                character.rotation += 0.02;
+            });
+        })();
+    </script>
+</body>
+</html>

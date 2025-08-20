@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <input type="text" id="search" />
+    <script>
+        const { fromEvent,map } = rxjs;
+        const { debounceTime, distinctUntilChanged, switchMap } = rxjs.operators;
+
+        const input = document.getElementById("search");
+
+        fromEvent(input, "input")
+            .pipe(
+                debounceTime(300), // 防抖 300ms
+                map(event => event.target.value.trim()), // 提取输入值
+                distinctUntilChanged(), // 忽略重复值
+                switchMap(query => fetch(`/api/search?q=${query}`)) // 切换为请求
+            )
+            .subscribe(response => {
+                console.log("搜索结果:", response);
+            });
+    </script>
+</body>
+</html>

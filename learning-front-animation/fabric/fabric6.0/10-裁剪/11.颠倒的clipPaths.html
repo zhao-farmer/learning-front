@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        // top 与 left 都在图形外
+        const clipPath = new fabric.Circle({ radius: 100, top: -200, left: -220 })
+        const clipPath2 = new fabric.Circle({ radius: 100, top: 0, left: -20 })
+        const clipPath3 = new fabric.Circle({ radius: 100, top: 0, left: -220 })
+        const clipPath4 = new fabric.Circle({ radius: 100, top: -200, left: -20 })
+        const g = new fabric.Group([ clipPath, clipPath2, clipPath3, clipPath4 ])
+
+        g.inverted = true // 颠倒裁剪
+
+        const img = new Image();
+        img.src="./assest/001.jpg"
+
+        img.onload = () =>{
+            let fabricImage = new fabric.FabricImage(img,{
+                scaleX:0.4,       // x轴比例
+                scaleY:0.4,       // y轴比例
+            })
+
+            fabricImage.clipPath = g
+            fabricImage.scaleToWidth(300)
+            canvas.add(fabricImage)
+        }
+    </script>
+</body>
+</html>

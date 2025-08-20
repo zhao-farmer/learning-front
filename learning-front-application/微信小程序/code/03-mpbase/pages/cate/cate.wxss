@@ -1,0 +1,10 @@
+page{
+  padding: 20rpx;
+}
+
+.line{
+  height: 20rpx;
+  width: 90%;
+  background-color: aqua;
+  margin: 15rpx;
+}

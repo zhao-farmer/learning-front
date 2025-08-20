@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+        /*
+			* n：表示n角星
+			* centerX、centerY：表示n角星中心坐标
+			* rMax：表示n角星外部圆的半径
+			* rMin：表示n角星内部圆的半径
+        */
+        function createPolygonalStar(ctx, n, centerX, centerY, rMax, rMin) {
+            ctx.beginPath();
+            for (var i = 0; i < n; i++) {
+                var xMax = rMax*Math.cos(2*Math.PI*i/n);
+                var yMax = rMax*Math.sin(2*Math.PI*i/n);
+                ctx.lineTo(centerX+xMax, centerY+yMax);
+                
+                var xMin = rMin*Math.cos(2*Math.PI*(i+0.5)/n);
+                var yMin = rMin*Math.sin(2*Math.PI*(i+0.5)/n);
+                ctx.lineTo(centerX+xMin, centerY+yMin);
+            }
+            ctx.closePath();
+        }
+
+        // 绘制箭头
+        var n = 6;
+        var centerX = c1.width/2;
+        var centerY = c1.height/2;
+        // 最大半径与最小半径 控制星星大的形状
+        var rMax = 100;
+        var rMin = 25;
+        createPolygonalStar(ctx, n, centerX, centerY, rMax, rMin)
+        ctx.closePath();
+        ctx.stroke();
+    
+    </script>
+</body>
+</html>

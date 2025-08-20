@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Point, MeshRope, Graphics } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                width:800,
+                height:400, 
+            });
+
+            // 应用程序添加到网页上
+            document.body.appendChild(app.canvas);
+
+            // 加载蛇纹理
+            const texture = await Assets.load("../assets/images/snake.png");
+
+            let count = 0;
+
+            // 使用点构建绳子
+            // 设置绳子点的宽度
+            const ropeLength = 35;
+
+            // 绳子集合
+            const points = [];
+
+            // 循环25次
+            for (let i = 0; i < 25; i++) {
+                points.push(new Point(i * ropeLength, 0));
+            }
+
+            // 创建蛇网绳
+            const strip = new MeshRope({ texture, points });
+
+            // 设置蛇的位置  开始位置的点并没有点连接，且尾巴不为原点有问题
+            strip.x = -40;
+            strip.y = 200;
+
+            // 网绳添加到舞台上
+            app.stage.addChild(strip);
+
+            // 创建新的图形
+            const g = new Graphics();
+
+            //图形的位置等于蛇网绳的位置
+            g.x = strip.x;
+            g.y = strip.y;
+
+            //添加到舞台上
+            app.stage.addChild(g);
+
+            // 开启动画
+            app.ticker.add(() => {
+                count += 0.1;
+
+                // 使蛇动起来
+                for (let i = 0; i < points.length; i++) {
+                    points[i].y = Math.sin(i * 0.5 + count) * 30;
+                    points[i].x = i * ropeLength + Math.cos(i * 0.3 + count) * 20;
+                }
+                //每次蛇动起来的时候 粘连再图片上的点也会随之变化
+                renderPoints();
+            });
+
+            function renderPoints() {
+                // 清理
+                g.clear();
+                //移动到第一个点
+                g.moveTo(points[0].x, points[0].y);
+
+                for (let i = 1; i < points.length; i++) {
+                    //连接到点
+                    g.lineTo(points[i].x, points[i].y);
+                    // 线条的宽度
+                    g.stroke({ width: 2, color: 0xffc2c2 });
+                }
+
+                // 自此循环
+                for (let i = 1; i < points.length; i++) {
+                    //每个点上画一个圆
+                    g.drawCircle(points[i].x, points[i].y, 10);
+                    //填充颜色
+                    g.fill({ color: 0xff0022 });
+                    //边的颜色
+                    g.stroke({ width: 2, color: 0xffc2c2 });
+                }
+            }
+        })();
+    </script>
+</body>
+</html>

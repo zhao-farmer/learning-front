@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+
+    <script>
+        // 1. ECharts 最基本的代码结构
+        // 2. 准备数据，设置给series下的data
+        // 3. 将type的值设置为gauge
+
+        var mCharts = echarts.init(document.querySelector("div"));
+        var option = {
+            series: [
+                {
+                    type: "gauge",
+                    data: [
+                        // 每一个对象就代表一个指针
+                        {
+                            value: 97,
+                            itemStyle:{     // 控制指针的样式
+                                color:"pink"    // 指针的颜色
+                            }
+                        },
+                        {
+                            value: 85,
+                            itemStyle:{
+                                color:"green"
+                            }
+                        }
+                    ],
+                    min:50  // min max 控制仪表盘的范围
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="like">like</button>
+    <script>
+        let wmap = new WeakMap()
+        let like = new WeakRef(document.getElementById("like"))
+        wmap.set(like.deref(),{click:0})
+
+        like.deref().onclick = function(){
+            let times = wmap.get(like.deref())
+            times.click++
+            console.log(wmap);
+            
+        }
+
+
+        setTimeout(() => {
+            document.body.removeChild(like.deref())
+            console.log(like);
+            
+        }, 2000);
+    </script>
+</body>
+</html>

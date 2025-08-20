@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        console.log(box);
+        
+
+        // 没有ES6时的写法
+        let obj = {}
+
+
+
+        // 这样写完之后 每次操作data DOM都会改变
+        Object.defineProperty(obj,"data",{
+            get(){
+                console.log("get");
+                return box.innerHTML
+            },
+            set(value){
+                console.log("set",value);
+                box.innerHTML = value
+            }
+        })
+
+
+        // 原本使用会造成的问题
+        let arr = [1,2,3]
+        // 这样的数组不能进行拦截，只能进行重写push pop....
+
+    </script>
+</body>
+</html>

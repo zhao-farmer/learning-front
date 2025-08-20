@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Button with Shadow DOM</title>
+</head>
+<body>
+    <my-button></my-button>
+
+    <script>
+        class MyButton extends HTMLElement {
+            constructor() {
+                super();
+                // 创建 shadow root
+                const shadow = this.attachShadow({ mode: 'open' });
+                
+                // 创建按钮元素
+                const button = document.createElement('button');
+                button.textContent = 'Click Me';
+
+                // 添加样式
+                const style = document.createElement('style');
+                style.textContent = `
+                    button {
+                        background-color: #008CBA;
+                        color: white;
+                        padding: 15px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                    }
+                `;
+
+                // 将样式和按钮添加到 shadow DOM 中
+                shadow.appendChild(style);
+                shadow.appendChild(button);
+            }
+        }
+
+        // 定义新的元素
+        customElements.define('my-button', MyButton);
+    </script>
+</body>
+</html>

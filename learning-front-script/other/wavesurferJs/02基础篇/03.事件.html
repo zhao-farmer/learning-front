@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <label> 聚焦: <input type="range" min="10" max="1000" value="100" /> </label>
+        <button>播放/暂停</button>
+        <p>打开控制台查看时间日志</p>
+
+        <!-- 导入文件 -->
+        <script src="../js/wavesurfer.min.js"></script>
+        <script>
+
+            const wavesurfer = WaveSurfer.create({
+                container: document.body,
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+            });
+
+            /** 在音频加载过程中，load事件在音频开始加载时触发 */
+            wavesurfer.on("load", url => {
+                console.log("Load", url);
+            });
+
+            /** loading事件则会在加载过程中持续触发，显示加载的百分比。这使用户能够跟踪音频文件的加载进度 */
+            wavesurfer.on("loading", percent => {
+                console.log("Loading", percent + "%");
+                //Loading 31% Loading 70% Loading 100%
+            });
+
+            /** decode事件在音频解码完成后触发，显示解码后的持续时间。 */
+            wavesurfer.on("decode", duration => {
+                console.log("Decode", duration + "s");
+                //Decode 26.386688s
+            });
+
+            /** ready事件表示音频已经解码并且准备好播放了，同样显示其时长。 */
+            wavesurfer.on("ready", duration => {
+                console.log("Ready", duration + "s");
+                //Ready 26.386688s
+            });
+
+            /** 绘制可见波形时 */
+            wavesurfer.on("redrawcomplete", () => {
+                console.log("Redraw began");
+            });
+
+            /** 当波形的所有音频通道块都绘制完毕时 */
+            wavesurfer.on("redrawcomplete", () => {
+                console.log("Redraw complete");
+            });
+
+            /** 当音频开始播放时 */
+            wavesurfer.on("play", () => {
+                console.log("Play");
+            });
+
+            /** 当音频暂停时 */
+            wavesurfer.on("pause", () => {
+                console.log("Pause");
+            });
+
+            /** 当音频播放结束时 */
+            wavesurfer.on("finish", () => {
+                console.log("Finish");
+            });
+
+            /** timeupdate事件在音频播放过程中持续触发，显示当前播放时间，
+             * 这对于显示播放进度条的当前位置非常有用。 */
+            wavesurfer.on("timeupdate", currentTime => {
+                console.log("Time", currentTime + "s");
+            });
+
+            /** 当用户停止拖动进度条，`seeking`事件会显示用户跳转到的时间点。
+             * 这个事件与用户寻求不同的播放位置相关。*/
+            wavesurfer.on("seeking", currentTime => {
+                console.log("Seeking", currentTime + "s");
+            });
+
+            /** 用户与波形图的交互会触发`interaction`事件，这个事件传递了用户交互后的新时间点。 */
+            wavesurfer.on("interaction", newTime => {
+                console.log("Interaction", newTime + "s");
+            });
+
+            /** 当用户点击波形图时触发，提供了用户与音频可视化直接交互的反馈。 */
+            wavesurfer.on("click", relativeX => {
+                console.log("Click", relativeX);
+            });
+
+            /** 当用户拖动波形图时，提供了用户与音频可视化直接交互的反馈。 */
+            wavesurfer.on("drag", relativeX => {
+                console.log("Drag", relativeX);
+            });
+
+            /** `scroll`事件在用户滚动（平移）波形图时触发，显示可视区域的开始和结束时间。 */
+            wavesurfer.on("scroll", (visibleStartTime, visibleEndTime) => {
+                console.log("Scroll", visibleStartTime + "s", visibleEndTime + "s");
+            });
+
+            /** `zoom`事件在缩放级别改变时触发，显示当前的缩放级别（以像素/秒为单位）。 */
+            wavesurfer.on("zoom", minPxPerSec => {
+                console.log("Zoom", minPxPerSec + "px/s");
+            });
+
+            /** `destroy`事件在波形图被销毁之前触发，允许开发者执行任何清理操作。*/
+            wavesurfer.on("destroy", () => {
+                console.log("Destroy");
+            });
+
+            // 开始加载音频文件
+            wavesurfer.load("../assest/audio.wav");
+
+            // 通过`input`类型的范围滑块实现了对音频缩放的控制。
+            // 在`once('decode')`回调函数中，它等待音频解码完成，然后获取滑块元素。
+            // 用户移动滑块时，`input`事件触发，更新`WaveSurfer`实例的缩放级别，从而改变波形的显示分辨率。
+            // 此外，页面上的一个按钮被添加了点击事件监听器，用于播放和暂停音频。
+
+            wavesurfer.once("decode", () => {
+                const slider = document.querySelector('input[type="range"]');
+
+                slider.addEventListener("input", e => {
+                    const minPxPerSec = e.target.valueAsNumber;
+                    wavesurfer.zoom(minPxPerSec);
+                });
+
+                document.querySelector("button").addEventListener("click", () => {
+                    wavesurfer.playPause();
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+// 数字，字符串相加
+$plus1: a + b; //ab
+$plus2: "a" + "b"; //"ab"
+$plus3: 'a' + 'b'; //"ab"
+$plus4: 'a' + b; //"ab"
+$plus5: a + 'b'; //ab
+$plus6: 'a' + 1; //"a1"
+$plus7: "1" + a; //"1a"
+
+.plus{
+   content: $plus1 $plus2 $plus3 $plus4 $plus5 $plus6  $plus7;
+}
+// 数字，字符串相减
+$minus1: a - b; //a-b
+$minus2: "a" - "b"; //"a"-"b"
+$minus3: 'a' - 'b'; //"a"-"b"
+$minus4: 'a' - b; //"a"-b
+$minus5: a - 'b'; //a-"b"
+$minus6: 'a' - 1; //"a"-1
+$minus7: "1" - a; //"1"-a
+$minus8: 1 - "a"; //1-"a"
+
+.plus{
+   content: $minus1 $minus2 $minus3 $minus4 $minus5 $minus6  $minus7;
+}
+
+// 数字无法与纯字符串相乘
+
+// 数字无法与纯字符串相除
+
+// 数字无法与纯字符串取模

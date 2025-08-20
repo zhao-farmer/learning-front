@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function ajax(url){
+            return new Promise((resolve,reject)=>{
+                let xhr = new XMLHttpRequest()
+                xhr.open("get",url,true)
+                xhr.send()
+                xhr.onreadystatechange = function(){
+                    // xhr.readyState等于4 是执行完成
+                    if(xhr.readyState === 4){
+                        if(xhr.status>=200&&xhr.status<300){
+                            resolve(JSON.parse(xhr.responseText) )
+                        }else{
+                            reject(xhr.responseText)
+                        }
+                    }
+                }
+            })
+        }
+
+        // allSettled 每个人物都会执行，出现问题并不会像all一样直接抛出异常
+        // 状态是fulfilled是执行成功的
+        Promise.allSettled([ajax("./json/1.json"),ajax("./json/2.json"),ajax("./json/33.json")]).then(res=>{
+            
+            let res1 = res.filter(item=>item.status === "fulfilled");
+            console.log(res1);
+            
+            console.log(res1.flatMap(item=>item.value.data));
+            
+        })
+    </script>
+</body>
+</html>

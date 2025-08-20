@@ -1,0 +1,10 @@
+button{
+  margin: 34rpx;
+}
+
+view{
+  display: flex;
+  justify-content: center;
+  margin: 20rpx;
+  background-color: lightcoral;
+}

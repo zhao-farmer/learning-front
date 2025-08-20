@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Point, Sprite, Texture } from "../js/pixi.mjs";
+
+        // 基于下面这篇文章
+        // https://spicyyoghurt.com/tutorials/html5-javascript-game-development/collision-detection-physics
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                background: "#111",
+                height: 600,
+                width: 800,
+            });
+
+            // 应用程序画布加载到页面上
+            document.body.appendChild(app.canvas);
+
+            // 对象交互的反应
+
+            // 红色方块的移动速度
+            const movementSpeed = 0.05;
+
+            // 两个物体之间的冲击力
+            const impulsePower = 5;
+
+            //命中测试
+            //两个不同方格之间的基本AABB检查
+            //object1 绿色方块 object2 红色方块
+            function testForAABB(object1, object2) {
+                const bounds1 = object1.getBounds();
+                const bounds2 = object2.getBounds();
+
+                // 四个条件都满足才是出现碰撞
+                return (
+                    bounds1.x < bounds2.x + bounds2.width &&
+                    bounds1.x + bounds1.width > bounds2.x &&
+                    bounds1.y < bounds2.y + bounds2.height &&
+                    bounds1.y + bounds1.height > bounds2.y
+                );
+            }
+
+            //计算碰撞的结果，使我们能够给出一个脉冲将物体铲开
+            // object1 绿色方块 object2 红色方块
+            function collisionResponse(object1, object2) {
+                // 都不存在 直接返回0点位置
+                if (!object1 || !object2) {
+                    return new Point(0);
+                }
+                // 碰撞位置
+                const vCollision = new Point(object2.x - object1.x, object2.y - object1.y);
+                // 斜线距离
+                const distance = Math.sqrt((object2.x - object1.x) * (object2.x - object1.x) + (object2.y - object1.y) * (object2.y - object1.y));
+                // 碰撞规范 直角边/斜边
+                const vCollisionNorm = new Point(vCollision.x / distance, vCollision.y / distance);
+                // 相对速度
+                const vRelativeVelocity = new Point(object1.acceleration.x - object2.acceleration.x, object1.acceleration.y - object2.acceleration.y);
+                // 速度
+                const speed = vRelativeVelocity.x * vCollisionNorm.x + vRelativeVelocity.y * vCollisionNorm.y;
+                // 推动
+                const impulse = (impulsePower * speed) / (object1.mass + object2.mass);
+
+                return new Point(impulse * vCollisionNorm.x, impulse * vCollisionNorm.y);
+            }
+
+            //计算两个给定点之间的距离
+            // p1当前鼠标的x轴与y值的值，p2红色方块中心点的位置
+            function distanceBetweenTwoPoints(p1, p2) {
+                const a = p1.x - p2.x;
+                const b = p1.y - p2.y;
+                //  Math.hypot函数返回所有参数的平方和的平方根，
+                return Math.hypot(a, b);
+            }
+
+            // 我们要移动的绿色方块
+            const greenSquare = new Sprite(Texture.WHITE);
+
+            // 设置精灵所在的位置
+            greenSquare.position.set((app.screen.width - 100) / 2, (app.screen.height - 100) / 2);
+            greenSquare.width = 100;
+            greenSquare.height = 100;
+            // 给精灵涂上颜色
+            greenSquare.tint = 0x00ff00;
+
+            // 非精灵自带的值 加速
+            greenSquare.acceleration = new Point(0);
+            // 质量
+            greenSquare.mass = 3;
+
+            // 你移动的方块
+            const redSquare = new Sprite(Texture.WHITE);
+
+            redSquare.position.set(0, 0);
+            redSquare.width = 100;
+            redSquare.height = 100;
+            redSquare.tint = 0xff0000;
+            redSquare.acceleration = new Point(0);
+            redSquare.mass = 1;
+
+            const mouseCoords = { x: 0, y: 0 };
+
+            app.stage.eventMode = "static";
+            //设置可以点击的大小
+            app.stage.hitArea = app.screen;
+            //一直检测鼠标位置 并赋值
+            app.stage.on("mousemove", event => {
+                mouseCoords.x = event.global.x;
+                mouseCoords.y = event.global.y;
+            });
+
+            // 监听动画更新
+            app.ticker.add(time => {
+                const delta = time.deltaTime;
+
+                // 对两个方块应用减速，每次循环将加速度减少0.01%
+                // 这个点会越来越低
+                redSquare.acceleration.set(redSquare.acceleration.x * 0.99, redSquare.acceleration.y * 0.99);
+                greenSquare.acceleration.set(greenSquare.acceleration.x * 0.99, greenSquare.acceleration.y * 0.99);
+
+                console.log(redSquare.acceleration, greenSquare.acceleration);
+
+                // 检查绿色方块是否移出屏幕 如果是这样，则沿该方向反向加速
+                //如果x轴 超过两侧
+                if (greenSquare.x < 0 || greenSquare.x > app.screen.width - 100) {
+                    greenSquare.acceleration.x = -greenSquare.acceleration.x;
+                }
+                // 如果y轴超过两侧
+                if (greenSquare.y < 0 || greenSquare.y > app.screen.height - 100) {
+                    greenSquare.acceleration.y = -greenSquare.acceleration.y;
+                }
+
+                // 如果绿色方块跳出警戒线，它会弹回到中间
+                if (greenSquare.x < -30 || greenSquare.x > app.screen.width + 30 || greenSquare.y < -30 || greenSquare.y > app.screen.height + 30) {
+                    greenSquare.position.set((app.screen.width - 100) / 2, (app.screen.height - 100) / 2);
+                }
+
+                // 在屏幕内执行下列动作（如果鼠标不在屏幕上，则不再更新）
+                if (app.screen.width > mouseCoords.x || mouseCoords.x > 0 || app.screen.height > mouseCoords.y || mouseCoords.y > 0) {
+                    // 获取红色方块的中心点
+                    const redSquareCenterPosition = new Point(redSquare.x + redSquare.width * 0.5, redSquare.y + redSquare.height * 0.5);
+
+                    // 计算鼠标指针和红色方块
+                    const toMouseDirection = new Point(mouseCoords.x - redSquareCenterPosition.x, mouseCoords.y - redSquareCenterPosition.y);
+
+                    // 使用上述方法计算出方向的角度  atan2 返回值再 -PI与PI之间 代表旋转的角度在0度与360度之间
+                    const angleToMouse = Math.atan2(toMouseDirection.y, toMouseDirection.x);
+
+                    // 计算出方块应该行驶的速度，作为红色方块距离鼠标指针多远的函数
+                    // 算出方块中的斜线
+                    const distMouseRedSquare = distanceBetweenTwoPoints(mouseCoords, redSquareCenterPosition);
+                    // 获取新的速度
+                    const redSpeed = distMouseRedSquare * movementSpeed;
+
+                    // 计算红色方块的加速度
+                    redSquare.acceleration.set(Math.cos(angleToMouse) * redSpeed, Math.sin(angleToMouse) * redSpeed);
+                }
+
+                // 如果两个方块相撞
+                if (testForAABB(greenSquare, redSquare)) {
+                    //计算以下两种情况之间应发生的加速度变化
+                    //每个方块都是碰撞的结果
+                    const collisionPush = collisionResponse(greenSquare, redSquare);
+
+                    // 设置两个方块的加速度变化
+                    redSquare.acceleration.set(collisionPush.x * greenSquare.mass, collisionPush.y * greenSquare.mass);
+                    // 绿色获取相反的加速度
+                    greenSquare.acceleration.set(-(collisionPush.x * redSquare.mass), -(collisionPush.y * redSquare.mass));
+                }
+                // 加速度会一直消减的
+                //x位置 随着加速度一直变化
+                greenSquare.x += greenSquare.acceleration.x * delta;
+                greenSquare.y += greenSquare.acceleration.y * delta;
+                //红色方块也是一样
+                redSquare.x += redSquare.acceleration.x * delta;
+                redSquare.y += redSquare.acceleration.y * delta;
+            });
+
+            // 加载到舞台上
+            app.stage.addChild(redSquare, greenSquare);
+        })();
+    </script>
+</body>
+</html>

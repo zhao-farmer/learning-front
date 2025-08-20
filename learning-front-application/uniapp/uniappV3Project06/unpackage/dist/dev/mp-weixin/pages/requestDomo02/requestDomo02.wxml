@@ -1,0 +1,1 @@
+<view class="content data-v-cc937869"><view class="layout data-v-cc937869"><view wx:for="{{a}}" wx:for-item="item" wx:key="e" class="box data-v-cc937869"><view class="pic data-v-cc937869" bindtap="{{item.b}}"><image class="data-v-cc937869" lazy-load src="{{item.a}}" mode="widthFix"></image></view><view class="text data-v-cc937869">{{item.c}}*{{item.d}}</view></view></view></view>

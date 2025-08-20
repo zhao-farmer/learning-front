@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        //找到画布
+        var c1 = document.getElementById("c1");
+        //获取画笔
+        var ctx = c1.getContext('2d');
+        
+         /*
+            * createLeaf()用于绘制N叶草
+            * n：n片
+            * centerX、centerY：花朵中心位置的坐标
+            * rMin：控制花朵的大小
+            * rMax：控制花瓣长度
+         */
+         function createLeaf(ctx, n, centerX, centerY, rMin, rMax) {
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + rMin);
+            var degree = 2*Math.PI/n;
+            for (var i = 1; i < n + 1; i++) {
+                //计算控制点坐标
+                var cx1 = centerX + rMax * Math.sin((i - 1) * degree);
+                var cy1 = centerY + rMax * Math.cos((i - 1) * degree);
+                var cx2 = centerX + rMax * Math.sin(i * degree);
+                var cy2 = centerY + rMax * Math.cos(i * degree);
+                //计算结束点的坐标
+                var x = centerX + rMin * Math.sin(i * degree);
+                var y = centerY + rMin * Math.cos(i * degree);
+                ctx.bezierCurveTo(cx1, cy1, cx2, cy2, x, y);
+            }
+            ctx.closePath();
+        }
+
+
+        var n = 5;
+        var rMin = 20*0.4;
+        var rMax = 80*1.5;
+        createLeaf(ctx, n, c1.width/2, c1.height/2, rMin, rMax);
+        ctx.fillStyle = "#00FF99";//浅绿色
+        ctx.fill();
+
+     </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        /*  
+            构造函数
+                功能描述
+                    类似函数中传入的值，修改修改内部属性
+                定义
+                    1.在类中可以添加一个特殊的方法 constructor 该方法我们成为构造函数
+                    2. class 类名 { constructor(){}}
+                 
+                调用时间
+                    构造函数会在我们调用类创建对象时执行
+                this指向
+                    在构造函数中，this表示当前所创建的对象
+                    构造函数的this.name 指向的是类中定义的属性
+            不使用构造函数-属性使用
+                    使用默认的属性值
+                        在类中直接指定实例属性的值时，创建的所有对象的属性都是这个值
+                    修改属性 (实例化后进行赋值)
+                        对象名.属性名 = 属性值
+            使用构造函数-属性使用
+                    1.创建时就进行使用，
+                    2.可以在构造函数中，为实例属性进行赋值
+        */
+
+        class Person1 {
+            name = '孙悟空'
+            age = 18
+            gender = "男"
+
+            sayHello() {
+                console.log(this.name);
+            }
+        }
+
+        const p1 = new Person1()
+        p1.name = '美猴王'
+        const p2 = new Person1()
+        p2.age = 500
+        const p3 = new Person1()
+        p3.gender = '石猴'
+
+        console.log(p1);
+        console.log(p2);
+        console.log(p3);
+
+
+        class Person2 {
+            name
+            age
+            gender
+            constructor(name, age, gender) {
+                this.name = name
+                this.age = age
+                this.gender = gender
+            }
+        }
+        const p4 = new Person2('孙悟空', 18, '男')
+        const p5 = new Person2('猪八戒', 28, '男')
+        const p6 = new Person2('唐僧', 38, '女')
+
+        console.log(p4);
+        console.log(p5);
+        console.log(p6);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

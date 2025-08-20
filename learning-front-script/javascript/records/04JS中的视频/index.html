@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <video id="myVideo" width="320" height="240" controls>
+    <source src="00.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <button onclick="playVideo()">Play</button>
+    <button onclick="pauseVideo()">Pause</button>
+    <button onclick="loadVideo()">Reload</button>
+
+    <script>
+        // 获取video元素
+        var video = document.getElementById("myVideo");
+
+        // 播放视频
+        function playVideo() {
+        video.play();
+        }
+
+        // 暂停视频
+        function pauseVideo() {
+        video.pause();
+        }
+
+        // 加载元数据
+        function loadVideo() {
+        video.load();
+        }
+
+        // 监听视频事件
+        video.addEventListener("play", function () {
+        console.log("Video is playing...");
+        });
+
+        video.addEventListener("pause", function () {
+        console.log("Video is paused...");
+        });
+
+        video.addEventListener("loadedmetadata", function () {
+        console.log("Video duration: " + video.duration + " seconds");
+        });
+
+    </script>
+</body>
+</html>

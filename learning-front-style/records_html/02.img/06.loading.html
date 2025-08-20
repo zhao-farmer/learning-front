@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <title>HTML img loading 属性 lazy 与 eager 示例</title>
+
+    <style>
+        body {
+            height: 2000px; /* 设置一个较大的高度来模拟滚动页面 */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- 立即加载的图像 -->
+    <img src="./images/00.jpg"  loading="eager">
+
+    <!-- ... 页面内容 ... -->
+
+    <!-- 懒加载的图像 -->
+    <img src="./images/005.gif"  loading="lazy">
+
+</body>
+</html>

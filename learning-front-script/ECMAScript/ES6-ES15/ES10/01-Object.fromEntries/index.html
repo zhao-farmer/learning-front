@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 这种是entries()转换的数据
+        let arr = [["name","kerwin"],["age",100]]
+
+        // 数组结构转换为对象
+        console.log(Object.fromEntries(arr));
+        
+        // 用处1 map转换
+        let m = new Map()
+        m.set("name","tiechui")
+        m.set("age",100)
+
+        //map转为对象
+        console.log(Object.fromEntries(m));
+        
+        // 用处2 将url路径直接转换为对象
+        let str = "name=xiaoming&age=18"
+        let seatchParams = new URLSearchParams(str)
+
+        // console.log(seatchParams);
+        console.log(Object.fromEntries(seatchParams));
+
+
+        // 用处3 将对象的value[数组]转为数组大小
+        let obj = {
+            "A":["A1","A2","A3"],
+            "B":["B1","B1"],
+            "C":["C1"]
+        }
+
+        // 转换为数组
+       let myarr = Object.entries(obj);
+        
+        let mynewarr = myarr.map(([key,value])=>
+            [key,value.length]
+        )
+
+        //再次转换为对象
+        console.log(Object.fromEntries(mynewarr));
+        
+    </script>
+</body>
+</html>

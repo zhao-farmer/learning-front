@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 4.扩展运算符 ... ES2018
+        let obj = {
+            name:'kerwi'
+        }
+        let obj2 = {
+            age:100
+        }
+        // 如果出现相同属性对象 会覆盖前面的
+        let obj3 = {
+            age:200
+        }
+        console.log({...obj,...obj2,...obj3});
+        
+    </script>
+</body>
+</html>

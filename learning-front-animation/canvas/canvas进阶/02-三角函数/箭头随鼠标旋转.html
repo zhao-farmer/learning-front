@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            // 箭头类
+            class Arrow {
+                x = 0;
+                y = 0;
+                rotation = 0;
+                #color = "#FFFF00";
+                constructor(x, y, rotation) {
+                    this.x = x;
+                    this.y = y;
+                    this.rotation = rotation;
+                }
+                draw(ctx) {
+
+                    ctx.save();
+                    ctx.translate(this.x, this.y); //将坐标移到this.x 和 this.y
+                    ctx.rotate(this.rotation); //设置旋转角度
+                    ctx.lineWidth = 5; //设置线宽
+                    ctx.fillStyle = this.#color; //设置填充色
+                    ctx.beginPath(); //路径开始
+                    ctx.moveTo(-50, -25);
+                    ctx.lineTo(0, -25);
+                    ctx.lineTo(0, -50);
+                    ctx.lineTo(50, 0);
+                    ctx.lineTo(0, 50);
+                    ctx.lineTo(0, 25);
+                    ctx.lineTo(-50, 25);
+                    ctx.closePath(); //路径闭合
+                    ctx.stroke(); //描边
+                    ctx.fill(); //填充
+                    ctx.restore();
+                }
+            }
+
+            //  canvas对象 与 canvas上下文对象
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // canvas1
+            const arrow1 = new Arrow(300, 300, 0);
+            arrow1.draw(ctx);
+
+            // canvas2
+            const arrow2 = new Arrow(100, 100, 0);
+            arrow2.draw(ctx);
+
+
+            const getMouse = element => {
+                let mouse = { x: 0, y: 0 } // 存储鼠标位置信息
+                element.addEventListener('mousemove', e => {
+                    let x = e.pageX
+                    let y = e.pageY
+                    // 计算鼠标在canvas画布中的相对位置
+                    mouse.x = x - element.offsetLeft
+                    mouse.y = y - element.offsetTop
+                })
+                return mouse
+            }
+            
+            // 获取鼠标指针
+            const mouse = getMouse(canvas);
+
+
+            // ==================== 开始箭头旋转 =======================
+            // 立即执行函数
+            (function drawFrame () {
+                // 请求动画帧 第一个是函数  第二个是对象
+                window.requestAnimationFrame(drawFrame, canvas)
+
+                // 清除画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+                // 鼠标位置相对于 图形的原点
+                const dx1 = mouse.x - arrow1.x
+                const dy1 = mouse.y - arrow1.y
+                // 计算鼠标指针与箭头中心的夹角
+                arrow1.rotation = Math.atan2(dy1, dx1)
+                // 重新绘制
+                arrow1.draw(ctx)
+
+
+                // 鼠标位置相对于 图形的原点
+                const dx2 = mouse.x - arrow2.x
+                const dy2 = mouse.y - arrow2.y
+                // 计算鼠标指针与箭头中心的夹角
+                arrow2.rotation = Math.atan2(dy2, dx2)
+                // 重新绘制
+                arrow2.draw(ctx)
+
+            })()
+
+
+        </script>
+    </body>
+</html>

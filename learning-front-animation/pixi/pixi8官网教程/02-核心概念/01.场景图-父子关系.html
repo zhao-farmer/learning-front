@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../js/pixi8.js"></script>
+</head>
+<body>
+    <script type="module">
+        //创建应用程序 帮助鱼添加到目标页面中
+        const app = new PIXI.Application();
+        await app.init({ width: 640, height: 360 });
+        document.body.appendChild(app.canvas);
+
+        // 添加一个容器，使我们的精灵堆栈在页面上居中
+        const container = new PIXI.Container({
+            x: app.screen.width / 2,
+            y: app.screen.height / 2,
+        });
+
+        app.stage.addChild(container);
+
+        // 加载纹理
+        await PIXI.Assets.load("../assest/sample1.png");
+
+        // 创建3个精灵，每个精灵都是最后一个精灵的孩子
+        const sprites = [];
+        let parent = container;
+        for (let i = 0; i < 3; i++) {
+            let wrapper = new PIXI.Container();
+            let sprite = PIXI.Sprite.from("../assest/sample1.png");
+            //锚点设置
+            sprite.anchor.set(0.5);
+            wrapper.addChild(sprite);
+            parent.addChild(wrapper);
+            sprites.push(wrapper);
+            parent = wrapper;
+        }
+
+        // 设置所有精灵的属性为相同的值，动画随着时间的推移
+        let elapsed = 0.0;
+        app.ticker.add(delta => {
+            //delta 回调对象  delta.deltaTime一个会随着时间 变化的值 如从0 - 1 然后再 从1 - 0;
+            elapsed += delta.deltaTime / 60;
+            // 正弦是一个上下变化的值，根据delta.deltaTime的变化，
+            // elapsed一直变大 正弦会出现曲线变化，正1到负1之间不断循环
+            const amount = Math.sin(elapsed);
+            // 缩放 大小
+            const scale = 1.0 + 0.25 * amount;
+            // 透明度
+            const alpha = 0.75 + 0.25 * amount;
+            // 角度
+            const angle = 40 * amount;
+            // x 位置
+            const x = 75 * amount;
+            for (let i = 0; i < sprites.length; i++) {
+                const sprite = sprites[i];
+                sprite.scale.set(scale);
+                sprite.alpha = alpha;
+                sprite.angle = angle;
+                sprite.x = x;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let array = [1, 2, 3, 4, 5];
+
+        // 1.使用for循环：
+        for (let i = 0; i < array.length; i++) {
+            console.log(array[i]);
+        }
+
+        // 2.使用forEach方法：
+        array.forEach(function(value, index) {
+            console.log(value);
+        });
+
+        // 3.使用for...of循环（ES6新增）：
+        for (let value of array) {
+            console.log(value);
+        }
+
+        // 4.使用for...in循环（通常用于对象属性的遍历，不推荐用于数组）
+        for (let index in array) {
+            console.log(array[index]);
+        }
+        
+        // 5.使用map方法（通常用于返回一个新数组）：
+        array.map(function(value, index) {
+            console.log(value);
+            return value * 2; // 返回一个新数组
+        });
+
+    </script>
+</body>
+</html>

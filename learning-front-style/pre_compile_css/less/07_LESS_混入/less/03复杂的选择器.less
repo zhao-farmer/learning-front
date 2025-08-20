@@ -1,0 +1,22 @@
+.myhover() {
+    &:hover {
+        border: 1px solid red;
+    }
+}
+button {
+    .myhover();
+}
+
+
+
+#outer() {
+    .inner-red {
+        color: red;
+    }
+    .inner-blue{
+        color: blue;
+    }
+}
+.c {
+    #outer > .inner-red();
+}

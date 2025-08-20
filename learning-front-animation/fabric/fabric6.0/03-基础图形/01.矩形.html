@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="300" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1"); 
+
+        // 矩形
+        const rect1 = new fabric.Rect({
+            top: 100, // 距离容器顶部 100px
+            left: 100, // 距离容器左侧 100px
+            fill: "orange", // 填充 橙色
+            width: 100, // 宽度 100px
+            height: 100, // 高度 100px
+        });
+
+        // 将矩形添加到画布中
+        canvas.add(rect1);
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            .box1 {
+                width: 100px;
+                height: 100px;
+                padding: 20px;
+                margin: 30px;
+                border: 5px solid yellow;
+                box-sizing: border-box;
+                background-color: #ccc;
+            }
+
+            .box2 {
+                width: 100px;
+                height: 100px;
+                padding: 20px;
+                margin: 30px;
+                border: 5px solid yellow;
+                box-sizing: border-box;
+                background-color: #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box1">盒子1</div>
+        <div class="box2">盒子2</div>
+        <script>
+            const box1 = document.getElementsByClassName("box1")[0];
+            const box2 = document.getElementsByClassName("box2")[0];
+            console.info("盒子1的offsetHeight", box1.offsetHeight);
+            console.info("盒子2的clientHeight", box2.clientHeight);
+        </script>
+    </body>
+</html>

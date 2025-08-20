@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            class Cache {
+                // 私有属性
+                #obj = {};
+
+                // 使用公共的set与get方法调整私有属性
+                get(key) {
+                    return this.#obj[key];
+                }
+                set(key, value) {
+                    this.#obj[key] = value;
+                }
+
+                // 私有方法
+                #prstore() {
+                    console.log("私有方法");
+                }
+                // 公共方法调用
+                getPrstore() {
+                    console.log("调用私有方法");
+                    this.#prstore();
+                }
+            }
+
+            let store = new Cache();
+            store.set("name", "kerwin");
+            store.set("age", 100);
+
+            console.log(store);
+
+            store.getPrstore();
+        </script>
+    </body>
+</html>

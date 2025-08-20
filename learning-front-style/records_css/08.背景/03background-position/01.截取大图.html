@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+
+        .show{
+            width: 600px;
+            margin-left: 150px;
+        }
+        .box{
+            display: flex;
+        }
+        .container {
+            width: 200px;
+            height: 200px;
+            margin: 50px;
+            background-image: url('../images/001.png');
+            background-color: red;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        .container1 {
+            background-position: center top;
+        }
+        .container2 {
+            background-position: center bottom;
+        }
+        .container3 {
+            background-position: 50% 50%;
+        }
+        .container span{
+            position: absolute;
+            bottom: -30px;
+            left: 50px;
+            font-size: 18px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <img class="show" src="../images/001.png">
+    <div class="box">
+        <div class="container container1"><span>center top</span></div>
+        <div class="container container2"><span>center bottom</span></div>
+        <div class="container container3"><span>50% 50%</span></div>
+    </div>
+</body>
+</html>

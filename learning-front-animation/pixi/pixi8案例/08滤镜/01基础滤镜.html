@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite, BlurFilter } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 800,
+                height: 600,
+            });
+
+            // 添加应用程序到网页中
+            document.body.appendChild(app.canvas);
+
+            // 加载纹理
+            await Assets.load(["../assets/images/bg_depth_blur.jpg", "../assets/images/depth_blur_dudes.jpg", "../assets/images/depth_blur_moby.jpg"]);
+
+            const bg = Sprite.from("../assets/images/bg_depth_blur.jpg");
+
+            //将背景图放到舞台上 并将其宽与高设置为舞台的宽与高
+            bg.width = app.screen.width;
+            bg.height = app.screen.height;
+            app.stage.addChild(bg);
+
+            //小外星人们
+            const littleDudes = Sprite.from("../assets/images/depth_blur_dudes.jpg");
+
+            //设置位置
+            littleDudes.x = app.screen.width / 2 - 315;
+            littleDudes.y = 200;
+            app.stage.addChild(littleDudes);
+
+            //小外星人
+            const littleRobot = Sprite.from("../assets/images/depth_blur_moby.jpg");
+
+            //设置位置
+            littleRobot.x = app.screen.width / 2 - 200;
+            littleRobot.y = 100;
+            app.stage.addChild(littleRobot);
+
+            // 创建模糊滤镜
+            const blurFilter1 = new BlurFilter();
+            const blurFilter2 = new BlurFilter();
+
+            // 应用滤镜到精灵们
+            littleDudes.filters = [blurFilter1];
+            littleRobot.filters = [blurFilter2];
+
+            let count = 0;
+
+            // 模糊经济赋予动画
+            app.ticker.add(() => {
+                count += 0.005;
+
+                const blurAmount = Math.cos(count);
+                const blurAmount2 = Math.sin(count);
+
+                //设置模糊度 由于cos与sin是相反的  所以一会儿模糊机器人 一会模糊外星人
+                blurFilter1.blur = 20 * blurAmount;
+                blurFilter2.blur = 20 * blurAmount2;
+            });
+        })();
+    </script>
+</body>
+</html>

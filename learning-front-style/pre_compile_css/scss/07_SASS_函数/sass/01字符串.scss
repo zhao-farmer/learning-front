@@ -1,0 +1,21 @@
+/* ====字符串====== */
+.p1{
+
+//添加引号
+content: quote(hello);  //"hello"
+//移除引号
+content:unquote("hello"); //hello
+//截取字符串
+content:str-index(abcd, a) // 1  
+str-index(abcd, ab) // 1  
+str-index(abcd, X);  // null   
+//插入字符串
+content:str-insert("Hello world!", " xiaoming", 6); //"Hello xiaoming world!"
+content:str-length("hello"); //5
+// 转小写
+content:to-lower-case("HELLO"); // "hello"
+//转大写
+content:to-upper-case("hello"); // "HELLO"
+//生成编号
+content:unique-id(); // 3a153b3ds
+}

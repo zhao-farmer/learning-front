@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="400" height="400" id="c1" style="border: 1px solid #ccc;"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from '../index.min.mjs'
+
+        // 画布主要参数
+        const options = {
+            height: 300,    // 高度
+            width:300,      // 宽度
+            backgroundColor: "#eee", // 画布背景色
+            backgroundVpt: true,  
+        }
+
+        // 获取动态画布
+        const canvas = new fabric.Canvas('c1',options) 
+        
+        // 修改背景颜色
+        canvas.backgroundColor = "red"
+        
+         // 创建一个长方形
+         const rect = new fabric.Rect({
+            top: 100, // 距离容器顶部 30px
+            left: 100, // 距离容器左侧 30px
+            width: 100, // 宽 100px
+            height: 60, // 高 60px
+        })
+        
+        canvas.add(rect)
+    </script>
+</body>
+</html>

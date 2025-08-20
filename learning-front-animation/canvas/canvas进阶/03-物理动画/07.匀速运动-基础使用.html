@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            // 位置
+            let position = {x:0, y: canvas.height/2}
+
+            // 创建图形
+            ctx.fillStyle = 'skyblue';
+            ctx.fillRect(position.x, position.y, 100, 100);
+
+            // 定义X轴的速度
+            const vx = 2;
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                 // 清空画布
+                 ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                position.x += vx;
+                ctx.fillRect(position.x, position.y, 100, 100);
+
+                if(position.x >= canvas.width){
+                    position.x = 0
+                }
+            })();
+        </script>
+    </body>
+</html>

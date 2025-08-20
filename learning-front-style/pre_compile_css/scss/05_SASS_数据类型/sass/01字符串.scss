@@ -1,0 +1,15 @@
+// scss 代码编辑
+$info01:'hello';
+$info02:"world";
+$info03: red;
+
+p{
+    &::before{
+        content: $info01;
+        color: $info03;
+    }
+    &::after{
+        content: $info02;
+        color: $info03;
+    }
+}

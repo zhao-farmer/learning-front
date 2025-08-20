@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            目标：异步任务按照顺序进行遍历
+        
+        */
+
+        function timer(t){
+            return new Promise(resolve=>{
+                setTimeout(() => {
+                    resolve("data-"+t)
+                }, t);
+            })
+        }
+
+        // 这种是并发任务
+        async function test() {
+            let arr = [timer(1000),timer(2000),timer(3000)]
+
+            /* 
+                每次都是按照for循环的顺序执行 
+                每次都是卡在await那里    
+                如果第一个参数大于后面的 打印出的时间都是一样的
+            */
+            for (const item of arr) {
+                console.log("start-",Date.now());      
+                console.log(await item);   
+                console.log("end-",Date.now());
+            }
+        }
+        test()
+ 
+    </script>
+</body>
+</html>

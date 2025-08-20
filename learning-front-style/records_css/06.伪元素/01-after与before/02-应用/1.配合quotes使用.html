@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+       h1{
+             quotes:"(" ")";  /*利用元素的quotes属性指定文字符号*/
+        }
+        h1::before{
+            content:open-quote;
+        }
+        h1::after{
+            content:close-quote;
+        }
+        h2{
+            quotes:"\"" "\"";  /*添加双引号要转义*/
+        }
+        h2::before{
+            content:open-quote;
+        }
+        h2::after{
+            content:close-quote;
+        }
+        h3::before{
+            content:open-quote;
+        }
+        h3::after{
+            content:close-quote;
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>给标题加括号</h1>
+    <h2>给标题加引号</h2>
+    <h3>不设置quotes</h3>
+</body>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+
+        // 圆形
+        const circle = new fabric.Circle({
+            radius: 30,
+            fill: "#f55",
+            top: 70,
+            left: 70,
+        });
+
+        circle.hasControls = false; // 禁止控制角
+
+        canvas.add(circle);
+
+        canvas.setActiveObject(circle); // 选中第一项
+    </script>
+</body>
+</html>

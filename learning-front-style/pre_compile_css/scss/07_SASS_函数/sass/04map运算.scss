@@ -1,0 +1,15 @@
+/* =====map运算======= */
+$font-sizes: ("small": 12px, "normal": 18px, "large": 24px) ;
+$font-sizes2: ("x-large": 30px, "xx-large": 36px);
+.p4{
+
+    content: map-get($font-sizes, "small") ;// 12px
+    content: map-has-key($font-sizes, "big") ;// false
+    content: map-keys($font-sizes) ;// "small", "normal, "large"
+    content: map-values($font-sizes) ;// 12px, 18px, 24px
+    content:  map-keys(map-merge($font-sizes, $font-sizes2)) ;
+    //"small": 12px, "normal": 18px, "large": 24px, "x-large": 30px, "xx-large": 36px
+    content: map-keys(map-remove($font-sizes, "small")); // ("normal": 18px, "large": 24px) 
+    content: map-keys(map-remove($font-sizes, "small", "large")); // ("normal": 18px)
+
+}

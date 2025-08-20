@@ -1,0 +1,21 @@
+// scss 代码编辑
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    .header {
+        height: 100px;
+        line-height: 2em;
+        .logo {
+            display: block;
+            float: left;
+            width: 100px;
+            height: 100px;
+        }
+    }
+    .footer {
+        height: 300px;
+        text-align: center;
+        color: #fff;
+        background-color: #000;
+    }
+}

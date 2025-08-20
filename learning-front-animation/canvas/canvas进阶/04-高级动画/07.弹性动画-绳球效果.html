@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+            // 定义鼠标事件
+            const getMouse = (element) => {
+                let mouse = { x: 0, y: 0 } // 存储鼠标位置信息
+                element.addEventListener('mousemove', e => {
+                    let x = e.pageX
+                    let y = e.pageY
+                    // 计算鼠标在canvas画布中的相对位置
+                    mouse.x = x - element.offsetLeft
+                    mouse.y = y - element.offsetTop
+                })
+                return mouse
+            }
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            // 初始化小球
+            const ball = new Ball(canvas.width / 2, canvas.height / 2,30);
+            const mouse = getMouse(canvas);
+            // 定义弹性系数 值越大弹得越快
+            const spring = 0.01;
+            // 定义速度
+            let vx = 0;
+            let vy = 0;
+            // 定义摩擦力
+            const friction = 0.95;
+            // 定义重力
+            const gravity = 1;
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                const ax = (mouse.x - ball.x) * spring // 计算加速度
+                const ay = (mouse.y - ball.y) * spring
+
+                vx += ax
+                vy += ay
+
+                vy += gravity
+
+                vx *= friction
+                vy *= friction
+
+                ball.x += vx
+                ball.y += vy
+                
+                ball.fill(ctx)
+
+                // 将指针与小球连线
+                ctx.beginPath()
+                ctx.moveTo(ball.x, ball.y)
+                ctx.lineTo(mouse.x, mouse.y)
+                ctx.stroke()
+                ctx.closePath()
+
+            })();
+        </script>
+    </body>
+</html>

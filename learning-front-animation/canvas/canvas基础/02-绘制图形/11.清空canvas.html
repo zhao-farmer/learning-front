@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <br />
+    <input id="btn1" type="button" value="画出图形" />
+    <input id="btn2" type="button" value="清空canvas" />
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+        
+
+        function darw(){
+            ctx.fillStyle = "HotPink";
+            ctx.fillRect(50, 50, 200, 250);
+
+            ctx.strokeStyle = "red";
+            ctx.strokeRect(80, 80, 300, 300);
+
+            ctx.fillStyle = "rgba(0, 0, 255, 0.3)";
+            ctx.fillRect(30, 30, 250, 200);
+        }
+        darw()
+
+        btn1.onclick = function () {
+            darw()
+        }
+     
+        btn2.onclick = function () {
+            ctx.clearRect(0, 0, c1.width, c1.height);
+        }
+    
+    </script>
+</body>
+</html>

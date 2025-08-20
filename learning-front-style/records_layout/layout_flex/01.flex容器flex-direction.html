@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Flex Direction Example</title>
+        <style>
+            .flex-container {
+                display: flex;
+                flex-wrap: wrap; /* 允许项目换行 */
+                width: 300px;
+                height: 200px;
+                border: 1px solid #000;
+                padding: 10px;
+                box-sizing: border-box;
+                position: relative;
+                padding-bottom: 20px;
+            }
+            .flex-container span{
+                position: absolute;
+                right: 10px;
+                bottom: 5px;
+                color: #059635;
+            }
+
+            .flex-item {
+                width: 50px;
+                height: 50px;
+                margin: 5px;
+                background-color: lightblue;
+                text-align: center;
+                line-height: 50px;
+                color: #333;
+            }
+
+            /* 使用不同的 flex-direction 值来改变项目的排列方向 */
+            .flex-container.row {
+                flex-direction: row;
+            }
+            .flex-container.row-reverse {
+                flex-direction: row-reverse;
+            }
+            .flex-container.column {
+                flex-direction: column;
+            }
+            .flex-container.column-reverse {
+                flex-direction: column-reverse;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- 使用 row 方向的 flex 容器 -->
+        <div class="flex-container row">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+            <span>flex-direction: row</span>
+        </div>
+
+        <!-- 使用 row-reverse 方向的 flex 容器 -->
+        <div class="flex-container row-reverse">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+            <span>flex-direction: row-reverse</span>
+        </div>
+
+        <!-- 使用 column 方向的 flex 容器 -->
+        <div class="flex-container column">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+            <span>flex-direction: column</span>
+        </div>
+
+        <!-- 使用 column-reverse 方向的 flex 容器 -->
+        <div class="flex-container column-reverse">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+            <span>flex-direction: column-reverse</span>
+        </div>
+    </body>
+</html>

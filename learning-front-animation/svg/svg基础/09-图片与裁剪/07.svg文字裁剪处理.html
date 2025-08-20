@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+      .css-clipped{
+        width: 800px;
+        height: 500px;
+        clip-path: url(#svgPath);
+      }
+    </style>
+</head>
+<body>
+    <img class="css-clipped" src="./images/004.png" alt="Cherry Blossoms.">
+
+    <svg height="0" width="0">
+        <defs>
+            <clipPath id="svgPath">
+                <text x="0" y="300" textLength="800px" lengthAdjust="spacing" font-family="Vollkorn" font-size="230px" font-weight="700" font-style="italic"> Blossom </text>
+            </clipPath>
+        </defs>
+    </svg>
+</body>
+</html>

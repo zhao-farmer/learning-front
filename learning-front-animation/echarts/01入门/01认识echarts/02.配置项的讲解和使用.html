@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        // 参数，dom，决定图表最终呈现的位置
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var option = {
+            title: {
+                text: "成绩",
+                link: "https://www.baidu.com",
+                textStyle: {
+                    color: "red",
+                },
+            },
+            xAxis: {
+                type: "category", //类目轴
+                data: ["小明", "小红", "小王"],
+            },
+            yAxis: {
+                type: "value", // 数值轴
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar", //柱状图 pie 扇形图 line 线形图
+                    data: [70, 92, 87],
+                },
+            ],
+        };
+
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

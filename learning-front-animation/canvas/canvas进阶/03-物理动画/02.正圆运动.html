@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="canvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            //  canvas对象 与 canvas上下文对象
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+
+            // 初始参数
+            let angle = 0; // 旋转角度（弧度）
+            const speed = 0.02; // 旋转速度（弧度/帧）
+            const radius = 100; // 物体到原点的距离
+            const center = { x: 200, y: 200 }; // 旋转中心
+            const rl = 50;  //矩形的边长
+
+            function draw() {
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 计算当前帧的坐标
+                let x = center.x + Math.cos(angle) * radius;
+                let y = center.y + Math.sin(angle) * radius;
+
+                // 绘制旋转物体（红色方块）
+                ctx.fillStyle = "red";
+                ctx.fillRect( x - rl/2,  y - rl/2, rl, rl);
+
+                // 绘制旋转轨迹（白色虚线圆）
+                ctx.strokeStyle = "#fff";
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.arc(center.x, center.y, radius, 0, Math.PI * 2);
+                ctx.stroke();
+
+                // 更新角度
+                angle += speed;
+
+                // 循环动画
+                requestAnimationFrame(draw);
+            }
+
+            // 启动动画
+            draw();
+        </script>
+    </body>
+</html>

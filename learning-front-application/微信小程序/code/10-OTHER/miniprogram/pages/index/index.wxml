@@ -1,0 +1,2 @@
+<!--pages/index/index.wxml-->
+<button type="warn" plain bindtap="handler">跳转到列表页面</button>

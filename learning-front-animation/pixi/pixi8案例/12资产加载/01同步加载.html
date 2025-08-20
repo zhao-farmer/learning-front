@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb",
+                width:200,
+                height:200,   
+            });
+
+            // 应用程序添加到网页上
+            document.body.appendChild(app.canvas);
+
+            // 立即开始加载并创建promise
+            const texturePromise = Assets.load("../assets/images/bunny.png");
+
+            // 当promise解析时，我们就有了纹理！
+            texturePromise.then(resolvedTexture => {
+                // 从解析的加载纹理创建新的Sprite
+                const bunny = Sprite.from(resolvedTexture);
+
+                // 设置锚点
+                bunny.anchor.set(0.5);
+
+                // 移动位置
+                bunny.x = app.screen.width / 2;
+                bunny.y = app.screen.height / 2;
+
+                app.stage.addChild(bunny);
+            });
+        })();
+    </script>
+</body>
+</html>

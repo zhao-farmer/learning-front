@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      body {
+        height: 100vh;
+        width: 100%;
+      }
+      .image-main {
+        height: 100%;
+        width: 100%;
+        padding: 2%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3%;
+      }
+      .box-parent {
+        height: 100%;
+        width: 100%;
+        background-image: url("./images/background-image.jpg");
+        background-size: cover;
+        background-color: #000000;
+        z-index: 1;
+      }
+      .box-child {
+        height: 90%;
+        width: 72%;
+        background-size: cover;
+        background-image: url("./images/foreground-image.png");
+        position: absolute;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .box-main {
+        position: relative;
+        width: 45vw;
+        height: calc(45vw * 9 / 16);
+      }
+      .box-main:nth-child(1) .box-child {
+        mix-blend-mode: none;
+      }
+      .box-main:nth-child(2) .box-child {
+        mix-blend-mode: multiply;
+      }
+      .box-main:nth-child(3) .box-child {
+        mix-blend-mode: screen;
+      }
+      .box-main:nth-child(4) .box-child {
+        mix-blend-mode: overlay;
+      }
+      .box-main:nth-child(5) .box-child {
+        mix-blend-mode: difference;
+      }
+      .box-main:nth-child(6) .box-child {
+        mix-blend-mode: hue;
+      }
+      .box-main:nth-child(7) .box-child {
+        mix-blend-mode: luminosity;
+      }
+      .box-main:nth-child(8) .box-child {
+        mix-blend-mode: color-dodge;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="image-main">
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+      <div class="box-main">
+        <div class="box-parent"></div>
+        <div class="box-child"></div>
+      </div>
+    </div>
+  </body>
+</html>

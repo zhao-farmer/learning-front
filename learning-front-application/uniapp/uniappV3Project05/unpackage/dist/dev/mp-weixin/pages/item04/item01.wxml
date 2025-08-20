@@ -1,0 +1,1 @@
+<view class="content data-v-cdb6a0f3"><button class="data-v-cdb6a0f3" bindtap="{{a}}">显示</button><button class="data-v-cdb6a0f3" bindtap="{{b}}">隐藏</button></view>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <div class="content"></div>
+    <script src="../js/pixi7.js"></script>
+    <script>
+        const app = new PIXI.Application({
+            width: 800,
+            height: 600,
+            background: 'white',
+            antialias: true,
+            //设置像素比例
+            resolution: window.devicePixelRatio || 1,
+        });
+
+
+        //将应用画布添加到DOM中
+        document.body.appendChild(app.view);
+
+        //创建容器
+        const container = new PIXI.Container();
+        app.stage.addChild(container);
+
+    
+        const baseTexture = PIXI.Texture.from("../assest/game.png");
+
+        //创建恐龙纹理
+        const pinoTexture = new PIXI.Texture(baseTexture, new PIXI.Rectangle(10, 0, 80, 50))
+        //创建恐龙精灵
+        const dino = new PIXI.Sprite(pinoTexture);
+        // 设置位置
+        console.log(app.screen.height);
+        
+
+        dino.position.set(10, app.screen.height - 85);
+        container.addChild(dino);
+
+        /* 设置跑步动画 */
+        //恐龙跑步动画所需的图片数组
+        const runTexture = [];
+        for (let i = 0; i < 2; i++) {
+            //两张图片加入进来
+            runTexture.push(
+                new PIXI.Texture(baseTexture, new PIXI.Rectangle(935 + (i * 45), 0, 45, 50))
+            )
+        }
+        //加载为动画精灵
+        const runAnimation = new PIXI.AnimatedSprite(runTexture);
+        //设置动画播放速度
+        runAnimation.animationSpeed = 0.1;
+        //设置可见性
+        runAnimation.visible = false;
+        //设置所在页面的位置
+        runAnimation.position.set(50, app.screen.height - 85);
+        //将其添加到容器中
+        container.addChild(runAnimation);
+
+        //恐龙蹲下动画所需的图片数组
+        // 需要的时候直接替换跑步动画的数组
+        const squatTexture = [];
+        for (let i = 0; i < 2; i++) {
+            squatTexture.push(
+                new PIXI.Texture(baseTexture, new PIXI.Rectangle(1110 + (i * 60), 20, 60, 30))
+            )
+        }
+
+        /* 蝙蝠飞翔动画 */
+        //加载所需的图片数组
+        const birdFlyTexture = [];
+        for (let i = 0; i < 2; i++) {
+            birdFlyTexture.push(new PIXI.Texture( baseTexture, new PIXI.Rectangle(135 + i * 45, 0, 45, 30) ));
+        }
+        //加载精灵动画
+        const flyAnimation = new PIXI.AnimatedSprite(birdFlyTexture);
+        //设置动画速度
+        flyAnimation.animationSpeed = 0.1;
+        //设置可见性
+        flyAnimation.visible = false;
+        //设置其随机位置出现
+        flyAnimation.position.set(app.screen.width + Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000, app.screen.height - 100);
+        //添加到容器中
+        container.addChild(flyAnimation);
+
+        //添加背景为例
+        const groundTexture = new PIXI.Texture(baseTexture, new PIXI.Rectangle(10, 50, 1200, 20) );
+        //使用平铺精灵
+        const ground = new PIXI.TilingSprite(groundTexture);
+        //设置平铺精灵的宽度
+        ground.width = app.screen.width;
+        //设置高度
+        ground.height = 20;
+        //设置位置
+        ground.position.set(0, app.screen.height - 50);
+        //添加到容器中
+        container.addChild(ground);
+
+        //创建仙人掌纹理
+        const cactusTexture = new PIXI.Texture(baseTexture, new PIXI.Rectangle(356, 0, 25, 55) );
+        const cactus = new PIXI.Sprite(cactusTexture);
+        cactus.position.set(app.screen.width / 2, app.screen.height - 85);
+        container.addChild(cactus);
+
+        // 设置计数的分数
+        let score = 0;
+        //设置文字
+        const text = new PIXI.Text("点击开始游戏\n空格是跳，↓是蹲。", {
+            fontSize: 30,
+            align: "center",
+        });
+        //设置锚点
+        text.anchor.set(0.5);
+        //设置位置
+        text.position.set(app.screen.width / 2, app.screen.height / 2);
+        //添加到容器中
+        container.addChild(text);
+        //开启交互事件权限
+        text.interactive = true;
+        // 点击后触发游戏
+        text.on("click", () => {
+            playGame();
+        });
+        // 设置游戏得分的文字描述
+        const tip = new PIXI.Text("当前得分为" + score, {
+            fontSize: 30,
+            align: "center",
+        });
+        //放在与开始游戏相同的位置
+        
+
+        tip.position.set(app.screen.width / 2, app.screen.height / 2);
+
+        tip.anchor.set(0.5);
+        tip.visible = false;
+        container.addChild(tip);
+
+        //下面是具体的状态设置
+        let isPlayGame = false;
+        let speed = 2;
+        let isJump = false;
+        let up = true;
+
+        //游戏开始
+        function playGame() {
+            //文字状态改变
+            text.visible = false;
+            tip.visible = true;
+            //游戏状态改变
+            isPlayGame = true;
+            //恐龙状态改变
+            dino.visible = false;
+            runAnimation.visible = true;
+            //跑步动画开始
+            runAnimation.play();
+        }
+        //游戏结束
+        function gameOver() {
+            isPlayGame = false;
+            tip.text = "游戏结束,得分为" + score + ",点击重新开始";
+
+            //开启交互功能 点击后开始重新加载
+            tip.interactive = true;
+            tip.on("click", () => {
+            location.reload();
+            });
+        }
+
+        //碰撞检测方法
+        function detectCollision(object1, object2) {
+            const bounds1 = object1.getBounds();
+            const bounds2 = object2.getBounds();
+
+            //碰撞检测是判断 如果两个点相交返回为真
+            // 只有这些条件全部满足 则出现碰撞
+            return (
+            bounds1.x < bounds2.x + bounds2.width / 2 + bounds1.width / 2 &&
+            bounds1.x + bounds1.width / 2 + bounds2.width / 2 > bounds2.x &&
+            bounds1.y < bounds2.y + bounds2.height / 2 + bounds1.height / 2 &&
+            bounds1.y + bounds1.height / 2 + bounds2.height / 2 > bounds2.y
+            );
+        }
+
+        //   let b = new Bump(PIXI);
+
+        //帧动画
+        app.ticker.add((delta) => {
+            //如果已开启游戏
+            if (isPlayGame) {
+            //背景在一直向后走 由于是平铺精灵的原因 会有相同的数据挨着上次的数据继续进行
+            ground.tilePosition.x -= 5;
+            //仙人掌的位置也在发生变化
+            cactus.x -= speed;
+            //判断仙人掌 如果位置低于0
+            //设定位置从末尾开始
+            //分数加一
+            if (cactus.x <= 0) {
+                cactus.x = app.screen.width;
+                score += 1;
+            }
+            //飞翔动画是开启时
+            if (flyAnimation.visible) {
+                //设置移动速度
+                flyAnimation.x -= speed;
+                //小于0时
+                //随机出现某个位置
+                // 分数加一
+                if (flyAnimation.x <= 0) {
+                flyAnimation.x = app.screen.width + Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000;
+                score += 1;
+                }
+            }
+            //设置需要显示的分数
+            tip.text = "当前得分为" + score;
+            //如果分数超过5 生成蝙蝠
+            // 如果分数超过10 移动速度是12
+            // 如果分数超过20 移动速度是15
+            if (score == 5) {
+                flyAnimation.visible = true;
+                flyAnimation.play();
+            } else if (score == 10) {
+                speed = 4;
+            } else if (score == 20) {
+                speed = 6;
+            }
+            //如果是跳的装填
+            if (isJump) {
+                //向上的状态
+                // 向下存在减去10 否则向加10
+                if (up) {
+                runAnimation.y -= 30;
+                } else {
+                runAnimation.y += 1;
+                }
+
+                //判断恐龙是否跳到最高处，然后向下
+                if (runAnimation.y <= ground.y - 150) {
+                up = false;
+                }
+
+                //判断恐龙是否回到原点，跳跃结束
+                if (runAnimation.y > ground.y - 40) {
+                isJump = false;
+                }
+            }
+
+            //判断恐龙和仙人掌和飞鸟时候碰撞到一起，游戏结束
+            if (detectCollision(runAnimation, cactus) || detectCollision(runAnimation, flyAnimation)) {
+                gameOver();
+            }
+            }
+        });
+
+        //设置动画的y轴数据
+        let y = runAnimation.y;
+        //监控键盘按下
+        window.addEventListener("keydown", (e) => {
+            //如果是空格
+            if (e.code == "Space") {
+            //阻止系统默认行为 就是按键不影响其他数据
+            e.preventDefault();
+            isJump = true;
+            up = true;
+            } else if (e.key == "ArrowDown") {
+            e.preventDefault();
+            //跑步状态改为低头状态
+            runAnimation.textures = squatTexture;
+            //y轴的位置变大
+            runAnimation.y = y + 20;
+            //动画继续运行
+            runAnimation.play();
+            }
+        });
+        //监控键盘松开
+        window.addEventListener("keyup", (e) => {
+            if (e.key == "ArrowDown") {
+            e.preventDefault();
+            // 低头的纹理变为跑步的纹理
+            runAnimation.textures = runTexture;
+            //涂鸦板v恶霸的y轴
+            runAnimation.y = y;
+            runAnimation.play();
+            }
+        });
+    </script>
+</body>
+</html>

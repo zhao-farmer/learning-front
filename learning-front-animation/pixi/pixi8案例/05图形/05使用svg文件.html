@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Graphics } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                antialias: true,
+                width: 800,
+                height: 600,
+            });
+
+            // 添加应用程序到网页中
+            document.body.appendChild(app.canvas);
+
+            const tigerSvg = await Assets.load({
+                src: "../assets/images/tiger.svg",
+                data: {
+                    parseAsGraphicsContext: true,
+                },
+            });
+
+            const graphics = new Graphics(tigerSvg);
+
+            //将其对齐，因为此svg未居中
+            const bounds = graphics.getLocalBounds();
+
+            // 设置其支点
+            graphics.pivot.set((bounds.x + bounds.width) / 2, (bounds.y + bounds.height) / 2);
+
+            //位置同样要设置 跟锚点不一样  支点必须求改位置
+            graphics.position.set(app.screen.width / 2, app.screen.height / 2);
+
+            //添加到舞台上
+            app.stage.addChild(graphics);
+
+            //开始旋转
+            app.ticker.add(time => {
+                graphics.rotation += 0.01;
+                graphics.scale.set(Math.sin(graphics.rotation));
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+        
+         /*
+         * n：表示n边形
+         * centerX、centerY：表示n边形中心坐标
+         * r：表示n边形的大小
+         */
+         function createPolygon(ctx, n, centerX, centerY, r) {
+            ctx.beginPath();
+            for (var i = 0; i < n; i++) {
+                var x = Math.cos(2*Math.PI*i/n);
+                var y = Math.sin(2*Math.PI*i/n);
+                ctx.lineTo(centerX+r*x, centerY+r*y);
+            }
+            ctx.closePath();
+        }
+
+
+        // 绘制箭头
+        var n = 7;
+        var centerX = 100;
+        var centerY = 100;
+        var r = 80;
+        createPolygon(ctx, n, centerX, centerY, r);//调用自定义的方法createPolygon()
+        ctx.fillStyle = "HotPink";
+        ctx.fill();
+
+    </script>
+</body>
+</html>

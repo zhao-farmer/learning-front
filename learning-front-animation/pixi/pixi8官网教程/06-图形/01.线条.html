@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/pixi8.js"></script>
+</head>
+<body>
+    <script type="module">
+        const app = new PIXI.Application();
+
+        await app.init({
+            width: 600,                 // 宽度
+            height: 400,                // 高度
+            backgroundColor: "#eee",  // 画布颜色
+        });
+
+        document.body.appendChild(app.canvas);
+
+        // 线段
+        const graphics = new PIXI.Graphics()
+            .moveTo(50, 50)
+            .lineTo(100, 100)
+            .stroke(0x00ff00)
+        graphics.setStrokeStyle({
+                width: 20,
+                color: 0xFF0000,
+                alpha: 0.8,
+                alignment: 0.5 // 线条居中（0内对齐，1外对齐）
+            });
+            
+
+
+        app.stage.addChild(graphics);
+    </script>
+</body>
+</html>

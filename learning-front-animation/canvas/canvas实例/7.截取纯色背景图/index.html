@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .main{
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="main">
+        <canvas width="800px" height="600px"></canvas>
+    </div>
+</body>
+</html>
+
+<script>
+    const canvas = document.querySelector("canvas"),
+    ctx = canvas.getContext("2d");
+  
+    window.addEventListener("load",() => {
+        //设置画布的宽度与高度
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        
+        ctx.fillStyle = "#fff"
+        ctx.fillRect(0,0,canvas.width,canvas.height)
+
+        const link = document.createElement('a');
+        link.download = `${Date.now()}` + '.jpg';
+        link.href = canvas.toDataURL();
+        link.click();
+    })
+</script>

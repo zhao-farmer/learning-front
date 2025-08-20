@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3]
+
+        let proxy = new Proxy(arr,{
+            get(target,key){
+                console.log("get",key);
+                // 反射原来的方法
+                return Reflect.get(...arguments)
+            },
+            set(target,key,value){
+                console.log("set",target,key,value);
+                
+                return Reflect.set(...arguments)
+            }
+        })
+
+        // 控制台proxy.push
+        // get push
+        // get length
+        // set (3) [1, 2, 3] 3 4
+        // set (4) [1, 2, 3, 4] length 4
+    </script>
+</body>
+</html>

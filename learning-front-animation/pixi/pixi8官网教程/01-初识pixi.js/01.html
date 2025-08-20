@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../js/pixi8.js"></script>
+  </head>
+  <body>
+    <script type="module">
+      // 创建应用程序助手并将其呈现目标添加到页面中
+      const app = new PIXI.Application();
+      await app.init({ width: 640, height: 360 });
+      document.body.appendChild(app.canvas);
+
+      // 创建精灵并将其添加到舞台
+      await PIXI.Assets.load("../assest/sample1.png");
+      let sprite = PIXI.Sprite.from("../assest/sample1.png");
+      app.stage.addChild(sprite);
+
+      //使用ticker回调以来回移动角色
+      let elapsed = 0.0;
+      app.ticker.add((ticker) => {
+        elapsed += ticker.deltaTime;
+        sprite.x = 100.0 + Math.cos(elapsed / 50.0) * 100.0;
+      });
+    </script>
+  </body>
+</html>

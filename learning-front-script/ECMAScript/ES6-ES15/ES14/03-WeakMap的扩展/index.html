@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const weakMap = new WeakMap();
+        const symbolKey = Symbol('key');
+        const obj = {};
+        weakMap.set(symbolKey, 'value');
+        console.log(weakMap.get(symbolKey)); // 'value'
+    </script>
+</body>
+</html>

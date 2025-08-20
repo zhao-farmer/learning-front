@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        let obj = { name: '孙悟空', age: 18, gender: '男' }
+        //传统方式
+        let name = obj.name;
+        let age = obj.age;
+        let gender = obj.gender;
+        console.log(name, age, gender);
+
+        //声明变量同时结构对象
+        obj = { name1: '孙悟空', age1: 18, gender1: '男' }
+        let { name1, age1, gender1 } = obj
+        console.log(name1, age1, gender1);
+
+        //先声明后赋值 注意加上()
+        obj = { name2: '孙悟空', age2: 18, gender2: '男' }
+        let name2, age2, gender2;
+        ({ name2, age2, gender2 } = obj);
+        console.log(name2, age2, gender2);
+
+
+        let { address } = obj; //没有的属性返回undefined
+
+
+        //可以使用别名进行赋值
+        let { name2: a, age2: b, gender3: c } = obj;
+        console.log(a, b, c);
+
+        //使用默认值
+
+        let { name2: d, age2: e, gender2: f, address: g = '花果山' } = obj;
+        console.log(d, e, f, g);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

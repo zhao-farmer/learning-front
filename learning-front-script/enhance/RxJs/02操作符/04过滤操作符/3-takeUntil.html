@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <button id="stop">停止</button>
+    <script>
+        const { interval, fromEvent } = rxjs;
+        const { takeUntil } = rxjs.operators;
+
+        const stopButton = document.getElementById("stop");
+        const stop$ = fromEvent(stopButton, "click");
+
+        interval(1000).pipe(takeUntil(stop$)).subscribe(console.log);
+
+    </script>
+</body>
+</html>

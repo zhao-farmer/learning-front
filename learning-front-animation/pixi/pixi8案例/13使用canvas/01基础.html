@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite } from "../js/pixi.mjs";
+
+        // 此示例基于基本/容器，但使用了OffscreenCanvas。
+        // 这里的createElement 也可以直接获取页面上的canvas
+
+        const canvas = document.createElement("canvas");
+        const view = canvas.transferControlToOffscreen();
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ view, background: "#1099bb", 
+                height:400, 
+                width: 600  
+            });
+
+            // 添加应用程序到网页中
+            document.body.appendChild(canvas);
+
+            const container = new Container();
+
+            app.stage.addChild(container);
+
+            // 记载纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            // 创建5x5的网格精灵
+            for (let i = 0; i < 25; i++) {
+                const bunny = new Sprite(texture);
+
+                bunny.anchor.set(0.5);
+                bunny.x = (i % 5) * 40;
+                bunny.y = Math.floor(i / 5) * 40;
+                container.addChild(bunny);
+            }
+
+            // 容器移动到屏幕中央
+            container.x = app.screen.width / 2;
+            container.y = app.screen.height / 2;
+
+            // 支点也设置到屏幕中央
+            container.pivot.x = container.width / 2;
+            container.pivot.y = container.height / 2;
+
+            // 添加到动画更新
+            app.ticker.add(time => {
+                // 容器开始旋转
+                container.rotation -= 0.01 * time.deltaTime;
+            });
+        })();
+    </script>
+</body>
+</html>

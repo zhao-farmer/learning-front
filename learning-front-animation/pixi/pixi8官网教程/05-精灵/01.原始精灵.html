@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../js/pixi8.js"></script>
+</head>
+<body>
+    <script type="module">
+        const app = new PIXI.Application();
+
+        await app.init({
+            width: 600,                 // 宽度
+            height: 400,                // 高度
+            backgroundColor: 0x1099bb,  // 画布颜色
+            backgroundAlpha:0.3         // 画布透明度
+        });
+
+        document.body.appendChild(app.canvas);
+
+        const texture = await PIXI.Assets.load('../assest/sample1.png');
+        const sprite = new PIXI.Sprite(texture);
+        
+        sprite.anchor.set(0.5);         // 锚点
+        sprite.position.set(100, 100);  // 位置
+        sprite.scale.set(0.5);           // 放大
+        sprite.rotation = Math.PI / 4; // 旋转角度
+
+        app.stage.addChild(sprite);
+    </script>
+</body>
+</html>

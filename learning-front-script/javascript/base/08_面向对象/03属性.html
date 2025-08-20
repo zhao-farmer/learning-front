@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            类是创建对象的模板，要创建第一件事就是定义类
+        */
+        class Person {
+            /* 
+                类的代码块，默认就是严格模式
+                    类的代码块是用来设置对象的属性的，不是什么代码都能写
+                实例属性
+                    属性的定义 
+                        属性名 = [属性值]  
+                    访问
+                        const 对象名 = new 类名();
+                        对象名.属性值    
+                    示例：
+                        Person的实例属性name  p1.name
+                        实例属性只能通过实例访问 p1.age
+                静态属性
+                    属性的定义
+                        static 属性名 = [属性值]  
+                    访问
+                        类名.属性值
+                     示例：
+                        使用static声明的属性，是静态属性（类属性） Person.test
+                        静态属性只能通过类去访问 Person.hh
+            */
+
+            name = '孙悟空'
+            age = 18
+
+            static weapon = "金箍棒"
+            static nickname = "齐天大圣"
+        }
+
+        //访问实例属性
+        const p1 = new Person()
+        p1.name = '孙悟空'
+        p1.age = 18
+        console.log(p1);
+
+        //访问静态属性
+        Person.weapon = '定海神针'
+        Person.nickname = '美猴王'
+
+        console.log(Person.weapon);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 4. find findIndex()
+        let arr = [11,12,13,14,15]
+
+        // 1.找出大于13的值（返回一个值）
+        let result = arr.find(function(item){
+            return item>13
+        })
+        console.log(result);    //14
+        
+        // 2.找出大于13的索引值 （返回一个值）
+        let result2 = arr.findIndex(function(item){
+            return item>13
+        })
+        console.log(result2);   //4
+
+        // 相反的 findLast findLastIndex() 是ES14的
+
+    </script>
+</body>
+</html>

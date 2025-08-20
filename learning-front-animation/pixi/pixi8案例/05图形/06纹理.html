@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Graphics, GraphicsContext } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                antialias: true,
+                backgroundColor: "white",
+                width: 800,
+                height: 600,
+            });
+
+            // 应用程序添加到瓦昂也中
+            document.body.appendChild(app.canvas);
+
+            //加载图片
+            const pandaTexture = await Assets.load(`../assets/images/panda.png`);
+
+            //加载图形内容
+            const pandasContext = new GraphicsContext()
+                //画一个圆
+                .circle(0, 0, 120)
+                //填充绿色
+                .fill("green")
+                // 第一个参数纹理 第二个参数 着色 三个参数左上角x 第四个参数 左上角y
+                .texture(pandaTexture, 0xffffff, -pandaTexture.width / 2, -pandaTexture.height / 2)
+                // 添加一只紫色熊猫宝宝
+                .translate(100, 100)
+                .scale(0.4)
+                .texture(pandaTexture, "yellow");
+
+            //放到图形中
+            const graphics = new Graphics(pandasContext);
+
+            const graphics2 = new Graphics(pandasContext);
+
+            //添加到舞台
+            app.stage.addChild(graphics, graphics2);
+
+            graphics.x = app.screen.width / 2;
+            graphics.y = app.screen.height / 2;
+
+            graphics2.x = app.screen.width / 2 - 200;
+            graphics2.y = app.screen.height / 2 - 200;
+            //进行旋转
+            graphics2.rotation = 0.5;
+        })();
+    </script>
+</body>
+</html>

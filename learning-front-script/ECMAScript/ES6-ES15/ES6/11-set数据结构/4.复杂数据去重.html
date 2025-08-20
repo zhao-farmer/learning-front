@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let list = [1,2,2,"kerwin","kerwin",[1,2],[3,4],[1,2],{name:'kerwin'},
+        {age:100},{name:'kerwin'},undefined,undefined,NaN,NaN]
+
+        function uni(arr){
+            let res = new Set()
+            return arr.filter((item)=>{
+                // 判断 has return false
+                // 没有 return true
+                let id = JSON.stringify(item)
+                if(res.has(id)){
+                    return false
+                }else{
+                    res.add(id)
+                    return true
+                }
+            })
+        }
+
+        console.log(uni(list));
+        
+    </script>
+</body>
+</html>

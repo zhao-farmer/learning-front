@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div id="msg"></div>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext('2d');
+        
+        var text = "我爱学习！我爱学习！";
+        ctx.font = "40px bold";
+
+        var textWidth = ctx.measureText(text).width;
+        var canvasWidth = canvas.width;
+        var xPosition = canvasWidth / 2 - textWidth / 2;
+
+        ctx.fillStyle = "purple";
+        ctx.fillText(text, xPosition, 50);
+       
+    </script>
+</body>
+</html>

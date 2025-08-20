@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Canvas 碎片化图片</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #content {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #box {
+        position: relative;
+        border: 1px solid #111;
+      }
+      #box div {
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform-style: preserve-3d;
+      }
+      #box canvas {
+        position: absolute;
+        transition: 1s;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <div id="box"></div>
+    </div>
+
+    <script>
+      const box = document.getElementById("box");
+
+      //创建一个canvas
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      //碎片化的行数与列数
+      let rows = 10;
+      let columns = 8;
+      //图片碎片化的次数
+      let index = 0;
+      //每次等待的时间
+      let waitTime = 0.2;
+      //图片飞舞的距离
+      let flyDistance = 200;
+
+      // 加载完整图片和碎片化图片
+      const img = new Image();
+      img.src = "./images/women.jpg";
+
+      img.onload = () => {
+        drawImage(); // 初始绘制
+      };
+
+      let debrisWidth, debrisHeight;
+      let oParentNode = document.createElement("div");
+
+      // 绘制图片到Canvas
+      function drawImage() {
+        box.style.width = img.width + "px";
+        box.style.height = img.height + "px";
+
+        box.appendChild(oParentNode);
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // 清除Canvas
+        ctx.drawImage(img, 0, 0, img.width, img.height); // 绘制图片
+
+        //将图片插入到div中
+        box.appendChild(canvas);
+
+        //计算小碎片的高度与宽度
+        debrisWidth = img.width / columns;
+        debrisHeight = img.height / rows;
+
+        shuipian();
+      }
+
+      function shuipian() {
+        //原本的图片每次移除首行的距离
+        setTimeout(() => {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, (index + 1) * debrisHeight, img.width, img.height - (index + 1) * debrisHeight, 0, (index + 1) * debrisHeight, img.width, img.height - (index + 1) * debrisHeight);
+        }, 0.2 * waitTime * 1000);
+
+        //将小碎片展示到图片上
+        setTimeout(() => {
+          for (let i = 0; i < columns; i++) {
+            const oCanvas = document.createElement("canvas");
+            const oCtx = oCanvas.getContext("2d");
+            //设置canvas
+            oCanvas.width = debrisWidth;
+            oCanvas.height = debrisHeight;
+            oCtx.drawImage(img, i * debrisWidth, index * debrisHeight, debrisWidth, debrisHeight, 0, 0, debrisWidth, debrisHeight);
+
+            oCanvas.style.left = debrisWidth * i + "px";
+            oCanvas.style.top = debrisHeight * index + "px";
+            oCanvas.style.transition = Math.random() * 1 + 0.5 + "s";
+            oParentNode.appendChild(oCanvas);
+          }
+        }, 0.4 * waitTime * 1000);
+
+        let allDiv = oParentNode.children;
+        //将小碎片进行飞舞
+        setTimeout(() => {
+          for (let i = 0; i < allDiv.length; i++) {
+            allDiv[i].style.transform =
+              "perspective(800px) rotateX(" +
+              (Math.random() * flyDistance - flyDistance / 2) +
+              "deg) rotateY(" +
+              (Math.random() * flyDistance - flyDistance / 2) +
+              "deg) translateX(" +
+              (Math.random() * flyDistance - flyDistance / 2) +
+              "px) translateY(" +
+              (Math.random() * flyDistance - flyDistance / 2) +
+              "px) translateZ(" +
+              (Math.random() * flyDistance - flyDistance / 2) +
+              "px)";
+            allDiv[i].style.opacity = 1;
+          }
+        }, 0.6 * waitTime * 1000);
+
+        //判断是否还拥有可碎片化的图片 1秒之后继续调用
+        rows = rows - 1;
+        if (rows > 0) {
+          setTimeout(() => {
+            index++;
+            oParentNode.innerHTML = "";
+            shuipian();
+          }, 700);
+        }
+      }
+    </script>
+  </body>
+</html>

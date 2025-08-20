@@ -1,0 +1,79 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path" : "pages/requestDomo01/requestDomo",
+			"style" : 
+			{
+				"navigationBarTitleText" : "案例布局"
+			}
+		},
+		{
+			"path" : "pages/requestDomo02/requestDomo01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "远程获取数据"
+			}
+		},
+		{
+			"path" : "pages/requestDomo02/requestDomo02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "预览图片"
+			}
+		},
+		{
+			"path" : "pages/requestDomo02/requestDomo03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "链式获取信息"
+			}
+		},
+		{
+			"path" : "pages/requestDomo02/requestDomo04",
+			"style" : 
+			{
+				"navigationBarTitleText" : "触底与下拉加载",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path" : "pages/requestDomo02/requestDomo05",
+			"style" : 
+			{
+				"navigationBarTitleText" : "悬浮刷新与顶部",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path" : "pages/requestDomo03/requestDomo01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "拓展组件-icon",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path" : "pages/requestDomo03/requestDomo02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "拓展组件-加载更多",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path" : "pages/requestDomo03/requestDomo03",
+			"style" : 
+			{
+				"navigationBarTitleText" : "拓展组件-分段器",
+				"enablePullDownRefresh": true
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

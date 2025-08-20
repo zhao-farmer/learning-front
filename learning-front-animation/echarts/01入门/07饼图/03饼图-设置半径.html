@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="display: flex;">
+      <div style="width: 300px; height: 200px" class="div1"></div>
+      <div style="width: 300px; height: 200px" class="div2"></div>
+    </div>
+    <div style="width: 300px; height: 200px" class="div3"></div>
+    
+    <script>
+        var pieData = [
+            { name: "淘宝", value: 11231 },
+            { name: "京东", value: 22673 },
+            { name: "唯品会", value: 6123 },
+            { name: "1号店", value: 8989 },
+            { name: "聚类优品", value: 6700 },
+            { name: "拼多多", value: 20010 },
+        ];
+        var mCharts1 = echarts.init(document.querySelector(".div1"));
+        var mCharts2 = echarts.init(document.querySelector(".div2"));
+        var mCharts3 = echarts.init(document.querySelector(".div3"));
+
+        var option1 = {
+            series: [
+                {
+                    type: "pie",
+                    data: pieData,
+
+                    //饼图的半径
+                    radius: 20,
+                },
+            ],
+        };
+        var option2 = {
+            series: [
+                {
+                    type: "pie",
+                    data: pieData,
+
+                    //百分比参照的是宽度和高度中较小的那一部分的一般来进行百分比设置
+                    // 200 * 0.3 = 60
+                    radius: "30%",
+                },
+            ],
+        };
+        var option3 = {
+            series: [
+                {
+                    type: "pie",
+                    data: pieData,
+
+                    //第0个元素代表的是内圆的半径  第一个元素外圆半径
+                    radius: ["50%", "70%"],
+                },
+            ],
+        };
+        mCharts1.setOption(option1);
+        mCharts2.setOption(option2);
+        mCharts3.setOption(option3);
+    </script>
+</body>
+</html>

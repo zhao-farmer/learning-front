@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            for-of语句可以用来遍历可迭代对象
+            语法：
+                for(变量 of 可迭代的对象){
+
+                }
+            执行流程：
+                for-of的循环体会执行多次，数组中有几个元素就会执行几次
+                    每次执行时都会将一个元素赋值给变量
+
+            for-in 用于 对象
+        */
+        const arr = ['孙悟空', '猪八戒', '沙和尚', '唐僧']
+        for (const value of arr) {
+            console.log(value);
+        }
+
+        for (const value of 'hello') {
+            console.log(value);
+        }
+
+
+    </script>
+
+
+</head>
+
+<body>
+
+</body>
+
+</html>

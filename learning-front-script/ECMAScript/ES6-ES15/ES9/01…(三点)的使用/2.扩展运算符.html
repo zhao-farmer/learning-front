@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        // ================   扩展运算符   ====================
+        // 1.数据合并
+        let obj1 = {
+            name:'tiechui',
+            location:"dalian"
+        }
+        let obj2 ={
+            name:'xiaoming',
+            age:18
+        }
+
+        // 类似 Object.assign
+        // 不同点：Object.assign 第一个参数有的不参与替换
+
+        let obj3 = {...obj1,...obj2}
+        console.log(obj3);
+        // {name: 'xiaoming', location: 'dalian', age: 18}
+
+        // 案例
+        function ajax(options){
+            const defaultOptions = {
+                methods:"get",
+                async:true
+            }
+            options = {...defaultOptions,...options}
+            console.log(options);   
+        }
+
+        ajax({
+            url:"",
+            methods:"post",
+        })
+        // {methods: 'post', async: true, url: ''}
+        ajax({
+            url:"",
+        })
+        // {methods: 'post', async: true, url: ''}
+
+
+        // 2. 浅复制（使用扩展运算符 ）
+        let obj5 = {
+            name:"kerwin",
+            age:100
+        }
+
+        let obj6 = {...obj5}
+        obj6.age = 10
+        console.log(obj5);
+        // {name: 'kerwin', age: 100}
+        
+
+    </script>
+</body>
+</html>

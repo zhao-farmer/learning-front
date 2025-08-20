@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <table class="table" border="1">
+            <thead>
+                <tr>
+                    <th>厚度</th>
+                    <th>光度</th>
+                    <th>外观</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td title="myTrue">
+                        <select onchange="myAddTr(this)">
+                            <!--当select的值发生改变时会触发onchange事件-->
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script src="../js/jquery.3.7.1.js"></script>
+        <script>
+            function myAddTr(obj) {
+                let myTr = `<tr>
+                    <td title="myTrue">
+                        <select οnchange="myAddTr(this)">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>`;
+
+                /*增加一行以及条件*/
+                // console.log($(obj).parent("td").attr("title"))
+                if ($(obj).parent("td").attr("title") == "myTrue") {
+                    $("tbody").append(myTr);
+                    $(obj).parent("td").attr("title", "myFalse");
+                }
+            }
+        </script>
+    </body>
+</html>

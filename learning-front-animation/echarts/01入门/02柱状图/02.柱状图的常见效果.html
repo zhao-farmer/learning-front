@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        // 标记：最大值、最小值、平均值
+	    //      markPoint(最大值、最小值) markLine(平均值)
+        // 显示：数值显示	柱宽度 横向柱状图
+	    //      label、barWidth、
+        var mCharts = echarts.init(document.querySelector("div"));
+
+        var xDataArr = ["张三", "李四", "王五", "闰土", "小明", "茅台", "二妞", "大强"];
+        var yDaataArr = [88, 92, 63, 77, 94, 80, 72, 86];
+        var option = {
+            /* 
+              -- 修改前     
+              xAxis: {
+                type: "category",
+                data: xDataArr,
+              },
+              yAxis: {
+                type: "value",
+              }, 
+            */
+            // 更改后的代码
+            xAxis: {
+                type: "value",
+            },
+            yAxis: {
+                type: "category",
+                data: xDataArr,
+            },
+            series: [
+                {
+                    name: "语文",
+                    type: "bar",
+                    markPoint: {
+                        data: [
+                            {
+                                type: "max",
+                                name: "最大值",
+                            },
+                            {
+                                type: "min",
+                                name: "最小值",
+                            },
+                        ],
+                    },
+                    markLine: {
+                        data: [
+                            {
+                                type: "average",
+                                name: "平均值",
+                            },
+                        ],
+                    },
+                    //数值显示
+                    label: {
+                        show: true,
+                        rotate: 60,
+                        position: "top",
+                    },
+                    //柱状图宽度
+                    barWidth: "30%",
+                    data: yDaataArr,
+                },
+            ],
+        };
+
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

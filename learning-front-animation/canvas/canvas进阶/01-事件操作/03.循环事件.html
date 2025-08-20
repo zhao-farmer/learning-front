@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            canvas {
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="500" height="200"></canvas>
+
+        <script>
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+
+            let angle = 0;
+            const amplitude = 50; // 振幅，控制曲线的弯曲程度
+            const frequency = 0.02; // 频率，控制曲线的周期
+            const speed = 10; // 速度，控制矩形移动的快慢
+
+            (function frame() {
+                window.requestAnimationFrame(frame);
+                // 清除整个画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                // 计算新位置
+                const x = canvas.width / 2 + Math.sin(angle) * amplitude;
+                const y = canvas.height / 2 + Math.cos(angle) * amplitude;
+                // 绘制圆形
+                ctx.beginPath();
+                ctx.arc(x - 25, y, 25, 25, (360 * Math.PI) / 180, true);
+                ctx.fill();
+                // 更新角度以改变矩形的位置
+                angle += speed;
+                // 当圆形到达边界时，改变方向
+                if (x <= 0 || x >= canvas.width) {
+                    speed = -speed;
+                }
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+// scss 代码编辑
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    a {
+        color: #333;
+        &:hover {
+            text-decoration: underline;
+            color: red;
+        }
+    }
+    .top {
+        border: 1px #ccc solid;
+        &-left {
+            float: left;
+            width: 200px;
+        }
+    }
+}

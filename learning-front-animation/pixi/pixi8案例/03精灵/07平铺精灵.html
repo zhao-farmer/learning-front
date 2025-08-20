@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, TilingSprite } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 600,
+                height: 400,
+            });
+
+            // 应用程序性添加当前页面上
+            document.body.appendChild(app.canvas);
+
+            // 加载瓷砖纹理
+            const texture = await Assets.load("../assets/images/p2.jpg");
+
+            /*
+              * 创建一个平铺精灵并将其添加到舞台上。。。
+              * 需要纹理、宽度和高度
+              * 在WebGL中，图像大小最好是2的幂
+              */
+            const tilingSprite = new TilingSprite({
+                texture,
+                width: app.screen.width,
+                height: app.screen.height,
+            });
+
+            app.stage.addChild(tilingSprite);
+
+            let count = 0;
+
+            // 平铺精灵的动画
+            app.ticker.add(() => {
+                count += 0.005;
+                //比例 使用的sin函数与cos函数
+                // 一会向左右变化 一会向上下变化
+                tilingSprite.tileScale.x = 2 + Math.sin(count);
+                tilingSprite.tileScale.y = 2 + Math.cos(count);
+                //位置 一直向右下放移动
+                tilingSprite.tilePosition.x += 1;
+                tilingSprite.tilePosition.y += 1;
+            });
+        })();
+    </script>
+</body>
+</html>

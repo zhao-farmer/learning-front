@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueComponen</title>
+    <!-- 引入vue -->
+    <script  type="text/javascript" src="../js/vue.js"></script>
+ 
+</head>
+<body>
+
+    <!-- 
+        关于VueCompont:
+            1.school组件本质是一个名为VueComponent的构造函数，而不是程序员定义的，是Vue.extend生成的。
+
+            2.我们只需要写<school/>或<shcool></shcool>,Vue解析时会帮我们创建school组件的实例对象，
+              即Vue帮我们执行的： _new VueComponent(options)。
+            
+            3.特别注意：每次调用Vue.extend，返回的都是一个全新的VueCompont!!!
+
+            4.关于this指向：
+                (1).组件配置中:
+                    data函数、methods中的函数、watch中的函数、computed中的函数  它们的this均是【VueComponent实例对象】。
+                (2).new Vue()配置中：
+                    data函数、methods中的函数、watch中的函数、computed中的函数  他们的this均时【Vue实例对象】。
+
+            5.VueComponent的实例对象，以后简称vc(也可称之为：组件实例对象)。
+              Vue的实例对象，以后简称vm
+              vm与vc的相同点
+                组件的属性大致是一样的
+              vm与vc的区别
+                vm指定el对象决定配置的容器，vc不能指定
+                vc的data必须写成函数，不能写成对象
+                vm中的$children 含有多个vc ,vc下也可以含有多个vc
+    -->
+    <!-- 创建一个容器 -->
+    <div id="root">
+        <!-- 特点1/特点2 -->
+        <!-- <school></school> -->
+        <!-- 特点3/特点5 -->
+        <school></school>
+        <hello></hello>
+    </div>
+    <script type="text/javascript">
+        Vue.config.productionTip = false 
+        
+
+        // 验证特点1 特点2
+        // const school = Vue.extend({
+        //     name:'school',
+        //     template: `
+        //         <div>
+        //             <h2>学校名称：{{name}}</h2>
+        //             <h2>学校地址：{{address}}</h2>
+        //         </div>
+        //     `,
+        //     data(){
+        //         return {
+        //             name:'尚硅谷',
+        //             address:'北京昌平',
+        //         }
+        //     },
+        // });
+        // // 输出
+        // console.log('验证1',school);
+        // // 实例对象
+        // new Vue({
+        //     el:'#root', 
+        //     components:{
+        //         school
+        //     }
+        // })
+
+        
+        // 验证特点3
+        // const school = Vue.extend({
+        //     name:'school',
+        //     template: `
+        //         <div>
+        //             <h2>学校名称：{{name}}</h2>
+        //             <h2>学校地址：{{address}}</h2>
+        //         </div>
+        //     `,
+        //     data(){
+        //         return {
+        //             name:'尚硅谷',
+        //             address:'北京昌平',
+        //         }
+        //     },
+        // });
+        // const hello = Vue.extend({
+        //     template:`
+        //         <div>
+        //             <h1>{{msg}}</h1>
+        //         </div>
+        //     `,
+        //     data(){
+        //         return {
+        //             msg:'欢迎来到尚硅谷学习！',
+        //         }
+        //     },
+        // })
+
+        // // 打印出是一样的
+        // console.log('@',school);
+        // console.log('#',hello);
+
+        // // 验证方式1
+        // console.log(school === hello);
+        
+        // // 验证方式2
+        // school.x = 99
+        // console.log(hello.x);
+
+        // //验证方式3
+        // //代码中可以找到构造函数
+
+        //  new Vue({
+        //     el:'#root', 
+        //     components:{
+        //         school,
+        //         hello,
+        //     }
+        // })
+
+        // //验证特点4
+        // const school = Vue.extend({
+        //     name:'school',
+        //     template: `
+        //         <div>
+        //             <h2>学校名称：{{name}}</h2>
+        //             <h2>学校地址：{{address}}</h2>
+        //             <button @click="showSchoolName">验证school的this指向</button>
+        //         </div>
+        //     `,
+        //     data(){
+        //         return {
+        //             name:'尚硅谷',
+        //             address:'北京昌平',
+        //         }
+        //     },
+        //     methods:{
+        //         showSchoolName(){
+        //            console.log('showNameSchool',this);
+        //         }
+        //     }
+        // });
+
+        
+        // new Vue({
+        //     el:'#root',
+        //     template: `
+        //         <div>
+        //             <button @click="showName">验证vm的this指向</button>
+        //             <school></school>
+        //         </div>
+        //     `, 
+        //     components:{
+        //         school, 
+        //     },
+        //     methods:{
+        //         showName(){
+        //            console.log('showNameVm',this);
+        //         }
+        //     }
+        // })
+
+
+        // 验证特点5
+        //定义school组件
+        const school = Vue.extend({
+            name:'school',
+            template: `
+                <div>
+                    <h2>学校名称：{{name}}</h2>
+                    <h2>学校地址：{{address}}</h2>
+                </div>
+            `,
+            data(){
+                return {
+                    name:'尚硅谷',
+                    address:'北京昌平',
+                }
+            },
+          
+        });
+
+        //定义test组件
+        const test = Vue.extend({
+            template:`<span>atguigu</span>`,
+        })
+
+        // 定义hello组件
+        const hello = Vue.extend({
+            template:`
+                <div>
+                    <h1>{{msg}}</h1>
+                    <test2></test2>
+                </div>
+              
+            `,
+            data(){
+                return {
+                    msg:'欢迎来到尚硅谷学习！',
+                }
+            },
+            components:{
+                test2:test
+            }
+        })
+
+        const vm = new Vue({
+            el:'#root', 
+            components:{
+                school,
+                hello,
+            }
+        })
+
+        console.log(vm);
+        
+    </script>
+</body>
+</html>

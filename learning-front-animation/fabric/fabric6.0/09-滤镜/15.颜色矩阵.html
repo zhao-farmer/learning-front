@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas width="300" height="400" id="c1" style="border: 1px solid #ccc"></canvas>
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取静态画布
+        const canvas = new fabric.StaticCanvas("c1");
+        
+        const filter = new fabric.filters.ColorMatrix({
+            matrix: [
+                1,0.25,0,0,0,
+                0,1,0,0,0,
+                0,0,1,0,0,
+                0,0,0,1,0
+            ]
+        });
+
+        // 图片
+        let img = new Image();
+        img.src="./assest/001.jpg"
+
+        img.onload = () =>{
+            let fabricImage = new fabric.FabricImage(img,{
+                    scaleX:0.4,       // x轴比例
+                    scaleY:0.4,       // y轴比例
+                    left: 0,
+                    top: 0,
+                }
+            )
+            canvas.add(fabricImage);
+
+            fabricImage.filters.push(filter);
+            fabricImage.applyFilters();
+            canvas.renderAll(); 
+        }
+    </script>
+</body>
+</html>

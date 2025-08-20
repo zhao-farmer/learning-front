@@ -1,0 +1,20 @@
+.public() {  //定义一个类；在定义规则集public的后面加一个括号，就在 CSS 编译中不会出现你定义的规则集
+    width: 100px;
+    height: 100px;
+}
+#test {  //定义一个类 id 选择器
+   color: red
+}
+button{
+    //使用!important 关键字在 mixin 调用后，为了去标记 mixin 中的所有属性继承通过 !important
+    .public()!important;  //混入类选择器
+    #test ();  //混入id选择器 
+    list-style: none;
+}
+//编译成css
+ button{
+    width: 100px!important;  
+    height: 100px!important;  
+    color: red;
+    list-style: none;
+}

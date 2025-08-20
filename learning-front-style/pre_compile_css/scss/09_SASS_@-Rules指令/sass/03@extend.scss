@@ -1,0 +1,22 @@
+.error {
+    border: 1px #f00;
+    background-color: #fdd;
+}
+.seriousError {
+    @extend .error;
+    border-width: 3px;
+}
+.error.intrusion {
+    background-image: url("/image/hacked.png");
+}
+
+// This ruleset won't be rendered on its own.
+#context a%extreme {
+    color: blue;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.notice {
+    @extend %extreme;
+}

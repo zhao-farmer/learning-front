@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite, Graphics, Text } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                antialias: true,  
+                width: 800,
+                height: 800,  
+            });
+
+            // 添加应用程序到页面上
+            document.body.appendChild(app.canvas);
+
+            app.stage.eventMode = "static";
+
+            // 加载纹理
+            await Assets.load([
+                "../assets/images/bg_rotate.jpg",
+                "../assets/images/bg_scene_rotate.jpg",
+                "../assets/images/light_rotate_2.png",
+                "../assets/images/light_rotate_1.png",
+                "../assets/images/panda.png",
+            ]);
+
+            // 获取一个精灵做背景
+            const bg = Sprite.from("../assets/images/bg_rotate.jpg");
+
+            // 设置锚点
+            bg.anchor.set(0.5);
+
+            //设置位置
+            bg.x = app.screen.width / 2;
+            bg.y = app.screen.height / 2;
+
+            //添加到舞台上
+            app.stage.addChild(bg);
+
+            //创建一个容器
+            const container = new Container();
+
+            //也放在屏幕中央
+            container.x = app.screen.width / 2;
+            container.y = app.screen.height / 2;
+
+            //添加一堆精灵
+            const bgFront = Sprite.from("../assets/images/bg_scene_rotate.jpg");
+
+            bgFront.anchor.set(0.5);
+
+            const light2 = Sprite.from("../assets/images/light_rotate_2.png");
+
+            light2.anchor.set(0.5);
+
+            const light1 = Sprite.from("../assets/images/light_rotate_1.png");
+
+            light1.anchor.set(0.5);
+
+            const panda = Sprite.from("../assets/images/panda.png");
+
+            panda.anchor.set(0.5);
+
+            //都放到容器中
+            container.addChild(bgFront, light2, light1, panda);
+
+            //放到舞台上
+            app.stage.addChild(container);
+
+            // 让我们创建一个移动形状的遮罩
+            const thing = new Graphics();
+
+            app.stage.addChild(thing);
+            //也放到屏幕的中央
+            thing.x = app.screen.width / 2;
+            thing.y = app.screen.height / 2;
+
+            //设置接招
+            container.mask = thing;
+
+            let count = 0;
+
+            //如果点击后 遮罩为空 否者将当前遮罩赋予
+            app.stage.on("pointertap", () => {
+                if (!container.mask) {
+                    container.mask = thing;
+                } else {
+                    container.mask = null;
+                }
+            });
+
+            //创建一个Text
+            const help = new Text({
+                text: "单击或点击以打开/关闭遮罩.",
+                style: {
+                    fontFamily: "Arial",
+                    fontSize: 12,
+                    fontWeight: "bold",
+                    fill: "white",
+                },
+            });
+
+            help.y = app.screen.height - 26;
+            help.x = 10;
+            app.stage.addChild(help);
+
+            // 遮罩的动画
+            app.ticker.add(() => {
+                //背景变化
+                bg.rotation += 0.01;
+                //背景反方向
+                bgFront.rotation -= 0.01;
+
+                //两个灯光也有不同的移动频率
+                light1.rotation += 0.02;
+                light2.rotation += 0.01;
+
+                // 熊猫开启周期性放大缩小
+                panda.scale.x = 1 + Math.sin(count) * 0.04;
+                panda.scale.y = 1 + Math.cos(count) * 0.04;
+
+                count += 0.1;
+
+                //遮罩也是四个角不断开始周期性变化
+                thing.clear();
+                thing.moveTo(-120 + Math.sin(count) * 20, -100 + Math.cos(count) * 20);
+                thing.lineTo(120 + Math.cos(count) * 20, -100 + Math.sin(count) * 20);
+                thing.lineTo(120 + Math.sin(count) * 20, 100 + Math.cos(count) * 20);
+                thing.lineTo(-120 + Math.cos(count) * 20, 100 + Math.sin(count) * 20);
+                //设置颜色与透明度
+                thing.fill({ color: 0x8bc5ff, alpha: 0.4 });
+                //开启旋转
+                thing.rotation = count * 0.1;
+            });
+        })();
+    </script>
+</body>
+</html>

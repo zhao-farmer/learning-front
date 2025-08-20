@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite } from "../js/pixi.mjs";
+
+        //使用立即执行函数进行调用
+        (async () => {
+            // 创建一个新的应用程序
+            const app = new Application();
+
+            // 初始化一个透明背景的应用程序
+            await app.init({
+                width: 400,
+                height: 400,
+                backgroundAlpha: 0,
+            });
+
+            //  将应用程序画布添加到到文档正文
+            document.body.appendChild(app.canvas);
+
+            // 加载兔子图片用于创建纹理
+            const texture = await Assets.load("../assets/images/bunny.png");
+
+            // 使用纹理创建一个精灵
+            const bunny = new Sprite(texture);
+
+            // 精灵的锚点放到中心点
+            bunny.anchor.set(0.5);
+
+            // 移动精灵到屏幕的中央
+            bunny.x = app.screen.width / 2;
+            bunny.y = app.screen.height / 2;
+
+            app.stage.addChild(bunny);
+
+            // 监听动画更新
+            app.ticker.add(() => {
+                //只是为了好玩，让我们随着时间的推移旋转我们的兔子！
+                bunny.rotation += 0.1;
+            });
+        })();
+    </script>
+</body>
+</html>

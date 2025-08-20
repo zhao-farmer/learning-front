@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="like">like</button>
+    <script>
+        // WeakMap()
+
+        // let wmap = new WeakMap()
+        // let like = document.getElementById("like")
+        // wmap.set(like,{click:0})
+
+        // like.onclick = function(){
+        //     let times = wmap.get(like)
+        //     times.click++
+        //     console.log(wmap);
+            
+        // }
+
+
+        // setTimeout(() => {
+        //     document.body.removeChild(like)
+        //     console.log(like);
+            
+        // }, 2000);
+
+
+        // 解决方法 20250101 并不能解决
+        let wmap = new WeakMap()
+        wmap.set(document.getElementById("like"),{click:0})
+
+        document.getElementById("like").addEventListener("click",function(){
+            let times = wmap.get(document.getElementById("like"))
+            times.click++
+        },false)
+
+        setTimeout(() => {
+            document.body.removeChild(document.getElementById("like"))
+        }, 5000);
+
+    </script>
+</body>
+</html>

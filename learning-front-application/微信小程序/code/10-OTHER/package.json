@@ -1,0 +1,15 @@
+{
+  "name": "10-other",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "pubsub-js": "^1.9.5"
+  }
+}

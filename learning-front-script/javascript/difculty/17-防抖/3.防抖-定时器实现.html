@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .box{
+            height: 300px;
+            width: 300px;
+            border: 1px solid black;
+            background-color: rgb(53, 76, 97);
+            font-size: 50px;
+            text-align: center;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script>
+        // 利用防抖实现性能优化
+        // 需求： 鼠标在盒子上移动，里面的数字会变化加一
+        const box = document.querySelector('.box')
+        let i = 1
+        function mouseMove(){
+            box.innerHTML = i++
+            // 如果里面存在大量消耗性能的代码，比如dom操作，比如数据处理，可能造成卡顿
+        }
+        // 添加事件
+        // box.addEventListener('mousemove',mouseMove)
+
+        // 手写防抖函数
+        // 核心是利用setTimeout定时器来实现
+        // 1.声明定时器遍历
+        // 2.每次鼠标移动（时间触发）的时候都要先判断是否有定时器，如果有先清除以前的定时器
+        // 3.如果没有定时器，则开启定时器，存入定时器遍历里面
+        // 4.定时器里面写函数条用
+        function dedounce(fn,t){
+            let timer
+            // return 返回一个匿名函数
+            return function(){
+                // 2,3,4
+                if(timer) clearTimeout(timer)
+                timer = setTimeout(() => {
+                    fn()    //加小括号调用
+                }, t);
+            }
+        }
+        box.addEventListener('mousemove',dedounce(mouseMove,500))
+
+    </script>
+</body>
+</html>

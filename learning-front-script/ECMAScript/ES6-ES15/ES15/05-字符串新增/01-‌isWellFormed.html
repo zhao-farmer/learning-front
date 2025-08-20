@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const str1 = "ab\uD800"; // 不完整的高代理项
+        const str2 = "abc"; // 完整字符串
+
+        console.log(str1.isWellFormed()); // 输出: false
+        console.log(str2.isWellFormed()); // 输出: true
+    </script>
+</body>
+</html>

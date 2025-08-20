@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="200" height="200" >
+        <!-- 储存一个圆 -->
+        <defs>
+          <circle id="myCircle" cx="100" cy="100" r="50" fill='lightblue' />
+        </defs>
+      
+        <!-- 使用：通过href属性指向以存储元素的id -->
+        <use x="5" y="5" href="#myCircle" />
+    </svg>
+</body>
+</html>

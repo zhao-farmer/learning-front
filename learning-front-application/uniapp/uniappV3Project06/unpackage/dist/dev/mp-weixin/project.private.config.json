@@ -1,0 +1,36 @@
+{
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/requestDomo02/requestDomo05",
+          "pathName": "pages/requestDomo02/requestDomo05",
+          "query": "",
+          "scene": null,
+          "launchMode": "default"
+        },
+        {
+          "name": "pages/requestDomo02/requestDomo04",
+          "pathName": "pages/requestDomo02/requestDomo04",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/requestDomo02/requestDomo04",
+          "pathName": "pages/requestDomo02/requestDomo04",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "pages/requestDomo02/requestDomo02",
+          "pathName": "pages/requestDomo02/requestDomo02",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

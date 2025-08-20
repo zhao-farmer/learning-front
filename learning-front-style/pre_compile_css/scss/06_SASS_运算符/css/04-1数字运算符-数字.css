@@ -1,0 +1,19 @@
+.plus {
+  content: 60 60px 60% 70px 550px;
+}
+
+.minus {
+  content: 30 30px 30% 20px -460px;
+}
+
+.multipl {
+  content: 1800 1800px 1800% 54000px;
+}
+
+.division {
+  content: 2 2px 2 1.5 0.0666666667px;
+}
+
+.modulo {
+  content: 6 6px 6% 0px 1px;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div id="msg"></div>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext('2d');
+        
+        //在横坐标150处绘制一条竖线
+        ctx.moveTo(150, 0);
+        ctx.lineTo(150, 200);
+        ctx.strokeStyle = "purple";
+        ctx.stroke();
+
+        ctx.font = "15px Arial";
+
+        ctx.textAlign = "start";
+        ctx.fillText("textAlign取值为start", 150, 30);
+        
+        ctx.textAlign = "left";
+        ctx.fillText("textAlign取值为left", 150, 60);
+        
+        ctx.textAlign = "end";
+        ctx.fillText("textAlign取值为end", 150, 90);
+        
+        ctx.textAlign = "right";
+        ctx.fillText("textAlign取值为right", 150, 120);
+        
+        ctx.textAlign = "center";
+        ctx.fillText("textAlign取值为center", 150, 150);
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .divs{
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="mydiv">
+        <div class="divs"></div>
+        <div class="divs"></div>
+        <div class="divs"></div>
+        <div class="divs"></div>
+        <div class="divs"></div>
+    </div>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+    <button>按钮1</button>
+
+    <script src="../js/jquery.3.7.1.js"></script>
+    <script>
+    
+        $("button").click(function () {
+            console.log("哈哈哈哈")
+        })
+    
+    
+    
+        /*事件的分发（什么类型的事件,分发给谁,执行的内容）*/
+        $("#mydiv").on("click","divs",function () {
+            console.log("嘻嘻嘻嘻嘻嘻嘻")
+        })
+        //虽然看上去没什么区别，但是它的性能会好很多，避免事件的重复绑定，因为on提供了一种很好的事件委托（将事件仅仅只绑到了父元素上），提升效率
+    
+    </script>
+
+</body>
+</html>

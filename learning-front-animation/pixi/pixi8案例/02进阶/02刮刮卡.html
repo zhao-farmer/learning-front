@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Graphics, Sprite, RenderTexture, Point } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                height:600,
+                width:800, 
+            });
+
+            // 将应用程序添加到网页中
+            document.body.appendChild(app.canvas);
+
+            // 画一个原型纹理将被作为我们的笔刷
+            const brush = new Graphics().circle(0, 0, 50).fill({ color: 0xffffff });
+
+            // 创建一条线来插值绘制的点
+            const line = new Graphics();
+
+            // 加载纹理
+            await Assets.load([
+                "../assets/images/bg_grass.jpg", 
+                "../assets/images/bg_rotate.jpg"
+            ]);
+            //获取宽与高
+            const { width, height } = app.screen;
+            //将舞台大小设置屏幕的大小
+            const stageSize = { width, height };
+            //设置精灵并赋值屏幕的宽度与高度
+            const background = Object.assign(Sprite.from("../assets/images/bg_grass.jpg"), stageSize);
+            const imageToReveal = Object.assign(Sprite.from("../assets/images/bg_rotate.jpg"), stageSize);
+            //创建渲染纹理
+            const renderTexture = RenderTexture.create(stageSize);
+            //将这个纹理赋值给新的精灵
+            const renderTextureSprite = new Sprite(renderTexture);
+            //新精灵作为遮罩 当遮罩有值的时候 这个精灵回显示出来
+            imageToReveal.mask = renderTextureSprite;
+            // 舞台上把这三者添加上
+            // 由于renderTextureSprite初始值为空 所以imageToReveal精灵显示不出  只能 显示background
+            // 更改renderTextureSprite的遮罩信息，可以将imageToReveal数据显示出来
+            app.stage.addChild(background, imageToReveal, renderTextureSprite);
+
+            //设置事件启动
+            app.stage.eventMode = "static";
+            //点击命中返回的范围是整个屏幕
+            app.stage.hitArea = app.screen;
+            //分别加载四种监控 鼠标按下 鼠标释放 在访问区域的外部 指针在页面上的移动
+            app.stage.on("pointerdown", pointerDown)
+                .on("pointerup", pointerUp)
+                .on("pointerupoutside", pointerUp)
+                .on("pointermove", pointerMove);
+            //拖拽进行的状态
+            let dragging = false;
+            // 最后按下鼠标指针
+            let lastDrawnPoint = null;
+
+            //传入的参数 鼠标的位置
+            function pointerMove({ global: { x, y } }) {
+                //如果鼠标按下了
+                if (dragging) {
+                    //笔刷进入当前位置
+                    brush.position.set(x, y);
+                    // 文档路径错误，哎
+                    app.renderer.render({
+                        //主体 笔刷
+                        container: brush,
+                        //目标渲染纹理
+                        target: renderTexture,
+                        // 清理
+                        clear: false,
+                        //跳过清理转换
+                        skipUpdateTransform: false,
+                    });
+                    //这个判断 最后画的点是否存在  是第二次进入
+                    if (lastDrawnPoint) {
+                        //将上次移动的位置移动到这次的位置 宽度设置100且颜色为白色
+                        line.clear()
+                            .moveTo(lastDrawnPoint.x, lastDrawnPoint.y)
+                            .lineTo(x, y)
+                            .stroke({ width: 100, color: 0xffffff });
+                        //将新内容放到渲染纹理中
+                        app.renderer.render({
+                            container: line,
+                            target: renderTexture,
+                            clear: false,
+                            skipUpdateTransform: false,
+                        });
+                    }
+                    //如果为空新建一个Point 否则使用上次的
+                    lastDrawnPoint = lastDrawnPoint || new Point();
+                    //这只x与y的坐标
+                    lastDrawnPoint.set(x, y);
+                }
+            }
+            //按下后 可进行移动
+            function pointerDown(event) {
+                dragging = true;
+                pointerMove(event);
+            }
+            // 松开后两个配置都为空
+            function pointerUp(event) {
+                dragging = false;
+                lastDrawnPoint = null;
+            }
+        })();
+    </script>
+</body>
+</html>

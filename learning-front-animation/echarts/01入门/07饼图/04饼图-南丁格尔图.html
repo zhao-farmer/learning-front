@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../js/echarts-5.5.js"></script>
+</head>
+<body>
+    <div style="width: 600px; height: 400px"></div>
+    <script>
+        var mCharts = echarts.init(document.querySelector("div"));
+        var pieData = [
+            { name: "淘宝", value: 11231 },
+            { name: "京东", value: 22673 },
+            { name: "唯品会", value: 6123 },
+            { name: "1号店", value: 8989 },
+            { name: "聚类优品", value: 6700 },
+            { name: "拼多多", value: 20010 },
+        ];
+        var option = {
+            series: [
+                {
+                    type: "pie",
+                    data: pieData,
+
+                    roseType: "radius", //南丁格尔图 平涂的每一个区域的半径是不同的，会随着数值的改变而变化
+                },
+            ],
+        };
+        mCharts.setOption(option);
+    </script>
+</body>
+</html>

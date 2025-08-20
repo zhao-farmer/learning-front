@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 旧版本
+        try{
+
+        }catch(error){
+
+        }
+
+        //新版本
+        try {
+            
+        } catch{
+
+        }
+
+
+        let pro1 = new Promise(function(resolve,reject){
+               setTimeout(()=>{
+                    resolve(3000)  
+               },3000)
+          })
+        let pro2 = new Promise(function(resolve,reject){
+               setTimeout(()=>{
+                    reject(2000)  
+               },2000)
+        })
+
+        async function test() {
+            try {
+                await Promise.race([pro1,pro2])
+            } catch {
+                console.log("超时");
+            }
+        }
+        test()
+    </script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx = c1.getContext('2d');
+        
+        var heartPath = new Path2D();
+        class Heart{
+            constructor(x,y){
+                this.x = x;
+                this.y = y;
+                this.color = "red";
+                this.isIn = false;
+                this.eventMapList = {
+                    hover: [],
+                    leave: [],
+                };
+                c1.onmousemove = (e) =>{
+                    let x = e.offsetX;
+                    let y = e.offsetY;
+                    this.isIn = ctx.isPointInPath(this.heartPath,x,y);
+                    if(this.isIn){
+                        this.eventMapList.hover.forEach((item) =>{
+                            item()
+                        })
+                    }else{
+                        this.eventMapList.leave.forEach((item) =>{
+                            item()
+                        })
+                    }
+              
+                };
+            }
+            
+            onHover(fn) {
+                this.eventMapList.hover.push(fn);
+            };
+            onLeave(fn){
+                this.eventMapList.leave.push(fn)
+            }
+            setPosition(x,y){
+                this.x = x;
+                this.y = y;
+            }
+            draw(){
+                this.heartPath = new Path2D();
+                //起始点
+                this.heartPath.moveTo(this.x,this.y);
+                //起点 两个控制点一个终点
+                this.heartPath.bezierCurveTo(
+                    this.x + 50,
+                    this.y - 50,
+                    this.x + 100,
+                    this.y,
+                    this.x,
+                    this.y + 50
+                );
+                this.heartPath.bezierCurveTo(
+                    this.x - 100,
+                    this.y ,
+                    this.x - 50,
+                    this.y - 50,
+                    this.x,
+                    this.y 
+                );    
+                ctx.save();
+                ctx.fillStyle = this.color;
+                ctx.fill(this.heartPath)
+                ctx.restore()
+            }
+        }
+        let heart = new Heart(100,100);
+        heart.onHover(() =>{
+            heart.color = "blue";
+        });
+        heart.onLeave(() =>{
+            heart.color = "red";
+        });
+
+        function reader(){
+            ctx.clearRect(0,0,c1.widht,c1.height)   
+            heart.draw()
+            requestAnimationFrame(reader)
+        }
+        reader()
+       
+     </script>
+</body>
+</html>

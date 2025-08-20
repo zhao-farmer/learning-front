@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <style>
+            canvas {
+                border: 1px solid #ccc;
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="500" height="200"></canvas>
+
+        <script>
+            // 获取canvas对象 ctx 对象 
+            const cnv = document.getElementById("myCanvas");
+            const cxt = cnv.getContext("2d");
+
+            // 绘制小球
+            const drawBall = (x, y, cxt) => {
+                cxt.beginPath();
+                cxt.arc(x, y, 20, 0, (360 * Math.PI) / 180, true);
+                cxt.closePath();
+                cxt.fillStyle = "blue";
+                cxt.fill();
+            };
+            let x = 100;
+            let y = 0;
+            drawBall(x, y, cxt);
+            
+            
+            // 获取按键方向
+            const getKey = () => {
+                let key = {}
+                window.addEventListener('keydown', e => {
+                    if (e.keyCode === 38 || e.keyCode === 87) {
+                        key['direction'] = 'up'
+                    } else if (e.keyCode === 39 || e.keyCode === 68) {
+                        key['direction'] = 'right'
+                    } else if (e.keyCode === 40 || e.keyCode === 83) {
+                        key['direction'] = 'down'
+                    } else if (e.keyCode === 37 || e.keyCode === 65) {
+                        key['direction'] = 'left'
+                    } else {
+                        key['direction'] = null
+                    }
+                }, false)
+                return key
+            }
+            
+            const key = getKey();
+
+
+            window.addEventListener("keydown", e => {
+                    // 每次绘制前清空画布
+                    cxt.clearRect(0, 0, cnv.width, cnv.height);
+
+                    // 根据事件重绘小球
+                    switch (key["direction"]) {
+                        case "up":
+                            y -= 2;
+                            break;
+                        case "down":
+                            y += 2;
+
+                            break;
+                        case "left":
+                            x -= 2;
+                            break;
+                        case "right":
+                            x += 2;
+                            break;
+                        default:
+                            break;
+                    }
+                    drawBall(x, y, cxt);
+                },
+                false
+            );
+        </script>
+    </body>
+</html>

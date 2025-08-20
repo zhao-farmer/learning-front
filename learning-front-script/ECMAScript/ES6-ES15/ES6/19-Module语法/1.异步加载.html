@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+    <!-- 
+        异步加载问题
+
+        // 直接引用 无法获取DOM对象
+        <script src="1.js"></script>
+
+        下面两个是ES5的解决方案
+        // 与DOM同步执行，如果DOM文件比较多，还是无法获取对象
+        <script src="1.js" async></script>
+
+        2.等到所有dom加载完成 才执行
+        <script src="1.js" defer></script> 
+    -->
+</head>
+<body>
+    <div></div>
+    <script>
+        // 模块化
+        /* 
+            异步加载
+                只能通过async与defer 来异步加载
+            私有访问
+            重名
+            依赖混乱
+        */
+    </script>
+</body>
+</html>

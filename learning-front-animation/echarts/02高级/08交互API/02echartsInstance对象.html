@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <script src="../js/echarts-5.5.js"></script>
+    </head>
+    <body>
+        <div style="width: 600px; height: 400px"></div>
+        <button id="btn1">dispatchAction</button>
+        <button id="btn2">clear</button>
+        <button id="btn3">setOption</button>
+        <button id="btn4">dispose</button>
+        <script>
+            var mCharts = echarts.init(document.querySelector("div"));
+            var pieData = [
+                { name: "淘宝", value: 11231 },
+                { name: "京东", value: 22673 },
+                { name: "唯品会", value: 6123 },
+                { name: "1号店", value: 8989 },
+                { name: "聚美优品", value: 6700 },
+            ];
+            var option = {
+                legend: {
+                    data: ["淘宝", "京东", "唯品会", "1号店", "聚美优品"],
+                },
+                tooltip: {
+                    show: true,
+                },
+                series: [
+                    {
+                        type: "pie",
+                        data: pieData,
+                    },
+                ],
+            };
+            mCharts.setOption(option);
+
+            // 对事件进行监听
+            mCharts.on("click", function (arg) {
+                console.log(arg);
+                console.log("click...");
+            });
+            // 解绑click的事件
+            mCharts.off("click", function (arg) {
+                console.log(arg);
+                console.log("click...");
+            });
+
+            mCharts.on("legendselectchanged", function (arg) {
+                console.log(arg);
+                console.log("legendselectchanged...");
+            });
+
+            btn1.onclick = () => {
+                // 模拟用户的行为
+                mCharts.dispatchAction({
+                    type: "highlight", // 事件类型
+                    seriesIndex: 0, // 图表索引
+                    dataIndex: 1, // 图表中哪一项高亮
+                });
+            };
+            btn2.onclick = () => {
+                // 清空图表的实例
+                mCharts.clear();
+            };
+            btn3.onclick = () => {
+                // 重新设置 option
+                mCharts.setOption(option);
+            };
+            btn4.onclick = () => {
+                // 销毁 mCharts
+                mCharts.dispose();
+            };
+        </script>
+    </body>
+</html>

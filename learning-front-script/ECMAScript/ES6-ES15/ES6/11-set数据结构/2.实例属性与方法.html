@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let s1 = new Set([1,2,3,4])
+
+        // set实例属性与方法
+        // add 添加
+        s1.add(5).add(6)
+        console.log(s1.size);
+        
+        // has 是否存在
+        console.log(s1.has(5));
+        
+        // delete 删除
+        s1.delete(5)
+        console.log(s1.has(5));
+        
+
+        // clear 全部清除
+        s1.clear()
+        console.log(s1);
+        
+    </script>
+</body>
+</html>

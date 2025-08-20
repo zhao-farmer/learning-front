@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="300">
+        <circle cx="50" cy="50" r="20" fill="red">
+            <animateTransform 
+                attributeName="transform" 
+                type="scale" 
+                from="1" 
+                to="2" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </circle>
+        <circle cx="100" cy="50" r="20" fill="green">
+            <animateTransform 
+                attributeName="transform" 
+                type="scale" 
+                from="1 1" 
+                to="2 3" 
+                dur="2s" 
+                repeatCount="indefinite"
+            />
+        </circle>
+    </svg>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <form id="dynamic-form">
+        <div id="input-container">
+          <!-- 这里将动态添加输入字段 -->
+        </div>
+        <button type="button" onclick="addInput()">Add Input</button>
+        <button type="submit">Submit</button>
+      </form>
+       
+      <script>
+        let counter = 1;
+       
+        function addInput() {
+          const container = document.getElementById('input-container');
+          const input = document.createElement('input');
+          input.type = 'text';
+          input.name = 'input_' + counter;
+          input.placeholder = 'Input ' + counter;
+          container.appendChild(input);
+          counter++;
+        }
+      </script>
+</body>
+</html>

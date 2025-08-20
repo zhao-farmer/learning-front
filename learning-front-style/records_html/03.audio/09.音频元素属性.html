@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        var audio = new Audio();
+        audio.src = "00.aac";
+        // 开启循环
+        audio.loop = true;
+        // 不会立即生效
+        audio.autoplay = true;
+        // 控制面板 使用必须加在dom上
+        audio.controls = true;
+        let box = document.getElementById("box")
+        box.appendChild(audio)
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!-- 1. 应用栏 (Toolbar) -->
+<mat-toolbar color="primary">
+  <span>Material 应用</span>
+
+  <!-- 这是一个 spacer，用来将后续内容推到右边 -->
+  <span class="example-spacer"></span>
+
+  <!-- 2. 图标按钮 (Icon Button) -->
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>更多</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>设置</mat-icon>
+      <span>设置</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>帮助</mat-icon>
+      <span>帮助</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<div class="content">
+  <!-- 3. 卡片 (Card) -->
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Angular Material</mat-card-title>
+      <mat-card-subtitle>内容模块</mat-card-subtitle>
+    </mat-card-header>
+    <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+    <mat-card-content>
+      <p>这是一些常用的Material组件的演示。尝试与他们互动！</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <!-- 4. 按钮 (Button) -->
+      <button mat-button (click)="isChecked = !isChecked">切换复选框</button>
+      <button mat-raised-button color="accent" (click)="openSnackbar()">
+        展示Snackbar
+      </button>
+      <button mat-stroked-button color="warn" (click)="openDialog()">
+        打开弹框
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <!-- 5. 表单字段和输入框 (Form Field & Input) -->
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>表单示例</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>你的名字</mat-label>
+        <input matInput placeholder="e.g. John Doe" [(ngModel)]="name" />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>请输入您的全名</mat-hint>
+      </mat-form-field>
+
+      <br />
+      <!-- 6. 复选框 (Checkbox) -->
+      <mat-checkbox [(ngModel)]="isChecked">我同意条款和条件</mat-checkbox>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,129 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app"
+			}
+		},
+		{
+			"path" : "pages/item01/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "vue3插值语法"
+			}
+		},
+		{
+			"path" : "pages/item02/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "ref定义响应式"
+			}
+		},
+		{
+			"path" : "pages/item03/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "v-bind指定绑定"
+			}
+		},
+		{
+			"path" : "pages/item04/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "class类与style绑定"
+			}
+		},
+		{
+			"path" : "pages/item05/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "内置事件"
+			}
+		},
+		{
+			"path" : "pages/item06/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "条件渲染"
+			}
+		},
+		{
+			"path" : "pages/item07/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "列表渲染"
+			}
+		},
+		{
+			"path" : "pages/item08/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "购物车案例"
+			}
+		},
+		{
+			"path" : "pages/item09/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "输入框事件"
+			}
+		},
+		{
+			"path" : "pages/item10/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "模拟双向绑定"
+			}
+		},
+		{
+			"path" : "pages/item10/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "v-model双向绑定"
+			}
+		},
+		{
+			"path" : "pages/item11/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "热梗案例"
+			}
+		},
+		{
+			"path" : "pages/item12/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "computed计算属性"
+			}
+		},
+		{
+			"path" : "pages/item13/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "计价案例"
+			}
+		},
+		{
+			"path" : "pages/item14/item01",
+			"style" : 
+			{
+				"navigationBarTitleText" : "watch监听"
+			}
+		},
+		{
+			"path" : "pages/item14/item02",
+			"style" : 
+			{
+				"navigationBarTitleText" : "多数据监听"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	},
+	"uniIdRouter": {}
+}

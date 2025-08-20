@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">播放</button>
+    <script src="../js/howler.js"></script>
+    <script>
+        btn.onclick = ()=>{
+                load()
+        }
+        function load(){
+            const sound1 = new Howl({
+                src: ['../assest/01.WAV']
+            });
+
+            // 向右偏0.5
+            sound1.stereo(0.5)
+
+
+            const sound2 = new Howl({
+                src: ['../assest/02.WAV']
+            });
+
+            // 接收位置 向左的的方向
+            sound2.pos(0,-0.5,0)
+
+
+            // 播放第一段音频
+            sound1.play();
+            sound2.play();
+        }
+       
+    </script>
+</body>
+</html>

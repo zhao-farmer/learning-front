@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>伪类选择器E::selection</title>
+    <style>
+        ::selection{
+            background: green;
+            color: #ffffff;
+        }
+        input[type="text"]::selection{
+            background: #ff6600;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<h1>伪类选择器E::selection</h1>
+<p>今天，开发搜索框，出现了bug，现在没有找到原因！</p>
+<input type="text" placeholder="文本">
+</body>
+</html>

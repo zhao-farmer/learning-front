@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="../js/pixi8.js"></script>
+  </head>
+  <body>
+    <script type="module">
+      //创建新的应用程序
+      const app = new PIXI.Application();
+
+      // 初始化应用程序
+      await app.init({ 
+        background: "#1099bb", 
+        height:400,
+        width:600,
+      });
+
+      // 将应用程序画布附加到文档正文
+      document.body.appendChild(app.canvas);
+
+      // 立即开始加载并创建promise
+      const texturePromise = PIXI.Assets.load("../assest/bunny.png");
+
+      //当promise解决了，我们就有了纹理！
+      texturePromise.then((resolvedTexture) => {
+        // 从已解析的加载纹理创建新的Sprite
+        const bunny = PIXI.Sprite.from(resolvedTexture);
+
+        // 使精灵的锚点居中
+        bunny.anchor.set(0.5);
+
+        // 移动精灵到屏幕中央
+        bunny.x = app.screen.width / 2;
+        bunny.y = app.screen.height / 2;
+
+        app.stage.addChild(bunny);
+      });
+    </script>
+  </body>
+</html>

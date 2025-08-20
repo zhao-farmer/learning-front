@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+<script type="module">
+    import { Application, Assets, Container, Graphics, Point, Sprite } from "../js/pixi.mjs";
+
+    (async () => {
+        // 创建新的PixiJS应用实例
+        const app = new Application();
+
+        // 初始化应用配置（开启抗锯齿/设置背景色/自动适应窗口）
+        await app.init({ 
+            antialias: true, 
+            background: "#1099bb", 
+            width: 600,
+            height: 200,
+        });
+
+        // 将应用画布添加到网页body中
+        document.body.appendChild(app.canvas);
+
+        // 加载纹理资源（旋转背景图/圆形元素图）
+        await Assets.load([
+            "../assets/images/bg_scene_rotate.jpg", 
+            "../assets/images/bg_rotate.jpg", 
+            "../assets/images/circle.png"
+        ]);
+
+        /* ---------------------------------------
+        变化形式1 正方形径向变化
+        -------------------------------------- */
+        const generateSpinner1 = position => {
+            // 新建一个容器
+            const container = new Container();
+
+            //容器的位置
+            container.position = position;
+            //将容器加载到页面上
+            app.stage.addChild(container);
+
+            //上面展示图片
+            const base = Sprite.from("../assets/images/bg_scene_rotate.jpg");
+            const size = 100;
+
+            base.width = size;
+            base.height = size;
+
+            //下面展示图片
+            const bottom = Sprite.from("../assets/images/bg_rotate.jpg");
+
+            bottom.width = size;
+            bottom.height = size;
+
+            const mask = new Graphics();
+
+            mask.position.set(size / 2, size / 2);
+            //基础精灵加载上遮罩
+            base.mask = mask;
+            //整个页面也加上纹理
+            window.mask = mask;
+
+            //容器中将三者都加入子元素中
+            container.addChild(bottom);
+            //这个精灵在上面 但是mask 并没有大小 还是显示的是这个精灵  后续如果增大 会将整个纹理覆盖 只会显示下面的精灵
+            container.addChild(base);
+            container.addChild(mask);
+
+            // 阶段
+            let phase = 0;
+
+            //改变的是mask遮罩，这个数据以自身为中心点，所以会有负值 以坐标轴为原点调整要展示的数据
+            return delta => {
+                // 更新阶段
+                // 每次加上每帧时间的的60分之一
+                phase += delta / 60;
+                // 阶段每次除以360度 如果能除下 phase会第一次等于0
+                phase %= Math.PI * 2;
+
+                // 计算目标点
+                //通过正弦与余弦计算 位置
+
+                // 2π 一个循环
+                // 开始值(phase - Math.PI / 2)  负二分之一π 值为0
+                // sin 0 到1 1到-1 -1到0
+                const x = Math.cos(phase - Math.PI / 2) * size;
+                // 2π 一个循环
+                // 开始值(phase - Math.PI / 2)  负二分之一π 值为-1
+                // sin -1 到1 然后1到-1
+                const y = Math.sin(phase - Math.PI / 2) * size;
+                // console.log(delta, phase, phase - Math.PI / 2, x, y);
+
+                // 四个边 每两个数字是一个点
+                const segments = [
+                    [-size / 2, -size / 2, size / 2, -size / 2], // 上部
+                    [size / 2, -size / 2, size / 2, size / 2], // 右边
+                    [-size / 2, size / 2, size / 2, size / 2], // 下边
+                    [-size / 2, -size / 2, -size / 2, size / 2], // 左边
+                ];
+
+                // 找到线段相交的点
+                let intersection = null;
+                //弯曲值为0
+                let winding = 0;
+
+                // 每次循环都按照顺时针循环
+                // 循环中每次都按照 每条边进行循环
+                for (let i = 0; i < segments.length; i++) {
+                    const segment = segments[i];
+                    //获取相交的x与y点
+                    const hit = intersect(0, 0, x, y, segment[0], segment[1], segment[2], segment[3]);
+
+                    //如果相交点存在
+                    if (hit) {
+                        intersection = hit;
+                        //判断如果相交的点为负数 就是第五部分
+                        // 从最上边的中间开始走到末尾 winding等于0
+                        // 从最上边开始走到中间 winding 等于 4
+                        if (i === 0) winding = hit.x > 0 ? 0 : 4;
+                        else winding = i;
+                        break;
+                    }
+                }
+
+                //角度
+                const corners = [
+                    size / 2,
+                    -size / 2, // 右上角
+                    size / 2,
+                    size / 2, // 右下角
+                    -size / 2,
+                    size / 2, // 左下角
+                    -size / 2,
+                    -size / 2, // 左上角
+                    0,
+                    -size / 2, // 结束点
+                ];
+
+                // 重绘遮罩
+                mask.clear()
+                    .moveTo(0, -size / 2)
+                    .lineTo(0, 0)
+                    .lineTo(intersection.x, intersection.y);
+
+                // 充满角
+                // 直接连接可以连接的每个点 越往后连接的越少
+                // 开始值为0 形成一个 缺少（0度 - 45度）的多边形
+                // 值为1 形成一个 缺少0度到135度的多边形
+                // 值为2 形成一个 缺少0度到225度的多边形
+                // 值为3 形成一个 缺少0度到315度的多边形
+                // 值为4 形成一个 缺少0度到360度的多边形
+
+                for (let i = winding; i < corners.length / 2; i++) {
+                    //连接x与y点
+                    mask.lineTo(corners[i * 2], corners[i * 2 + 1]);
+                }
+
+                //填充红色 只要填充颜色都会展示数据
+                mask.fill({ color: 0xff0000 });
+            };
+        };
+
+        /* -----------------------
+        Spinner. 3 缩放球
+        ---------------------- */
+        const generateSpinner2 = position => {
+            //新建一个容器
+            const container = new Container();
+
+            //容器位置判断
+            container.position = position;
+            //在舞台上添加
+            app.stage.addChild(container);
+
+            //设置大小
+            const size = 100;
+            //小球数量
+            const ballAmount = 7;
+            //球的集合
+            const balls = [];
+
+            //数量循环
+            for (let i = 0; i < ballAmount; i++) {
+                //加载纹理
+                const ball = Sprite.from("../assets/images/circle.png");
+
+                //设置锚点
+                ball.anchor.set(0.5);
+                //加入舞台上
+                container.addChild(ball);
+                //设置球的位置
+                //通过余弦与正弦设置x与y 环绕着中心点放位置
+                //(i / ballAmount) * Math.PI * 2  
+                // 计算结果: 0  2π/7（约0.88） 4π/7（约1.76） 6π/7（约2.64） 8π/7（约3.52） 10π/7（约4.40） 12π/7（约5.28）
+                //cos 1 0.62 -0.22 -0.90 -0.90 -0.22 0.62
+                //sin 0 0.78 0.97 0.43 -0.43 -0.97 -0.78
+                //最后除以3 防止超过设定的值的二分之一
+                //以size/2为坐标轴原点，所有的数据围绕着这个点循环
+
+                //最终的x与y的坐标   83.3 50   70.7 76.0   42.5 82.4   19.9 64.4   19.9 35.5   42.5 17.5   70.7 23.9
+                ball.position.set(
+                    size / 2 + (Math.cos((i / ballAmount) * Math.PI * 2) * size) / 3, 
+                    size / 2 + (Math.sin((i / ballAmount) * Math.PI * 2) * size) / 3
+                );
+
+                //加入集合
+                balls.push(ball);
+            }
+
+            // 阶段
+            let phase = 0;
+
+            return delta => {
+                // 更新阶段
+                phase += delta / 60;
+                phase %= Math.PI * 2;
+
+                // 修改球的大小
+                balls.forEach((b, i) => {
+                    //根据页面缓缓增大
+                    //使用这些数据 0  π/7  2π/7  3π/7 4π/7  5π/7  6π/7 减去一个0-2π的值
+                    // 最后值都在-1到1之间循环
+                    //因为减去的相同，都是按照曲线获取的值 相隔一个π/7
+                    const sin = Math.sin((i / ballAmount) * Math.PI - phase);
+
+                    // 将sin与自身相乘，得到更陡峭的边缘。
+                    // 0.5 - 0.9 再0.9 - 0.5 定期修改
+                    // 最低是0.5 也是值为0的时候
+                    // Math.abs 计算数据的绝对值，不管是什么最后都等于正数
+                    b.scale.set(Math.abs(sin * sin * sin * 0.5) + 0.5);
+                });
+            };
+        };
+
+        /* ---------------------
+        Spinner 3. 径向遮罩
+        -------------------- */
+        const generateSpinner3 = position => {
+            //新建一个容器
+            const container = new Container();
+
+            //判断位置
+            container.position = position;
+            //容器加载到舞台上
+            app.stage.addChild(container);
+
+            //加载精灵
+            const base = Sprite.from("../assets/images/bg_scene_rotate.jpg");
+            const size = 100;
+
+            //设置大小
+            base.width = size;
+            base.height = size;
+
+            //设置遮罩
+            const mask = new Graphics();
+
+            //遮罩中心位置
+            mask.position.set(size / 2, size / 2);
+            //设置遮罩
+            base.mask = mask;
+            //也是整个页面的遮罩
+            window.mask = mask;
+
+            //精灵与遮罩都加入到容器中
+            container.addChild(base);
+            container.addChild(mask);
+
+            //阶段
+            let phase = 0;
+
+            return delta => {
+                // 更新阶段 phase 是一个不断增大的数 如果大于2π 就会重新开始
+                phase += delta / 60;
+                phase %= Math.PI * 2;
+
+                //开始角度 -90°  -0.44 也是坐标轴上方的竖线
+                const angleStart = 0 - Math.PI / 2;
+                //角度
+                const angle = phase + angleStart;
+                //圆角
+                const radius = 50;
+
+                // x1与y1 根据余弦与正弦获取正确的数据
+                const x1 = Math.cos(angleStart) * radius;
+                const y1 = Math.sin(angleStart) * radius;
+
+                // 重新绘制遮罩
+                // 从0点开始 目标点x1与y1 不停变化的数据
+                // arc 前两个参数 弧的中心点 弧度的半径  弧度的开始点 弧度的结束点 是否逆时针(false代表顺时针)
+                // 代表先从原点画 画到目标点 连接一个弧线  再次连接到原点 形成一个扇形  最后加入颜色
+                mask.clear()
+                    .moveTo(0, 0)
+                    .lineTo(x1, y1)
+                    .arc(0, 0, radius, angleStart, angle, false)
+                    .lineTo(0, 0)
+                    .fill({ color: 0xff0000 });
+            };
+        };
+
+        /* ---------------------------------
+        Spinner 4. 围绕正方形的边
+        ------------------------------- */
+        const generateSpinner4 = position => {
+            //新建一个容器
+            const container = new Container();
+
+            //容器的位置
+            container.position = position;
+            app.stage.addChild(container);
+
+            const size = 100;
+            //圆弧半径
+            const arcRadius = 15;
+
+            //初始化精灵
+            const base = Sprite.from("../assets/images/bg_scene_rotate.jpg");
+
+            //宽度与高度
+            base.width = size;
+            base.height = size;
+
+            // 为了获得更好的性能，预先对资产进行设定比遮罩要好。
+            const roundingMask = new Graphics();
+
+            // 围绕的遮罩 这个遮罩有颜色 会一直展示
+            roundingMask.roundRect(0, 0, size, size, arcRadius).fill({ color: 0x0 });
+            base.mask = roundingMask;
+
+            // 边缘也可以用图像代替
+            const lineSize = 5;
+            const edge = new Graphics();
+
+            //创建一个圆角边 是边框(stroke)类型的，外部是红色
+            edge.roundRect(0, 0, size, size, arcRadius).stroke({ width: lineSize, color: 0xff0000 });
+
+            //此示例中的Mask的工作方式与示例1基本相同。
+            //除了它被反转并在边缘中以直线计算遮罩。
+            const mask = new Graphics();
+
+            //内部的遮罩
+            mask.position.set(size / 2, size / 2);
+            edge.mask = mask;
+
+            container.addChild(base);
+            container.addChild(roundingMask);
+            container.addChild(edge);
+            container.addChild(mask);
+
+            let phase = 0;
+
+            return delta => {
+                // 更新阶段
+                // 除以160 需要更长的时间去获取
+                phase += delta / 160;
+                phase %= Math.PI * 2;
+
+                // 随时间变化 通过余弦与正弦确认x y变化 计算目标点
+                const x = Math.cos(phase - Math.PI / 2) * size;
+                const y = Math.sin(phase - Math.PI / 2) * size;
+                // 线段计算 四个边
+                const segments = [
+                    [-size / 2 + lineSize, -size / 2 + lineSize, size / 2 - lineSize, -size / 2 + lineSize], // 上边
+                    [size / 2 - lineSize, -size / 2 + lineSize, size / 2 - lineSize, size / 2 - lineSize], // 右边
+                    [-size / 2 + lineSize, size / 2 - lineSize, size / 2 - lineSize, size / 2 - lineSize], // 下边
+                    [-size / 2 + lineSize, -size / 2 + lineSize, -size / 2 + lineSize, size / 2 - lineSize], // 左边
+                ];
+                // 在每个分段处，应屏蔽到哪个目录继续
+                let outDir = [
+                    [0, -1],
+                    [1, 0],
+                    [0, 1],
+                    [-1, 0],
+                ];
+
+                // 找到线段相交的点
+                let intersection = null;
+                let winding = 0;
+                //在找到撞击后，在撞击线尺寸之前，线应该继续朝哪个方向前进
+                for (let i = 0; i < segments.length; i++) {
+                    const segment = segments[i];
+                    //相交的点
+                    const hit = intersect(0, 0, x, y, segment[0], segment[1], segment[2], segment[3]);
+
+                    if (hit) {
+                        intersection = hit;
+                        if (i === 0) winding = hit.x < 0 ? 0 : 4;
+                        else winding = 4 - i; //这里发生了变动 1与3调换位置
+                        //判断 屏蔽目录
+                        outDir = outDir[i];
+                        break;
+                    }
+                }
+
+                //角度
+                const corners = [
+                    -size / 2 - lineSize,
+                    -size / 2 - lineSize, // 左上角,
+                    -size / 2 - lineSize,
+                    size / 2 + lineSize, // 左下角
+                    size / 2 + lineSize,
+                    size / 2 + lineSize, // 右下角
+                    size / 2 + lineSize,
+                    -size / 2 - lineSize, // 左上角
+                ];
+
+                // 重绘遮罩
+                // 这些形成一条直线，是竖着的一条线
+                mask.clear()
+                    .moveTo(0, 0)
+                    .moveTo(0, -size / 2 - lineSize);
+
+                // 填充角度
+                for (let i = 0; i < winding; i++) {
+                    //循环中连接不同的角
+                    mask.lineTo(corners[i * 2], corners[i * 2 + 1]);
+                }
+
+                //首先连接短线的上边与下边
+                //然后连接到原点
+                //最后填充颜色
+                mask.lineTo(intersection.x + outDir[0] * lineSize * 2, intersection.y + outDir[1] * lineSize * 2)
+                    .lineTo(intersection.x, intersection.y)
+                    .lineTo(0, 0)
+                    .fill({ color: 0xff0000 });
+            };
+        };
+
+        /* ---------------------
+        Spinner 5. 圆矩形定长旋转器
+        -------------------- */
+        const generateSpinner5 = position => {
+            //创建容器
+            const container = new Container();
+
+            //设置位置
+            container.position = position;
+            app.stage.addChild(container);
+
+            //设置半个圆 颜色红色
+            const halfCircle = new Graphics().arc(0, 0, 100, 0, Math.PI).fill({ color: 0xff0000 });
+
+            //设置位置的中心点
+            halfCircle.position.set(50, 50);
+
+            //设置圆角矩形 白色
+            const rectangle = new Graphics().roundRect(0, 0, 100, 100, 16).stroke({ width: 2, color: 0xffffff });
+
+            //圆角矩形的遮罩使用半圆
+            rectangle.mask = halfCircle;
+
+            //再容器中添加圆角矩形与半圆遮罩
+            container.addChild(rectangle);
+            container.addChild(halfCircle);
+
+            //阶段
+            let phase = 0;
+
+            return delta => {
+                // 更新阶段
+                phase += delta / 6;
+                phase %= Math.PI * 2;
+
+                //设置旋转角度，每次角度变化 都会将数据改变
+                halfCircle.rotation = phase;
+            };
+        };
+
+        const onTick = [
+            generateSpinner1(new Point(50, 50)),
+            generateSpinner2(new Point(160, 50)),
+            generateSpinner3(new Point(270, 50)),
+            generateSpinner4(new Point(380, 50)),
+            generateSpinner5(new Point(490, 50)),
+        ];
+
+        // Listen for animate update
+        app.ticker.add(time => {
+            // Call tick handling for each spinner.
+            onTick.forEach(cb => {
+                cb(time.deltaTime);
+            });
+        });
+
+        /**
+         * 帮助方法
+
+                Paul Bourke的线截距数学http://paulbourke.net/geometry/pointlineplane/
+                确定两条线段的交点
+                如果线条不相交，则返回FALSE
+                对原始代码进行了修改，以匹配pixi示例的linting规则。
+
+                前四个参数与后四个参数都代表 一条线
+                每两个参数代表一个点 
+        */
+        function intersect(x1, y1, x2, y2, x3, y3, x4, y4) {
+            // 检查每条线的起始位置是否相同 如果相同是个点 不符合判断 直接返回false
+            if ((x1 === x2 && y1 === y2) || (x3 === x4 && y3 === y4)) {
+                return false;
+            }
+
+            // 分母
+            const denominator = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1);
+
+            // 线条是平行的
+            if (denominator === 0) {
+                return false;
+            }
+
+            const ua = ((x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)) / denominator;
+            const ub = ((x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)) / denominator;
+
+            // 是沿线段的交点
+            if (ua < 0 || ua > 1 || ub < 0 || ub > 1) {
+                return false;
+            }
+
+            // 返回一个具有交点x和y坐标的对象
+            const x = x1 + ua * (x2 - x1);
+            const y = y1 + ua * (y2 - y1);
+
+            return { x, y };
+        }
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <script src="../node_modules/rxjs/dist/bundles/rxjs.umd.js"></script>
+</head>
+<body>
+    <button id="btn">点击</button>
+    <script>
+        const { fromEvent, interval } = rxjs;
+        const { exhaustMap, take } = rxjs.operators;
+
+        const button = document.getElementById("btn");
+        fromEvent(button, "click")
+            .pipe(exhaustMap(() => interval(1000).pipe(take(3))))
+            .subscribe(console.log);
+    </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">播放</button>
+    <script src="../js/howler.js"></script>
+    <script>
+        btn.onclick = ()=>{
+                load()
+        }
+        function load(){
+            var sound = new Howl({
+                src: ['../assest/01.WAV', '../assest/02.WAV']
+            });
+
+            // 首次调用后清除监听器。
+            sound.once('load', function(){
+                sound.play();
+            });
+
+            // 声音播放结束时触发。
+            sound.on('end', function(){
+                console.log('Finished!');
+            });
+        }
+       
+    </script>
+</body>
+</html>

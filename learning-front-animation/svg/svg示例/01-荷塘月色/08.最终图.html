@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        .night-wrap {
+            width: 500px;
+            height: 660px;
+            background: #04191c;
+            background-position: 0 160px;
+            position: relative;
+        }
+
+        .ripple {
+            width: 500px;
+            height: 100px;
+            filter: url(#displacementFilter);
+        }
+    </style>
+</head>
+<body>
+    <svg class="night-wrap">
+        <defs>
+            <!-- 模糊滤镜 -->
+            <filter id="blur">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="8" />
+            </filter>
+            <!-- 线性渐变-->
+            <linearGradient id="moonColor" x1="0%" y1="0%" x2="100%" y2="80%">
+                <stop offset="10%" stop-color="#fbe70e" />
+                <stop offset="100%" stop-color="#fbfedf" />
+            </linearGradient>
+            <!-- 镜面反射 -->
+            <filter id="lightMoon">
+                <feSpecularLighting in="SourceGraphic" specularExponent="5" lighting-color="white" result="light">
+                    <fePointLight x="65" y="70" z="30"/>
+                </feSpecularLighting>
+                <feComposite in="SourceGraphic" in2="light" operator="arithmetic" k1="1" k2="0" k3="0" k4="0"/>
+            </filter>
+
+             <!-- 合成的月亮 -->
+             <g id="moon">
+                <circle cx="100" cy="100" r="70" fill="#fbfedf" filter="url(#blur)"/>
+                <circle cx="100" cy="100" r="60" fill="url(#moonColor)"/>
+                <circle cx="100" cy="100" r="60" fill="#fbfedf" filter="url(#lightMoon)"/>
+            </g>
+
+
+             <!-- 水波滤镜 -->
+             <filter id="displacementFilter">
+                <feTurbulence type="turbulence" baseFrequency="0.01 .1" result="turbulence" seed="23">
+                    <animate id="ani1" attributeName="baseFrequency" from="0.007 0.09" to="0.015 0.14" begin="0s; ani2.end" dur="15s" fill="freeze" />
+                    <animate id="ani2" attributeName="baseFrequency" from="0.015 0.14" to="0.007 0.09" begin="ani1.end" dur="15s" fill="freeze" />
+                </feTurbulence>
+                <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="20" xChannelSelector="R" yChannelSelector="R" />
+            </filter>
+
+
+            <svg viewBox="0 0 400 300" id="rabbit">
+                <!--  兔子左耳朵 -->
+                <path d="M 78 104 L 60 60 Q 50 25 60 15 Q 68 3 80 10 Q 100 20 102 88" stroke="black" fill="white" />
+                <path d="M 90 90 Q 75 5 70 50" stroke="black" fill="none" />
+                <!--  兔子右耳朵 -->
+                <path d="M 180 95 Q 200 40 240 30 Q 280 25 270 50 Q 270 72 198 105" stroke="black" fill="white" />
+                <path d="M 188 100 Q 230 40 252 50" stroke="black" fill="none" />
+                <!--  兔子尾巴 -->
+                <path d="M 300 145 Q 340 130 320 160 " stroke="black" fill="white" />
+                <!--  兔子腿 -->
+                <path d="M 65 225 Q 40 260 95 240 " stroke="black" fill="white" />
+                <!--  兔子头 -->
+                <path
+                    d="M 233 182 C 250 43 25 43 62 190 Q 50 210 65 226 Q 100 250 175 240
+                M 200 220 C 150 240 180 260 222 238 Q 260 245 295 237
+                L 300 240 C 340 250 360 230 320 223 L 318 228 Q 360 125 230 138"
+                    stroke="black"
+                    fill="white"
+                />
+                <!--  兔子眼睛 -->
+                <path d="M 75 180 Q 90 190 100 180 " stroke="black" fill="none" />
+                <path d="M 75 180 Q 90 190 100 180 " stroke="black" fill="none" transform="translate(70, 3)" />
+                <!--  兔子腮红 -->
+                <ellipse cx="80" cy="205" rx="15" ry="8" stroke="pink" fill="pink" />
+                <ellipse cx="75" cy="205" rx="15" ry="8" stroke="pink" fill="pink" transform="translate(85, 3)" />
+                <!--  兔子嘴巴 -->
+                <path d="M 110 200 Q 128 200 115 205 Q 105 201 110 200 " stroke="black" fill="white" />
+                <path d="M 105 208 Q 114 213 115 205 Q 115 215 128 210" stroke="black" fill="white" />
+            </svg>
+
+            <svg viewBox="0 0 400 200" id="boat">
+                <!-- 船身 #aa6428 #76421a -->
+                <path d="M 0 70 Q 22 110 48 126 Q 110 145 200 140 Q 300 130 363 103 Q 380 90 395 62" stroke="#7b4717" fill="#aa6428" />
+                <!-- 船 #c37731 #7b4717 -->
+                <path d="M 0 70 Q 200 60 352 30 L 395 63 Q 150 140 0 70" stroke="#7b4717" fill="#c37731" />
+                <path d="M 20 75 Q 200 65 352 37 L 385 63 Q 170 125 20 75" stroke="#7b4717" fill="#7b4717" />
+                <!--  船纹路  #76421a -->
+                <path d="M 12 90 Q 150 140 385 80 L 380 85 Q 150 140 18 95 z" stroke="none" fill="#76421a" />
+                <path d="M 30 110 Q 150 140 373 95 L 365 100 Q 160 140 35 115 z" stroke="none" fill="#76421a" />
+                <path d="M 90 90 Q 200 80 340 55 L 360 70 Q  200 110 90 90" stroke="#d69c3a" fill="#d69c3a" />
+                <!--  船底   -->
+                <path
+                    d="M 42 116 Q 22 110 48 126 Q 110 145 200 140 Q 300 130 363 103 L 368 98 Q 160 145 35 115"
+                    stroke="#aa6428"
+                    fill="#76421a"
+                    fill-opacity="0.7"
+                    filter="url(#displacementFilter)"
+                />
+            </svg>
+            <!-- 合成的兔子与船 -->
+            <g id="boat-rabbit">
+                <use x="100px" y="440px" width="200" height="100" xlink:href="#boat" fill="red" />
+                <use x="150px" y="412px" width="100" height="100" xlink:href="#rabbit" fill="red" />
+            </g>
+
+            <!-- 鱼 -->
+            <g id="fish">
+                <image xlink:href="./assets/04.png" width="100" height="100" opacity="0.9"/>
+            </g>
+        </defs>
+
+        <svg>
+            <!-- 月亮 -->
+            <use xlink:href="#moon" height="200" height="150" x="0" y="10px"></use>
+            <!-- 水波、倒影-->
+            <g class="ripple">
+                <!-- 水图片-->
+                <image class="ripple-img" xlink:href="./assets/01.png" width="100%" height="100%" x="-10px" y="190px"/>
+                <!-- 花倒影图片-->
+                <image xlink:href="./assets/02.png" width="500" height="200"  x="50px" y="320px"/>
+                <!-- 鱼图片-->
+                <use xlink:href="#fish" transform="rotate(140, 0, 0) translate(0 0)">
+                    <animateMotion dur="8s" repeatCount="indefinite" path="M 0 500 Q 200 500 440 800" />
+                </use>
+            </g>
+            <!-- 莲花 -->
+            <image xlink:href="./assets/03.png" width="500" height="200" x="60px" y="200px"/>
+            <!-- 船 -->
+            <use xlink:href="#boat-rabbit" x="60px" y="-100px">
+                <animateMotion dur="8s" repeatCount="indefinite" path="M 0, 20 L 10 30 z" />
+            </use>
+        </svg>
+    </svg>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+    "posts":[
+        {"name":"电脑","price":5000},
+        {"name":"洗衣机","price":800},
+        {"name":"冰箱","price":1000}
+    ],
+    "users":[
+        {"username":"张三","age":18},
+        {"username":"李四","age":20},
+        {"username":"王五","age":32},
+        {"username":"赵六","age":12}
+    ]
+}

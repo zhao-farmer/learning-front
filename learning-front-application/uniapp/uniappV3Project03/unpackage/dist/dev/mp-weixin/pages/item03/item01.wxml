@@ -1,0 +1,1 @@
+<view class=""><image src="{{a}}" mode=""></image><button type="primary" loading="{{false}}" disabled="{{false}}">按钮</button></view>

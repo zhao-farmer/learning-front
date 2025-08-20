@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>点击页面任意区域触发视频播放</title>
+</head>
+
+<body>
+    <video
+        src="./resource/01.mp4"
+        id="myVideo" width="200" height="300" controls muted>
+    </video>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const videoElement = document.getElementById('myVideo');
+
+            // 添加 click 事件监听器
+            document.addEventListener('click', function (event) {
+                // 检查是否点击的是视频以外的区域
+                if (event.target !== videoElement) {
+                    // 尝试播放视频
+                    videoElement.play()
+                        .catch(error => {
+                            console.error('播放失败，可能是因为浏览器限制自动播放', error);
+                        });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

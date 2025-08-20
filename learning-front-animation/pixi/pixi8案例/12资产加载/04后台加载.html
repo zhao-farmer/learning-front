@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Sprite } from "../js/pixi.mjs";
+
+        // 创建应用程序
+        const app = new Application();
+
+        // 初始化应用程序
+        app.init({ background: "#1099bb", height:400, width: 400 }).then(() => {
+            // 添加到页面上
+            document.body.appendChild(app.canvas);
+
+            // 添加资源信息到资源池中
+            Assets.add({ alias: "flowerTop", src: "../assets/images/flowerTop.png" });
+            Assets.add({ alias: "eggHead", src: "../assets/images/eggHead.png" });
+
+            // 允许资产在后台加载
+            Assets.backgroundLoad(["flowerTop", "eggHead"]);
+
+            // 如果后台加载尚未加载此资源，则调用load会强制立即加载此资源。
+            Assets.load("eggHead").then(texture => {
+                // 用于切换纹理的辅助标志
+                let isEggHead = true;
+
+                // 从解析的加载纹理创建新的Sprite
+                const character = new Sprite(texture);
+
+                character.anchor.set(0.5);
+                character.x = app.screen.width / 2;
+                character.y = app.screen.height / 2;
+                character.eventMode = "static";
+                character.cursor = "pointer";
+
+                app.stage.addChild(character);
+
+                // 点击后判断当前需要加载的
+                character.on("pointertap", async () => {
+                    isEggHead = !isEggHead;
+                    // 这些promise已在缓存中解析。
+                    character.texture = await Assets.load(isEggHead ? "eggHead" : "flowerTop");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

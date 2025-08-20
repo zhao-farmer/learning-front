@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- 
+        引入时 需要加上  type="module"
+        <script src="1.js" type="module"></script>
+    -->
+    
+</head>
+<body>
+    <div></div>
+    <!-- 异步加载 放到所有DOM下面 -->
+    <script type="module">
+        // 模块化
+        /* 
+            异步加载
+            私密不漏
+            重名不怕
+            依赖不乱
+        */
+        //  私密不漏
+        // 导入1.js中的方法
+        import obj from './es6-js/1.js'
+        console.log(obj.A1);
+        
+        // 重名不怕
+        import obj1 from './es6-js/2.js'
+        import obj2 from './es6-js/3.js'
+        obj1.test()
+        obj2.test()
+        
+
+        // 依赖不乱  6.js中导入了4.js与5.js
+        import obj3 from './es6-js/6.js'
+    </script>
+</body>
+</html>

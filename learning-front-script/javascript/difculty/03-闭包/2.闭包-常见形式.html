@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       // 常见的闭包的形式 外部可以访问使用 函数内部的变量
+       function outer(){
+            let a = 10;
+            function fn(){
+                console.log(a);
+            }
+           return fn
+       }
+      
+
+       // 外面使用这个10
+       //   outer() === fn ===  function fn(){}
+       const fun = outer()
+       fun()    // 调用函数
+
+
+       // 简约写法
+       function outer1(){
+            let a = 10;
+            return function fn(){
+                console.log(a);
+            }
+       }
+       const fun1 = outer1()
+       fun1()    // 调用函数
+
+
+    </script>
+</body>
+</html>

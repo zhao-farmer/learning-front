@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Container, Sprite, WRAP_MODES, DisplacementFilter } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({
+                width: 600,
+                height: 400,
+            });
+
+            // 添加应用程序到页面中
+            document.body.appendChild(app.canvas);
+
+            // 加载纹理
+            await Assets.load(["../assets/images/flag.png", "../assets/images/displacement_map_repeat.jpg"]);
+
+            //设置其交互性
+            app.stage.eventMode = "static";
+
+            const container = new Container();
+
+            app.stage.addChild(container);
+
+            //旗帜精灵
+            const flag = Sprite.from("../assets/images/flag.png");
+
+            container.addChild(flag);
+            flag.x = 100;
+            flag.y = 100;
+
+            // 创建置换精灵
+            const displacementSprite = Sprite.from("../assets/images/displacement_map_repeat.jpg");
+
+            // 确保精灵正在覆盖
+            displacementSprite.texture.baseTexture.wrapMode = WRAP_MODES.REPEAT;
+
+            // 创建置换过滤器
+            const displacementFilter = new DisplacementFilter({
+                sprite: displacementSprite,
+                scale: { x: 60, y: 120 },
+            });
+
+            //置换过滤器的内边距
+            displacementFilter.padding = 10;
+
+            //置换过滤器的位置
+            displacementSprite.position = flag.position;
+
+            app.stage.addChild(displacementSprite);
+
+            // 应用过滤器
+            flag.filters = [displacementFilter];
+
+            app.ticker.add(() => {
+                //偏移角色位置，使vFilterCoord更新为更大的值。
+                //重复覆盖以确保坐标上仍有像素。
+                displacementSprite.x++;
+                //当x超过宽度时，将其重置为0，以防止值变为非常大的数字。
+                if (displacementSprite.x > displacementSprite.width) {
+                    displacementSprite.x = 0;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

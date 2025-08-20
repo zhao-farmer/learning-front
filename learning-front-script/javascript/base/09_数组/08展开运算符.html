@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        /*
+           [...原数组] （展开运算符）
+           原理： [...原数组] = [原数组元素...]
+               1.进行深拷贝
+                    可以将一个数组中的元素展开到另一个数组中
+               2.作为函数的参数传递
+                    展开为多个参数传递作为形参
+        */
+
+        const arr = ['孙悟空', '猪八戒', '沙和尚']
+        //复制方式 - 浅拷贝
+        const arr2 = arr.slice()
+        //展开复制  - 深拷贝
+        const arr3 = [...arr]
+        // 等于  const arr3 = [arr[0],arr[1],arr[2]]
+        // 可以写成 const arr3 = ['唐僧',...arr,'白骨精']
+
+        console.log(arr);
+        console.log(arr3);
+
+
+        //可以将原数组作为参数传递给函数
+        function sum(a, b, c) {
+            return a + b + c
+        }
+        const arr4 = [10, 20, 30]
+        let result = sum(arr4[0], arr4[1], arr[2]);
+        result = sum(...arr4);
+
+        console.log(result);
+
+
+        /*
+            对象的复制
+               - Object.assign(目标对象，被复制的对象)
+                    - 将被复制对象中属性复制到目标对象里，并将目标对象返回
+                - 也可以使用展开运算符{...} 对对象进行复制
+        
+        */
+        const obj = { name: '孙悟空', age: 18 }
+        const obj2 = Object.assign({}, obj);
+        console.log(obj2);
+
+        const obj3 = { address: '花果山', age: 28 }
+        Object.assign(obj3, obj);
+        console.log(obj3);
+
+
+        const obj4 = { address: '高老庄', ...obj };
+        console.log(obj4);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

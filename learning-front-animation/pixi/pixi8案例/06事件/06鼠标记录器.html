@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Text, Graphics } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                antialias: true, 
+                background: "#1099bb", 
+                width: 800,
+                height: 600, 
+            });
+
+            // 应用程序添加到网页中
+            document.body.appendChild(app.canvas);
+
+            //标题添加
+            const title = app.stage.addChild(
+                //需添加的文本
+                new Text({
+                    text: '将鼠标缓慢移动到框上' + 
+                    '\n查看指针进入、指针退出、指针退出的顺序，' + 
+                    '\npointerover，pointerout每个目标上的事件！',
+                    style: {
+                        fontSize: 16,
+                    },
+                })
+            );
+
+            title.x = 2;
+
+            const logs = [];
+            //日志文本
+            const logText = app.stage.addChild(
+                new Text({
+                    text: "",
+                    style: {
+                        fontSize: 14,
+                    },
+                })
+            );
+
+            logText.y = 80;
+            logText.x = 2;
+
+            app.stage.name = "stage";
+
+            // 安装外部黑匣子
+            const blackBox = app.stage.addChild(
+                new Graphics()
+                    .rect(0, 0, 400, 400)
+                    .fill({ color: 0 })
+            );
+
+            blackBox.name = "black box";
+            blackBox.x = 400;
+
+            // 在白色盒子里装上白色盒子
+            const whiteBox = blackBox.addChild(
+                new Graphics()
+                    .rect(100, 100, 200, 200)
+                    .fill({ color: 0xffffff })
+            );
+
+            whiteBox.name = "white box";
+
+            // 让互动无处不在！
+            app.stage.eventMode = "static";
+            app.stage.hitArea = app.screen;
+            whiteBox.eventMode = "static";
+            blackBox.eventMode = "static";
+
+            function onEvent(e) {
+                const type = e.type;
+                const targetName = e.target.name;
+                const currentTargetName = e.currentTarget.name;
+
+                // 将事件添加到日志顶部
+                logs.push(`${currentTargetName} 收到 ${type} 事件 (目标是 ${targetName})`);
+
+                if (currentTargetName === "stage" || type === "pointerenter" || type === "pointerleave") {
+                    logs.push("-----------------------------------------", "");
+                }
+
+                // 防止原木长得太长
+                if (logs.length > 30) {
+                    while (logs.length > 30) {
+                        logs.shift();
+                    }
+                }
+
+                // 更新日志文本
+                logText.text = logs.join("\n");
+            }
+
+            // 对象都添加信息
+            [app.stage, whiteBox, blackBox].forEach(object => {
+                // 四个事件 执行的方法
+                object.addEventListener("pointerenter", onEvent);
+                object.addEventListener("pointerleave", onEvent);
+                object.addEventListener("pointerover", onEvent);
+                object.addEventListener("pointerout", onEvent);
+            });
+        })();
+    </script>
+</body>
+</html>

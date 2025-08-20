@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title>圆形</title>
+     <style>
+        body{
+            display: flex;
+        }
+        .outer{
+            border: 1px solid;
+        }
+        .inside_01{
+            width:100px;
+            height: 100px;
+            background:orange;
+            clip-path: circle(50% at 50% 50%)
+        }
+        .inside_02{
+            width:100px;
+            height: 100px;
+            background:green;
+            clip-path: circle(50% at 30px 50px)
+        }
+        .inside_03{
+            width:200px;
+            height: 200px;
+            background:skyblue;
+            clip-path: circle(50px at 150px 50px)
+        }
+        .inside_04{
+            width:200px;
+            height: 100px;
+            background:pink;
+            clip-path: circle(50% at 50% 50%)
+        }
+        .inside_05{
+            width:100px;
+            height: 200px;
+            background:red;
+            clip-path: circle(50% at 50% 50%)
+        }
+     </style>
+</head>
+<body>
+    <div class="outer">
+        <div class="inside_01"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_02"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_03"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_04"></div>
+    </div>
+    <div class="outer">
+        <div class="inside_05"></div>
+    </div>
+</body>
+</html>

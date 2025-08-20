@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>flex-flow示例</title>
+        <style>
+            .flex-container {
+                display: flex;
+                flex-flow: column wrap; /* 设置主轴为垂直和允许换行 */
+                justify-content: flex-start;
+                align-items: stretch;
+                margin-bottom: 20px;
+                padding: 10px;
+                height: 200px;
+                border: 1px solid #000;
+            }
+            .flex-item {
+                width: 100px;
+                height: 50px;
+                margin: 5px;
+                background-color: #999;
+                color: #fff;
+                text-align: center;
+                line-height: 50px;
+                border: 1px solid #666;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Flex Flow Example</h2>
+        <div class="flex-container">
+            <div class="flex-item">1</div>
+            <div class="flex-item">2</div>
+            <div class="flex-item">3</div>
+            <div class="flex-item">4</div>
+            <div class="flex-item">5</div>
+            <div class="flex-item">6</div>
+            <div class="flex-item">7</div>
+            <div class="flex-item">8</div>
+            <div class="flex-item">9</div>
+            <div class="flex-item">10</div>
+        </div>
+    </body>
+</html>

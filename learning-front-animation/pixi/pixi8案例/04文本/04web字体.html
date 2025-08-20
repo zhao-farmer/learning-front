@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Text } from "../js/pixi.mjs";
+
+        // 加载谷歌字体之前开始
+        window.WebFontConfig = {
+            google: {
+                families: ["Snippet"],
+            },
+            active() {
+                init();
+            },
+        };
+
+        /* eslint-disable */
+        //包括web字体加载器脚本
+        (function () {
+            const wf = document.createElement("script");
+            wf.src = `${document.location.protocol === "https:" ? "https" : "http"
+                        }://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js`;
+            wf.type = "text/javascript";
+            wf.async = "true";
+            const s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+        /* eslint-enabled */
+
+        async function init() {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ 
+                background: "#1099bb", 
+                width: 800,
+                height:400,   
+            });
+
+            // 应用程序添加到网页中
+            document.body.appendChild(app.canvas);
+
+            // 使用Snippet网页字体创建一些白色的字体
+            const textSample = new Text('PixiJS text using the\ncustom "Snippet" Webfont', {
+                fontFamily: "Snippet",
+                fontSize: 50,
+                fill: "white",
+                align: "left",
+            });
+            textSample.position.set(50, 200);
+            app.stage.addChild(textSample);
+        }
+    </script>
+</body>
+</html>

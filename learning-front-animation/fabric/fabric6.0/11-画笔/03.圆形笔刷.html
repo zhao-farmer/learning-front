@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>圆形笔刷 CircleBrush</title>
+</head>
+<body>
+    <canvas id="c" width="600" height="400" style="border: 1px solid #ccc"></canvas>
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+
+        // 初始化
+        const canvas = new fabric.Canvas("c",{
+            isDrawingMode:true
+        });
+
+        // 创建笔刷
+        let circleBrush = new fabric.CircleBrush(canvas);
+        canvas.freeDrawingBrush = circleBrush;
+
+        // 设置笔刷宽度
+        circleBrush.width = 30;
+
+        // 设置颜色
+        circleBrush.color = "rgb(10, 230, 120)";
+
+        // 设置阴影
+        circleBrush.shadow = new fabric.Shadow({
+            blur: 10, // 羽化程度
+            offsetX: 20, // x轴偏移量
+            offsetY: 20, // y轴偏移量
+            color: "#30e3ca", // 投影颜色
+        });
+
+        // 其他属性可以有，单不适合圆形笔刷  
+        // strokeDashArray 虚线 
+        // strokeLineCap 笔刷的线尾样式
+        // strokeLineJoin 笔刷的角样式
+        // strokeMiterLimit 笔刷的最大斜接长度（用于strokeLineJoin = “斜接”）
+        // points 不知道什么用处
+    </script>
+</body>
+</html>

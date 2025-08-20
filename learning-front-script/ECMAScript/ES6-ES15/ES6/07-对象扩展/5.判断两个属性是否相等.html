@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.is
+        // == 
+        // ===
+
+        console.log(Object.is(5,5));    // true
+        console.log(Object.is(5,"5"));  // false
+        console.log(Object.is({},{}));  // false
+        console.log(Object.is(parseInt("kerwin"),NaN)); // true
+
+        // 判断正零与负零
+        console.log(Object.is(+0,-0));
+        
+
+    </script>
+</body>
+</html>

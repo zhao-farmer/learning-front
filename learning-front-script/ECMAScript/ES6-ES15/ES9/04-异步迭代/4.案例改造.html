@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            任务：异步任务按照顺序进行遍历
+        
+        */
+
+        function timer(t){
+            return new Promise(resolve=>{
+                setTimeout(() => {
+                    resolve("data-"+t)
+                }, t);
+            })
+        }
+
+        // 异步生成器
+        async function *gen() {
+            yield timer(1000)
+            yield timer(2000)
+            yield timer(3000)
+        }
+       
+        async function test() {
+            // 异步遍历器数组
+            let arr = [g.next(),g.next(),g.next()]
+            // for await遍历
+            for await(const item of arr) {
+                console.log("start-",Date.now());      
+                console.log(await item);   
+                console.log("end-",Date.now());
+            }
+        }
+        test()
+ 
+    </script>
+</body>
+</html>

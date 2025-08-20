@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, Point, Container, MeshRope } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({   
+                width:800,
+                height:400, 
+            });
+
+            // 添加页面程序到网页上
+            document.body.appendChild(app.canvas);
+
+            // 加载蛇纹理
+            const texture = await Assets.load("../assets/images/snake.png");
+
+            let count = 0;
+
+            // 从点开始做一根绳子
+            const ropeLength = 918 / 20;
+            const points = [];
+
+            //循环20次 20个点位
+            for (let i = 0; i < 20; i++) {
+                points.push(new Point(i * ropeLength, 0));
+            }
+
+            // 创建一个蛇网绳
+            const strip = new MeshRope({ texture, points });
+
+            //条
+            strip.x = -459;
+
+            //蛇容器
+            const snakeContainer = new Container();
+
+            //蛇的位置
+            snakeContainer.x = 400;
+            snakeContainer.y = 200;
+
+            //蛇容器的比例
+            snakeContainer.scale.set(800 / 1100);
+            //添加
+            app.stage.addChild(snakeContainer);
+            //网绳加入到蛇容器中
+            snakeContainer.addChild(strip);
+
+            // 绳上的点开始移动
+            app.ticker.add(() => {
+                count += 0.1;
+
+                // 每个点都进行循环
+                for (let i = 0; i < points.length; i++) {
+                    //y轴等按照序号 * 0.5 + 计数
+                    //使用sin函数 大约每6个点位一个循环 进行上下摆动
+                    // 最大移动 -30 到 30
+                    points[i].y = Math.sin(i * 0.5 + count) * 30;
+                    //x轴 设置会显得动画更平滑
+                    // i * ropeLength 点位所在的点  序号 * 0.3 + 计数
+                    // 使用cos函数 大约每10个点位一个循环 左右摆动
+                    // 最大移动 -20 到 20
+                    points[i].x = i * ropeLength + Math.cos(i * 0.3 + count) * 20;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

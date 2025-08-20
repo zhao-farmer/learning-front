@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <svg width="300" height="200">
+        <!-- 非均匀时间分配 -->
+        <circle cx="50" cy="50" r="20" fill="green">
+            <animate 
+                attributeName="cx" 
+                values="50; 100; 150; 100; 50" 
+                keyTimes="0; 0.2; 0.6; 0.8; 1" 
+                dur="5s"
+                repeatCount="indefinite"
+            />
+        </circle>
+        <!-- ‌配合spline插值 -->
+        <circle cx="50" cy="150" r="20" fill="red">
+            <animate 
+                attributeName="opacity"
+                values="0;1;0.5;1"
+                keyTimes="0;0.4;0.8;1"
+                calcMode="spline"
+                dur="3s"
+                repeatCount="indefinite"
+                keySplines=".5 0 .5 1; 0 0 1 1; .5 0 .5 1"
+            />
+        </circle>
+    </svg>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        /*
+            练习：
+                有如下一个数组
+                    arr = [1,2,1,3,2,4,5,5,6,7]
+                编写代码，去除数组中重复的元素 -> [1,2,3,4,5,6,7]
+        
+        */
+
+        //双重循环去重
+        const arr = [1, 2, 1, 3, 2, 2, 4, 5, 5, 6, 7]
+        //编写代码去除数组中重复的元素
+        //分别获取数组中的元素
+        for (let i = 0; i < arr.length; i++) {
+            //获取当前值后边的所有指
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[i] === arr[j]) {
+                    //出现了重复元素，删除后边的元素
+                    arr.splice(j, 1);
+                    /* 
+                        当arr[i] 和 arr[j] 相同时，他会自动的删除j位置的元素，然后j+1位置的元素，会编程j位置的元素
+                        而j位置已经比较过了，不会重新比较，所以会出现漏比较的情况
+
+                        解决方法，删除一个元素后，进行重新比较一遍
+                    */
+                    j--;
+                }
+
+            }
+
+        }
+        console.log(arr);
+
+        //使用indexOf 进行去重
+        arr = [1, 2, 1, 3, 2, 2, 4, 5, 5, 6, 7]
+        //获取数组中的元素
+        for (let i = 0; i < arr.length; i++) {
+            const index = arr.indexOf(arr[i], i + 1);
+            if (index !== -1) {
+                //出现重复内容
+                arr.splice(index, 1);
+                i--;
+            }
+        }
+        console.log(arr);
+
+
+        const newArr = [];
+        arr = [1, 2, 1, 3, 2, 2, 4, 5, 5, 6, 7]
+        //indexOf 加push进行去重
+        for (const ele of arr) {
+            if (newArr.indexOf(ele) === -1) {
+                newArr.push(ele);
+            }
+        }
+        console.log(newArr);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

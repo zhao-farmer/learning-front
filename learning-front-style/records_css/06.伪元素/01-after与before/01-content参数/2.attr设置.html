@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .one::after {
+            /* 在 href 前显示一个箭头 */
+            content: ' → ' attr(href); 
+        }
+
+        
+        .two::after{
+            content: "【" attr(href) "】";
+        }
+    </style>
+    
+</head>
+<body>
+ <a href="https://www.baidu.com/" class="one">百度地址</a>
+ <br/>
+ <a href="https://www.baidu.com/" class="two">百度地址</a>
+</body>

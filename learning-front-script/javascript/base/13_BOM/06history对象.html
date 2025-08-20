@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">点我一下</button>
+    <script>
+      const btn = document.getElementById("btn");
+
+      btn.addEventListener("click", () => {
+        /* 
+          history.back()
+              - 回退按钮
+          history.forward()
+              - 前进按钮
+          history.go()
+              - 可以向前跳转也可以向后跳转
+        
+        */
+
+        console.log(history.length);
+        history.back();
+        history.forward();
+        history.go(-1);
+      });
+    </script>
+  </body>
+</html>

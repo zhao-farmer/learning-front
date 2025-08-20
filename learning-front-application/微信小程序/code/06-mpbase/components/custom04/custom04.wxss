@@ -1,0 +1,4 @@
+/* components/custom04/custom04.wxss */
+.btn{
+  margin: 34rpx;
+}

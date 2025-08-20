@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            class Ball{
+                constructor(x = 0,y = 0,radius = 12,color = '#6699FF'){
+                    //小球中心的x坐标
+                    this.x = x;
+                     //小球中心的y坐标
+                    this.y = y;
+                    //小球半径
+                    this.radius = radius;
+                    // 小球颜色
+                    this.color = color;
+                }
+
+                stroke(ctx){
+                    ctx.strokeStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.stroke()
+                }
+
+                fill (ctx){
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, 360 * Math.PI / 180);
+                    ctx.closePath();
+                    ctx.fill()
+                }
+            }
+
+
+            // 获取canvas对象
+            const canvas = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const ctx = canvas.getContext("2d");
+
+            // 创建图形
+            let ball = new Ball(0,canvas.height,30)
+
+            let vx = 3;
+            let vy = -6;
+            // 重力加速度为0.2 
+            let gravity = 0.1; 
+            // 反弹系数 -0.75
+            let bounce = -0.75; 
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, canvas);
+                // 清空画布
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                ball.x += vx;
+                ball.y += vy;
+
+                // 边界检测
+                if (ball.y > canvas.height - ball.radius) {
+                    ball.y = canvas.height - ball.radius
+                    // 速度反向并减小
+                    vy = vy * bounce
+                }
+                ball.fill(ctx)
+                vy += gravity
+
+                if( ball.x >= canvas.width){
+                    vy = -6
+                    ball = new Ball(0,canvas.height,30)
+                }
+
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+
+        //进行排序
+        let arr = [9, 1, 3, 2, 8, 0, 5, 7, 6, 4];
+        function sort(array) {
+
+            const arr = array.slice();
+
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = i + 1; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) {
+                        let temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+
+                }
+            }
+            return arr
+        }
+        let arr2 = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+
+
+        let rsult = sort(arr)
+        let rsult2 = sort(arr2)
+        console.log(arr);
+        console.log(arr2);
+        console.log(rsult);
+        console.log(rsult2);
+
+
+
+        class Person {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+        }
+
+        const pesonArr = [
+            new Person('孙悟空', 18),
+            new Person('沙和尚', 38),
+            new Person('红孩儿', 8),
+            new Person('白骨精', 16),
+        ]
+
+        //fliter() 函数来对数组进行过滤 循环方法
+        function filter(arr) {
+            const newArr = [];
+            for (let index = 0; index < arr.length; index++) {
+                const element = arr[index];
+                if (element.age < 18) {
+                    newArr.push(element)
+                }
+            }
+            return newArr
+        }
+
+        let result3 = filter(pesonArr)
+        console.log(result3);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

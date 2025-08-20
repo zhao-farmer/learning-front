@@ -1,0 +1,19 @@
+<view class="custom-checkbox-container">
+  <view class="custom-checkbox-box {{ position === 'right'?'right':'left' }}">
+    
+    <label class="custom-label">
+
+      <checkbox class="custom-checkbox" checked="{{ isChecked }}" bind:tap="updateChecked"/>
+
+      <view class="content">
+        <!-- label 和 子节点内容都进行了展示 -->
+        <!-- 要么展示 label 要么展示 子节点内容 -->
+        <!-- 如果用户传递了 label 属性。就展示 lebel -->
+        <!-- 如果用户没有传递label 属性，就展示 子节点内容 -->
+        <text  wx:if="{{ label !== '' }}">{{ label }}</text>
+        <slot wx:else/>
+      </view>
+    </label>
+    
+  </view>
+</view>

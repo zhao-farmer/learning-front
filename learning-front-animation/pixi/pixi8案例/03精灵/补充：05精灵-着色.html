@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+
+  <body>
+    <div id="px-render"></div>
+
+    <script type="module">
+      import { Application, Assets, Sprite, Texture } from "../js/pixi.mjs";
+
+      //创建一个 Pixi应用
+      let app = new Application();
+
+      await app.init({
+        width: 400,
+        height: 300,
+        background: "#fff",
+      });
+
+      let playground = document.getElementById("px-render");
+      //把 Pixi 创建的 canvas 添加到页面上
+      playground.appendChild(app.canvas);
+
+      let texture1 = await Assets.load("../assets/images/brick.jpg");
+
+      let sprite = new Sprite(texture1);
+      sprite.tint = "red";
+      sprite.x = 200;
+
+      let sprite1 = new Sprite(texture1);
+
+      app.stage.addChild(sprite);
+      app.stage.addChild(sprite1);
+    </script>
+  </body>
+</html>

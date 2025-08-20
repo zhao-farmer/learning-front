@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.基础结构赋值
+        let arr = [1,2,3]
+
+        let [a,b,c] = arr
+        console.log('1.基础结构赋值',a,b,c);
+
+        // 2.互换对象
+        let x = 1;
+        let y = 2;
+        [y,x] = [x,y]
+
+        console.log('2.互换对象',x,y);
+        
+        // 3.使用省略变量 获取想要的对象 [,,x]
+        let arr2 = [1,2,3]
+        console.log('3.获取需要的变量',arr2[1]);
+
+        let [,,d] = arr2
+        console.log('3.获取需要的变量',d);
+        
+        // 4.获取数组中的嵌套
+        let arr3 = [1,[2,3,4],5,6]
+        let [e,[f1,,f2],g] = arr3
+        console.log('获取对象中的对象',f1,f2);
+        
+        
+        // 5.默认值 如果取不到值使用默认值
+        let [h=1] = [];
+        console.log(h);
+        
+    </script>
+</body>
+</html>

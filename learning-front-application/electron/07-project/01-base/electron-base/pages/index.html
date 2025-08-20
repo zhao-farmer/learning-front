@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+    <h1>hello world!</h1>
+    <h2></h2>
+    <script>
+        const h2 = document.querySelector("h2");
+        window.dirname.then(res => {
+            console.log("res", res);
+            // 因为在预加载脚本preload.js中暴露了全局变量 varName，所以在html中可以直接访问到其中的node.js的内容
+            h2.innerText = 
+                `
+                该应用的Chrome版本为${versions.getVersions("chrome")},
+                Node.js的版本为${versions.getVersions("node")}
+                Electron版本为${versions.getVersions("electron")}
+                我的精灵是:${jinlin.pika}
+                我的性别是:${sex}
+                文件路径是:${res}
+                `;
+        });
+    </script>
+    <!-- 通常专门弄一个renderer.js文件来写html中运用到的js内容，称之为渲染脚本 -->
+    <!-- <script src="./renderer.js">
+
+    </script> -->
+</body>
+</html>

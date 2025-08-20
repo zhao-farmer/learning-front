@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <!-- 导入pixi -->
+    <script src="../js/pixi7.js"></script>
+    <script>
+        //创建应用
+        const app = new PIXI.Application({
+            width: 800,
+            height: 600,
+            background: 0x1099bb,
+            //设置像素比例
+            resolution: window.devicePixelRatio || 1,
+        });
+
+        //将应用画布添加到DOM中
+        document.body.appendChild(app.view);
+
+
+        // 创建一个木剑精灵
+        const mujian = PIXI.Sprite.from("../assest/mujian.png");
+        // 必须添加到舞台上，否者无法显示
+        app.stage.addChild(mujian);
+
+        // 创建一个背景
+        const bunny = PIXI.Sprite.from("../assest/bg.png");
+        // 用精灵铺满整个屏幕
+        bunny.width = app.screen.width;
+        bunny.height = app.screen.height;
+
+        // 精灵遮罩
+        bunny.mask = mujian;
+        app.stage.addChild(bunny);
+    </script>
+</body>
+</html>

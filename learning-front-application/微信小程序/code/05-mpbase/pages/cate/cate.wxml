@@ -1,0 +1,14 @@
+
+<view>同步存储</view>
+
+<button size="mini" plain type="warn"  bind:tap="setStorageSync">存储</button>
+<button size="mini" plain type="primary" bind:tap="getStorageSync">获取</button>
+<button size="mini" plain type="warn" bind:tap="removeStorageSync">删除</button>
+<button size="mini" plain type="primary" bind:tap="clearStorageSync">清空</button>
+
+<view>异步存储</view>
+
+<button size="mini" plain type="warn"  bind:tap="setStorage">存储</button>
+<button size="mini" plain type="primary" bind:tap="getStorage">获取</button>
+<button size="mini" plain type="warn" bind:tap="removeStorage">删除</button>
+<button size="mini" plain type="primary" bind:tap="clearStorage">清空</button>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 设置数据
+        sessionStorage.setItem('sessionKey', 'sessionValue');
+        localStorage.setItem('localKey', 'localValue');
+
+        // 在新标签页中访问数据，将看到localStorage的数据，但sessionStorage的数据可能不存在
+        const sessionData = sessionStorage.getItem('sessionKey');
+        const localData = localStorage.getItem('localKey');
+
+        // 打印数据
+        console.log(sessionData); // 可能输出: null（如果是在新标签页中）
+        console.log(localData);  // 输出: localValue
+
+        // 关闭当前标签页或窗口，再次打开时，sessionStorage的数据将不存在
+        // 而localStorage的数据仍然存在
+    </script>
+</body>
+</html>

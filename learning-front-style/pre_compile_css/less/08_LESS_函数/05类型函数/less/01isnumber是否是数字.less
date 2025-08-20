@@ -1,0 +1,10 @@
+.test {
+    isnumber(#ff0); // false
+    isnumber(blue); // false
+    isnumber("string"); // false
+    isnumber(1234); // true
+    isnumber(56px); // true
+    isnumber(7.8%); // true
+    isnumber(keyword); // false
+    isnumber(url(...)); // false
+}

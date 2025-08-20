@@ -1,0 +1,43 @@
+@mixin sexy-border($color, $width) {
+    border: {
+      color: $color;
+      width: $width;
+      style: dashed;
+    }
+  }
+  p { @include sexy-border(blue, 1in); }
+
+
+
+@mixin sexy-border2($color, $width: 1in) {
+border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+}
+}
+p { @include sexy-border2(blue); }
+h1 { @include sexy-border2(blue, 2in); }
+
+
+
+
+@mixin box-shadow($shadows...) {
+    -moz-box-shadow: $shadows;
+    -webkit-box-shadow: $shadows;
+    box-shadow: $shadows;
+}
+.shadows {
+    @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}
+
+
+@mixin colors($text, $background, $border) {
+    color: $text;
+    background-color: $background;
+    border-color: $border;
+}
+$values: #ff0000, #00ff00, #0000ff;
+.primary {
+    @include colors($values...);
+}

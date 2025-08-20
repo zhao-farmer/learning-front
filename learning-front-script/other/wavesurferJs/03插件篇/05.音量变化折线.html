@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button style="min-width: 5em" id="play">播放</button>
+        <button style="margin: 0 1em 2em" id="randomize">随机化点数</button>
+
+        音量: <label>0</label>
+        <div id="container" style="border: 1px solid #ddd"></div>
+
+        <script type="module">
+            import WaveSurfer from "../mjs/wavesurfer.js";
+            import EnvelopePlugin from "../mjs/plugins/envelope.esm.js";
+
+            // 创建WaveSurfer的实例
+            const wavesurfer = WaveSurfer.create({
+                container: "#container",
+                waveColor: "rgb(200, 0, 200)",
+                progressColor: "rgb(100, 0, 100)",
+                url: "../assest/audio.wav",
+            });
+
+            const isMobile = top.matchMedia("(max-width: 900px)").matches;
+
+            // 初始化 Envelope plugin
+            const envelope = wavesurfer.registerPlugin(
+                EnvelopePlugin.create({
+                    volume: 0.8,
+                    lineColor: "rgba(255, 0, 0, 0.5)",
+                    lineWidth: 4,
+                    dragPointSize: isMobile ? 20 : 12,
+                    dragLine: !isMobile,
+                    dragPointFill: "rgba(0, 255, 255, 0.8)",
+                    dragPointStroke: "rgba(0, 0, 0, 0.5)",
+
+                    points: [
+                        { time: 11.2, volume: 0.5 },
+                        { time: 15.5, volume: 0.8 },
+                    ],
+                })
+            );
+
+            envelope.on("points-change", points => {
+                console.log("Envelope points changed", points);
+            });
+
+            envelope.addPoint({ time: 1, volume: 0.9 });
+
+            // 随机点数
+            const randomizePoints = () => {
+                const points = [];
+                const len = 5 * Math.random();
+                for (let i = 0; i < len; i++) {
+                    points.push({
+                        time: Math.random() * wavesurfer.getDuration(),
+                        volume: Math.random(),
+                    });
+                }
+                envelope.setPoints(points);
+            };
+
+            document.querySelector("#randomize").onclick = randomizePoints;
+
+            // 显示当前音量
+            const volumeLabel = document.querySelector("label");
+            const showVolume = () => {
+                volumeLabel.textContent = envelope.getCurrentVolume().toFixed(2);
+            };
+            envelope.on("volume-change", showVolume);
+            wavesurfer.on("ready", showVolume);
+
+            // 播放/暂停 按钮
+            const button = document.querySelector("#play");
+            wavesurfer.once("ready", () => {
+                button.onclick = () => {
+                    wavesurfer.playPause();
+                };
+            });
+            wavesurfer.on("play", () => {
+                button.textContent = "Pause";
+            });
+            wavesurfer.on("pause", () => {
+                button.textContent = "Play";
+            });
+        </script>
+    </body>
+</html>

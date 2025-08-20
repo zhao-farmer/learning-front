@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 原图 -->
+    <img src="./images/flower.png" width="200" height='200'>
+
+    <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="blurFilter">
+            <feGaussianBlur stdDeviation="5" />
+            </filter>
+        </defs>
+
+        <image href="./images/flower.png" width="200" height="200" filter="url(#blurFilter)"  />
+    </svg>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+         //绘制一条直线
+        ctx.beginPath();
+        ctx.moveTo(20, 20);
+        ctx.lineTo(70, 20);
+        ctx.stroke();
+
+        //绘制圆弧+直线
+        ctx.beginPath();
+        ctx.arc(70, 70, 50, 0, -90 * Math.PI / 180, true);
+        ctx.moveTo(120, 70);
+        ctx.lineTo(120, 120);
+        ctx.stroke();
+
+    </script>
+</body>
+</html>

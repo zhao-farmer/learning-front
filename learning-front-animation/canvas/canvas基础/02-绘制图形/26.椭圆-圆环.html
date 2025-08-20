@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <script>
+        var c1 = document.getElementById("canvas");
+        var ctx = c1.getContext('2d');
+
+
+        // 外层椭圆
+        ctx.beginPath();
+        ctx.ellipse(200, 100, 100, 60, 0, 0, 2 * Math.PI);  
+        ctx.strokeStyle = "#666";
+        ctx.stroke();
+
+        // 内层椭圆填充
+        ctx.beginPath();
+        ctx.ellipse(200, 100, 70, 40, 0, 0, 2 * Math.PI);
+        ctx.fillStyle = "#ffeb3b";
+        ctx.fill();  // 组合椭圆形成环形效果
+
+    </script>
+</body>
+</html>

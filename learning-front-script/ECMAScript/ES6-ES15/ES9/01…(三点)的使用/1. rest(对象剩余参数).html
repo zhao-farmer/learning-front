@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* ============= rest 剩余参数   ============ */
+        let obj = {
+            name:'kerwin',
+            age:100,
+            location:"dalian"
+        }
+        // 1. 解构赋值使用
+        let {name,...other} = obj
+
+        console.log(name,other);  
+        // kerwin  {age: 100, location: 'dalian'}
+
+        // 2. 在函数的参数中使用
+        function test({name,...other}){
+            console.log(name,other);
+        }
+
+        test(obj)
+        // kerwin  {age: 100, location: 'dalian'}
+       
+      
+    </script>
+</body>
+</html>

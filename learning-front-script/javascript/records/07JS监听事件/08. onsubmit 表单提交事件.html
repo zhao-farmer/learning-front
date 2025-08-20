@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript">
+        function onsubmitFun() {
+            //假设这一部分内容要验证所有表单项是否合法，如果有一个不合法就输出提示，并阻止表单提交
+            alert("静态注册表单提交事件----发现不合法");
+            return false; //返回false，阻止提交
+        }
+        window.onload=function (){
+            var fm=document.getElementById("form");
+            fm.onsubmit=function (){
+                //检查环节
+                alert("动态注册表单提交事件----发现不合法");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <!--return false 可以阻止 表单提交 -->
+    <form action="http://www.baidu.com" method="get" onsubmit="return onsubmitFun()">
+        <input type="submit" value="静态注册"/>     <!-- 提交成功就跳转到百度-->
+    </form>
+
+    <form action="http://www.baidu.com" method="get" id="form">
+        <input type="submit" value="动态注册"/>
+    </form>
+</body>
+</html>

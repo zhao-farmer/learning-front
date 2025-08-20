@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        // 如果仅仅查找数据是否再数组中，建议使用includes，如果是查找数据的索引位置，
+        // 建议使用indexOf更好一些
+
+        // 判断数组中是否存在 indexOf无法判断NaN
+        let arr = [1,2,NaN];
+        console.log(arr.includes(NaN));
+        console.log(arr.indexOf(NaN));
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.利用字面量创建对象
+        const obj1 = {
+            name:'佩奇'
+        }
+
+        // 2. 利用 new Object 创建对象
+        const obj2 = new Object({name:'佩奇'})
+        const obj3 = new Object()
+        obj3.name = "佩奇"
+        
+        // 3.利用构造函数创建对象
+        function Pig(name){
+            this.name = name
+        }
+        const peppa = new Pig("佩奇")
+    </script>
+</body>
+</html>

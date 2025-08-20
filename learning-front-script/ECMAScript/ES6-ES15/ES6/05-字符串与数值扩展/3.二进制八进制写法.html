@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.二进制八进制写法
+
+        let num1 = 100;
+        // 十六进制
+        let num2 = 0x100;
+        // 二进制
+        let num3 = 0b100;
+        // 八进制
+        let num4 = 0o100;
+
+        console.log(num1);  //100
+        console.log(num2);  //256
+        console.log(num3);  //4
+        console.log(num4);  //64
+        
+        // 2. Number.isFinite(判断是否是数值类型)   Number.isNaN
+        // 减少全局的语言 可以直接使用isFinite与isNaN
+        let num5 = Number.isFinite(100);    //true
+        let num6 = Number.isFinite(100/0);  //false
+        let num7 = Number.isFinite(Infinity);//false
+        let num8 = Number.isFinite("100");  //true
+
+        console.log(num5);
+        console.log(num6);
+        console.log(num7);
+        console.log(num8);
+
+        // 是否是NaN类型
+        let num9 = Number.isNaN(100);       //false
+        let num10 = Number.isNaN(NaN);      //true
+        let num11 = Number.isNaN("kerwin"); //false
+        let num12 = Number.isNaN("100");    //false
+
+
+        // 判断是否是正数
+        let num13 = Number.isInteger(100);      //true
+        let num14 = Number.isInteger(100.0);    //true
+        let num15 = Number.isInteger("kerwin"); //false
+        let num16 = Number.isInteger("100");    //false
+
+
+        //3.极小常量
+        function isEqual(x,y){
+            return Math.abs(x-y)<Number.EPSILON
+        }
+
+        console.log(isEqual(0.1+0.2,0.3));
+        
+
+        // 小数抹掉
+        console.log(Math.trunc(1.2));   //1
+        console.log(Math.trunc(1.8));   //1
+        console.log(Math.trunc(-1.2));   //-1
+        console.log(Math.trunc(-1.8));   //-1
+
+
+        // 判断是否是负数、正数、还是零
+        console.log(Math.sign(-100));       //-1
+        console.log(Math.sign(100));        //+1
+        console.log(Math.sign(0));          //+0
+        console.log(Math.sign(-0));         //-0
+        console.log(Math.sign("kerwin"));   //NaN
+    </script>
+</body>
+</html>

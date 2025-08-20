@@ -1,0 +1,43 @@
+/* ====颜色====== */
+.p6{
+    color:  rgb(0, 255, 255);
+    color:  rgba(0, 255, 255, 0.3);
+
+    color: hsl(120, 100%, 50%) ;// 绿色 
+    color: hsl(120, 100%, 75%);// 浅绿色 
+    color: hsl(120, 100%, 25%); // dark green 
+    color: hsl(120, 60%, 70%);// 柔和的绿色
+
+    color: hsl(120, 100%, 50%, 0.3); // 绿色带有透明度
+    color: hsl(120, 100%, 75%, 0.3); // 浅绿色带有透明度
+
+    color: grayscale(#7fffd4);// #c6c6c6
+
+    color: complement(#7fffd4) ;// #ff7faa
+
+    color: invert(white); // black
+
+
+
+
+    content: red(#7fffd4) ;// 127 
+    content: red(red) ;// 255
+
+    content:  green(#7fffd4) ;// 255 
+    content: green(blue) ;// 0
+
+    content: blue(#7fffd4) ;// 212 
+    content: blue(blue); // 255
+
+    content:  hue(#7fffd4) ;// 160deg
+    content: saturation(#7fffd4); // 100%
+
+    content: lightness(#7fffd4) ;// 74.9%
+    content: alpha(#7fffd4); // 1
+    content: opacity(rgba(127, 255, 212, 0.5)); // 0.5
+
+    color: adjust-hue(#7fffd4, 80deg); // #8080ff
+
+    color: rgba(#7fffd4, 30%);// rgba(127, 255, 212, 0.3)
+}
+

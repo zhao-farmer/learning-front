@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="c1" width="300" height="300" style="border: 1px solid #ccc"></canvas>
+    <div id="down">按下鼠标：x轴坐标:0; y轴坐标:0 </div>
+    <div id="move">移动鼠标：x轴坐标:0; y轴坐标:0 </div>
+    <div id="up">松开鼠标：x轴坐标:0; y轴坐标:0 </div>
+
+
+    <script type="module">
+        // 引入文件
+        import * as fabric from "../index.min.mjs";
+        // 获取动态画布
+        const canvas = new fabric.Canvas("c1");
+        
+        canvas.isDrawingMode = true;
+
+        canvas.on('mouse:down', options => {
+            down.innerHTML = `按下鼠标：x轴坐标: ${options.e.clientX}; y轴坐标: ${options.e.clientY}`
+        })
+
+        canvas.on('mouse:move', options => {
+            move.innerHTML = `移动鼠标：x轴坐标: ${options.e.clientX}; y轴坐标: ${options.e.clientY}`
+        })
+
+        canvas.on('mouse:up', options => {
+            up.innerHTML = `松开鼠标：x轴坐标: ${options.e.clientX}; y轴坐标: ${options.e.clientY}`
+        })
+    </script>
+</body>
+</html>

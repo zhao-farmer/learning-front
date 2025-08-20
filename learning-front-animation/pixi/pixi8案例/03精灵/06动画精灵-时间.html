@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+        import { Application, Assets, AnimatedSprite, Texture } from "../js/pixi.mjs";
+
+        (async () => {
+            // 创建一个应用程序
+            const app = new Application();
+
+            // 初始化应用程序
+            await app.init({ autoStart: false, width: 600, height: 400 });
+
+            // 应用程序添加页面中
+            document.body.appendChild(app.canvas);
+
+            // 加载动画精灵页
+            const spritesheet = await Assets.load("../assets/spritesheet/0123456789.json");
+
+            // 创建一个纹理数组
+            const textures = [];
+            let i;
+
+            for (i = 0; i < 10; i++) {
+                //ase格式 起始不重要，重要的是规定选中0123456789.png的位置与大小
+                const framekey = `0123456789 ${i}.ase`;
+                const texture = Texture.from(framekey);
+                const time = spritesheet.data.frames[framekey].duration;
+
+                //这个数组中同样个填充图片持续的时间
+                textures.push({ texture, time });
+            }
+
+            const scaling = 4;
+
+            // 创建一个慢速的AnimatedSprite
+            const slow = new AnimatedSprite(textures);
+
+            slow.anchor.set(0.5);
+            slow.scale.set(scaling);
+            //速度原本的一般
+            slow.animationSpeed = 0.5;
+            slow.x = (app.screen.width - slow.width) / 2;
+            slow.y = app.screen.height / 2;
+            slow.play();
+            app.stage.addChild(slow);
+
+            // 创建一个快速的AnimatedSprite
+            const fast = new AnimatedSprite(textures);
+
+            fast.anchor.set(0.5);
+            fast.scale.set(scaling);
+            fast.x = (app.screen.width + fast.width) / 2;
+            fast.y = app.screen.height / 2;
+            fast.play();
+            app.stage.addChild(fast);
+
+            // 开始动画
+            app.start();
+        })();
+    </script>
+</body>
+</html>

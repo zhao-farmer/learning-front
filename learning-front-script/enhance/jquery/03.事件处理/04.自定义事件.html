@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn1">按钮1</button>
+    <button id="btn2">按钮2</button>
+    <button id="btn3">按钮3</button>
+    <button id="btn4">自定义行为</button>
+
+    <script src="../js/jquery.3.7.1.js"></script>
+
+    <script>
+        $("#btn1").on("click",function () {
+            console.log("按钮1被按了")
+        })
+    
+        $("#btn2").on("click",function () {
+            alert("按钮2被按了")
+        })
+        
+    
+        /*点击btn3，触发btn2*/
+        $("#btn3").click(function () {
+            // $("#btn2").click()
+    
+            //模拟选中按键的行为：trigger()自定义行为的触发，trigger()触发被选中元素的指定事件
+            $("#btn2").trigger("click")
+        })
+    
+    
+        /*自定义行为*/
+        $("#btn4").on("myTest",function () {   //无法触发
+            alert("自定义行为")
+        })
+        $("#btn4").on("click",function () {   //去模拟自定义行为，就可以触发了
+            $(this).trigger("myTest")
+        })
+    </script>
+</body>
+</html>

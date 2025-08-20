@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            class Person {
+                static myname = "peson类的名字";
+                static mymethod = function () {
+                    console.log("mymethod");
+                };
+
+                constructor(name, age) {
+                    this.name = name;
+                    this.age = age;
+                }
+
+                say() {
+                    console.log(this.name, this.age);
+                }
+            }
+
+            class Student extends Person {
+                constructor(name, age, score) {
+                    super(name,age);
+                    this.score = score;
+                }
+
+                getScore(){
+                    console.log(this.score);
+                }
+
+                // 相同的方法
+                say() {
+                    super.say()
+                    console.log(this.score);
+                }
+            }
+
+
+            let obj = new Student("kerwin",100,150)
+            obj.say();  
+            // kerwin 100
+            // 150
+            
+
+            // 静态的方法与属性也会继承
+            console.log(Student.myname);    // peson类的名字
+            console.log(Student.mymethod);  //f()
+        </script>
+    </body>
+</html>

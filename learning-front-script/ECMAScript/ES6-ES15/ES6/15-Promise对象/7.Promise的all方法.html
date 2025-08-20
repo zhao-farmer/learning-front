@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+          let pro1 = new Promise(function(resolve,reject){
+               setTimeout(()=>{
+                    resolve(1000)  
+               },1000)
+          })
+
+          let pro2 = new Promise(function(resolve,reject){
+               setTimeout(()=>{
+                    resolve(2000)  
+               },2000)
+          })
+
+          let pro3 = new Promise(function(resolve,reject){
+               setTimeout(()=>{
+                    resolve(3000)  
+               },3000)
+          })
+
+          Promise.all([pro1,pro2,pro3]).then(res =>{
+                //hide loading 
+                console.log(res);
+          }).catch(err =>{
+                console.log(err);
+          })
+    </script>
+</body>
+</html>

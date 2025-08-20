@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 第一种创建方式
+        let m1 = new Map([
+            ["name","kerwin"],
+            ["age",100],
+            [{a:1},"大连"]
+        ])
+        console.log(m1);
+
+        // 第二种创建方式
+        let m2 = new Map()
+        m2.set("name","kerwin")
+        m2.set("age",100)
+        m2.set({a:1},"大连")
+        console.log(m2);
+                
+        // 拿出的是每个数组
+        for (const i of m2) {
+            console.log(i);
+        }
+        // 转换为二维数组
+        console.log([...m2]);
+        
+    </script>
+</body>
+</html>

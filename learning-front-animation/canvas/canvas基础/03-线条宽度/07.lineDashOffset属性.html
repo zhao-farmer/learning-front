@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Document</title>
+</head>
+<body>
+     <canvas id="c1" width="600" height="400" ></canvas>
+     <script>
+        var c1 = document.getElementById("c1");
+        var ctx  = c1.getContext('2d');
+       
+        //index用于确认绘制的步骤
+        let index = 0;
+        //绘制函数
+        function render(){
+            ctx.clearRect(0,0,600,400)
+            index ++;
+            if(index > 40){
+                index = 0;
+            }
+            ctx.moveTo(150,150);
+            ctx.lineTo(300,200);
+            ctx.lineTo(450,150);
+
+            //设置线条样式，默认1px
+            ctx.lineWidth = 1;
+            
+            //设置虚线
+            ctx.setLineDash([40,5]);
+            //虚线偏移设置
+            ctx.lineDashOffset = index;
+            //绘制
+            ctx.stroke()
+            requestAnimationFrame(render);
+        }
+        requestAnimationFrame(render);
+ 
+     </script>
+</body>
+</html>

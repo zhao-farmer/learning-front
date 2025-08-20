@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="400" style="background: #ccc"> </canvas>
+
+        <script>
+            // 获取canvas对象
+            const cnv = document.getElementById("myCanvas");
+            // 获取上下文对象context
+            const cxt = cnv.getContext("2d");
+
+            let center = {x: 0, y: cnv.height / 2}
+
+            cxt.fillStyle = 'skyblue'
+            cxt.fillRect( center.x, center.y,  50, 50);
+
+            let angle = 0;     
+            let speed = 0.05; 
+            let range = 100; // 最大摆动距离
+
+            (function drawFrame() {
+                window.requestAnimationFrame(drawFrame, cnv);
+                cxt.clearRect(0, 0, cnv.width, cnv.height);
+
+                center.x += 1;
+                // 计算小球轨迹
+                center.y  = cnv.height / 2 + Math.sin(angle) * range;
+                cxt.fillRect( center.x, center.y,  50, 50);
+
+                angle += speed;
+                if(center.x >= cnv.width){
+                    center.x = 0
+                }
+
+            })();
+        </script>
+    </body>
+</html>

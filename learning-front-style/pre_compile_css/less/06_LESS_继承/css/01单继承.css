@@ -1,0 +1,12 @@
+.g_father,
+.father,
+.chird {
+  color: #555555;
+}
+.father,
+.chird {
+  background: #FFFFFF;
+}
+.chird {
+  border: 1px solid #000;
+}

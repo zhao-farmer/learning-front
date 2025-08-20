@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .active{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+
+    </ul>
+    <script>
+     
+        // 3.使用表达式进行修改
+        function test(){
+            return "函数返回结果"
+        }
+
+
+        let arr = ["tiechui",'kerwin',"gangdan"]
+
+        let newList = arr.map(function(item,index){
+            return `<li class="${index === 0?'active':''}">
+                <b>${item}</b>
+                ${ test()}
+            </li>`
+        })
+        console.log(newList);
+
+        let oul = document.querySelector("ul")
+        // 默认是数组 里面的分隔符是, 使用join 可以改变分隔符
+        oul.innerHTML = newList.join("")
+        
+   
+        
+    </script>
+</body>
+</html>

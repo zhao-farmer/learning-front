@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "custom-swiper":"./custom-swiper/custom-swiper"
+  }
+}

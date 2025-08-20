@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let myname = 'kerwin'
+        // 字符串中是否存在字符或字符串
+        console.log(myname.includes("erw"));
+        // 开始是否是字符或字符串
+        console.log(myname.startsWith("ke"));
+        // 结束是否是字符或字符串
+        console.log(myname.endsWith("n"));
+
+
+        // 带参数 includes与startsWith都是从0开始
+        // endsWith 是下标位置往前取查询
+        console.log(myname.includes("e",1));
+        console.log(myname.startsWith("e",1));
+        console.log(myname.endsWith("r",3));
+    </script>
+</body>
+</html>

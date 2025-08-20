@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const str =
+        "I wish to wish the wish you wish to wish,"
+        +" but if you wish the wish the witch wishes, "
+        +"I won't wish the wish you wish to wish. ";
+
+        // 旧版本使用正则表达式替换
+        console.log(str.replace(/wish/g,"*"));
+        // 使用replaceAll
+        console.log(str.replaceAll("wish","*"));
+        
+    </script>
+</body>
+</html>

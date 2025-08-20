@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: #f7f7f7;
+            font-size: 70px;
+            color: black;
+        }
+        .container{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 5px;
+            padding: 10px;
+        }
+        .container div{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1f81db;
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+    </div>
+</body>
+</html>

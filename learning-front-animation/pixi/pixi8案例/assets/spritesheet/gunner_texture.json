@@ -1,0 +1,111 @@
+{
+  "frames": {
+    "gunner_1.jpg": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 143
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 143
+      },
+      "sourceSize": {
+        "w": 80,
+        "h": 143
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gunner_2.jpg": {
+      "frame": {
+        "x": 80,
+        "y": 0,
+        "w": 80,
+        "h": 143
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 143
+      },
+      "sourceSize": {
+        "w": 80,
+        "h": 143
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gunner_3.jpg": {
+      "frame": {
+        "x": 0,
+        "y": 143,
+        "w": 80,
+        "h": 143
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 143
+      },
+      "sourceSize": {
+        "w": 80,
+        "h": 143
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "gunner_4.jpg": {
+      "frame": {
+        "x": 80,
+        "y": 143,
+        "w": 80,
+        "h": 143
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 80,
+        "h": 143
+      },
+      "sourceSize": {
+        "w": 80,
+        "h": 143
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "gunner_texture.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 160,
+      "h": 286
+    },
+    "scale": 1
+  }
+}

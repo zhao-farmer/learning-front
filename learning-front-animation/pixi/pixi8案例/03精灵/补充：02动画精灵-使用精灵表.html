@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>动画精灵</title>
+  </head>
+  <body>
+    <div id="px-render"></div>
+  </body>
+  <script type="module">
+    import { Application, Assets, AnimatedSprite, Texture } from "../js/pixi.mjs";
+
+    (async () => {
+      // 创建应用程序
+      const app = new Application();
+
+      // 初始化应用程序
+      await app.init({
+        width: 400,
+        height: 300,
+      });
+
+      let playground = document.getElementById("px-render");
+
+      // 把 Pixi 创建的 canvas 添加到页面上
+      playground.appendChild(app.canvas);
+
+      // 加载动画精灵页
+      const texture = await Assets.load("../assets/spritesheet/gunner_texture.json");
+
+      // 创建一个数组填充仓库中的精灵
+      const gunnerTextures = [];
+
+      // 数据放入纹理集合中
+      for (let i = 0; i < 4; i++) {
+        const texture = Texture.from(`gunner_${i + 1}.jpg`);
+
+        gunnerTextures.push(texture);
+      }
+      console.log(gunnerTextures);
+
+      //创建动画精灵
+      let anim = new AnimatedSprite(gunnerTextures);
+      // 设置位置与锚点
+      anim.x = app.screen.width / 2;
+      anim.y = app.screen.height / 2;
+      anim.anchor.set(0.5);
+
+      //设置速度与播放
+      anim.animationSpeed = 0.1;
+      anim.play();
+
+      //将其添加到舞台上
+      app.stage.addChild(anim);
+    })();
+  </script>
+</html>

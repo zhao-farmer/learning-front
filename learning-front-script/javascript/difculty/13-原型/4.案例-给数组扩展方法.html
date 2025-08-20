@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 自己定义 数组扩展方法 求和 和 最大值
+        // 1.我们定义的这个方法，任何一个数组实例对象都可以使用
+        // 2.自定义的方法写道 数组.prototype 身上
+
+        const arr = [1,2,3]
+        // 1.最大值
+        Array.prototype.max = function(arr){
+            // return Math.max(...arr)
+            // 由于是当前数组使用，this指向的也是当前数组 直接使用this
+            return Math.max(...this)
+        }
+        // 2.最小值
+        Array.prototype.min = function(){
+            return Math.min(...this)
+        }
+        // 3.求和 方法
+        Array.prototype.sum = function(){
+            return this.reduce((prev,item) =>prev + item,0)
+        }
+        console.log(arr.max()); //3
+        console.log(arr.min()); //1
+        console.log(arr.sum()); //6
+       
+    </script>
+</body>
+</html>

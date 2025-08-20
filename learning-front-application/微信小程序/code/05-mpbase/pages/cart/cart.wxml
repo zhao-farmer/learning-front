@@ -1,0 +1,4 @@
+<button plain type="warn" bindtap="navigateTo">navigateTo</button>
+<button plain type="primary" bindtap="redirectTo">redirectTo</button>
+<button plain type="warn" bindtap="switchTab">switchTab</button>
+<button plain type="primary" bindtap="reLaunch">reLaunch</button>

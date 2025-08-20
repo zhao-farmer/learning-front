@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1.实例属性 1ength 
+        const str1 = 'pink'
+        console.log(str1.length);   // 4
+        
+        // 2.分隔符 sp1it 
+        const str2 = 'pink,red'
+        console.log(str2.split(','));           // ['pink', 'red']
+        
+        // 3.substring 字符串截取
+        const str3 = 'substring'
+        console.log(str3.substring(0,3));       // sub
+        
+        // 4.startsWith 字符串以...为开头
+        const str4 = 'startswith'
+        console.log(str4.startsWith('ts',4));   // true
+
+        // 5.includes 字符或字符串是否在当前字符串中
+        const str5 = 'includes'
+        console.log(str5.includes('lu'));   // true
+
+        // 6.touppercase 字符串转大写
+        const str6 = 'toUpperCase'
+        console.log(str6.toUpperCase());    // TOUPPERCASE
+
+        // 7.touppercase 字符串转小写
+        const str7 = 'toLowerCase'
+        console.log(str7.toLowerCase());    // tolowercase
+
+        // 8.indexOf 查询字符或字符串在目标字符串的位置 为查询到返回 -1
+        const str8 = 'indexOf'
+        console.log(str8.indexOf('de'));    // 2
+
+        // 9.endWith 字符串以...为结尾
+        const str9 = 'endWith'
+        console.log(str9.endsWith('th'));    // true
+        
+        // 10.endswith 字符串以...为结尾
+        const str10 = 'replace'
+        console.log(str10.replace('pl'));    // reace
+        
+        // 11.match 查找字符串
+        const str11 = 'match'
+        console.log(str11.match('tc'));    // ['tc', index: 2, input: 'match', groups: undefined]
+    </script>
+</body>
+</html>

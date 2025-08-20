@@ -1,0 +1,9 @@
+$null:null;
+div{
+    @if $null == null  {
+        color: red;
+    }
+    @else {
+        color: blue;
+    }
+}
